@@ -265,14 +265,13 @@ initStateMachine();
 				while(getstackmsgsize()>0){
 					Stackmsg(MSG);
 					SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
-					UART_transmit(REP);
+					if(mainCerrG.cerr != 0){
+						UART_transmit(REP.assign(mainCerrG.ToString()));
+					}else{
+						UART_transmit(REP);
+					}
 				}
-
 				stateMachine = DEFAULT;
-
-
-
-
 	  			break;
 	  		case (SECU):
 	  			HAL_Delay(100);

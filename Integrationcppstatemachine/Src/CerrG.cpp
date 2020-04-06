@@ -6,6 +6,7 @@
  */
 
 #include "CerrG.h"
+#include <string>
 
 CerrG::CerrG() {
 	for(int i =0; i<6;i++){
@@ -13,6 +14,7 @@ CerrG::CerrG() {
 	}
 	this->specificPosition = 0;
 	this->cerr = 0;
+	this->stateMachine = 0;
 }
 
 CerrG::CerrG(int _specificPosition) {
@@ -21,6 +23,7 @@ CerrG::CerrG(int _specificPosition) {
 	}
 	this->specificPosition = _specificPosition;
 	this->cerr = 0;
+	this->stateMachine = 0;
 }
 
 CerrG::~CerrG() {
@@ -55,4 +58,13 @@ int CerrG::SetErrId(short int _specificPosition, short int _errAdress ){
 	this->adresse[_specificPosition] = _errAdress;
 
 	return 0;
+}
+
+std::string CerrG::ToString(void){
+
+	std::string strError = "";
+
+	strError = "ERROR :" + std::to_string(this->stateMachine)+"_"+std::to_string(this->adresse[0])+"."+std::to_string(this->adresse[1])+"."+std::to_string(this->adresse[2])+"."+std::to_string(this->adresse[3])+"."+std::to_string(this->adresse[4])+"."+std::to_string(this->adresse[5])+"_"+std::to_string(this->cerr);
+
+	return strError;
 }

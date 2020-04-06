@@ -8,6 +8,8 @@
 #ifndef CERRG_H_
 #define CERRG_H_
 
+#include <string>
+
 class CerrG {
 public:
 	CerrG();
@@ -25,6 +27,8 @@ public:
 	int getSpecificPosition(void);
 
 	int SetErrId(short int _specificPosition, short int _errAdress );
+
+	std::string ToString(void);
 
 private:
 
