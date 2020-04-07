@@ -68,20 +68,7 @@ short int ScpiClientServer::DecodeMsg(std::string& _msg, std::string& _header, s
 	int first = -1;
 	first = _msg.find(":");
 
-	/*if(_msg.find("*") != string::npos){
-		_header = _msg.substr(0, 1);
-		_cmde = _msg;
-	}else{
-		if(first == -1){
-			_header.assign("\0");
-			_cmde = _msg;
 
-		}else{
-
-			_header = _msg.substr(0, first);
-			_cmde = _msg.substr(first+1);
-		}
-	}*/
 
 	if(_msg.find("*") != string::npos){ //broadcast
 		_cmde = _msg;
@@ -111,7 +98,12 @@ short int ScpiClientServer::DecodeMsg(std::string& _msg, std::string& _header, s
 
 short int ScpiClientServer::ExecuteCmde (std::string& _cmde, std::string &_rep){
 
-	//throw ERROR_TEST;
+//throw ERROR_TEST;
+
+
+	if(_cmde.compare("ERR ?") != 0){
+
+	}
 
 	std::string Order = "Order66";
 	_rep = Order;
@@ -155,8 +147,6 @@ try{
 				throw ERROR_CANT_FIND_CLIENT;
 			}else{
 				this->getClient(positionClient)->ReceiveMsg(_cmde,_rep,_cerrg  );//accéde à la ref du prochain client dans le vector
-				if(_cerrg.cerr != 0)
-					throw 1;
 			}
 		}
 		break;
@@ -166,34 +156,13 @@ try{
 
 
 	}
-	//this->DecodeMsg(_msg, _header ,_cmde );
-	/*if(_header.find("*") != string::npos){//test si le header correspond à une commande courte
-		BroadCastCmde(_cmde,_rep); //envoie de la commande à tous les clients en reccursif
-	}else{
-		if(_header.empty()){ //ajouter une condition pour vérifier que l'on se trouve dans le bon objet
-			this->ExecuteCmde(_cmde, _rep); //retourne l'erreur
-		}else{
-			if(this->sendEnable != 0){ //vérifie si la chaine scpi n'a pas été bloquée
-				;
-			}else{
-				int positionClient = this->FindClientinList(_header);//cherche le header du prochain client et renvoi sa position dans le vector
-				if(positionClient == -1){
-					throw ERROR_CANT_FIND_CLIENT;
-				}else{
-					this->getClient(positionClient)->ReceiveMsg(_cmde,_rep,_cerrg  );//accéde à la ref du prochain client dans le vector
-					if(_cerrg.cerr != 0)
-						throw 1;
-				}
-
-			}
-		}
-	}*/
 
 
 }catch(int e){
 	this->codeErr.AddErrorCode(e);
 	_cerrg.AddErrorCode(e);
 	_cerrg.AddErrorCode(this->codeErr);
+	throw;
 }
 
 
@@ -231,12 +200,12 @@ int ScpiClientServer::BroadCastCmde(std::string&_cmde, std::string& _rep){
 	streponse.assign("\0");
 
 	for(int i = 0; i < this->listeClients.size(); i++){ // parcours la liste des clients et cherche lesquels ont un vecteur ayant 0 éléments ( donc les clients)
-		if(this->getClient(i)->getTailleListClient() != 0){ // pas un client
+		/*if(this->getClient(i)->getTailleListClient() != 0){ // pas un client
 			this->getClient(i)->BroadCastCmde(_cmde,_rep); // appel en recursif de la fonction sur le prochain serveur
 		}else{
 			this->getClient(i)->ExecuteCmde(_cmde, streponse); // le client execute la commande
 			_rep = _rep + streponse + ":"; // la réponse est concatener avec la réponses des autres clients
-		}
+		}*/
 	}
 	return 0;
 }

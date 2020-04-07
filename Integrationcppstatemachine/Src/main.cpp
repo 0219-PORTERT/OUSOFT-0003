@@ -257,21 +257,17 @@ initStateMachine();
 	  			stateMachine = DEFAULT;
 	  			break;
 	  		case (CMD):
-		        /*MSG = RX_string;
-				CerrG =  SCPI_MAIN.ReceiveMsg(MSG, REP);
-				UART_transmit(REP);
-	  			stateMachine = DEFAULT;*/
-
-				while(getstackmsgsize()>0){
-					Stackmsg(MSG);
-					SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
-					if(mainCerrG.cerr != 0){
-						UART_transmit(REP.assign(mainCerrG.ToString()));
-					}else{
+				try{
+					while(getstackmsgsize()>0){
+						Stackmsg(MSG);
+						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						UART_transmit(REP);
 					}
+					stateMachine = DEFAULT;
+				}catch(int e){
+					UART_transmit(REP.assign(mainCerrG.ToString()));
 				}
-				stateMachine = DEFAULT;
+
 	  			break;
 	  		case (SECU):
 	  			HAL_Delay(100);
