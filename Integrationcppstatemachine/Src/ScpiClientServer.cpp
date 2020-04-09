@@ -180,6 +180,24 @@ int ScpiClientServer::FindClientinList(std::string headertofind){
 	return -1;
 }
 
+/*ScpiClientServer ScpiClientServer::GetClientFromList(std::string& p_header) {
+		try {
+			for (uint i = 0; i < v_listeClients.size(); i++) {
+				ScpiClientServer* nextClient = v_listeClients.at(i);
+				std::string nextClientHeader = nextClient->_HEADER;
+				int compare = nextClientHeader.compare(*p_header);
+				if (!compare) {
+					return nextClient;
+				}
+			}
+			return NULL;
+		} catch (std::exception & e) {
+			std::string err(e.what());
+		}
+
+	}*/
+
+
 int ScpiClientServer::getTailleListClient(){
 	return this->listeClients.size();
 }
@@ -187,25 +205,25 @@ int ScpiClientServer::getTailleListClient(){
 short int ScpiClientServer::SetSendEnable (int _sendEnbleValue){
 
 	this->sendEnable = _sendEnbleValue;
+
 	for(int i = 0; i < this->listeClients.size(); i++){
 		this->getClient(i)->SetSendEnable(_sendEnbleValue);
 	}
+
 	return 0;
 }
 
-int ScpiClientServer::BroadCastCmde(std::string&_cmde, std::string& _rep){
+int ScpiClientServer::BroadCastCmde(std::string& _cmde, std::string& _rep){
 	std::string streponse;
 
 	streponse.reserve(256);
 	streponse.assign("\0");
 
-	for(int i = 0; i < this->listeClients.size(); i++){ // parcours la liste des clients et cherche lesquels ont un vecteur ayant 0 éléments ( donc les clients)
-		/*if(this->getClient(i)->getTailleListClient() != 0){ // pas un client
-			this->getClient(i)->BroadCastCmde(_cmde,_rep); // appel en recursif de la fonction sur le prochain serveur
-		}else{
-			this->getClient(i)->ExecuteCmde(_cmde, streponse); // le client execute la commande
-			_rep = _rep + streponse + ":"; // la réponse est concatener avec la réponses des autres clients
-		}*/
+	this->ExecuteCmde(_cmde, streponse);
+	_rep = _rep + "client:" + this->_HEADER + "->"+ streponse + ";";
+
+	for(int i = 0; i < this->listeClients.size(); i++){
+		this->getClient(i)->BroadCastCmde(_cmde,_rep);
 	}
 	return 0;
 }

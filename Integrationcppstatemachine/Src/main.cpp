@@ -203,9 +203,9 @@ int main(void)
 		SCPI_MAIN.AddClient(&SCPI_RPM);
 		ScpiClientServer SCPI_SECU("SECU");
 		SCPI_MAIN.AddClient(&SCPI_SECU);
-			ScpiClientServer SEC_A("A");
+			ScpiClientServer SEC_A("S_A");
 			SCPI_SECU.AddClient(&SEC_A);
-			ScpiClientServer SEC_B("B");
+			ScpiClientServer SEC_B("S_B");
 			SCPI_SECU.AddClient(&SEC_B);
 		ScpiClientServer SCPI_DIO("DIO");
 		SCPI_MAIN.AddClient(&SCPI_DIO);
@@ -267,7 +267,7 @@ initStateMachine();
 				}catch(int e){
 					UART_transmit(REP.assign(mainCerrG.ToString()));
 				}
-
+				 REP.assign("\0");
 	  			break;
 	  		case (SECU):
 	  			HAL_Delay(100);
