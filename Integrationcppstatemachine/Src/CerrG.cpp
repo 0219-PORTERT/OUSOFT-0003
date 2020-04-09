@@ -68,3 +68,11 @@ std::string CerrG::ToString(void){
 
 	return strError;
 }
+
+void CerrG::clearCerrg(void){
+	for(int i =0; i<6;i++){
+			adresse[i] =0;
+		}
+		this->cerr = 0;
+		this->stateMachine = 0;
+}

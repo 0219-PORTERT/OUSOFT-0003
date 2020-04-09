@@ -74,6 +74,9 @@ short int ScpiClientServer::DecodeMsg(std::string& _msg, std::string& _header, s
 		_cmde = _msg;
 		a = BRD_CMD;
 	}
+	else if((_msg.find("ERR?")!=string::npos) && (this->_HEADER.compare("TEST0256")) == 0){
+		a = ERR_REQ;
+	}
 	else if(first == -1){//exec commande courte
 		_header.assign("\0");
 		_cmde = _msg;
@@ -98,16 +101,15 @@ short int ScpiClientServer::DecodeMsg(std::string& _msg, std::string& _header, s
 
 short int ScpiClientServer::ExecuteCmde (std::string& _cmde, std::string &_rep){
 
-//throw ERROR_TEST;
-
-
-	if(_cmde.compare("ERR ?") != 0){
-
-	}
-
+	//throw ERROR_TEST;
 	std::string Order = "Order66";
-	_rep = Order;
-	return 0 ;
+
+	if(sendEnable !=0) {
+		throw ERR_CMDE_EXEC_FORBIDEN;
+	} else {
+		_rep.assign(Order);
+		return 0;
+	}
 }
 
 std::string ScpiClientServer::getHeader(){
@@ -139,16 +141,18 @@ try{
 		this->ExecuteCmde(_cmde, _rep);
 		break;
 	case FIND_NEXT_SERVER :
-		if(this->sendEnable != 0){ //vérifie si la chaine scpi n'a pas été bloquée
-			;
+	{
+		int positionClient = this->FindClientinList(_header);//cherche le header du prochain client et renvoi sa position dans le vector
+		if(positionClient == -1){
+			throw ERROR_CANT_FIND_CLIENT;
 		}else{
-			int positionClient = this->FindClientinList(_header);//cherche le header du prochain client et renvoi sa position dans le vector
-			if(positionClient == -1){
-				throw ERROR_CANT_FIND_CLIENT;
-			}else{
-				this->getClient(positionClient)->ReceiveMsg(_cmde,_rep,_cerrg  );//accéde à la ref du prochain client dans le vector
-			}
+			this->getClient(positionClient)->ReceiveMsg(_cmde,_rep,_cerrg  );//accéde à la ref du prochain client dans le vector
 		}
+	}
+		break;
+	case ERR_REQ :
+		_rep.assign(_cerrg.ToString());
+		_cerrg.clearCerrg();
 		break;
 	default :
 		throw ERROR_BAD_MSG;

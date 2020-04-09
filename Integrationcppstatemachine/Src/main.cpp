@@ -89,11 +89,12 @@
 
 /*debug uart*/
 
-T_STATUS stateMachine = HELLO;
+
 
 /* USER CODE BEGIN PV */
 void SystemClock_Config(void);
 void initStateMachine(void);
+void InitScpiStructure(void);
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -105,6 +106,9 @@ void initStateMachine(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+extern std::string RX_string;
+
+T_STATUS stateMachine = HELLO;
 
 
 
@@ -132,18 +136,15 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
+  initStateMachine();
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
 
 
-  /* USER CODE BEGIN WHILE */
 
-  //TI95xx expand1;
-
-	ScpiClientServer SCPI_MAIN("TEST0256",0);
-		ScpiClientServer SCPI_MES_I("MES_I");
+  ScpiClientServer SCPI_MAIN("TEST0256",0);
+  	  ScpiClientServer SCPI_MES_I("MES_I");
 		SCPI_MAIN.AddClient(&SCPI_MES_I);
 			ScpiClientServer RADIAL("RAD");
 			SCPI_MES_I.AddClient(&RADIAL);
@@ -216,37 +217,35 @@ int main(void)
 		ScpiClientServer SCPI_OPT("OPT");
 		SCPI_MAIN.AddClient(&SCPI_OPT);
 
+	CerrG mainCerrG(-1);
+
+  /* USER CODE BEGIN WHILE */
 
 
- //SCPI_MAIN.SetSendEnable(1);
- //std::string MSG = "MES_I:AXE:L1:?" ;
- //std::string MSG = "*IDN?" ;
+	  std::string MSG;
+	  std::string REP;
 
- std::string MSG;
- MSG.reserve(256);
- MSG.assign("\0");
+  //SCPI_MAIN.SetSendEnable(1);
 
- std::string REP;
- REP.reserve(256);
- REP.assign("\0");
-
-
-CerrG mainCerrG(-1);
-
-
-
- //CerrG =  SCPI_MAIN.ReceiveMsg(MSG, REP);
- extern std::string RX_string;
+  MSG.reserve(256);
+  MSG.assign("\0");
+  REP.reserve(256);
+  REP.assign("\0");
 
 
 
+	UART_transmit("\r\n*** Testing exception ***");
+	try {
+		throw 1;
+		UART_transmit("\r\n*** FAILED ***");
+	} catch (int e) {
+		UART_transmit("\r\n*** OK ***");
+	}
 
-initStateMachine();
+	UART_transmit("\r\n*** RUNNING STATE MACHINE ***");
 
   while (1)
   {
-
-
 	  	/* Infinite loop */
 	  	/* USER CODE BEGIN WHILE */
 	  	while (1) {
@@ -261,13 +260,17 @@ initStateMachine();
 					while(getstackmsgsize()>0){
 						Stackmsg(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
-						UART_transmit(REP);
+						if(REP.size() == 0){
+							UART_transmit("OK");
+						}else{
+							UART_transmit("OK:answer = " + REP);
+						}
 					}
-					stateMachine = DEFAULT;
 				}catch(int e){
 					UART_transmit(REP.assign(mainCerrG.ToString()));
 				}
-				 REP.assign("\0");
+				REP.assign("\0");
+				stateMachine = DEFAULT;
 	  			break;
 	  		case (SECU):
 	  			HAL_Delay(100);
@@ -291,36 +294,50 @@ initStateMachine();
 }
 
 void initStateMachine(void) {
-	HAL_Init();
-	SystemClock_Config();
 
+	MX_USART3_UART_Init();
+	Reset_uart_buffer();
+
+	UART_transmit("*** OUSOFT-0003 Rev0.01 ***");
+	UART_transmit("--- Hardware initing ---");
+
+	UART_transmit("--- init : GPIO");
 	MX_GPIO_Init();
-	MX_ADC3_Init();
+	UART_transmit("--- init : DAC");
 	MX_DAC_Init();
+	UART_transmit("--- init : I2C2");
 	MX_I2C2_Init();
+	UART_transmit("--- init : I2C3");
 	MX_I2C3_Init();
+	UART_transmit("--- init : SPI3");
 	MX_SPI3_Init();
 	MX_UART4_Init();
 	MX_UART5_Init();
 	//MX_LWIP_Init();
+	UART_transmit("--- init : ADC1");
 	MX_ADC1_Init();
+	UART_transmit("--- init : I2C4");
 	MX_I2C4_Init();
 	MX_UART7_Init();
 //	MX_CAN1_Init();
+	UART_transmit("--- init : TIM2");
 	MX_TIM2_Init();
+	UART_transmit("--- init : TIM3");
 	MX_TIM3_Init();
+	UART_transmit("--- init : TIM4");
 	MX_TIM4_Init();
+	UART_transmit("--- init : TIM8");
 	MX_TIM8_Init();
 
 	//Relay_Init();
-	MX_USART3_UART_Init();
-	Reset_uart_buffer();
 
+	UART_transmit("--- init : RCC");
 	TM_RCC_InitSystem();
 	TM_I2C_Init(I2C4, TM_I2C_PinsPack_3, 100000);
 
 	//CheckI2C4();
-
+	UART_transmit("--- init : ADC3");
+	MX_ADC3_Init();
 	TM_ADC_Init(ADC3, TM_ADC_Channel_0);
 	//TM_ADC_Init(ADC3, TM_ADC_Channel_1);
 	//TM_ADC_Init(ADC3, TM_ADC_Channel_2);
@@ -420,7 +437,8 @@ void TM_I2C_InitCustomPinsCallback(I2C_TypeDef* I2Cx,
 
 void TraitementSECU(void) {
 	UART_transmit("\n\r AU SECOUR !!! \n\r");
-
+	stateMachine = SECU;
+	//SCPI_MAIN.SetSendEnable(1);
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {

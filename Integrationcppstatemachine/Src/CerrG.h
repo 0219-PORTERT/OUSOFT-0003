@@ -30,6 +30,8 @@ public:
 
 	std::string ToString(void);
 
+	void clearCerrg(void);
+
 private:
 
 
