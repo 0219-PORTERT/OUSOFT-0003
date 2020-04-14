@@ -8,6 +8,8 @@
 #include <vector>
 #include "ListenerScpiMsg.h"
 
+/* ERT : 20200414*/
+
 extern ListenerScpiMsg stateM;
 extern ListenerScpiMsg mainScpi;
 
