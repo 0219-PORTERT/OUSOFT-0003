@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1586810396 source:c:\users\renault_e\stm32cubeide\workspace_1.0.2\ousoft-0003\test_unit\com_rx\test_com_rx\main.cpp
+	<iostream>
+	"ScpiRecvMsg.h"
+	<string>
+
+1586811698 c:\users\renault_e\stm32cubeide\workspace_1.0.2\ousoft-0003\test_unit\com_rx\test_com_rx\include\scpirecvmsg.h
+	<string>
+	<iostream>
+	<vector>
+
+1586812203 source:c:\users\renault_e\stm32cubeide\workspace_1.0.2\ousoft-0003\test_unit\com_rx\test_com_rx\src\scpirecvmsg.cpp
+	"ScpiRecvMsg.h"
+	<string>
+	<iostream>
+	<vector>
+

@@ -317,26 +317,25 @@ int getstackmsgsize(){
 }
 
 int Stackmsg(std::string &MSG){
-	MSG = stack_cmd.at(0);
+	MSG = stack_cmd.at(0); //Il faut passer par une recopie MSG->assign(stack_cmd.at(0)) car là, tu déréférence le pointeur MSG !
 	stack_cmd.erase(stack_cmd.begin());
 
 	return 0;
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-	std::string test = "";
-
-
+	// std::string test = ""; A SUPPRIMER
 
 		if(RX_Buffer[0] != '\r') {
 			if(RX_Buffer[0] == ';'){
+				RX_string+="\0";  //Ajout du caractère de fin de ligne avant enregistrement dans le vecteur
 				stack_cmd.push_back(RX_string);
 				RX_string.assign("\0");
 			}else{
 				RX_string = RX_string + RX_Buffer[0];
 			}
 		}else {
-			RX_string = RX_string + "\n" + "\r";
+			//RX_string = RX_string + "\n" + "\r"; ON NE MET PAS LES CARACTERE DE FIN MAIS ILS SERVENT A DECLENCHER L'ACTION
 			if (RX_string.compare("*RST\n\r") == 0) {   //Test le zéro de l'égalité
 				stateMachine = RST;
 			}else {
@@ -349,6 +348,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 
 	__HAL_UART_CLEAR_IT(&huart3, UART_IT_RXNE);
+
 }
 
 
