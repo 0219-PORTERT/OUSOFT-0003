@@ -292,13 +292,11 @@ void MX_USART3_UART_Init(void) {
 	/* USER CODE BEGIN USART3_Init 2 */
 	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 
+	RX_string.reserve(256);
+	RX_string.assign("\0");
 
-	 RX_string.reserve(256);
-	 RX_string.assign("\0");
-
-	 TX_string.reserve(256);
-	 TX_string.assign("\0");
-
+	TX_string.reserve(256);
+	TX_string.assign("\0");
 
 	/* USER CODE END USART3_Init 2 */
 
@@ -312,60 +310,53 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 	__NOP();
 }
 
-int getstackmsgsize(){
+int getstackmsgsize() {
 	return stack_cmd.size();
 }
 
-int Stackmsg(std::string &MSG){
-	MSG = stack_cmd.at(0); //Il faut passer par une recopie MSG->assign(stack_cmd.at(0)) car là, tu déréférence le pointeur MSG !
+int Stackmsg(std::string &MSG) {
+	MSG.assign(stack_cmd.at(0));
 	stack_cmd.erase(stack_cmd.begin());
 
 	return 0;
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-	// std::string test = ""; A SUPPRIMER
 
-		if(RX_Buffer[0] != '\r') {
-			if(RX_Buffer[0] == ';'){
-				RX_string+="\0";  //Ajout du caractère de fin de ligne avant enregistrement dans le vecteur
-				stack_cmd.push_back(RX_string);
-				RX_string.assign("\0");
-			}else{
-				RX_string = RX_string + RX_Buffer[0];
-			}
-		}else {
-			//RX_string = RX_string + "\n" + "\r"; ON NE MET PAS LES CARACTERE DE FIN MAIS ILS SERVENT A DECLENCHER L'ACTION
-			if (RX_string.compare("*RST\n\r") == 0) {   //Test le zéro de l'égalité
-				stateMachine = RST;
-			}else {
-				stack_cmd.push_back(RX_string);
-				//test = stack_cmd.at(0);
-				//test = stack_cmd.at(1);
-				stateMachine = CMD;
-			}
+	if (RX_Buffer[0] != '\r') {
+		if (RX_Buffer[0] == ';') {
+			stack_cmd.push_back(RX_string);
+			RX_string.assign("\0");
+		} else {
+			RX_string = RX_string + RX_Buffer[0];
 		}
-
-
-	__HAL_UART_CLEAR_IT(&huart3, UART_IT_RXNE);
+	} else {
+		//RX_string = RX_string + "\n" + "\r";
+		if (RX_string.compare("*RST\n\r") == 0) {   //Test le zéro de l'égalité
+			stateMachine = RST;
+		} else {
+			stack_cmd.push_back(RX_string);
+			stateMachine = CMD;
+		}
+	}
+	//__HAL_UART_CLEAR_IT(&huart3, UART_IT_RXNE);
+	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+	//__HAL_UART_FLUSH_DRREGISTER(&huart3);
 
 }
 
-
 void UART_transmit(std::string stringtosend) {
 	stringtosend = stringtosend + "\n" + "\r";
-	char char_array[stringtosend.length()+1];
+	char char_array[stringtosend.length()];
 
-	stringtosend.copy(char_array, stringtosend.length()+1);
+	stringtosend.copy(char_array, stringtosend.length());
 
-
-	HAL_UART_Transmit(&huart3, (uint8_t*) char_array, stringtosend.length()+1, 0xFFFF);
+	HAL_UART_Transmit(&huart3, (uint8_t*) char_array, stringtosend.length(),
+			0xFFFF);
 
 	Reset_uart_buffer();
 
 }
-
-
 
 void Reset_uart_buffer(void) {
 	TX_string.assign("\0");
