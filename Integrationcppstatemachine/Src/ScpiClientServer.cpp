@@ -107,7 +107,7 @@ short int ScpiClientServer::ExecuteCmde (std::string& _cmde, std::string &_rep){
 	if(sendEnable !=0) {
 		throw ERR_CMDE_EXEC_FORBIDEN;
 	} else {
-		_rep.assign(Order);
+		_rep.assign("Je suis" +this->_HEADER +"et j'ai reçu"+ _cmde  );
 		return 0;
 	}
 }
@@ -121,7 +121,6 @@ ScpiClientServer* ScpiClientServer::getClient(uint8_t pos){
 }
 
 short int ScpiClientServer::ReceiveMsg (std::string _msg, std::string &_rep, CerrG &_cerrg ){
-
 
 	std::string _header;
 	std::string _cmde;

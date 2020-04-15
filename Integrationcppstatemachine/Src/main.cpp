@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -28,7 +28,6 @@
 #include "expanders\TI95xx.h"
 
 #include <string>
-
 
 /* USER CODE END Header */
 
@@ -44,19 +43,16 @@
 #include "usart.h"
 #include "gpio.h"
 
-
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 //#include "lwip/apps/httpd.h"
-
 #include "FonctionsSCPI.h"
 #include "fonctions_eeprom.h"
 #include "FonctionsAutotest.h"
 #include "stateMachine.h"
 #include "CerrG.h"
 #include "ScpiClientServer.h"
-
+#include "Pwm.h"
 
 /* Include core modules */
 #include "stm32fxxx_hal.h"
@@ -89,8 +85,6 @@
 
 /*debug uart*/
 
-
-
 /* USER CODE BEGIN PV */
 void SystemClock_Config(void);
 void initStateMachine(void);
@@ -110,44 +104,41 @@ extern std::string RX_string;
 
 T_STATUS stateMachine = HELLO;
 
-
-
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
-int main(void)
-{
-  /* USER CODE BEGIN 1 */
+ * @brief  The application entry point.
+ * @retval int
+ */
+int main(void) {
+	/* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
-  
+	/* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
+	/* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
 
-  /* USER CODE BEGIN Init */
+	/* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+	/* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
-  initStateMachine();
-  /* USER CODE BEGIN SysInit */
+	/* Configure the system clock */
+	SystemClock_Config();
+	initStateMachine();
+	/* USER CODE BEGIN SysInit */
 
-  /* USER CODE END SysInit */
+	/* USER CODE END SysInit */
 
-
-
-  ScpiClientServer SCPI_MAIN("TEST0256",0);
-  	  ScpiClientServer SCPI_MES_I("MES_I");
+	ScpiClientServer SCPI_MAIN("TEST0256", 0);
+	{
+		ScpiClientServer SCPI_MES_I("MES_I");
 		SCPI_MAIN.AddClient(&SCPI_MES_I);
+		{
 			ScpiClientServer RADIAL("RAD");
 			SCPI_MES_I.AddClient(&RADIAL);
+			{
 				ScpiClientServer V1("V1");
 				RADIAL.AddClient(&V1);
 				ScpiClientServer V2("V2");
@@ -164,22 +155,29 @@ int main(void)
 				RADIAL.AddClient(&W3);
 				ScpiClientServer W4("W4");
 				RADIAL.AddClient(&W4);
+			}
 			ScpiClientServer AXIAL("AXE");
 			SCPI_MES_I.AddClient(&AXIAL);
+			{
 				ScpiClientServer L1("L1");
 				AXIAL.AddClient(&L1);
 				ScpiClientServer L2("L2");
 				AXIAL.AddClient(&L2);
+			}
+		}
 		ScpiClientServer SCPI_POS("POS");
 		SCPI_MAIN.AddClient(&SCPI_POS);
+		{
 			ScpiClientServer MOD("MOD");
 			SCPI_POS.AddClient(&MOD);
 			ScpiClientServer SOURCE("SRC");
 			SCPI_POS.AddClient(&SOURCE);
 			ScpiClientServer DESTINATION("DST");
 			SCPI_POS.AddClient(&DESTINATION);
+		}
 		ScpiClientServer SCPI_TEMP("TMP");
 		SCPI_MAIN.AddClient(&SCPI_TEMP);
+		{
 			ScpiClientServer T1("T1");
 			SCPI_TEMP.AddClient(&T1);
 			ScpiClientServer T2("T2");
@@ -188,8 +186,10 @@ int main(void)
 			SCPI_TEMP.AddClient(&T3);
 			ScpiClientServer T4("T4");
 			SCPI_TEMP.AddClient(&T4);
+		}
 		ScpiClientServer SCPI_HUMS("HUMS");
 		SCPI_MAIN.AddClient(&SCPI_HUMS);
+		{
 			ScpiClientServer EIC("EIC");
 			SCPI_HUMS.AddClient(&EIC);
 			ScpiClientServer CAL("CAL");
@@ -200,39 +200,46 @@ int main(void)
 			SCPI_HUMS.AddClient(&DTI);
 			ScpiClientServer TEMP("TEMP");
 			SCPI_HUMS.AddClient(&TEMP);
+		}
 		ScpiClientServer SCPI_RPM("TPM");
 		SCPI_MAIN.AddClient(&SCPI_RPM);
 		ScpiClientServer SCPI_SECU("SECU");
 		SCPI_MAIN.AddClient(&SCPI_SECU);
+		{
 			ScpiClientServer SEC_A("S_A");
 			SCPI_SECU.AddClient(&SEC_A);
 			ScpiClientServer SEC_B("S_B");
 			SCPI_SECU.AddClient(&SEC_B);
+		}
 		ScpiClientServer SCPI_DIO("DIO");
 		SCPI_MAIN.AddClient(&SCPI_DIO);
+		{
 			ScpiClientServer DIO_A("A");
 			SCPI_SECU.AddClient(&DIO_A);
 			ScpiClientServer DIO_B("B");
 			SCPI_SECU.AddClient(&DIO_B);
+		}
 		ScpiClientServer SCPI_OPT("OPT");
 		SCPI_MAIN.AddClient(&SCPI_OPT);
+	}
 
 	CerrG mainCerrG(-1);
 
-  /* USER CODE BEGIN WHILE */
+	/*Objets hardware*/
 
+	Pwm Pwm1("PWM1");
 
-	  std::string MSG;
-	  std::string REP;
+	/* USER CODE BEGIN WHILE */
 
-  //SCPI_MAIN.SetSendEnable(1);
+	std::string MSG;
+	std::string REP;
 
-  MSG.reserve(256);
-  MSG.assign("\0");
-  REP.reserve(256);
-  REP.assign("\0");
+	//SCPI_MAIN.SetSendEnable(1);
 
-
+	MSG.reserve(256);
+	MSG.assign("\0");
+	REP.reserve(256);
+	REP.assign("\0");
 
 	UART_transmit("\r\n*** Testing exception ***");
 	try {
@@ -244,53 +251,50 @@ int main(void)
 
 	UART_transmit("\r\n*** RUNNING STATE MACHINE ***");
 
-  while (1)
-  {
-	  	/* Infinite loop */
-	  	/* USER CODE BEGIN WHILE */
-	  	while (1) {
+	while (1) {
+		/* Infinite loop */
+		/* USER CODE BEGIN WHILE */
+		while (1) {
 
-	  		switch (stateMachine) {
-	  		case (HELLO):
+			switch (stateMachine) {
+			case (HELLO):
 				UART_transmit("\n\r *** Hello S2M *** \n\r");
-	  			stateMachine = DEFAULT;
-	  			break;
-	  		case (CMD):
-				try{
-					while(getstackmsgsize()>0){
+				stateMachine = DEFAULT;
+				break;
+			case (CMD):
+				try {
+					while (getstackmsgsize() > 0) {
 						Stackmsg(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
-						if(REP.size() == 0){
+						if (REP.size() == 0) {
 							UART_transmit("OK");
-						}else{
+						} else {
 							UART_transmit("OK:answer = " + REP);
 						}
 					}
-				}catch(int e){
+				} catch (int e) {
 					UART_transmit(REP.assign(mainCerrG.ToString()));
 				}
 				REP.assign("\0");
 				stateMachine = DEFAULT;
-	  			break;
-	  		case (SECU):
-	  			HAL_Delay(100);
-	  			stateMachine = SECU;
-	  			break;
-	  		case (RST):
+				break;
+			case (SECU):
+				HAL_Delay(100);
+				stateMachine = SECU;
+				break;
+			case (RST):
 				UART_transmit("\n\r RESETING... \n\r");
-	  			//RESET()
-	  			stateMachine = HELLO;
-	  			break;
-	  		case (DEFAULT):
-	  			;
-	  		}
+				//RESET()
+				stateMachine = HELLO;
+				break;
+			case (DEFAULT):
+				;
+			}
 
-
-
-	  	}
-	  	/* USER CODE END 3 */
-  }
-  /* USER CODE END 3 */
+		}
+		/* USER CODE END 3 */
+	}
+	/* USER CODE END 3 */
 }
 
 void initStateMachine(void) {
@@ -358,9 +362,9 @@ void initStateMachine(void) {
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 
 void SystemClock_Config(void) {
 	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
@@ -420,8 +424,6 @@ void SystemClock_Config(void) {
 
 /* USER CODE BEGIN 4 */
 
-
-
 /* USER CODE BEGIN 4 */
 
 /* Called if TM_I2C_PinsPack_Custom is selected when initializing I2C */
@@ -447,28 +449,25 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	//}
 	/* Clear interrupt flag */
 	EXTI_HandleTypeDef extihandle;
-	extihandle.Line = GPIO_Pin ;
+	extihandle.Line = GPIO_Pin;
 	HAL_EXTI_ClearPending(&extihandle, EXTI_TRIGGER_RISING_FALLING);
 
 	//HAL_EXTI_ClearPending(GPIO_PIN_8, EXTI_TRIGGER_RISING_FALLING);
 }
-
-
 
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
-void Error_Handler(void)
-{
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
+void Error_Handler(void) {
+	/* USER CODE BEGIN Error_Handler_Debug */
+	/* User can add his own implementation to report the HAL error return state */
 
-  /* USER CODE END Error_Handler_Debug */
+	/* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT

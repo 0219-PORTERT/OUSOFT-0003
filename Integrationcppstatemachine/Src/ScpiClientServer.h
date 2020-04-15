@@ -93,10 +93,12 @@ private:
   int FindClientinList(std::string headertofind);
   ScpiClientServer GetClientFromList(std::string& p_header);
   short int ExecuteCmde (std::string& _cmde,std::string& _rep);
-  short int ExecuteClient (std::string& _header,std::string& _rep);
   int BroadCastCmde(std::string& _cmde, std::string& _rep);
 
   void initAttributes () ;
+
+protected:
+
 };
 
 #endif // SCPICLIENTSERVER_H
