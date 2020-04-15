@@ -16,12 +16,13 @@ using namespace std;
 ScpiClientServer::ScpiClientServer(std::string _HEADER) {
 	this->_HEADER = _HEADER;
 	this->sendEnable = 0;
-
+	this->modeperoquetstatut = 0;
 }
 
 ScpiClientServer::ScpiClientServer(std::string _HEADER, int _errLvl ) {
 	this->_HEADER = _HEADER;
 	this->sendEnable = 0;
+	this->modeperoquetstatut = 0;
 
 	this->codeErr.SetSpecificPosition(_errLvl);
 	this->codeErr.adresse[0] = 1; // attribution de son adresse en dur car c'est le 1er serveur
@@ -107,9 +108,20 @@ short int ScpiClientServer::ExecuteCmde (std::string& _cmde, std::string &_rep){
 	if(sendEnable !=0) {
 		throw ERR_CMDE_EXEC_FORBIDEN;
 	} else {
-		_rep.assign("Je suis" +this->_HEADER +"et j'ai reçu"+ _cmde  );
-		return 0;
+		if(_cmde.compare("*IDN ?") ==0){
+			_rep.assign("je suis le client "+this->_HEADER);
+		}else{
+			//throw ERR_CMDE;
+		}
+
+
 	}
+
+	if( this->modeperoquetstatut !=0){
+		_rep.assign("MODEPEROQUET: Client " +this->_HEADER +" et j'ai recu "+ _cmde + "\n\r" + _rep );
+	}
+
+	return 0;
 }
 
 std::string ScpiClientServer::getHeader(){
@@ -183,29 +195,11 @@ int ScpiClientServer::FindClientinList(std::string headertofind){
 	return -1;
 }
 
-/*ScpiClientServer ScpiClientServer::GetClientFromList(std::string& p_header) {
-		try {
-			for (uint i = 0; i < v_listeClients.size(); i++) {
-				ScpiClientServer* nextClient = v_listeClients.at(i);
-				std::string nextClientHeader = nextClient->_HEADER;
-				int compare = nextClientHeader.compare(*p_header);
-				if (!compare) {
-					return nextClient;
-				}
-			}
-			return NULL;
-		} catch (std::exception & e) {
-			std::string err(e.what());
-		}
-
-	}*/
-
-
 int ScpiClientServer::getTailleListClient(){
 	return this->listeClients.size();
 }
 
-short int ScpiClientServer::SetSendEnable (int _sendEnbleValue){
+void ScpiClientServer::SetSendEnable (int _sendEnbleValue){
 
 	this->sendEnable = _sendEnbleValue;
 
@@ -213,7 +207,13 @@ short int ScpiClientServer::SetSendEnable (int _sendEnbleValue){
 		this->getClient(i)->SetSendEnable(_sendEnbleValue);
 	}
 
-	return 0;
+}
+void ScpiClientServer::modeperoquet(int mode){
+	this->modeperoquetstatut = mode;
+
+		for(int i = 0; i < this->listeClients.size(); i++){
+			this->getClient(i)->modeperoquet(mode);
+		}
 }
 
 int ScpiClientServer::BroadCastCmde(std::string& _cmde, std::string& _rep){
@@ -223,11 +223,17 @@ int ScpiClientServer::BroadCastCmde(std::string& _cmde, std::string& _rep){
 	streponse.assign("\0");
 
 	this->ExecuteCmde(_cmde, streponse);
-	_rep = _rep + "client:" + this->_HEADER + "->"+ streponse + ";";
+	//_rep = _rep + "client:" + this->_HEADER + "->"+ streponse + ";";
+
+	_rep = _rep + streponse + ";"+"\n\r";
 
 	for(int i = 0; i < this->listeClients.size(); i++){
 		this->getClient(i)->BroadCastCmde(_cmde,_rep);
 	}
 	return 0;
+}
+
+ScpiClientServer* ScpiClientServer::getSCPIClientServer(){
+	return this;
 }
 

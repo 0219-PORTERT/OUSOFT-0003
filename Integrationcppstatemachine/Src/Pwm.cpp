@@ -6,6 +6,7 @@
  */
 
 #include "Pwm.h"
+#include "ScpiClientServer.h"
 #include <string>
 
 Pwm::Pwm() {
@@ -14,20 +15,28 @@ Pwm::Pwm() {
 
 }
 
-Pwm::Pwm(std::string _name) {
+Pwm::Pwm(std::string _name) : ScpiClientServer(_name), rpmValue(0) {
 	// TODO Auto-generated constructor stub
-	this->rpmValue = 0;
-	this->Name = _name;
 }
 
 Pwm::~Pwm() {
 	// TODO Auto-generated destructor stub
 }
 
-short int Pwm::ExecuteCmde (std::string& _cmde, std::string &_rep){
+short int Pwm::ExecuteCmde (std::string& _cmde, std::string& _rep){
+	_rep.assign("Je suis le execute de la classe pwm");
 
-	//switch(){
-	//}
+	/*if(_cmde.compare("*RST") == 0){
+
+	}else if(_cmde.compare("RPM ?") == 0){
+
+	}else if(_cmde.compare("RPM ") == 0){
+
+	}else{
+		//throw something
+	}*/
+
+
 
 	return 0;
 }

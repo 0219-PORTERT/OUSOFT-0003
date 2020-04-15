@@ -131,14 +131,18 @@ int main(void) {
 
 	/* USER CODE END SysInit */
 
+	/*Objets hardware*/
+	Pwm Pwm1("RPM");
+
+	/*SCPI STRUCTURE*/
 	ScpiClientServer SCPI_MAIN("TEST0256", 0);
-	{
+	//{
 		ScpiClientServer SCPI_MES_I("MES_I");
 		SCPI_MAIN.AddClient(&SCPI_MES_I);
-		{
+		//{
 			ScpiClientServer RADIAL("RAD");
 			SCPI_MES_I.AddClient(&RADIAL);
-			{
+			//{
 				ScpiClientServer V1("V1");
 				RADIAL.AddClient(&V1);
 				ScpiClientServer V2("V2");
@@ -155,29 +159,29 @@ int main(void) {
 				RADIAL.AddClient(&W3);
 				ScpiClientServer W4("W4");
 				RADIAL.AddClient(&W4);
-			}
+			//}
 			ScpiClientServer AXIAL("AXE");
 			SCPI_MES_I.AddClient(&AXIAL);
-			{
+			//{
 				ScpiClientServer L1("L1");
 				AXIAL.AddClient(&L1);
 				ScpiClientServer L2("L2");
 				AXIAL.AddClient(&L2);
-			}
-		}
+			//}
+		//}
 		ScpiClientServer SCPI_POS("POS");
 		SCPI_MAIN.AddClient(&SCPI_POS);
-		{
+		//{
 			ScpiClientServer MOD("MOD");
 			SCPI_POS.AddClient(&MOD);
 			ScpiClientServer SOURCE("SRC");
 			SCPI_POS.AddClient(&SOURCE);
 			ScpiClientServer DESTINATION("DST");
 			SCPI_POS.AddClient(&DESTINATION);
-		}
+		//}
 		ScpiClientServer SCPI_TEMP("TMP");
 		SCPI_MAIN.AddClient(&SCPI_TEMP);
-		{
+	//	{
 			ScpiClientServer T1("T1");
 			SCPI_TEMP.AddClient(&T1);
 			ScpiClientServer T2("T2");
@@ -186,10 +190,10 @@ int main(void) {
 			SCPI_TEMP.AddClient(&T3);
 			ScpiClientServer T4("T4");
 			SCPI_TEMP.AddClient(&T4);
-		}
+		//}
 		ScpiClientServer SCPI_HUMS("HUMS");
 		SCPI_MAIN.AddClient(&SCPI_HUMS);
-		{
+		//{
 			ScpiClientServer EIC("EIC");
 			SCPI_HUMS.AddClient(&EIC);
 			ScpiClientServer CAL("CAL");
@@ -200,34 +204,35 @@ int main(void) {
 			SCPI_HUMS.AddClient(&DTI);
 			ScpiClientServer TEMP("TEMP");
 			SCPI_HUMS.AddClient(&TEMP);
-		}
-		ScpiClientServer SCPI_RPM("TPM");
-		SCPI_MAIN.AddClient(&SCPI_RPM);
+		//}
+		SCPI_MAIN.AddClient(Pwm1.getSCPIClientServer()); //RPM
+		//ScpiClientServer SCPI_RPM("RPM");
+		//SCPI_MAIN.AddClient(&SCPI_RPM);
 		ScpiClientServer SCPI_SECU("SECU");
 		SCPI_MAIN.AddClient(&SCPI_SECU);
-		{
+		//{
 			ScpiClientServer SEC_A("S_A");
 			SCPI_SECU.AddClient(&SEC_A);
 			ScpiClientServer SEC_B("S_B");
 			SCPI_SECU.AddClient(&SEC_B);
-		}
+		//}
 		ScpiClientServer SCPI_DIO("DIO");
 		SCPI_MAIN.AddClient(&SCPI_DIO);
-		{
+		//{
 			ScpiClientServer DIO_A("A");
 			SCPI_SECU.AddClient(&DIO_A);
 			ScpiClientServer DIO_B("B");
 			SCPI_SECU.AddClient(&DIO_B);
-		}
+		//}
 		ScpiClientServer SCPI_OPT("OPT");
 		SCPI_MAIN.AddClient(&SCPI_OPT);
-	}
+	//}
 
 	CerrG mainCerrG(-1);
 
-	/*Objets hardware*/
 
-	Pwm Pwm1("PWM1");
+
+
 
 	/* USER CODE BEGIN WHILE */
 
@@ -235,6 +240,7 @@ int main(void) {
 	std::string REP;
 
 	//SCPI_MAIN.SetSendEnable(1);
+	SCPI_MAIN.modeperoquet(1);
 
 	MSG.reserve(256);
 	MSG.assign("\0");

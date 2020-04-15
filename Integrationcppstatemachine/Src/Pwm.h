@@ -17,11 +17,15 @@ public:
 	Pwm(std::string _name);
 	virtual ~Pwm();
 
-	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
+
 
 private:
 	int rpmValue;
-	std::string Name;
+	std::string _name;
+	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
+
+protected:
+
 };
 
 #endif /* PWM_H_ */
