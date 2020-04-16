@@ -471,14 +471,15 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 
 /* USER CODE BEGIN 1 */
 
-void ConfigurePWM(TIM_HandleTypeDef* timHandle, uint32_t period, uint32_t pwm, uint16_t CHANNEL){
+void ConfigurePWM(TIM_HandleTypeDef* timHandle, uint32_t frequence, uint32_t rapportcyclique, uint16_t CHANNEL){
 
 	TIM_OC_InitTypeDef sConfig;
 
-	uint16_t Fpwm = 100;
+	uint16_t Fpwm = 10;
 	uint16_t psc = 200;
 
-	uint16_t ARR = (uint16_t)0+(( (2*APB1_FREQ)/(Fpwm * (1+psc)) )-1);
+	//uint16_t ARR = (uint16_t)0+(( (2*APB1_FREQ)/(Fpwm * (1+psc)) )-1);
+	uint16_t ARR = (uint16_t)0+(( (2*APB1_FREQ)/(frequence * (1+psc)) )-1);
 	htim3.Init.Prescaler         = psc+1;
 	htim3.Init.Period            = ARR;
 
@@ -486,7 +487,8 @@ void ConfigurePWM(TIM_HandleTypeDef* timHandle, uint32_t period, uint32_t pwm, u
 
 
 
-	uint32_t pulse = (ARR * 50 )/100;
+	//uint32_t pulse = (ARR * 50 )/100;
+	uint32_t pulse = (ARR * rapportcyclique )/100;
 
 
 	htim3.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
@@ -536,12 +538,22 @@ void PwmOutput(TIM_HandleTypeDef* timHandle,uint16_t CHANNEL, uint16_t state){
 
 }
 
-void testPWM(int cpt,int cpt2){
+void testPWM(void){
 
 
 	ConfigurePWM(&htim3, 250, 50, TIM_CHANNEL_1);
 	PwmOutput(&htim3,TIM_CHANNEL_1, 1);
 	//setPWM(htim3, TIM_CHANNEL_1, 255, 50);
+}
+
+short int startPwm(int value){
+	ConfigurePWM(&htim3, value, 50, TIM_CHANNEL_1);
+	if(value ==0){
+		PwmOutput(&htim3,TIM_CHANNEL_1, 0);
+	}else{
+		PwmOutput(&htim3,TIM_CHANNEL_1, 1);
+	}
+
 }
 
 
