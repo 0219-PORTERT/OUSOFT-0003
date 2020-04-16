@@ -27,23 +27,53 @@ Pwm::~Pwm() {
 }
 
 short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
-	_rep.assign("Je suis le execute de la classe pwm");
-	//testPWM();
+	//_rep.assign("Je suis le execute de la classe pwm");
 
-	if (_cmde.compare("*RST") == 0) {
+	switch (decodeInstruct(_cmde)) {
+
+	case REQ_RST:
 		this->rpmValue = 0;
 		startPwm(0);
-	}/*else if(_cmde.compare("*IDN ?") == 0){
-	 _rep.assign("je suis le client " + this->getHeader());
-	 }*/
-	/*else if (_cmde.compare("?") == 0) {
+		break;
+	case REQ_IDN:
+		_rep.assign("je suis le client HARDWARE " + this->getHeader());
+		break;
+	case REQ_x:
+		startPwm(this->rpmValue);
+		break;
+	case REQ_QST:
 		_rep.assign("RPM: " + std::to_string(this->rpmValue) + "\n\r");
-	} else {
-		int value = 0;
-		value = stoi(_cmde, nullptr, 10);
-		this->rpmValue = value;
-		startPwm(value);
-	}*/
+		break;
+
+	default:
+		//throw something;
+		break;
+	}
 
 	return 0;
+}
+
+int Pwm::decodeInstruct(std::string& _cmde) {
+
+	int sel = 0;
+
+	if (_cmde.compare("*RST") == 0) {
+		sel = REQ_RST;
+	} else if (_cmde.compare("*IDN ?") == 0) {
+		sel = REQ_IDN;
+	} else if (_cmde.compare("RPM ?") == 0) {
+		sel = REQ_QST;
+	} else if (_cmde.compare(0, 4, "RPM ") == 0) {
+		int value = 0;
+		value = stoi(_cmde.substr(4), nullptr, 10);
+		if ((value < 0) || (value > MAX_FREQ_VALUE)) {
+			sel = -1; //bonne commande mais mauvaise valeur car mal convertie ou autre
+		} else {
+			this->rpmValue = value;
+			sel = REQ_x;
+		}
+	} else {
+		//throw something;
+	}
+	return sel;
 }

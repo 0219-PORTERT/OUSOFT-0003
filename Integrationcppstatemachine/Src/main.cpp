@@ -137,7 +137,7 @@ int main(void) {
 	/*SCPI STRUCTURE*/
 	ScpiClientServer SCPI_MAIN("TEST0256", 0);
 	//{
-		ScpiClientServer SCPI_MES_I("MES_I");
+		ScpiClientServer SCPI_MES_I("MESI");
 		SCPI_MAIN.AddClient(&SCPI_MES_I);
 		//{
 			ScpiClientServer RADIAL("RAD");
@@ -273,9 +273,9 @@ int main(void) {
 						Stackmsg(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
-							UART_transmit("OK");
+							UART_transmit(" OK\n\r");
 						} else {
-							UART_transmit("OK:answer = " + REP);
+							UART_transmit("OK:answer =\n\r" + REP);
 						}
 					}
 				} catch (int e) {

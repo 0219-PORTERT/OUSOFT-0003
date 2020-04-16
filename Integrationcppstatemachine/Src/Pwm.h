@@ -8,6 +8,14 @@
 #ifndef PWM_H_
 #define PWM_H_
 
+
+#define REQ_RST 1
+#define REQ_IDN 2
+#define REQ_x 3
+#define REQ_QST 4
+
+#define MAX_FREQ_VALUE 200
+
 #include "ScpiClientServer.h"
 #include <String>
 #include <iostream>
@@ -24,6 +32,7 @@ private:
 	int rpmValue;
 	std::string _name;
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
+	int decodeInstruct(std::string& _cmde);
 
 protected:
 

@@ -72,7 +72,7 @@ short int ScpiClientServer::DecodeMsg(std::string& _msg, std::string& _header,
 		a = ERR_REQ;
 	} else if (first == -1) { //exec commande courte
 		_header.assign("\0");
-		_cmde.assign(_msg.substr(1));
+		_cmde.assign(_msg);
 		a = EXEC_CMD;
 	} else if (first != -1) { // passe au serveur
 		_header = _msg.substr(0, first);
