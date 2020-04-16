@@ -321,6 +321,10 @@ int Stackmsg(std::string &MSG) {
 	return 0;
 }
 
+void clearStackmsg(void){
+	stack_cmd.clear();
+}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 	if (RX_Buffer[0] != '\r') {
@@ -331,8 +335,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			RX_string = RX_string + RX_Buffer[0];
 		}
 	} else {
-		//RX_string = RX_string + "\n" + "\r";
-		if (RX_string.compare("*RST\n\r") == 0) {   //Test le zéro de l'égalité
+		if (RX_string.compare("*RST") == 0) {   //Test le zéro de l'égalité
+			stack_cmd.push_back(RX_string);
 			stateMachine = RST;
 		} else {
 			stack_cmd.push_back(RX_string);

@@ -89,18 +89,16 @@ short int ScpiClientServer::DecodeMsg(std::string& _msg, std::string& _header,
 short int ScpiClientServer::ExecuteCmde(std::string& _cmde, std::string &_rep) {
 
 	//throw ERROR_TEST;
-	std::string Order = "Order66";
+	//std::string Order = "Order66";
 
-	if (sendEnable != 0) {
-		throw ERR_CMDE_EXEC_FORBIDEN;
-	} else {
+
 		if (_cmde.compare("*IDN ?") == 0) {
 			_rep.assign("je suis le client " + this->_HEADER);
 		} else {
 			//throw ERR_CMDE;
 		}
 
-	}
+
 
 	if (this->modeperoquetstatut != 0) {
 		_rep.assign(
@@ -137,7 +135,11 @@ short int ScpiClientServer::ReceiveMsg(std::string _msg, std::string &_rep,
 			BroadCastCmde(_cmde, _rep); //envoie de la commande à tous les clients en reccursif
 			break;
 		case EXEC_CMD:
-			this->ExecuteCmde(_cmde, _rep);
+			if (sendEnable != 0) {
+				throw ERR_CMDE_EXEC_FORBIDEN;
+			} else {
+				this->ExecuteCmde(_cmde, _rep);
+			}
 			break;
 		case FIND_NEXT_SERVER: {
 			int positionClient = this->FindClientinList(_header); //cherche le header du prochain client et renvoi sa position dans le vector

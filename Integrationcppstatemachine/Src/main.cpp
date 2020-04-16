@@ -239,7 +239,7 @@ int main(void) {
 	std::string MSG;
 	std::string REP;
 
-	//SCPI_MAIN.SetSendEnable(1);
+	//SCPI_MAIN.SetSendEnable(1); //bloquer
 	SCPI_MAIN.modeperoquet(1);
 
 	MSG.reserve(256);
@@ -282,6 +282,7 @@ int main(void) {
 					UART_transmit(REP.assign(mainCerrG.ToString()));
 				}
 				REP.assign("\0");
+				MSG.assign("\0");
 				stateMachine = DEFAULT;
 				break;
 			case (SECU):
@@ -291,6 +292,14 @@ int main(void) {
 			case (RST):
 				UART_transmit("\n\r RESETING... \n\r");
 				//RESET()
+				REP.assign("\0");
+				MSG.assign("\0");
+				Stackmsg(MSG);
+				clearStackmsg();
+				SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
+				SCPI_MAIN.SetSendEnable(0); //réactivation des commandes
+				REP.assign("\0");//à voir si il faut une réponse du système ??????
+				MSG.assign("\0");
 				stateMachine = HELLO;
 				break;
 			case (DEFAULT):

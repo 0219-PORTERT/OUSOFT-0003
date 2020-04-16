@@ -36,14 +36,14 @@ short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	}/*else if(_cmde.compare("*IDN ?") == 0){
 	 _rep.assign("je suis le client " + this->getHeader());
 	 }*/
-	else if (_cmde.compare("?") == 0) {
+	/*else if (_cmde.compare("?") == 0) {
 		_rep.assign("RPM: " + std::to_string(this->rpmValue) + "\n\r");
 	} else {
 		int value = 0;
 		value = stoi(_cmde, nullptr, 10);
 		this->rpmValue = value;
 		startPwm(value);
-	}
+	}*/
 
 	return 0;
 }
