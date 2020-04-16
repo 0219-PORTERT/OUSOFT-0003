@@ -10,6 +10,7 @@
 
 #include "ScpiClientServer.h"
 #include <String>
+#include <iostream>
 
 class Pwm : public ScpiClientServer {
 public:
