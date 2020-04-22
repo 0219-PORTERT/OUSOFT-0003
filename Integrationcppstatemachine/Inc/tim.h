@@ -50,6 +50,8 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 void PwmOutput(TIM_HandleTypeDef* timHandle,uint16_t CHANNEL, uint16_t state);
 void ConfigurePWM(TIM_HandleTypeDef* timHandle, uint32_t period, uint32_t pwm, uint16_t CHANNEL);
 static void setPWM(TIM_HandleTypeDef, uint32_t, uint16_t, uint16_t);
+void testPWM(void);
+short int startPwm(int value);
 
 /* USER CODE END Prototypes */
 

@@ -1,7 +1,4 @@
 /* USER CODE BEGIN Header */
-
-
-/*test push TPS 14/04/20*/
 /**
  ******************************************************************************
  * @file           : main.c
@@ -55,6 +52,7 @@
 #include "stateMachine.h"
 #include "CerrG.h"
 #include "ScpiClientServer.h"
+#include "Pwm.h"
 
 /* Include core modules */
 #include "stm32fxxx_hal.h"
@@ -133,135 +131,185 @@ int main(void) {
 
 	/* USER CODE END SysInit */
 
+	/*Objets hardware*/
+	Pwm Pwm1("RPM");
+
+	/*SCPI STRUCTURE*/
 	ScpiClientServer SCPI_MAIN("TEST0256", 0);
-	ScpiClientServer SCPI_MES_I("MES_I");
-	SCPI_MAIN.AddClient(&SCPI_MES_I);
-	ScpiClientServer RADIAL("RAD");
-	SCPI_MES_I.AddClient(&RADIAL);
-	ScpiClientServer V1("V1");
-	RADIAL.AddClient(&V1);
-	ScpiClientServer V2("V2");
-	RADIAL.AddClient(&V2);
-	ScpiClientServer V3("V3");
-	RADIAL.AddClient(&V3);
-	ScpiClientServer V4("V4");
-	RADIAL.AddClient(&V4);
-	ScpiClientServer W1("W1");
-	RADIAL.AddClient(&W1);
-	ScpiClientServer W2("W2");
-	RADIAL.AddClient(&W2);
-	ScpiClientServer W3("W3");
-	RADIAL.AddClient(&W3);
-	ScpiClientServer W4("W4");
-	RADIAL.AddClient(&W4);
-	ScpiClientServer AXIAL("AXE");
-	SCPI_MES_I.AddClient(&AXIAL);
-	ScpiClientServer L1("L1");
-	AXIAL.AddClient(&L1);
-	ScpiClientServer L2("L2");
-	AXIAL.AddClient(&L2);
-	ScpiClientServer SCPI_POS("POS");
-	SCPI_MAIN.AddClient(&SCPI_POS);
-	ScpiClientServer MOD("MOD");
-	SCPI_POS.AddClient(&MOD);
-	ScpiClientServer SOURCE("SRC");
-	SCPI_POS.AddClient(&SOURCE);
-	ScpiClientServer DESTINATION("DST");
-	SCPI_POS.AddClient(&DESTINATION);
-	ScpiClientServer SCPI_TEMP("TMP");
-	SCPI_MAIN.AddClient(&SCPI_TEMP);
-	ScpiClientServer T1("T1");
-	SCPI_TEMP.AddClient(&T1);
-	ScpiClientServer T2("T2");
-	SCPI_TEMP.AddClient(&T2);
-	ScpiClientServer T3("T3");
-	SCPI_TEMP.AddClient(&T3);
-	ScpiClientServer T4("T4");
-	SCPI_TEMP.AddClient(&T4);
-	ScpiClientServer SCPI_HUMS("HUMS");
-	SCPI_MAIN.AddClient(&SCPI_HUMS);
-	ScpiClientServer EIC("EIC");
-	SCPI_HUMS.AddClient(&EIC);
-	ScpiClientServer CAL("CAL");
-	SCPI_HUMS.AddClient(&CAL);
-	ScpiClientServer MCO("MCO");
-	SCPI_HUMS.AddClient(&MCO);
-	ScpiClientServer DTI("DTI");
-	SCPI_HUMS.AddClient(&DTI);
-	ScpiClientServer TEMP("TEMP");
-	SCPI_HUMS.AddClient(&TEMP);
-	ScpiClientServer SCPI_RPM("TPM");
-	SCPI_MAIN.AddClient(&SCPI_RPM);
-	ScpiClientServer SCPI_SECU("SECU");
-	SCPI_MAIN.AddClient(&SCPI_SECU);
-	ScpiClientServer SEC_A("S_A");
-	SCPI_SECU.AddClient(&SEC_A);
-	ScpiClientServer SEC_B("S_B");
-	SCPI_SECU.AddClient(&SEC_B);
-	ScpiClientServer SCPI_DIO("DIO");
-	SCPI_MAIN.AddClient(&SCPI_DIO);
-	ScpiClientServer DIO_A("A");
-	SCPI_SECU.AddClient(&DIO_A);
-	ScpiClientServer DIO_B("B");
-	SCPI_SECU.AddClient(&DIO_B);
-	ScpiClientServer SCPI_OPT("OPT");
-	SCPI_MAIN.AddClient(&SCPI_OPT);
+	//{
+		ScpiClientServer SCPI_MES_I("MESI");
+		SCPI_MAIN.AddClient(&SCPI_MES_I);
+		//{
+			ScpiClientServer RADIAL("RAD");
+			SCPI_MES_I.AddClient(&RADIAL);
+			//{
+				ScpiClientServer V1("V1");
+				RADIAL.AddClient(&V1);
+				ScpiClientServer V2("V2");
+				RADIAL.AddClient(&V2);
+				ScpiClientServer V3("V3");
+				RADIAL.AddClient(&V3);
+				ScpiClientServer V4("V4");
+				RADIAL.AddClient(&V4);
+				ScpiClientServer W1("W1");
+				RADIAL.AddClient(&W1);
+				ScpiClientServer W2("W2");
+				RADIAL.AddClient(&W2);
+				ScpiClientServer W3("W3");
+				RADIAL.AddClient(&W3);
+				ScpiClientServer W4("W4");
+				RADIAL.AddClient(&W4);
+			//}
+			ScpiClientServer AXIAL("AXE");
+			SCPI_MES_I.AddClient(&AXIAL);
+			//{
+				ScpiClientServer L1("L1");
+				AXIAL.AddClient(&L1);
+				ScpiClientServer L2("L2");
+				AXIAL.AddClient(&L2);
+			//}
+		//}
+		ScpiClientServer SCPI_POS("POS");
+		SCPI_MAIN.AddClient(&SCPI_POS);
+		//{
+			ScpiClientServer MOD("MOD");
+			SCPI_POS.AddClient(&MOD);
+			ScpiClientServer SOURCE("SRC");
+			SCPI_POS.AddClient(&SOURCE);
+			ScpiClientServer DESTINATION("DST");
+			SCPI_POS.AddClient(&DESTINATION);
+		//}
+		ScpiClientServer SCPI_TEMP("TMP");
+		SCPI_MAIN.AddClient(&SCPI_TEMP);
+	//	{
+			ScpiClientServer T1("T1");
+			SCPI_TEMP.AddClient(&T1);
+			ScpiClientServer T2("T2");
+			SCPI_TEMP.AddClient(&T2);
+			ScpiClientServer T3("T3");
+			SCPI_TEMP.AddClient(&T3);
+			ScpiClientServer T4("T4");
+			SCPI_TEMP.AddClient(&T4);
+		//}
+		ScpiClientServer SCPI_HUMS("HUMS");
+		SCPI_MAIN.AddClient(&SCPI_HUMS);
+		//{
+			ScpiClientServer EIC("EIC");
+			SCPI_HUMS.AddClient(&EIC);
+			ScpiClientServer CAL("CAL");
+			SCPI_HUMS.AddClient(&CAL);
+			ScpiClientServer MCO("MCO");
+			SCPI_HUMS.AddClient(&MCO);
+			ScpiClientServer DTI("DTI");
+			SCPI_HUMS.AddClient(&DTI);
+			ScpiClientServer TEMP("TEMP");
+			SCPI_HUMS.AddClient(&TEMP);
+		//}
+		SCPI_MAIN.AddClient(Pwm1.getSCPIClientServer()); //RPM
+		//ScpiClientServer SCPI_RPM("RPM");
+		//SCPI_MAIN.AddClient(&SCPI_RPM);
+		ScpiClientServer SCPI_SECU("SECU");
+		SCPI_MAIN.AddClient(&SCPI_SECU);
+		//{
+			ScpiClientServer SEC_A("S_A");
+			SCPI_SECU.AddClient(&SEC_A);
+			ScpiClientServer SEC_B("S_B");
+			SCPI_SECU.AddClient(&SEC_B);
+		//}
+		ScpiClientServer SCPI_DIO("DIO");
+		SCPI_MAIN.AddClient(&SCPI_DIO);
+		//{
+			ScpiClientServer DIO_A("A");
+			SCPI_SECU.AddClient(&DIO_A);
+			ScpiClientServer DIO_B("B");
+			SCPI_SECU.AddClient(&DIO_B);
+		//}
+		ScpiClientServer SCPI_OPT("OPT");
+		SCPI_MAIN.AddClient(&SCPI_OPT);
+	//}
 
 	CerrG mainCerrG(-1);
+
+
+
+
 
 	/* USER CODE BEGIN WHILE */
 
 	std::string MSG;
 	std::string REP;
 
-	//SCPI_MAIN.SetSendEnable(1);
+	//SCPI_MAIN.SetSendEnable(1); //bloquer
+	SCPI_MAIN.modeperoquet(1);
 
 	MSG.reserve(256);
 	MSG.assign("\0");
 	REP.reserve(256);
 	REP.assign("\0");
 
+	UART_transmit("\r\n*** Testing exception ***");
+	try {
+		throw 1;
+		UART_transmit("\r\n*** FAILED ***");
+	} catch (int e) {
+		UART_transmit("\r\n*** OK ***");
+	}
+
 	UART_transmit("\r\n*** RUNNING STATE MACHINE ***");
 
 	while (1) {
+		/* Infinite loop */
+		/* USER CODE BEGIN WHILE */
+		while (1) {
 
-		switch (stateMachine) {
-		case (HELLO):
-			UART_transmit("\n\r *** Hello S2M *** \n\r");
-			stateMachine = DEFAULT;
-			break;
-		case (CMD):
-			try {
-				while (getstackmsgsize() > 0) {
-					Stackmsg(MSG);
-					SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
-					if (REP.size() == 0) {
-						UART_transmit("OK");
-					} else {
-						UART_transmit("OK:answer = " + REP);
+			switch (stateMachine) {
+			case (HELLO):
+				UART_transmit("\n\r *** Hello S2M *** \n\r");
+				stateMachine = DEFAULT;
+				break;
+			case (CMD):
+				try {
+					while (getstackmsgsize() > 0) {
+						Stackmsg(MSG);
+						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
+						if (REP.size() == 0) {
+							UART_transmit(" OK\n\r");
+						} else {
+							UART_transmit("OK:answer =\n\r" + REP);
+						}
 					}
+				} catch (int e) {
+					UART_transmit(REP.assign(mainCerrG.ToString()));
 				}
-			} catch (int e) {
-				UART_transmit(REP.assign(mainCerrG.ToString()));
+				REP.assign("\0");
+				MSG.assign("\0");
+				stateMachine = DEFAULT;
+				break;
+			case (SECU):
+				HAL_Delay(100);
+				stateMachine = SECU;
+				break;
+			case (RST):
+				UART_transmit("\n\r RESETING... \n\r");
+				//RESET()
+				REP.assign("\0");
+				MSG.assign("\0");
+				Stackmsg(MSG);
+				clearStackmsg();
+				SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
+				SCPI_MAIN.SetSendEnable(0); //réactivation des commandes
+				REP.assign("\0");//à voir si il faut une réponse du système ??????
+				MSG.assign("\0");
+				stateMachine = HELLO;
+				break;
+			case (DEFAULT):
+				;
 			}
-			REP.assign("\0");
-			stateMachine = DEFAULT;
-			break;
-		case (SECU):
-			HAL_Delay(100);
-			stateMachine = SECU;
-			break;
-		case (RST):
-			UART_transmit("\n\r RESETING... \n\r");
-			//RESET()
-			stateMachine = HELLO;
-			break;
-		case (DEFAULT):
-			;
+
 		}
-
+		/* USER CODE END 3 */
 	}
-
+	/* USER CODE END 3 */
 }
 
 void initStateMachine(void) {

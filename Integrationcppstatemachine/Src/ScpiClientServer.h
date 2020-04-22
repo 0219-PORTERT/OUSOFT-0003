@@ -74,29 +74,33 @@ public:
 
   short int ReceiveMsg (std::string _msg, std::string &_rep, CerrG &_cerrg);
   short int AddClient (ScpiClientServer* _client);
-  short int SetSendEnable (int _sendEnbleValue);
-
+  void SetSendEnable (int _sendEnbleValue);
+  void modeperoquet(int mode);
 
   int getTailleListClient();
   ScpiClientServer* getClient(uint8_t pos);
   std::string getHeader();
+  ScpiClientServer* getSCPIClientServer();
 
   CerrG codeErr;
 
 private:
 
   int sendEnable;
+  int modeperoquetstatut;
   std::string _HEADER;
   std::vector<ScpiClientServer*> listeClients;
 
   short int DecodeMsg (std::string& _msg, std::string& _header, std::string& _cmde);
   int FindClientinList(std::string headertofind);
   ScpiClientServer GetClientFromList(std::string& p_header);
-  short int ExecuteCmde (std::string& _cmde,std::string& _rep);
-  short int ExecuteClient (std::string& _header,std::string& _rep);
   int BroadCastCmde(std::string& _cmde, std::string& _rep);
 
+
   void initAttributes () ;
+
+protected:
+  virtual short int ExecuteCmde (std::string& _cmde,std::string& _rep);
 };
 
 #endif // SCPICLIENTSERVER_H

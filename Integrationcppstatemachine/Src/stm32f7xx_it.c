@@ -224,6 +224,7 @@ void USART3_IRQHandler(void)
   /* USER CODE BEGIN USART2_IRQn 1 */
   //HAL_Delay(100);
   HAL_UART_Receive_IT(&huart3, RX_Buffer, 1);
+
   /* USER CODE END USART2_IRQn 1 */
   //HAL_Delay(100);
 }
