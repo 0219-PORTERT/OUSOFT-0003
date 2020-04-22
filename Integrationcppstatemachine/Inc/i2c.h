@@ -42,6 +42,8 @@ void MX_I2C2_Init(void);
 void MX_I2C3_Init(void);
 void MX_I2C4_Init(void);
 
+void testI2CCS(I2C_TypeDef* I2Cx);
+
 /* USER CODE BEGIN Prototypes */
 #define I2CEEPROM1 0xA0
 #define I2CEEPROM2 0xA2

@@ -1,12 +1,12 @@
 /*
- * Pwm.h
+ * Cna.h
  *
- *  Created on: 15 avr. 2020
+ *  Created on: 22 avr. 2020
  *      Author: PARIS
  */
 
-#ifndef PWM_H_
-#define PWM_H_
+#ifndef CNA_H_
+#define CNA_H_
 
 #include "ScpiClientServer.h"
 #include <String>
@@ -17,24 +17,16 @@
 #define REQ_x 3
 #define REQ_QST 4
 
-#define MAX_FREQ_VALUE 200
-
-
-class Pwm : public ScpiClientServer {
+class Cna : public ScpiClientServer{
 public:
-	Pwm();
-	Pwm(std::string _name);
-	virtual ~Pwm();
-
-
-
+	Cna();
+	Cna(std::string _name);
+	virtual ~Cna();
 private:
-	int rpmValue;
+	int modValue;
 	std::string _name;
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
 	int decodeInstruct(std::string& _cmde);
-
-
 };
 
-#endif /* PWM_H_ */
+#endif /* CNA_H_ */

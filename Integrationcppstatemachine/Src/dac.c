@@ -110,9 +110,17 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* dacHandle)
 void Set_Dac_Value(uint32_t Channel, int value){
 
 
-	if(value > 4095){
-		value = 4095;
+	if(value == 0){
+		value = 2048;
+	}else if(value < 0){
+		value = (int)((2047*value)/100)+2047;
+	}else if(value > 0){
+		value = (int)((2047*value)/100)+2048;
+	}else{
+		//
 	}
+
+	//DAC_CHANNEL_1
 
 	/*##-4- Enable DAC Channel1 ################################################*/
 	  if (HAL_DAC_Start(&hdac, Channel) != HAL_OK)

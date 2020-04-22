@@ -39,7 +39,7 @@ extern DAC_HandleTypeDef hdac;
 void MX_DAC_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+void Set_Dac_Value(uint32_t Channel, int value);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

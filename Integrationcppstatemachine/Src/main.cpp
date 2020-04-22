@@ -53,6 +53,7 @@
 #include "CerrG.h"
 #include "ScpiClientServer.h"
 #include "Pwm.h"
+#include "Cna.h"
 
 /* Include core modules */
 #include "stm32fxxx_hal.h"
@@ -133,6 +134,7 @@ int main(void) {
 
 	/*Objets hardware*/
 	Pwm Pwm1("RPM");
+	Cna Cna1("MOD");
 
 	/*SCPI STRUCTURE*/
 	ScpiClientServer SCPI_MAIN("TEST0256", 0);
@@ -172,8 +174,9 @@ int main(void) {
 		ScpiClientServer SCPI_POS("POS");
 		SCPI_MAIN.AddClient(&SCPI_POS);
 		//{
-			ScpiClientServer MOD("MOD");
-			SCPI_POS.AddClient(&MOD);
+			//ScpiClientServer MOD("MOD");
+			//SCPI_POS.AddClient(&MOD);
+		    SCPI_POS.AddClient(Cna1.getSCPIClientServer()); //MOD
 			ScpiClientServer SOURCE("SRC");
 			SCPI_POS.AddClient(&SOURCE);
 			ScpiClientServer DESTINATION("DST");
@@ -230,7 +233,7 @@ int main(void) {
 
 	CerrG mainCerrG(-1);
 
-
+	//testI2CCS(I2C4);
 
 
 
@@ -240,7 +243,7 @@ int main(void) {
 	std::string REP;
 
 	//SCPI_MAIN.SetSendEnable(1); //bloquer
-	SCPI_MAIN.modeperoquet(1);
+	//SCPI_MAIN.modeperoquet(1);
 
 	MSG.reserve(256);
 	MSG.assign("\0");
@@ -353,6 +356,8 @@ void initStateMachine(void) {
 	UART_transmit("--- init : RCC");
 	TM_RCC_InitSystem();
 	TM_I2C_Init(I2C4, TM_I2C_PinsPack_3, 100000);
+	TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 100000);
+	//TM_I2C_Init(I2C3, TM_I2C_PinsPack_Custom, 100000);
 
 	//CheckI2C4();
 	UART_transmit("--- init : ADC3");
