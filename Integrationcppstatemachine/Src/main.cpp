@@ -52,6 +52,7 @@
 #include "ScpiClientServer.h"
 #include "Pwm.h"
 #include "Cna.h"
+#include "Can.h"
 
 /* Include core modules */
 #include "stm32fxxx_hal.h"
