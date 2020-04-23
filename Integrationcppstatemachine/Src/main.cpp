@@ -33,8 +33,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "adc.h"
-#include "can.h"
 #include "dac.h"
 #include "i2c.h"
 //#include "lwip.h"
@@ -234,7 +232,8 @@ int main(void) {
 	CerrG mainCerrG(-1);
 
 	//testI2CCS(I2C4);
-
+	int test = 0;
+	test = TM_ADC_Read(ADC3, TM_ADC_Channel_0);
 
 
 	/* USER CODE BEGIN WHILE */
@@ -336,12 +335,9 @@ void initStateMachine(void) {
 	MX_UART4_Init();
 	MX_UART5_Init();
 	//MX_LWIP_Init();
-	UART_transmit("--- init : ADC1");
-	MX_ADC1_Init();
 	UART_transmit("--- init : I2C4");
 	MX_I2C4_Init();
 	MX_UART7_Init();
-//	MX_CAN1_Init();
 	UART_transmit("--- init : TIM2");
 	MX_TIM2_Init();
 	UART_transmit("--- init : TIM3");
@@ -360,8 +356,8 @@ void initStateMachine(void) {
 	//TM_I2C_Init(I2C3, TM_I2C_PinsPack_Custom, 100000);
 
 	//CheckI2C4();
+
 	UART_transmit("--- init : ADC3");
-	MX_ADC3_Init();
 	TM_ADC_Init(ADC3, TM_ADC_Channel_0);
 	//TM_ADC_Init(ADC3, TM_ADC_Channel_1);
 	//TM_ADC_Init(ADC3, TM_ADC_Channel_2);

@@ -66,9 +66,6 @@ int Cna::decodeInstruct(std::string& _cmde) {
 		int value = 0;
 		value = stoi(_cmde.substr(4), nullptr, 10);
 
-		//this->modValue = value;
-		//sel = REQ_x;
-
 		if ((value < -100) || (value > 100)) {
 			sel = -1; //bonne commande mais mauvaise valeur car mal convertie ou autre
 		} else {
