@@ -135,6 +135,17 @@ int main(void) {
 	Pwm Pwm1("RPM");
 	Cna Cna1("MOD");
 
+	Can CanV1("V1",TM_ADC_Channel_0);
+	Can CanV2("V2",TM_ADC_Channel_3);
+	Can CanV3("V3",TM_ADC_Channel_4);
+	Can CanV4("V4",TM_ADC_Channel_5);
+	Can CanW1("W1",TM_ADC_Channel_6);
+	Can CanW2("W2",TM_ADC_Channel_8);
+	Can CanW3("W3",TM_ADC_Channel_9);
+	Can CanW4("W4",TM_ADC_Channel_10);
+	Can CanL1("L1",TM_ADC_Channel_12);
+	Can CanL2("L2",TM_ADC_Channel_13);
+
 	/*SCPI STRUCTURE*/
 	ScpiClientServer SCPI_MAIN("TEST0256", 0);
 	//{
@@ -144,7 +155,7 @@ int main(void) {
 			ScpiClientServer RADIAL("RAD");
 			SCPI_MES_I.AddClient(&RADIAL);
 			//{
-				ScpiClientServer V1("V1");
+				/*ScpiClientServer V1("V1");
 				RADIAL.AddClient(&V1);
 				ScpiClientServer V2("V2");
 				RADIAL.AddClient(&V2);
@@ -159,15 +170,26 @@ int main(void) {
 				ScpiClientServer W3("W3");
 				RADIAL.AddClient(&W3);
 				ScpiClientServer W4("W4");
-				RADIAL.AddClient(&W4);
+				RADIAL.AddClient(&W4);*/
+
+				RADIAL.AddClient(CanV1.getSCPIClientServer());
+				RADIAL.AddClient(CanV2.getSCPIClientServer());
+				RADIAL.AddClient(CanV3.getSCPIClientServer());
+				RADIAL.AddClient(CanV4.getSCPIClientServer());
+				RADIAL.AddClient(CanW1.getSCPIClientServer());
+				RADIAL.AddClient(CanW2.getSCPIClientServer());
+				RADIAL.AddClient(CanW3.getSCPIClientServer());
+				RADIAL.AddClient(CanW4.getSCPIClientServer());
 			//}
 			ScpiClientServer AXIAL("AXE");
 			SCPI_MES_I.AddClient(&AXIAL);
 			//{
-				ScpiClientServer L1("L1");
+				/*ScpiClientServer L1("L1");
 				AXIAL.AddClient(&L1);
 				ScpiClientServer L2("L2");
-				AXIAL.AddClient(&L2);
+				AXIAL.AddClient(&L2);*/
+				AXIAL.AddClient(CanL1.getSCPIClientServer());
+				AXIAL.AddClient(CanL2.getSCPIClientServer());
 			//}
 		//}
 		ScpiClientServer SCPI_POS("POS");
@@ -233,8 +255,7 @@ int main(void) {
 	CerrG mainCerrG(-1);
 
 	//testI2CCS(I2C4);
-	int test = 0;
-	test = TM_ADC_Read(ADC3, TM_ADC_Channel_0);
+
 
 
 	/* USER CODE BEGIN WHILE */
@@ -243,7 +264,7 @@ int main(void) {
 	std::string REP;
 
 	//SCPI_MAIN.SetSendEnable(1); //bloquer
-	//SCPI_MAIN.modeperoquet(1);
+	//SCPI_MAIN.modeperoquet(1); //uncomment to active parrot mode
 
 	MSG.reserve(256);
 	MSG.assign("\0");
@@ -280,12 +301,12 @@ int main(void) {
 						} else {
 							UART_transmit("OK:answer =\n\r" + REP);
 						}
+						REP.assign("\0");
+						MSG.assign("\0");
 					}
 				} catch (int e) {
 					UART_transmit(REP.assign(mainCerrG.ToString()));
 				}
-				REP.assign("\0");
-				MSG.assign("\0");
 				stateMachine = DEFAULT;
 				break;
 			case (SECU):
