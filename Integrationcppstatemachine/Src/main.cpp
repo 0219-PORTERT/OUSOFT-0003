@@ -53,6 +53,7 @@
 #include "Pwm.h"
 #include "Cna.h"
 #include "Can.h"
+#include "SimCapTemp.h"
 
 /* Include core modules */
 #include "stm32fxxx_hal.h"
@@ -146,6 +147,11 @@ int main(void) {
 	Can CanL1("L1",TM_ADC_Channel_12);
 	Can CanL2("L2",TM_ADC_Channel_13);
 
+	SimCapTemp SIMT1("T1",TEMP1);
+	SimCapTemp SIMT2("T2",TEMP2);
+	SimCapTemp SIMT3("T3",TEMP3);
+	SimCapTemp SIMT4("T4",TEMP4);
+
 	/*SCPI STRUCTURE*/
 	ScpiClientServer SCPI_MAIN("TEST0256", 0);
 	//{
@@ -206,14 +212,19 @@ int main(void) {
 		ScpiClientServer SCPI_TEMP("TMP");
 		SCPI_MAIN.AddClient(&SCPI_TEMP);
 	//	{
-			ScpiClientServer T1("T1");
+			/*ScpiClientServer T1("T1");
 			SCPI_TEMP.AddClient(&T1);
 			ScpiClientServer T2("T2");
 			SCPI_TEMP.AddClient(&T2);
 			ScpiClientServer T3("T3");
 			SCPI_TEMP.AddClient(&T3);
 			ScpiClientServer T4("T4");
-			SCPI_TEMP.AddClient(&T4);
+			SCPI_TEMP.AddClient(&T4);*/
+
+			SCPI_TEMP.AddClient(SIMT1.getSCPIClientServer());
+			SCPI_TEMP.AddClient(SIMT2.getSCPIClientServer());
+			SCPI_TEMP.AddClient(SIMT3.getSCPIClientServer());
+			SCPI_TEMP.AddClient(SIMT4.getSCPIClientServer());
 		//}
 		ScpiClientServer SCPI_HUMS("HUMS");
 		SCPI_MAIN.AddClient(&SCPI_HUMS);
