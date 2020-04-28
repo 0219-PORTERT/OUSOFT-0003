@@ -15,20 +15,9 @@
 
 #define REQ_RST 1
 #define REQ_IDN 2
-#define REQ_x 3
-#define REQ_CH1 3
-#define REQ_CH2 4
-#define REQ_CH3 5
-#define REQ_CH4 6
-#define REQ_CH5 7
-#define REQ_CH6 8
-#define REQ_CH7 9
-#define REQ_CH8 10
-#define REQ_CH9 11
-#define REQ_CH10 12
-
-#define REQ_CH11
-#define REQ_CH12
+#define REQ_CHX 3
+#define REQ_IMOY 4
+#define REQ_ISTCURR 5
 
 class Can : public ScpiClientServer {
 public:
@@ -41,6 +30,9 @@ private:
 	TM_ADC_Channel_t channel;
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
 	int decodeInstruct(std::string& _cmde);
+	uint16_t readADC();
+	float readADCImoy(int nb);
+	float InstCurrent();
 };
 
 #endif /* CAN_H_ */

@@ -255,8 +255,7 @@ int main(void) {
 	CerrG mainCerrG(-1);
 
 	//testI2CCS(I2C4);
-	/*int test = 0;
-	test = TM_ADC_Read(ADC3, TM_ADC_Channel_0);*/
+
 
 
 	/* USER CODE BEGIN WHILE */

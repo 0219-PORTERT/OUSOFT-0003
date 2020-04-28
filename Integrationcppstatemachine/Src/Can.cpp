@@ -10,6 +10,9 @@
 #include <string>
 #include <iostream>
 #include "tm_stm32_adc.h"
+
+#define NB_MOYENNE 3
+
 Can::Can() {
 	// TODO Auto-generated constructor stub
 	this->channel = TM_ADC_Channel_0;
@@ -28,40 +31,19 @@ short int Can::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	switch (decodeInstruct(_cmde)) {
 
 	case REQ_RST:
-
+		//RESET ?
 		break;
 	case REQ_IDN:
 		_rep.assign("je suis le client HARDWARE " + this->getHeader() +" et je suis sur la voie " + std::to_string(this->channel));
 		break;
-	case REQ_CH1:
-		_rep.assign(_cmde +" : "+std::to_string(TM_ADC_Read(ADC3, TM_ADC_Channel_0))+"\n\r");
+	case REQ_CHX:
+		_rep.assign(_cmde +" : "+std::to_string(readADC())+"\n\r");
 		break;
-	case REQ_CH2:
-		std::to_string(TM_ADC_Read(ADC3, TM_ADC_Channel_3));
+	case REQ_IMOY:
+		_rep.assign(_cmde +" : "+std::to_string(readADCImoy(NB_MOYENNE))+"\n\r");
 		break;
-	case REQ_CH3:
-		std::to_string(TM_ADC_Read(ADC3, TM_ADC_Channel_4));
-		break;
-	case REQ_CH4:
-		std::to_string(TM_ADC_Read(ADC3, TM_ADC_Channel_5));
-		break;
-	case REQ_CH5:
-		std::to_string(TM_ADC_Read(ADC3, TM_ADC_Channel_6));
-		break;
-	case REQ_CH6:
-		std::to_string(TM_ADC_Read(ADC3, TM_ADC_Channel_8));
-		break;
-	case REQ_CH7:
-		std::to_string(TM_ADC_Read(ADC3, TM_ADC_Channel_9));
-		break;
-	case REQ_CH8:
-		std::to_string(TM_ADC_Read(ADC3, TM_ADC_Channel_10));
-		break;
-	case REQ_CH9:
-		std::to_string(TM_ADC_Read(ADC3, TM_ADC_Channel_12));
-		break;
-	case REQ_CH10:
-		std::to_string(TM_ADC_Read(ADC3, TM_ADC_Channel_13));
+	case REQ_ISTCURR:
+		_rep.assign(_cmde +" : "+std::to_string(InstCurrent())+"\n\r");
 		break;
 	default:
 		//throw something;
@@ -79,26 +61,35 @@ int Can::decodeInstruct(std::string& _cmde) {
 		sel = REQ_RST;
 	} else if (_cmde.compare("*IDN ?") == 0) {
 		sel = REQ_IDN;
-	} else if(_cmde.compare("I_moy ?") == 0){
-
-	}
-	else if(_cmde.compare("I_moy ?") == 0){
-
-		}
-
-
-
-	else {
+	} else if(_cmde.compare("CHX ?") == 0){
+		sel = REQ_CHX;
+	} else if(_cmde.compare("IMOY ?") == 0){
+		sel = REQ_IMOY;
+	}else if(_cmde.compare("ISTCURR ?") == 0){
+		sel = REQ_ISTCURR;
+	} else {
 		//throw something
 	}
-
 	return sel;
 }
 
-uint16_t readADC(TM_ADC_Channel_t channel){
-
+uint16_t Can::readADC(){
+	return TM_ADC_Read(ADC3, this->channel);
 }
 
-uint16_t readADCmoy(TM_ADC_Channel_t _channel, int nb){
 
+
+float Can::readADCImoy(int nb){
+	uint16_t value = 0;
+	float moyenne = 0;
+
+	for(int i = 0;i<nb;i++){
+		value = value + TM_ADC_Read(ADC3, this->channel);
+	}
+	moyenne = (float)value/(float)nb;
+	return ((3.3/4095.0)*moyenne);
+}
+
+float Can::InstCurrent(){
+	return ((3.3/4095.0)*TM_ADC_Read(ADC3, this->channel));
 }
