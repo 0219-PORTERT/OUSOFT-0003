@@ -313,7 +313,7 @@ static void TM_ADC_INT_Channel_9_Init(ADC_TypeDef* ADCx) {
 	}
 #if defined(ADC3) && defined(GPIOF)
 	if (ADCx == ADC3) {
-		TM_ADC_INT_InitPin(GPIOF, GPIO_PIN_11);
+		TM_ADC_INT_InitPin(GPIOF, GPIO_PIN_3);
 	}
 #endif
 }
