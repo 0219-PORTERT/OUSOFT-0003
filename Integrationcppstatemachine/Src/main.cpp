@@ -301,12 +301,12 @@ int main(void) {
 						} else {
 							UART_transmit("OK:answer =\n\r" + REP);
 						}
+						REP.assign("\0");
+						MSG.assign("\0");
 					}
 				} catch (int e) {
 					UART_transmit(REP.assign(mainCerrG.ToString()));
 				}
-				REP.assign("\0");
-				MSG.assign("\0");
 				stateMachine = DEFAULT;
 				break;
 			case (SECU):
