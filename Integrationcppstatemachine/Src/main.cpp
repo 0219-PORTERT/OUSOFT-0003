@@ -147,10 +147,10 @@ int main(void) {
 	Can CanL1("L1",TM_ADC_Channel_12);
 	Can CanL2("L2",TM_ADC_Channel_13);
 
-	SimCapTemp SIMT1("T1",TEMP1);
-	SimCapTemp SIMT2("T2",TEMP2);
-	SimCapTemp SIMT3("T3",TEMP3);
-	SimCapTemp SIMT4("T4",TEMP4);
+	SimCapTemp SIMT1("T1",TEMPCAP1);
+	SimCapTemp SIMT2("T2",TEMPCAP2);
+	SimCapTemp SIMT3("T3",TEMPCAP3);
+	SimCapTemp SIMT4("T4",TEMPCAP4);
 
 	/*SCPI STRUCTURE*/
 	ScpiClientServer SCPI_MAIN("TEST0256", 0);

@@ -12,10 +12,10 @@
 #include <String>
 #include <iostream>
 
-#define TEMP1 1
-#define TEMP2 2
-#define TEMP3 3
-#define TEMP4 4
+#define TEMPCAP1 0x00
+#define TEMPCAP2 0x01
+#define TEMPCAP3 0x02
+#define TEMPCAP4 0x03
 
 #define REQ_RST 1
 #define REQ_IDN 2
@@ -30,9 +30,11 @@ public:
 private:
 	std::string _name;
 	uint8_t capteur;
-	int tmpValue;
+	int tempValue;
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
 	int decodeInstruct(std::string& _cmde);
+
+	void setTemp(int value);
 };
 
 #endif /* SIMCAPTEMP_H_ */

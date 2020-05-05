@@ -6,17 +6,26 @@
  */
 
 #include "SimCapTemp.h"
+#include "tm_stm32_i2c.h"
+#include "i2c.h"
+#include <String>
+#include <iostream>
+#include <cmath>
+
+#define alpha 0.00788
+#define beta 0.00001937
+#define r25 2000
 
 SimCapTemp::SimCapTemp() {
 	// TODO Auto-generated constructor stub
-	this->capteur = TEMP1;
-	this->tmpValue = 0;
+	this->capteur = TEMPCAP1;
+	this->tempValue = 25;
 
 }
 
 SimCapTemp::SimCapTemp(std::string _name, uint8_t _capteur): ScpiClientServer(_name), capteur(_capteur) {
 	// TODO Auto-generated constructor stub
-
+	this->tempValue = 25;
 }
 
 SimCapTemp::~SimCapTemp() {
@@ -26,19 +35,21 @@ SimCapTemp::~SimCapTemp() {
 short int SimCapTemp::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	//_rep.assign("Je suis le execute de la classe SIMCAPTEMP");
 
+
 	switch (decodeInstruct(_cmde)) {
 
 	case REQ_RST:
-		//RESET ?
+		setTemp(25);
+		this->tempValue = 25;
 		break;
 	case REQ_IDN:
 		_rep.assign("je suis le client HARDWARE " + this->getHeader() +" et je suis le capteur " + std::to_string(this->capteur));
 		break;
 	case REQ_x:
-		//_rep.assign(_cmde +" : "+std::to_string(readADC())+"\n\r");
+		setTemp(this->tempValue);
 		break;
 	case REQ_QST:
-		//_rep.assign(_cmde +" : "+std::to_string(readADCImoy(NB_MOYENNE))+"\n\r");
+		_rep.assign(this->getHeader()+ " : "+ std::to_string(this->tempValue) + "\n\r");
 		break;
 	default:
 		//throw something;
@@ -59,13 +70,13 @@ int SimCapTemp::decodeInstruct(std::string& _cmde) {
 	} else if(_cmde.compare("TMP ?") == 0){
 		sel = REQ_QST;
 	} else if(_cmde.compare(0, 4, "TMP ") == 0){
-		int value = 0;
+		uint8_t value = 0;
 		value = stoi(_cmde.substr(4), nullptr, 10);
 
 		if ((value < -40) || (value > 200)) {
 			sel = -1; //bonne commande mais mauvaise valeur car mal convertie ou autre
 		} else {
-			//this->modValue = value;
+			this->tempValue = value;
 			sel = REQ_x;
 		}
 	}else {
@@ -73,3 +84,27 @@ int SimCapTemp::decodeInstruct(std::string& _cmde) {
 	}
 	return sel;
 }
+
+void SimCapTemp::setTemp(int tValue){
+
+	uint8_t rGcode = 0;
+	uint8_t rPcode = 0;
+	int rT = 0;
+
+	//conversion temperature to resistance
+	rT = r25 * (1+alpha*(tValue-25)+beta*pow((tValue-25),2));
+
+	//repartition resistance to Rp et Rg
+
+	rGcode = round((rT - 500)/390.0);
+	rPcode = round((rT-rGcode*390)/4.0);
+
+
+	//settings
+	TM_I2C_Write(I2C4, I2C4_POT1K_PHYADD, this->capteur, rPcode);
+	//HAL_Delay(10);
+	TM_I2C_Write(I2C4, I2C4_POT100K_PHYADD, this->capteur, rGcode);
+
+
+}
+
