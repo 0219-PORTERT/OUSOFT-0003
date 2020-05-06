@@ -70,7 +70,7 @@ int SimCapTemp::decodeInstruct(std::string& _cmde) {
 	} else if(_cmde.compare("TMP ?") == 0){
 		sel = REQ_QST;
 	} else if(_cmde.compare(0, 4, "TMP ") == 0){
-		uint8_t value = 0;
+		int value = 0;
 		value = stoi(_cmde.substr(4), nullptr, 10);
 
 		if ((value < -40) || (value > 200)) {
@@ -90,14 +90,19 @@ void SimCapTemp::setTemp(int tValue){
 	uint8_t rGcode = 0;
 	uint8_t rPcode = 0;
 	int rT = 0;
+	int Rth =0;
+	int Rapp=0;
 
 	//conversion temperature to resistance
-	rT = r25 * (1+alpha*(tValue-25)+beta*pow((tValue-25),2));
+	rT = r25 * (1+alpha*(tValue-25)+beta*pow((tValue-25),2)); //Resistance totale théorique
 
 	//repartition resistance to Rp et Rg
 
-	rGcode = round((rT - 500)/390.0);
-	rPcode = round((rT-rGcode*390)/4.0);
+	rGcode = round((rT - 500)/390.0); //code resistance 100k
+	rPcode = round((rT-rGcode*390)/4.0);//code resistance 1k
+
+	Rth = rPcode*4 + rGcode*390; //resistance totale après 2pot ?
+	Rapp = ((rPcode/256.0)*1000+75) + ((rGcode/256.0)*100000+75); // resistance réel appliqué sur les pot ;
 
 
 	//settings
