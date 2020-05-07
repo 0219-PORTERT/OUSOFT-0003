@@ -1,3 +1,6 @@
+/*SIMCAPTEMP_WIP*/
+
+
 *IDN ?
 *RST
 ERR ?

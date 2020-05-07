@@ -94,15 +94,15 @@ void SimCapTemp::setTemp(int tValue){
 	int Rapp=0;
 
 	//conversion temperature to resistance
-	rT = r25 * (1+alpha*(tValue-25)+beta*pow((tValue-25),2)); //Resistance totale théorique
+	rT = (r25 * ((1+alpha*(tValue-25)+beta*pow((tValue-25),2)))); //Resistance totale théorique
 
 	//repartition resistance to Rp et Rg
 
-	rGcode = round((rT - 500)/390.0); //code resistance 100k
-	rPcode = round((rT-rGcode*390)/4.0);//code resistance 1k
+	rGcode = round(((rT - 500)/390.0)); //code resistance 100k
+	rPcode = round((rT - rGcode*390)/4.0)-37;//code resistance 1k
 
 	Rth = rPcode*4 + rGcode*390; //resistance totale après 2pot ?
-	Rapp = ((rPcode/256.0)*1000+75) + ((rGcode/256.0)*100000+75); // resistance réel appliqué sur les pot ;
+	Rapp = ((rPcode/256.0)*1000+75) + ((rGcode/256.0)*100000+75); // resistance réelle appliquée sur les pot ;
 
 
 	//settings
