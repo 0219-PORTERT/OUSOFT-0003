@@ -1,6 +1,6 @@
-/*SIMCAPTEMP_WIP*/
+/*BUSY_WIP*/
 
-
+*BUSY ?
 *IDN ?
 *RST
 ERR ?
