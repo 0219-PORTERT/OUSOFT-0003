@@ -45,13 +45,15 @@ void MX_I2C4_Init(void);
 void testI2CCS(I2C_TypeDef* I2Cx);
 
 /* USER CODE BEGIN Prototypes */
+/*à deplacer dans les fichiers qui correspondront*/
+
+#define I2C4_POT1K_PHYADD 0x5A
+#define I2C4_POT100K_PHYADD 0x58
+
 #define I2CEEPROM1 0xA0
 #define I2CEEPROM2 0xA2
 
 #define I2CTEMP 0x90
-
-#define I2CPOT1K 0x5A
-#define I2CPOT100K 0x58
 
 #define I2CEXP 0x40
 /* USER CODE END Prototypes */

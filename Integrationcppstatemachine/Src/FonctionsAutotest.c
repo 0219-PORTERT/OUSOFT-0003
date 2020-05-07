@@ -41,9 +41,9 @@ uint16_t CheckI2C4(void){
 		return  CERR_ERRROR2 ;
 	}else if(TM_I2C_IsDeviceConnected(I2C4, I2CTEMP)!= TM_I2C_Result_Ok){
 		return  CERR_ERRROR3 ;
-	}else if(TM_I2C_IsDeviceConnected(I2C4, I2CPOT1K)!= TM_I2C_Result_Ok){
+	}else if(TM_I2C_IsDeviceConnected(I2C4, I2C4_POT1K_PHYADD)!= TM_I2C_Result_Ok){
 		return  CERR_ERRROR4 ;
-	}else if(TM_I2C_IsDeviceConnected(I2C4, I2CPOT100K)!= TM_I2C_Result_Ok){
+	}else if(TM_I2C_IsDeviceConnected(I2C4, I2C4_POT100K_PHYADD)!= TM_I2C_Result_Ok){
 		return  CERR_ERRROR5 ;
 	}else if(TM_I2C_IsDeviceConnected(I2C4, I2CEXP)!= TM_I2C_Result_Ok){
 		return  CERR_ERRROR6 ;
@@ -142,9 +142,9 @@ uint16_t testTemperature(void){
 }
 
 uint16_t Simtemp1(void){
-	TM_I2C_Write(I2C4, I2CPOT1K, 0x00, 0x00);
+	TM_I2C_Write(I2C4, I2C4_POT1K_PHYADD, 0x00, 0x00);
 	HAL_Delay(10);
-	TM_I2C_Write(I2C4, I2CPOT100K, 0x00, 0x00);
+	TM_I2C_Write(I2C4, I2C4_POT100K_PHYADD, 0x00, 0x00);
 
 	/*uint8_t tol1 = 0;
 	uint8_t tol2 = 0;
@@ -155,27 +155,27 @@ uint16_t Simtemp1(void){
 
 	uint8_t val = 0;
 
-	TM_I2C_Read(I2C4, (I2CPOT100K | (1u << 0)), 0x38, &val);
+	TM_I2C_Read(I2C4, (I2C4_POT100K_PHYADD | (1u << 0)), 0x38, &val);
 	tolRabTab[0][0] = val;
-	TM_I2C_Read(I2C4, (I2CPOT100K | (1u << 0)), 0x39, &val);
+	TM_I2C_Read(I2C4, (I2C4_POT100K_PHYADD | (1u << 0)), 0x39, &val);
 	tolRabTab[1][0] = val;
 
 
-	TM_I2C_Read(I2C4, (I2CPOT100K | (1u << 0)), 0x3A, &val);
+	TM_I2C_Read(I2C4, (I2C4_POT100K_PHYADD | (1u << 0)), 0x3A, &val);
 	tolRabTab[0][1] = val;
-	TM_I2C_Read(I2C4, (I2CPOT100K | (1u << 0)), 0x3B, &val);
+	TM_I2C_Read(I2C4, (I2C4_POT100K_PHYADD | (1u << 0)), 0x3B, &val);
 	tolRabTab[1][1]  = val;
 
 
-	TM_I2C_Read(I2C4, (I2CPOT100K | (1u << 0)), 0x3C, &val);
+	TM_I2C_Read(I2C4, (I2C4_POT100K_PHYADD | (1u << 0)), 0x3C, &val);
 	tolRabTab[0][2] = val;
-	TM_I2C_Read(I2C4, (I2CPOT100K | (1u << 0)), 0x3D, &val);
+	TM_I2C_Read(I2C4, (I2C4_POT100K_PHYADD | (1u << 0)), 0x3D, &val);
 	tolRabTab[1][2 ]= val;
 
 
-	TM_I2C_Read(I2C4, (I2CPOT100K | (1u << 0)), 0x3E, &val);
+	TM_I2C_Read(I2C4, (I2C4_POT100K_PHYADD | (1u << 0)), 0x3E, &val);
 	tolRabTab[0][3] = val;
-	TM_I2C_Read(I2C4, (I2CPOT100K | (1u << 0)), 0x3F, &val);
+	TM_I2C_Read(I2C4, (I2C4_POT100K_PHYADD | (1u << 0)), 0x3F, &val);
 	tolRabTab[1][3] = val;
 
 
