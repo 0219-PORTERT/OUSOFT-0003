@@ -1,0 +1,3 @@
+MCP23xxx.cpp:10:1:MCP23xxx::MCP23xxx()	16	static
+MCP23xxx.cpp:16:1:MCP23xxx::~MCP23xxx()	16	static
+MCP23xxx.cpp:16:1:virtual MCP23xxx::~MCP23xxx()	16	static

@@ -1,0 +1,2 @@
+fonctions_eeprom.c:10:6:read	4	static
+fonctions_eeprom.c:14:6:write	4	static

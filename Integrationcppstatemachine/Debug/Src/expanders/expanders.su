@@ -1,0 +1,6 @@
+expanders.cpp:10:1:expanders::expanders()	16	static
+expanders.cpp:14:1:expanders::~expanders()	16	static
+expanders.cpp:14:1:virtual expanders::~expanders()	16	static
+expanders.cpp:18:6:void expanders::Add(int)	16	static
+expanders.cpp:22:5:int expanders::GetValue()	16	static
+expanders.cpp:26:7:char* expanders::GetType()	16	static

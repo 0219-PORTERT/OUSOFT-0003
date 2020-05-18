@@ -1,0 +1,12 @@
+tim.c:38:6:MX_TIM2_Init	72	static
+tim.c:91:6:MX_TIM3_Init	88	static
+tim.c:153:6:MX_TIM4_Init	104	static
+tim.c:224:6:MX_TIM8_Init	56	static
+tim.c:262:6:HAL_TIM_Base_MspInit	64	static
+tim.c:346:6:HAL_TIM_MspPostInit	48	static
+tim.c:405:6:HAL_TIM_Base_MspDeInit	16	static
+tim.c:474:6:ConfigurePWM	64	static
+tim.c:526:6:PwmOutput	16	static
+tim.c:541:6:testPWM	8	static
+tim.c:549:11:startPwm	16	static
+tim.c:560:6:setPWM	40	static

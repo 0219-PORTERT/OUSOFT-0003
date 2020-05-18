@@ -1,0 +1,7 @@
+core_cm7.h:2147:34:__NVIC_SystemReset	4	static,ignoring_inline_asm
+FonctionsSCPI.c:12:7:TrameSelectionSource	16	static
+FonctionsSCPI.c:33:7:TrameCptSource	16	static
+FonctionsSCPI.c:43:7:TrameMesureCourants	32	static
+FonctionsSCPI.c:84:7:TrameVariationPosition	24	static
+FonctionsSCPI.c:99:7:Sys_Reset	16	static
+FonctionsSCPI.c:103:7:Sys_ID	16	static
