@@ -49,10 +49,11 @@ void MX_UART7_Init(void);
 
 
 
-int getstackmsgsize();
+int getQueueMsgsize();
 void MX_USART3_UART_Init(void);
-int Stackmsg(std::string &MSG);
-void clearStackmsg(void);
+int deQueueMsgs(std::string &MSG);
+int Enqueue();
+void clearQueuemsg(void);
 void UART_transmit(std::string stringtosend);
 void Reset_uart_buffer(void);
 

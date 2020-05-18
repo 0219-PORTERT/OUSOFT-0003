@@ -310,18 +310,27 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 	__NOP();
 }
 
-int getstackmsgsize() {
+int getQueueMsgsize() {
 	return stack_cmd.size();
 }
 
-int Stackmsg(std::string &MSG) {
+int Enqueue(){
+	//vérifier si la machine d'etat est occupé (flag CMD)
+		//si != CMD ok
+		//mettre dans queue les commandes courte ou longue
+	//si == CMD nok
+		//rejeter les cmd longue
+		//mettre les courte en queue -> pb de priorité ?
+		//Où mettre le cas *OPC? pour cmd remaining ?
+}
+int deQueueMsg(std::string &MSG) {
 	MSG.assign(stack_cmd.at(0));
 	stack_cmd.erase(stack_cmd.begin());
 
 	return 0;
 }
 
-void clearStackmsg(void){
+void clearQueuemsg(void){
 	stack_cmd.clear();
 }
 

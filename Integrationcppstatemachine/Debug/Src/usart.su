@@ -9,9 +9,9 @@ usart.cpp:189:6:void HAL_UART_MspDeInit(UART_HandleTypeDef*)	16	static
 usart.cpp:246:6:void MX_USART3_UART_Init()	40	static
 usart.cpp:305:6:void HAL_UART_ErrorCallback(UART_HandleTypeDef*)	16	static
 usart.cpp:309:6:void HAL_UART_TxCpltCallback(UART_HandleTypeDef*)	16	static,ignoring_inline_asm
-usart.cpp:313:5:int getstackmsgsize()	8	static
-usart.cpp:317:5:int Stackmsg(std::__cxx11::string&)	24	static
-usart.cpp:324:6:void clearStackmsg()	8	static
+usart.cpp:313:5:int getQueueMsgsize()	8	static
+usart.cpp:317:5:int DequeueMsg(std::__cxx11::string&)	24	static
+usart.cpp:324:6:void clearQueuemsg()	8	static
 usart.cpp:328:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	40	static
 usart.cpp:352:6:void UART_transmit(std::__cxx11::string)	80	dynamic
 usart.cpp:365:6:void Reset_uart_buffer()	8	static

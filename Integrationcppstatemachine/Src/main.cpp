@@ -304,8 +304,9 @@ int main(void) {
 				break;
 			case (CMD):
 				try {
-					while (getstackmsgsize() > 0) {
-						Stackmsg(MSG);
+
+					while (getQueueMsgsize() > 0) {
+						deQueueMsg(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
 							UART_transmit(" OK\n\r");
@@ -329,8 +330,8 @@ int main(void) {
 				//RESET()
 				REP.assign("\0");
 				MSG.assign("\0");
-				Stackmsg(MSG);
-				clearStackmsg();
+				deQueueMsg(MSG);
+				clearQueuemsg();
 				SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 				SCPI_MAIN.SetSendEnable(0); //réactivation des commandes
 				REP.assign("\0");//à voir si il faut une réponse du système ??????
