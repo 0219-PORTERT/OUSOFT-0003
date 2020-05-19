@@ -37,7 +37,7 @@ char RX_Buffer[1];
 std::string RX_string;
 std::string TX_string;
 
-std::vector<std::string> stack_cmd;
+std::vector<std::string> v_queueCmd;
 
 /* UART4 init function */
 void MX_UART4_Init(void) {
@@ -311,10 +311,10 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 }
 
 int getQueueMsgsize() {
-	return stack_cmd.size();
+	return v_queueCmd.size();
 }
 
-int Enqueue(){
+int Enqueue(std::string &RX_string){
 	//vérifier si la machine d'etat est occupé (flag CMD)
 		//si != CMD ok
 		//mettre dans queue les commandes courte ou longue
@@ -322,33 +322,49 @@ int Enqueue(){
 		//rejeter les cmd longue
 		//mettre les courte en queue -> pb de priorité ?
 		//Où mettre le cas *OPC? pour cmd remaining ?
+	// commande courte forcéement avec * ?
+	//commande broadcast ?
+
+	if(stateMachine != CMD){
+		v_queueCmd.push_back(RX_string);
+	}else{
+
+
+
+		//v_queueCmd.push_back(RX_string); //seulement pour les courtes
+		__NOP();
+	}
+	return 0;
 }
 int deQueueMsg(std::string &MSG) {
-	MSG.assign(stack_cmd.at(0));
-	stack_cmd.erase(stack_cmd.begin());
+	MSG.assign(v_queueCmd.at(0));
+	v_queueCmd.erase(v_queueCmd.begin());
 
 	return 0;
 }
 
 void clearQueuemsg(void){
-	stack_cmd.clear();
+	v_queueCmd.clear();
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 	if (RX_Buffer[0] != '\r') {
 		if (RX_Buffer[0] == ';') {
-			stack_cmd.push_back(RX_string);
+			//v_queueCmd.push_back(RX_string);
+			Enqueue(RX_string);
 			RX_string.assign("\0");
 		} else {
 			RX_string = RX_string + RX_Buffer[0];
 		}
 	} else {
 		if (RX_string.compare("*RST") == 0) {   //Test le zéro de l'égalité
-			stack_cmd.push_back(RX_string);
+			//v_queueCmd.push_back(RX_string);
+			Enqueue(RX_string);
 			stateMachine = RST;
 		} else {
-			stack_cmd.push_back(RX_string);
+			//v_queueCmd.push_back(RX_string);
+			Enqueue(RX_string);
 			stateMachine = CMD;
 		}
 	}
