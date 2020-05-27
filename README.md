@@ -1,6 +1,6 @@
-/*BUSY_WIP*/
+/*MASTER*/
 
-*BUSY ?
+*OPC ?
 *IDN ?
 *RST
 ERR ?
