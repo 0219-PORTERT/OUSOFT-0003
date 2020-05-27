@@ -13,11 +13,12 @@ usart.cpp:308:6:void HAL_UART_ErrorCallback(UART_HandleTypeDef*)	16	static
 usart.cpp:312:6:void HAL_UART_TxCpltCallback(UART_HandleTypeDef*)	16	static,ignoring_inline_asm
 usart.cpp:316:5:int getQueueMsgsize()	8	static
 usart.cpp:321:5:int Enqueue(std::__cxx11::string&)	88	static
-usart.cpp:357:5:int deQueueMsg(std::__cxx11::string&)	24	static
-usart.cpp:364:6:void clearQueuemsg()	8	static
-usart.cpp:368:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	40	static
-usart.cpp:391:6:void UART_transmit(std::__cxx11::string)	80	dynamic
-usart.cpp:404:6:void Reset_uart_buffer()	8	static
+usart.cpp:361:5:int deQueueFirstCmd()	16	static
+usart.cpp:366:5:int getFirstCmd(std::__cxx11::string&)	16	static
+usart.cpp:371:6:void clearQueuemsg()	8	static
+usart.cpp:375:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	40	static
+usart.cpp:398:6:void UART_transmit(std::__cxx11::string)	80	dynamic
+usart.cpp:411:6:void Reset_uart_buffer()	8	static
 string_conversions.h:99:5:) [with _String = std::__cxx11::basic_string<char>; _CharT = char]	52	dynamic
 basic_string.h:139:14:std::__cxx11::basic_string<char>::_Alloc_hider::~_Alloc_hider()	16	static
 basic_string.h:5916:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, const _CharT*) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	24	static
@@ -26,10 +27,10 @@ stl_vector.h:259:7:std::vector<_Tp, _Alloc>::vector() [with _Tp = std::__cxx11::
 stl_vector.h:670:7:std::vector<_Tp, _Alloc>::size_type std::vector<_Tp, _Alloc>::size() const [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	16	static
 stl_vector.h:939:7:void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	16	static
 basic_string.h:5980:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&&, const _CharT*) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	24	static
-stl_vector.h:844:7:std::vector<_Tp, _Alloc>::reference std::vector<_Tp, _Alloc>::at(std::vector<_Tp, _Alloc>::size_type) [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	16	static
 stl_vector.h:563:7:std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::begin() [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	24	static
 stl_iterator.h:784:9:__gnu_cxx::__normal_iterator<_Iterator, _Container>::__normal_iterator(const __gnu_cxx::__normal_iterator<_Iter, typename __gnu_cxx::__enable_if<std::__are_same<_Iter, typename _Container::pointer>::__value, _Container>::__type>&) [with _Iter = std::__cxx11::basic_string<char>*; _Iterator = const std::__cxx11::basic_string<char>*; _Container = std::vector<std::__cxx11::basic_string<char> >]	16	static
 stl_vector.h:1179:7:std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::erase(std::vector<_Tp, _Alloc>::const_iterator) [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	24	static
+stl_vector.h:844:7:std::vector<_Tp, _Alloc>::reference std::vector<_Tp, _Alloc>::at(std::vector<_Tp, _Alloc>::size_type) [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	16	static
 stl_vector.h:1247:7:void std::vector<_Tp, _Alloc>::clear() [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	16	static
 basic_string.h:5932:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, _CharT) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	24	static
 basic_string.h:604:9:std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::basic_string(_InputIterator, _InputIterator, const _Alloc&) [with _InputIterator = char*; <template-parameter-2-2> = void; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	32	static
@@ -41,14 +42,14 @@ move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::
 alloc_traits.h:474:2:) [with _Up = std::__cxx11::basic_string<char>; _Args = {const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&}; _Tp = std::__cxx11::basic_string<char>]	24	static
 stl_vector.h:581:7:std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::end() [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	24	static
 vector.tcc:394:7:) [with _Args = {const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&}; _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	56	static
-stl_vector.h:822:7:void std::vector<_Tp, _Alloc>::_M_range_check(std::vector<_Tp, _Alloc>::size_type) const [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	16	static
-stl_vector.h:795:7:std::vector<_Tp, _Alloc>::reference std::vector<_Tp, _Alloc>::operator[](std::vector<_Tp, _Alloc>::size_type) [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	16	static
 stl_iterator.h:779:7:__gnu_cxx::__normal_iterator<_Iterator, _Container>::__normal_iterator(const _Iterator&) [with _Iterator = std::__cxx11::basic_string<char>*; _Container = std::vector<std::__cxx11::basic_string<char> >]	16	static
 stl_iterator.h:844:7:const _Iterator& __gnu_cxx::__normal_iterator<_Iterator, _Container>::base() const [with _Iterator = std::__cxx11::basic_string<char>*; _Container = std::vector<std::__cxx11::basic_string<char> >]	16	static
 stl_vector.h:636:7:std::vector<_Tp, _Alloc>::const_iterator std::vector<_Tp, _Alloc>::cbegin() const [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	24	static
 stl_iterator.h:962:5:typename __gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&) [with _Iterator = const std::__cxx11::basic_string<char>*; _Container = std::vector<std::__cxx11::basic_string<char> >]	24	static
 stl_iterator.h:832:7:__gnu_cxx::__normal_iterator<_Iterator, _Container> __gnu_cxx::__normal_iterator<_Iterator, _Container>::operator+(__gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type) const [with _Iterator = std::__cxx11::basic_string<char>*; _Container = std::vector<std::__cxx11::basic_string<char> >]	24	static
 vector.tcc:153:5:std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::_M_erase(std::vector<_Tp, _Alloc>::iterator) [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	32	static
+stl_vector.h:822:7:void std::vector<_Tp, _Alloc>::_M_range_check(std::vector<_Tp, _Alloc>::size_type) const [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	16	static
+stl_vector.h:795:7:std::vector<_Tp, _Alloc>::reference std::vector<_Tp, _Alloc>::operator[](std::vector<_Tp, _Alloc>::size_type) [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	16	static
 stl_vector.h:1511:7:void std::vector<_Tp, _Alloc>::_M_erase_at_end(std::vector<_Tp, _Alloc>::pointer) [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	24	static
 basic_string.h:252:9:void std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::_M_construct(_InIterator, _InIterator) [with _InIterator = char*; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	32	static
 stl_vector.h:88:2:std::_Vector_base<_Tp, _Alloc>::_Vector_impl::_Vector_impl() [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	16	static
@@ -106,7 +107,7 @@ move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::
 stl_construct.h:74:5:) [with _T1 = std::__cxx11::basic_string<char>; _Args = {std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >}]	24	static
 stl_iterator.h:1124:5:bool std::operator==(const std::move_iterator<_IteratorL>&, const std::move_iterator<_IteratorL>&) [with _Iterator = std::__cxx11::basic_string<char>*]	24	static
 stl_iterator.h:1045:7:std::move_iterator<_Iterator>::iterator_type std::move_iterator<_Iterator>::base() const [with _Iterator = std::__cxx11::basic_string<char>*]	16	static
-usart.cpp:409:1:void __static_initialization_and_destruction_0(int, int)	16	static
+usart.cpp:416:1:void __static_initialization_and_destruction_0(int, int)	16	static
 stl_vector.h:433:7:std::vector<_Tp, _Alloc>::~vector() [with _Tp = std::__cxx11::basic_string<char>; _Alloc = std::allocator<std::__cxx11::basic_string<char> >]	24	static
-usart.cpp:409:1:cpp)	8	static
-usart.cpp:409:1:cpp)	8	static
+usart.cpp:416:1:cpp)	8	static
+usart.cpp:416:1:cpp)	8	static

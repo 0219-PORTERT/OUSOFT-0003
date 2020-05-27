@@ -306,13 +306,15 @@ int main(void) {
 				try {
 
 					while (getQueueMsgsize() > 0) {
-						deQueueMsg(MSG);
+
+						getFirstCmd(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
 							UART_transmit(" OK\n\r");
 						} else {
 							UART_transmit("OK:answer =\n\r" + REP);
 						}
+						deQueueFirstCmd();
 						REP.assign("\0");
 						MSG.assign("\0");
 					}
@@ -332,7 +334,7 @@ int main(void) {
 				NVIC_SystemReset();
 				REP.assign("\0");
 				MSG.assign("\0");
-				deQueueMsg(MSG);
+				deQueueFirstCmd();
 				clearQueuemsg();
 				SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 				SCPI_MAIN.SetSendEnable(0); //réactivation des commandes

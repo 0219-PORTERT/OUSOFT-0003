@@ -329,11 +329,19 @@ int Enqueue(std::string &RX_string){
 	}else if (RX_string.compare("*OPC ?") == 0){
 		UART_transmit("There are "+ std::to_string(getQueueMsgsize()) + " commands remaining" );
 	}else if (RX_string.compare("*IDN ?") == 0) {
-		v_queueCmd.push_back(RX_string);
-		stateMachine = CMD;
+		if(endofCMD ==1){
+			v_queueCmd.push_back(RX_string);
+			stateMachine = CMD;
+		}else{
+			v_queueCmd.push_back(RX_string);
+		}
 	}else if (RX_string.compare("ERR") == 0){
-		v_queueCmd.push_back(RX_string);
-		stateMachine = CMD;
+		if(endofCMD ==1){
+			v_queueCmd.push_back(RX_string);
+			stateMachine = CMD;
+		}else {
+			v_queueCmd.push_back(RX_string);
+		}
 	}else{
 		if(stateMachine != CMD){
 			if(endofCMD ==1){
@@ -346,18 +354,17 @@ int Enqueue(std::string &RX_string){
 			//commande longue bloquée
 		}
 	}
-
-
-
 	Reset_uart_buffer();
-
 
 	return 0;
 }
-int deQueueMsg(std::string &MSG) {
-	MSG.assign(v_queueCmd.at(0));
+int deQueueFirstCmd() {
 	v_queueCmd.erase(v_queueCmd.begin());
+	return 0;
+}
 
+int getFirstCmd(std::string &MSG){
+	MSG.assign(v_queueCmd.at(0));
 	return 0;
 }
 

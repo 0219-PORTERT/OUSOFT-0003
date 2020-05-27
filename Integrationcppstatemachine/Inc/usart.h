@@ -51,8 +51,10 @@ void MX_UART7_Init(void);
 
 int getQueueMsgsize();
 void MX_USART3_UART_Init(void);
-int deQueueMsg(std::string &MSG);
+int deQueueFirstCmd();
 int Enqueue();
+int getFirstCmd(std::string &MSG);
+
 void clearQueuemsg(void);
 void UART_transmit(std::string stringtosend);
 void Reset_uart_buffer(void);
