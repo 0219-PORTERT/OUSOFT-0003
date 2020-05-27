@@ -44,7 +44,7 @@ short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		break;
 	case REQ_QST:
 		///////////////
-		while(1){;}/*Simulation du client qui bosse*/
+		//while(1){;}/*Simulation du client qui bosse*/
 		///////////////
 		_rep.assign("RPM: " + std::to_string(this->rpmValue) + "\n\r");
 		break;
