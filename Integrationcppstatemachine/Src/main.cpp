@@ -304,20 +304,24 @@ int main(void) {
 				break;
 			case (CMD):
 				try {
-					while (getstackmsgsize() > 0) {
-						Stackmsg(MSG);
+
+					while (getQueueMsgsize() > 0) {
+
+						getFirstCmd(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
 							UART_transmit(" OK\n\r");
 						} else {
 							UART_transmit("OK:answer =\n\r" + REP);
 						}
+						deQueueFirstCmd();
 						REP.assign("\0");
 						MSG.assign("\0");
 					}
 				} catch (int e) {
 					UART_transmit(REP.assign(mainCerrG.ToString()));
 				}
+				Reset_uart_buffer();
 				stateMachine = DEFAULT;
 				break;
 			case (SECU):
@@ -326,11 +330,12 @@ int main(void) {
 				break;
 			case (RST):
 				UART_transmit("\n\r RESETING... \n\r");
-				//RESET()
+				//RESET();
+				NVIC_SystemReset();
 				REP.assign("\0");
 				MSG.assign("\0");
-				Stackmsg(MSG);
-				clearStackmsg();
+				deQueueFirstCmd();
+				clearQueuemsg();
 				SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 				SCPI_MAIN.SetSendEnable(0); //réactivation des commandes
 				REP.assign("\0");//à voir si il faut une réponse du système ??????
@@ -346,6 +351,7 @@ int main(void) {
 	}
 	/* USER CODE END 3 */
 }
+
 
 void initStateMachine(void) {
 

@@ -1,0 +1,6 @@
+FonctionsAutotest.c:14:10:autoTest	4	static
+FonctionsAutotest.c:36:10:CheckI2C4	8	static
+FonctionsAutotest.c:57:10:testEeprom1	16	static
+FonctionsAutotest.c:95:10:testEeprom2	16	static
+FonctionsAutotest.c:130:10:testTemperature	16	static
+FonctionsAutotest.c:144:10:Simtemp1	16	static

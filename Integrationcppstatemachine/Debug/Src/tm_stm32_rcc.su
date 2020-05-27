@@ -1,0 +1,3 @@
+core_cm7.h:2229:22:SCB_EnableICache	4	static,ignoring_inline_asm
+core_cm7.h:2281:22:SCB_EnableDCache	24	static,ignoring_inline_asm
+tm_stm32_rcc.c:28:17:TM_RCC_InitSystem	88	static

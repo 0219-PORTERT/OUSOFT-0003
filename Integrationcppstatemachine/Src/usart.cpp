@@ -37,7 +37,8 @@ char RX_Buffer[1];
 std::string RX_string;
 std::string TX_string;
 
-std::vector<std::string> stack_cmd;
+std::vector<std::string> v_queueCmd;
+volatile uint8_t endofCMD;
 
 /* UART4 init function */
 void MX_UART4_Init(void) {
@@ -298,6 +299,8 @@ void MX_USART3_UART_Init(void) {
 	TX_string.reserve(256);
 	TX_string.assign("\0");
 
+	endofCMD = 0;
+
 	/* USER CODE END USART3_Init 2 */
 
 }
@@ -310,42 +313,85 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 	__NOP();
 }
 
-int getstackmsgsize() {
-	return stack_cmd.size();
+int getQueueMsgsize() {
+	RX_string.assign("\0");
+	return v_queueCmd.size();
 }
 
-int Stackmsg(std::string &MSG) {
-	MSG.assign(stack_cmd.at(0));
-	stack_cmd.erase(stack_cmd.begin());
+int Enqueue(std::string &RX_string){
+
+
+
+	if (RX_string.compare("*RST") == 0) {   //Test le zéro de l'égalité
+		v_queueCmd.push_back(RX_string);
+		stateMachine = RST;
+		NVIC_SystemReset();
+	}else if (RX_string.compare("*OPC ?") == 0){
+		UART_transmit("There are "+ std::to_string(getQueueMsgsize()) + " commands remaining" );
+	}else if (RX_string.compare("*IDN ?") == 0) {
+		if(endofCMD ==1){
+			v_queueCmd.push_back(RX_string);
+			stateMachine = CMD;
+		}else{
+			v_queueCmd.push_back(RX_string);
+		}
+	}else if (RX_string.compare("ERR") == 0){
+		if(endofCMD ==1){
+			v_queueCmd.push_back(RX_string);
+			stateMachine = CMD;
+		}else {
+			v_queueCmd.push_back(RX_string);
+		}
+	}else{
+		if(stateMachine != CMD){
+			if(endofCMD ==1){
+				v_queueCmd.push_back(RX_string);
+				stateMachine = CMD;
+			}else{
+				v_queueCmd.push_back(RX_string);
+			}
+		}else{
+			//commande longue bloquée
+		}
+	}
+	Reset_uart_buffer();
 
 	return 0;
 }
+int deQueueFirstCmd() {
+	v_queueCmd.erase(v_queueCmd.begin());
+	return 0;
+}
 
-void clearStackmsg(void){
-	stack_cmd.clear();
+int getFirstCmd(std::string &MSG){
+	MSG.assign(v_queueCmd.at(0));
+	return 0;
+}
+
+void clearQueuemsg(void){
+	v_queueCmd.clear();
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 	if (RX_Buffer[0] != '\r') {
 		if (RX_Buffer[0] == ';') {
-			stack_cmd.push_back(RX_string);
+			Enqueue(RX_string);
 			RX_string.assign("\0");
-		} else {
+		}else if(RX_Buffer[0] == '\n'){
+			;
+		}else {
 			RX_string = RX_string + RX_Buffer[0];
 		}
-	} else {
-		if (RX_string.compare("*RST") == 0) {   //Test le zéro de l'égalité
-			stack_cmd.push_back(RX_string);
-			stateMachine = RST;
-		} else {
-			stack_cmd.push_back(RX_string);
-			stateMachine = CMD;
-		}
+	} else { //fin de reception commandes
+
+
+		endofCMD = 1;
+		Enqueue(RX_string);
+
 	}
-	//__HAL_UART_CLEAR_IT(&huart3, UART_IT_RXNE);
 	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
-	//__HAL_UART_FLUSH_DRREGISTER(&huart3);
+
 
 }
 
@@ -366,6 +412,7 @@ void Reset_uart_buffer(void) {
 	TX_string.assign("\0");
 	RX_string.assign("\0");
 	RX_Buffer[0] = '\0';
+	endofCMD = 0;
 }
 
 /* USER CODE END 1 */
