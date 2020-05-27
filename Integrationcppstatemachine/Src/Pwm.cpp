@@ -29,9 +29,7 @@ Pwm::~Pwm() {
 short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	//_rep.assign("Je suis le execute de la classe pwm");
 
-	///////////////
-	while(1){;}/*Simulation du client qui bosse*/
-	///////////////
+
 	switch (decodeInstruct(_cmde)) {
 
 	case REQ_RST:
@@ -45,6 +43,9 @@ short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		startPwm(this->rpmValue);
 		break;
 	case REQ_QST:
+		///////////////
+		while(1){;}/*Simulation du client qui bosse*/
+		///////////////
 		_rep.assign("RPM: " + std::to_string(this->rpmValue) + "\n\r");
 		break;
 

@@ -319,6 +319,7 @@ int main(void) {
 				} catch (int e) {
 					UART_transmit(REP.assign(mainCerrG.ToString()));
 				}
+				Reset_uart_buffer();
 				stateMachine = DEFAULT;
 				break;
 			case (SECU):
@@ -327,7 +328,8 @@ int main(void) {
 				break;
 			case (RST):
 				UART_transmit("\n\r RESETING... \n\r");
-				//RESET()
+				//RESET();
+				NVIC_SystemReset();
 				REP.assign("\0");
 				MSG.assign("\0");
 				deQueueMsg(MSG);
@@ -347,6 +349,7 @@ int main(void) {
 	}
 	/* USER CODE END 3 */
 }
+
 
 void initStateMachine(void) {
 

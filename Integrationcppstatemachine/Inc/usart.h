@@ -61,6 +61,9 @@ void Reset_uart_buffer(void);
 
 extern T_STATUS stateMachine;
 
+
+
+
 #endif /*__ usart_H */
 
 /**
