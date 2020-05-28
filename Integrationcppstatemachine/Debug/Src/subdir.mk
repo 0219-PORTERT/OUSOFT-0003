@@ -31,6 +31,7 @@ CPP_SRCS += \
 ../Src/Pwm.cpp \
 ../Src/ScpiClientServer.cpp \
 ../Src/SimCapTemp.cpp \
+../Src/TempHumSensor.cpp \
 ../Src/main.cpp \
 ../Src/usart.cpp 
 
@@ -43,6 +44,7 @@ OBJS += \
 ./Src/Pwm.o \
 ./Src/ScpiClientServer.o \
 ./Src/SimCapTemp.o \
+./Src/TempHumSensor.o \
 ./Src/dac.o \
 ./Src/fonctions_eeprom.o \
 ./Src/gpio.o \
@@ -91,6 +93,7 @@ CPP_DEPS += \
 ./Src/Pwm.d \
 ./Src/ScpiClientServer.d \
 ./Src/SimCapTemp.d \
+./Src/TempHumSensor.d \
 ./Src/main.d \
 ./Src/usart.d 
 
@@ -112,6 +115,8 @@ Src/ScpiClientServer.o: ../Src/ScpiClientServer.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/ScpiClientServer.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/SimCapTemp.o: ../Src/SimCapTemp.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/SimCapTemp.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
+Src/TempHumSensor.o: ../Src/TempHumSensor.cpp
+	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/TempHumSensor.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/dac.o: ../Src/dac.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/dac.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/fonctions_eeprom.o: ../Src/fonctions_eeprom.c

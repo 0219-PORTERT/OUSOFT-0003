@@ -35,6 +35,7 @@
 "Src/Pwm.o"
 "Src/ScpiClientServer.o"
 "Src/SimCapTemp.o"
+"Src/TempHumSensor.o"
 "Src/dac.o"
 "Src/fonctions_eeprom.o"
 "Src/gpio.o"

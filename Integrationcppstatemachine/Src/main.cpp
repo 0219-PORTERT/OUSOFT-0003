@@ -54,6 +54,7 @@
 #include "Cna.h"
 #include "Can.h"
 #include "SimCapTemp.h"
+#include "TempHumSensor.h"
 
 /* Include core modules */
 #include "stm32fxxx_hal.h"
@@ -152,6 +153,9 @@ int main(void) {
 	SimCapTemp SIMT3("T3",TEMPCAP3);
 	SimCapTemp SIMT4("T4",TEMPCAP4);
 
+	TempHumSensor TempHum1("TEMPHUM");
+
+
 	/*SCPI STRUCTURE*/
 	ScpiClientServer SCPI_MAIN("TEST0256", 0);
 	//{
@@ -237,8 +241,11 @@ int main(void) {
 			SCPI_HUMS.AddClient(&MCO);
 			ScpiClientServer DTI("DTI");
 			SCPI_HUMS.AddClient(&DTI);
-			ScpiClientServer TEMP("TEMP");
-			SCPI_HUMS.AddClient(&TEMP);
+			/*ScpiClientServer TEMP("TEMP");
+			SCPI_HUMS.AddClient(&TEMP);*/
+
+			SCPI_HUMS.AddClient(TempHum1.getSCPIClientServer());//TEMPHUM
+
 		//}
 		SCPI_MAIN.AddClient(Pwm1.getSCPIClientServer()); //RPM
 		//ScpiClientServer SCPI_RPM("RPM");
