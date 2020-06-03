@@ -54,6 +54,7 @@
 #include "Cna.h"
 #include "Can.h"
 #include "SimCapTemp.h"
+#include "EXPSEC.h"
 
 /* Include core modules */
 #include "stm32fxxx_hal.h"
@@ -152,6 +153,9 @@ int main(void) {
 	SimCapTemp SIMT3("T3",TEMPCAP3);
 	SimCapTemp SIMT4("T4",TEMPCAP4);
 
+	EXPSEC ExpSecuA("S_A",SIDEA);
+	EXPSEC ExpSecuB("S_B",SIDEA);
+
 	/*SCPI STRUCTURE*/
 	ScpiClientServer SCPI_MAIN("TEST0256", 0);
 	//{
@@ -246,10 +250,12 @@ int main(void) {
 		ScpiClientServer SCPI_SECU("SECU");
 		SCPI_MAIN.AddClient(&SCPI_SECU);
 		//{
-			ScpiClientServer SEC_A("S_A");
+			/*ScpiClientServer SEC_A("S_A");
 			SCPI_SECU.AddClient(&SEC_A);
 			ScpiClientServer SEC_B("S_B");
-			SCPI_SECU.AddClient(&SEC_B);
+			SCPI_SECU.AddClient(&SEC_B);*/
+			SCPI_SECU.AddClient(ExpSecuA.getSCPIClientServer());
+			SCPI_SECU.AddClient(ExpSecuB.getSCPIClientServer());
 		//}
 		ScpiClientServer SCPI_DIO("DIO");
 		SCPI_MAIN.AddClient(&SCPI_DIO);

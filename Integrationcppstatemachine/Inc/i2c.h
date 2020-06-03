@@ -58,6 +58,15 @@ void testI2CCS(I2C_TypeDef* I2Cx);
 #define I2CEXP 0x40
 /* USER CODE END Prototypes */
 
+/*OUCART-018 ADRESS*/
+
+#define TEM_HUM_I2CADD 0x44
+#define EXPSECU_I2CADD 0x40
+#define POT_I2CADD 0x58
+#define MEMU3_I2CADD 0xa0
+#define MEMU4_I2CADD 0xa0
+#define MEMU5_I2CADD 0xa4
+
 #ifdef __cplusplus
 }
 #endif

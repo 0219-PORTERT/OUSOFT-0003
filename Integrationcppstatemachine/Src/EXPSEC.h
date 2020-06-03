@@ -8,10 +8,29 @@
 #ifndef EXPSEC_H_
 #define EXPSEC_H_
 
-class EXPSEC {
+#include "ScpiClientServer.h"
+#include <String>
+#include <iostream>
+
+#define REQ_RST 1
+#define REQ_IDN 2
+#define REQ_QST 3
+
+#define SIDEA 0
+#define SIDEB 1
+
+class EXPSEC : public ScpiClientServer {
 public:
 	EXPSEC();
+	EXPSEC(std::string _name, uint8_t _side);
 	virtual ~EXPSEC();
+
+private :
+	std::string _name;
+	uint8_t side;
+	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
+	int decodeInstruct(std::string& _cmde);
+	int configseq();
 };
 
 #endif /* EXPSEC_H_ */
