@@ -31,6 +31,7 @@ private :
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
 	int decodeInstruct(std::string& _cmde);
 	int configseq();
+	uint8_t readPort();
 };
 
 #endif /* EXPSEC_H_ */

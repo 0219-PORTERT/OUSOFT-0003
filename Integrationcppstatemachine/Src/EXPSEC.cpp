@@ -34,10 +34,10 @@ short int EXPSEC::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		//reset
 		break;
 	case REQ_IDN:
-		_rep.assign("je suis le client HARDWARE " + this->getHeader());
+		_rep.assign("je suis le client HARDWARE " + this->getHeader() + " Side: " + std::to_string(this->side));
 		break;
 	case REQ_QST:
-		_rep.assign(this->getHeader()+ " : "+ std::to_string(66) + "\n\r");
+		_rep.assign(this->getHeader()+" side " +std::to_string(this->side)+ " : "+ std::to_string(readPort()) + "\n\r");
 		break;
 	default:
 		//throw something;
@@ -61,6 +61,26 @@ int EXPSEC::decodeInstruct(std::string& _cmde) {
 		//throw something
 	}
 	return sel;
+}
+
+uint8_t EXPSEC::readPort(){
+	uint8_t data = -1;
+
+	if(this->side == SIDEA){
+		TM_I2C_WriteNoRegister(I2C4, EXPSECU_I2CADD, 0x00); //write input port 0
+
+		TM_I2C_ReadNoRegister(I2C4, (EXPSECU_I2CADD)|(1u<<0), &data); //read from input port 0
+	}else{
+		TM_I2C_WriteNoRegister(I2C4, EXPSECU_I2CADD, 0x01); //write input port 1
+
+		TM_I2C_ReadNoRegister(I2C4, (EXPSECU_I2CADD)|(1u<<0), &data); //read from input port 1
+	}
+
+
+
+
+
+	return data;
 }
 
 int EXPSEC::configseq(){
