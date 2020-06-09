@@ -153,8 +153,7 @@ int main(void) {
 	SimCapTemp SIMT3("T3",TEMPCAP3);
 	SimCapTemp SIMT4("T4",TEMPCAP4);
 
-	EXPSEC ExpSecuA("S_A",SIDEA);
-	EXPSEC ExpSecuB("S_B",SIDEA);
+	EXPSEC ExpSecu1("SECU");
 
 	/*SCPI STRUCTURE*/
 	ScpiClientServer SCPI_MAIN("TEST0256", 0);
@@ -254,8 +253,7 @@ int main(void) {
 			SCPI_SECU.AddClient(&SEC_A);
 			ScpiClientServer SEC_B("S_B");
 			SCPI_SECU.AddClient(&SEC_B);*/
-			SCPI_SECU.AddClient(ExpSecuA.getSCPIClientServer());
-			SCPI_SECU.AddClient(ExpSecuB.getSCPIClientServer());
+			SCPI_SECU.AddClient(ExpSecu1.getSCPIClientServer());
 		//}
 		ScpiClientServer SCPI_DIO("DIO");
 		SCPI_MAIN.AddClient(&SCPI_DIO);

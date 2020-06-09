@@ -13,10 +13,9 @@
 
 EXPSEC::EXPSEC() {
 	// TODO Auto-generated constructor stub
-	this->side = SIDEA;
 
 }
-EXPSEC::EXPSEC(std::string _name, uint8_t _side): ScpiClientServer(_name), side(_side) {
+EXPSEC::EXPSEC(std::string _name): ScpiClientServer(_name) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -34,10 +33,10 @@ short int EXPSEC::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		//reset
 		break;
 	case REQ_IDN:
-		_rep.assign("je suis le client HARDWARE " + this->getHeader() + " Side: " + std::to_string(this->side));
+		_rep.assign("je suis le client HARDWARE " + this->getHeader());
 		break;
 	case REQ_QST:
-		_rep.assign(this->getHeader()+" side " +std::to_string(this->side)+ " : "+ std::to_string(readPort()) + "\n\r");
+		_rep.assign(this->getHeader()+ " : "+ std::to_string(readPort()) + "\n\r");
 		break;
 	default:
 		//throw something;
@@ -63,24 +62,27 @@ int EXPSEC::decodeInstruct(std::string& _cmde) {
 	return sel;
 }
 
-uint8_t EXPSEC::readPort(){
-	uint8_t data = -1;
+uint16_t EXPSEC::readPort(){
+	uint8_t data = 0;
+	uint16_t value = 0;
 
-	if(this->side == SIDEA){
-		TM_I2C_WriteNoRegister(I2C4, EXPSECU_I2CADD, 0x00); //write input port 0
+	uint16_t value2 = 0x0000;
 
-		TM_I2C_ReadNoRegister(I2C4, (EXPSECU_I2CADD)|(1u<<0), &data); //read from input port 0
-	}else{
-		TM_I2C_WriteNoRegister(I2C4, EXPSECU_I2CADD, 0x01); //write input port 1
+	TM_I2C_WriteNoRegister(I2C4, EXPSECU_I2CADD, 0x00); //write input port 0
+	TM_I2C_ReadNoRegister(I2C4, (EXPSECU_I2CADD)|(1u<<0), &data); //read from input port 0
 
-		TM_I2C_ReadNoRegister(I2C4, (EXPSECU_I2CADD)|(1u<<0), &data); //read from input port 1
-	}
+	value = data;
+	value2 = data;
+
+	TM_I2C_WriteNoRegister(I2C4, EXPSECU_I2CADD, 0x01); //write input port 1
+	TM_I2C_ReadNoRegister(I2C4, (EXPSECU_I2CADD)|(1u<<0), &data); //read from input port 1
+
+	value = value + data;
+	value2 = value2 + (data<<8);
 
 
 
-
-
-	return data;
+	return value2;
 }
 
 int EXPSEC::configseq(){

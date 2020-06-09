@@ -22,16 +22,15 @@
 class EXPSEC : public ScpiClientServer {
 public:
 	EXPSEC();
-	EXPSEC(std::string _name, uint8_t _side);
+	EXPSEC(std::string _name);
 	virtual ~EXPSEC();
 
 private :
 	std::string _name;
-	uint8_t side;
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
 	int decodeInstruct(std::string& _cmde);
 	int configseq();
-	uint8_t readPort();
+	uint16_t readPort();
 };
 
 #endif /* EXPSEC_H_ */
