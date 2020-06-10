@@ -30,6 +30,7 @@
 "Src/Can.o"
 "Src/CerrG.o"
 "Src/Cna.o"
+"Src/EXPSEC.o"
 "Src/FonctionsAutotest.o"
 "Src/FonctionsSCPI.o"
 "Src/Pwm.o"
