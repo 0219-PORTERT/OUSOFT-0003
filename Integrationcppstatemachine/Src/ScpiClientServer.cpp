@@ -93,7 +93,8 @@ short int ScpiClientServer::ExecuteCmde(std::string& _cmde, std::string &_rep) {
 
 
 		if (_cmde.compare("*IDN ?") == 0) {
-			_rep.assign("je suis le client SCPI " + this->_HEADER);
+			//_rep.assign("je suis le client SCPI " + this->_HEADER);
+			_rep.assign(this->_HEADER);
 		} else {
 			//throw ERR_CMDE;
 		}

@@ -327,7 +327,8 @@ int Enqueue(std::string &RX_string){
 		stateMachine = RST;
 		NVIC_SystemReset();
 	}else if (RX_string.compare("*OPC ?") == 0){
-		UART_transmit("There are "+ std::to_string(getQueueMsgsize()) + " commands remaining" );
+		//UART_transmit("There are "+ std::to_string(getQueueMsgsize()) + " commands remaining" );
+		UART_transmit(std::to_string(getQueueMsgsize()));
 	}else if (RX_string.compare("*IDN ?") == 0) {
 		if(endofCMD ==1){
 			v_queueCmd.push_back(RX_string);

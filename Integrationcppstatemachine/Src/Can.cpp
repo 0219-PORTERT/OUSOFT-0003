@@ -34,16 +34,20 @@ short int Can::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		//RESET ?
 		break;
 	case REQ_IDN:
-		_rep.assign("je suis le client HARDWARE " + this->getHeader() +" et je suis sur la voie " + std::to_string(this->channel));
+		//_rep.assign("je suis le client HARDWARE " + this->getHeader() +" et je suis sur la voie " + std::to_string(this->channel));
+		_rep.assign(this->getHeader() +":" + std::to_string(this->channel));
 		break;
 	case REQ_CHX:
-		_rep.assign(_cmde +" : "+std::to_string(readADC())+"\n\r");
+		//_rep.assign(_cmde +" : "+std::to_string(readADC())+"\n\r");
+		_rep.assign(std::to_string(readADC())+"\n\r");
 		break;
 	case REQ_IMOY:
-		_rep.assign(_cmde +" : "+std::to_string(readADCImoy(NB_MOYENNE))+"\n\r");
+		//_rep.assign(_cmde +" : "+std::to_string(readADCImoy(NB_MOYENNE))+"\n\r");
+		_rep.assign(std::to_string(readADCImoy(NB_MOYENNE))+"\n\r");
 		break;
 	case REQ_ISTCURR:
-		_rep.assign(_cmde +" : "+std::to_string(InstCurrent())+"\n\r");
+		//_rep.assign(_cmde +" : "+std::to_string(InstCurrent())+"\n\r");
+		_rep.assign(std::to_string(InstCurrent())+"\n\r");
 		break;
 	default:
 		//throw something;

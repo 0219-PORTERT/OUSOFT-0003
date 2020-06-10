@@ -16,8 +16,6 @@
 #define REQ_IDN 2
 #define REQ_QST 3
 
-#define SIDEA 0
-#define SIDEB 1
 
 class EXPSEC : public ScpiClientServer {
 public:

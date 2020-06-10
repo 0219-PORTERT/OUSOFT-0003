@@ -55,6 +55,7 @@
 #include "Can.h"
 #include "SimCapTemp.h"
 #include "EXPSEC.h"
+#include "EXPANDADDO.h"
 
 /* Include core modules */
 #include "stm32fxxx_hal.h"
@@ -298,7 +299,7 @@ int main(void) {
 
 	UART_transmit("\r\n*** RUNNING STATE MACHINE ***");
 
-	initSCPI();
+	//initSCPI();
 
 	while (1) {
 		/* Infinite loop */
@@ -318,9 +319,10 @@ int main(void) {
 						getFirstCmd(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
-							UART_transmit(" OK\n\r");
+							//UART_transmit(" OK\n\r");
 						} else {
-							UART_transmit("OK:answer =\n\r" + REP);
+							//UART_transmit("OK:answer =\n\r" + REP);
+							UART_transmit(REP);
 						}
 						deQueueFirstCmd();
 						REP.assign("\0");

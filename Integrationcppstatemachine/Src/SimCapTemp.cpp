@@ -43,13 +43,15 @@ short int SimCapTemp::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		this->tempValue = 25;
 		break;
 	case REQ_IDN:
-		_rep.assign("je suis le client HARDWARE " + this->getHeader() +" et je suis le capteur " + std::to_string(this->capteur));
+		//_rep.assign("je suis le client HARDWARE " + this->getHeader() +" et je suis le capteur " + std::to_string(this->capteur));
+		_rep.assign(this->getHeader());
 		break;
 	case REQ_x:
 		setTemp(this->tempValue);
 		break;
 	case REQ_QST:
-		_rep.assign(this->getHeader()+ " : "+ std::to_string(this->tempValue) + "\n\r");
+		//_rep.assign(this->getHeader()+ " : "+ std::to_string(this->tempValue) + "\n\r");
+		_rep.assign(std::to_string(this->tempValue));
 		break;
 	default:
 		//throw something;

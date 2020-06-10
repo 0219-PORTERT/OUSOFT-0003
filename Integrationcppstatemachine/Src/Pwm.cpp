@@ -37,7 +37,8 @@ short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		startPwm(0);
 		break;
 	case REQ_IDN:
-		_rep.assign("je suis le client HARDWARE " + this->getHeader());
+		//_rep.assign("je suis le client HARDWARE " + this->getHeader());
+		_rep.assign(this->getHeader());
 		break;
 	case REQ_x:
 		startPwm(this->rpmValue);
@@ -46,7 +47,8 @@ short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		///////////////
 		//while(1){;}/*Simulation du client qui bosse*/
 		///////////////
-		_rep.assign("RPM: " + std::to_string(this->rpmValue) + "\n\r");
+		//_rep.assign("RPM: " + std::to_string(this->rpmValue) + "\n\r");
+		_rep.assign(std::to_string(this->rpmValue) + "\n\r");
 		break;
 
 	default:
