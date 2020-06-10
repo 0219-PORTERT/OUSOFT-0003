@@ -91,6 +91,8 @@
 void SystemClock_Config(void);
 void initStateMachine(void);
 void InitScpiStructure(void);
+void initSCPI(void);
+void TraitementSECU(void);
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -296,6 +298,8 @@ int main(void) {
 
 	UART_transmit("\r\n*** RUNNING STATE MACHINE ***");
 
+	initSCPI();
+
 	while (1) {
 		/* Infinite loop */
 		/* USER CODE BEGIN WHILE */
@@ -356,7 +360,25 @@ int main(void) {
 	/* USER CODE END 3 */
 }
 
+void initSCPI(void){
+	std::string MSG;
+	std::string REP;
+	REP.assign("\0");
+	MSG.assign("\0");
 
+	MSG.assign("SECU:SECU:DATA ?");
+	//SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
+
+	if(std::stoi(REP,nullptr,10)!=0){
+		TraitementSECU(); // problème sur une ligne de l'expender secu
+	}
+
+	MSG.assign("*RST"); //toutes valeur par defaut
+	//SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
+
+	REP.assign("\0");
+	MSG.assign("\0");
+}
 void initStateMachine(void) {
 
 	MX_USART3_UART_Init();
@@ -504,7 +526,7 @@ void TraitementSECU(void) {
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	//if (GPIO_Pin == GPIO_PIN_8) {
-	TraitementSECU();
+	//TraitementSECU();
 	//}
 	/* Clear interrupt flag */
 	EXTI_HandleTypeDef extihandle;
