@@ -55,6 +55,7 @@
 #include "Can.h"
 #include "SimCapTemp.h"
 #include "EXPSEC.h"
+#include "CommutPOS.h"
 
 /* Include core modules */
 #include "stm32fxxx_hal.h"

@@ -1,0 +1,8 @@
+gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
+CommutPOS.cpp:12:1:CommutPOS::CommutPOS()	16	static
+CommutPOS.cpp:17:1:CommutPOS::CommutPOS(std::__cxx11::string)	48	static
+CommutPOS.cpp:22:1:CommutPOS::~CommutPOS()	16	static
+CommutPOS.cpp:22:1:virtual CommutPOS::~CommutPOS()	16	static
+CommutPOS.cpp:24:1:void __static_initialization_and_destruction_0(int, int)	16	static
+CommutPOS.cpp:24:1:cpp)	8	static
+CommutPOS.cpp:24:1:cpp)	8	static

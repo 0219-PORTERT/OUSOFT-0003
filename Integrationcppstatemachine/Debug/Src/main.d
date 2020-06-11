@@ -46,8 +46,8 @@ Src/main.o: ../Src/main.cpp ../Inc/main.h \
  ../Src/Pwm.h ../Src/Cna.h ../Src/Can.h ../Inc/tm_stm32_adc.h \
  ../Inc/stm32fxxx_hal.h ../Inc/defines.h ../Inc/tm_stm32_rcc.h \
  ../Inc/tm_stm32_gpio.h ../Src/SimCapTemp.h ../Src/EXPSEC.h \
- ../Inc/stm32fxxx_hal.h ../Inc/defines.h ../Inc/tm_stm32_i2c.h \
- ../Inc/attributes.h
+ ../Src/CommutPOS.h ../Inc/stm32fxxx_hal.h ../Inc/defines.h \
+ ../Inc/tm_stm32_i2c.h ../Inc/attributes.h
 
 ../Inc/main.h:
 
@@ -182,6 +182,8 @@ Src/main.o: ../Src/main.cpp ../Inc/main.h \
 ../Src/SimCapTemp.h:
 
 ../Src/EXPSEC.h:
+
+../Src/CommutPOS.h:
 
 ../Inc/stm32fxxx_hal.h:
 

@@ -30,6 +30,7 @@
 "Src/Can.o"
 "Src/CerrG.o"
 "Src/Cna.o"
+"Src/CommutPOS.o"
 "Src/EXPSEC.o"
 "Src/FonctionsAutotest.o"
 "Src/FonctionsSCPI.o"
