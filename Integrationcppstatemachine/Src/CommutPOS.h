@@ -14,7 +14,8 @@
 
 #define REQ_RST 1
 #define REQ_IDN 2
-#define REQ_QST 3
+#define REQ_QST 4
+#define REQ_x 3
 
 class CommutPOS : public ScpiClientServer {
 public:
@@ -24,8 +25,11 @@ public:
 
 private:
 	std::string _name;
+	uint16_t relaystate;
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
 	int decodeInstruct(std::string& _cmde);
+	uint16_t getStateRelay();
+	uint16_t Commut1Relay(uint16_t relay);
 };
 
 #endif /* COMMUTPOS_H_ */
