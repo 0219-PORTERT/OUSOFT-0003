@@ -320,40 +320,47 @@ int getQueueMsgsize() {
 
 int Enqueue(std::string &RX_string){
 
-
-
-	if (RX_string.compare("*RST") == 0) {   //Test le zéro de l'égalité
-		v_queueCmd.push_back(RX_string);
-		stateMachine = RST;
-		NVIC_SystemReset();
-	}else if (RX_string.compare("*OPC ?") == 0){
-		UART_transmit("There are "+ std::to_string(getQueueMsgsize()) + " commands remaining" );
-	}else if (RX_string.compare("*IDN ?") == 0) {
-		if(endofCMD ==1){
-			v_queueCmd.push_back(RX_string);
-			stateMachine = CMD;
-		}else{
-			v_queueCmd.push_back(RX_string);
-		}
-	}else if (RX_string.compare("ERR") == 0){
-		if(endofCMD ==1){
-			v_queueCmd.push_back(RX_string);
-			stateMachine = CMD;
-		}else {
-			v_queueCmd.push_back(RX_string);
-		}
+	if(stateMachine == SECU){ // cas spécial déblocage scpi
+		if (RX_string.compare("*RST") == 0) {
+				v_queueCmd.push_back(RX_string);
+				stateMachine = RST;
+			}
 	}else{
-		if(stateMachine != CMD){
+		if (RX_string.compare("*RST") == 0) {   //Test le zéro de l'égalité
+			v_queueCmd.push_back(RX_string);
+			stateMachine = RST;
+			NVIC_SystemReset();
+		}else if (RX_string.compare("*OPC ?") == 0){
+			UART_transmit("There are "+ std::to_string(getQueueMsgsize()) + " commands remaining" );
+		}else if (RX_string.compare("*IDN ?") == 0) {
 			if(endofCMD ==1){
 				v_queueCmd.push_back(RX_string);
 				stateMachine = CMD;
 			}else{
 				v_queueCmd.push_back(RX_string);
 			}
+		}else if (RX_string.compare("ERR") == 0){
+			if(endofCMD ==1){
+				v_queueCmd.push_back(RX_string);
+				stateMachine = CMD;
+			}else {
+				v_queueCmd.push_back(RX_string);
+			}
 		}else{
-			//commande longue bloquée
+			if(stateMachine != CMD){ //Protection pour empecher d'avoir plusieurs commande en meme temps
+				if(endofCMD ==1){
+					v_queueCmd.push_back(RX_string);
+					stateMachine = CMD;
+				}else{
+					v_queueCmd.push_back(RX_string);
+				}
+			}else{
+				//commande longue bloquée
+			}
 		}
 	}
+
+
 	Reset_uart_buffer();
 
 	return 0;

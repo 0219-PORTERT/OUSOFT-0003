@@ -76,3 +76,11 @@ void CerrG::clearCerrg(void){
 		this->cerr = 0;
 		this->stateMachine = 0;
 }
+
+int CerrG::SetStateMachineErrorCode(uint16_t code){
+
+	this->stateMachine = code;
+
+
+	return 0;
+}

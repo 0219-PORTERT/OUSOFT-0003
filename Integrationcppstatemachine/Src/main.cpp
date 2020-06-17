@@ -107,7 +107,8 @@ void TraitementSECU(void);
 extern std::string RX_string;
 
 T_STATUS stateMachine = HELLO;
-
+ScpiClientServer SCPI_MAIN("TEST0256", 0);
+CerrG mainCerrG(-1);
 /* USER CODE END 0 */
 
 /**
@@ -158,7 +159,7 @@ int main(void) {
 	EXPSEC ExpSecu1("SECU");
 
 	/*SCPI STRUCTURE*/
-	ScpiClientServer SCPI_MAIN("TEST0256", 0);
+
 	//{
 		ScpiClientServer SCPI_MES_I("MESI");
 		SCPI_MAIN.AddClient(&SCPI_MES_I);
@@ -269,7 +270,7 @@ int main(void) {
 		SCPI_MAIN.AddClient(&SCPI_OPT);
 	//}
 
-	CerrG mainCerrG(-1);
+
 
 	//testI2CCS(I2C4);
 
@@ -333,12 +334,12 @@ int main(void) {
 				stateMachine = DEFAULT;
 				break;
 			case (SECU):
-				HAL_Delay(100);
-				stateMachine = SECU;
+				//HAL_Delay(100);
+				//stateMachine = SECU;
+						__NOP();
 				break;
 			case (RST):
 				UART_transmit("\n\r RESETING... \n\r");
-				//RESET();
 				NVIC_SystemReset();
 				REP.assign("\0");
 				MSG.assign("\0");
@@ -361,20 +362,23 @@ int main(void) {
 }
 
 void initSCPI(void){
+
+	int secu = 0;
 	std::string MSG;
 	std::string REP;
 	REP.assign("\0");
 	MSG.assign("\0");
 
 	MSG.assign("SECU:SECU:DATA ?");
-	//SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
-
-	if(std::stoi(REP,nullptr,10)!=0){
-		TraitementSECU(); // problème sur une ligne de l'expender secu
+	SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
+	secu = std::stoi(REP,nullptr,10);
+	if(secu!=0){
+		mainCerrG.SetStateMachineErrorCode(secu);
+		TraitementSECU(); // problème sur une ligne de l'expender secu //mettre dans maincerg en cas d'erreur
 	}
 
 	MSG.assign("*RST"); //toutes valeur par defaut
-	//SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
+	SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 
 	REP.assign("\0");
 	MSG.assign("\0");
@@ -521,13 +525,13 @@ void TM_I2C_InitCustomPinsCallback(I2C_TypeDef* I2Cx,
 void TraitementSECU(void) {
 	UART_transmit("\n\r AU SECOUR !!! \n\r");
 	stateMachine = SECU;
-	//SCPI_MAIN.SetSendEnable(1);
+	SCPI_MAIN.SetSendEnable(1);
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	//if (GPIO_Pin == GPIO_PIN_8) {
-	//TraitementSECU();
-	//}
+	if ((GPIO_Pin == GPIO_PIN_8) && (HAL_GPIO_ReadPin(GPIOG, GPIO_Pin) == 0) ) {
+		TraitementSECU();
+	}
 	/* Clear interrupt flag */
 	EXTI_HandleTypeDef extihandle;
 	extihandle.Line = GPIO_Pin;

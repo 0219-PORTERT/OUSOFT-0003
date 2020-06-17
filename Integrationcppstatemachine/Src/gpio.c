@@ -133,7 +133,7 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = SS0_CN11_58_Pin|SY1_CN11_42_Pin|SY2_CN11_44_Pin|CS_FDP_CN12_69_Pin 
                           |CS_I2C_EX0_CN12_68_Pin|CS_I2C_EX1_CN12_70_Pin|CS_I2C_EX2_CN12_67_Pin|EXT_IT_SECU_Pin 
                           |EXT_IT_11_CN11_70_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 

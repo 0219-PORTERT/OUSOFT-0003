@@ -15,7 +15,7 @@ public:
 	CerrG();
 	CerrG(int _specificPosition);
 	virtual ~CerrG();
-	short int stateMachine;
+	uint32_t stateMachine;
 	short int cerr;
 	short int adresse[6];//public
 	short int specificPosition;//public
@@ -27,6 +27,7 @@ public:
 	int getSpecificPosition(void);
 
 	int SetErrId(short int _specificPosition, short int _errAdress );
+	int SetStateMachineErrorCode(uint16_t code);
 
 	std::string ToString(void);
 

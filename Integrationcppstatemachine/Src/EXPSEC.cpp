@@ -33,10 +33,12 @@ short int EXPSEC::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		//reset
 		break;
 	case REQ_IDN:
-		_rep.assign("je suis le client HARDWARE " + this->getHeader());
+		//_rep.assign("je suis le client HARDWARE " + this->getHeader());
+		_rep.assign(this->getHeader());
 		break;
 	case REQ_QST:
-		_rep.assign(this->getHeader()+ " : "+ std::to_string(readPort()) + "\n\r");
+		//_rep.assign(this->getHeader()+ " : "+ std::to_string(readPort()) + "\n\r");
+		_rep.assign(std::to_string(readPort()) + "\n\r");
 		break;
 	default:
 		//throw something;
@@ -80,7 +82,7 @@ uint16_t EXPSEC::readPort(){
 	value = value + data;
 	value2 = value2 + (data<<8);
 
-
+	TM_I2C_IsDeviceConnected(I2C4, EXPSECU_I2CADD);
 
 	return value2;
 }
