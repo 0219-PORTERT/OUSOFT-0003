@@ -37,7 +37,7 @@ Src/usart.o: ../Src/usart.cpp ../Inc/usart.h ../Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
- ../Inc/stateMachine.h
+ ../Inc/stateMachine.h ../Inc/..\Src\CerrG.h
 
 ../Inc/usart.h:
 
@@ -120,3 +120,5 @@ Src/usart.o: ../Src/usart.cpp ../Inc/usart.h ../Inc/main.h \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
 
 ../Inc/stateMachine.h:
+
+../Inc/..\Src\CerrG.h:

@@ -324,7 +324,10 @@ int Enqueue(std::string &RX_string){
 		if (RX_string.compare("*RST") == 0) {
 				v_queueCmd.push_back(RX_string);
 				stateMachine = RST;
-			}
+		}else if(RX_string.compare("ERR ?") == 0){
+			UART_transmit(mainCerrG.ToString());
+		}
+
 	}else{
 		if (RX_string.compare("*RST") == 0) {   //Test le zéro de l'égalité
 			v_queueCmd.push_back(RX_string);

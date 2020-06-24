@@ -40,14 +40,14 @@ Src/main.o: ../Src/main.cpp ../Inc/main.h \
  ../Src/expanders\MCP23xxx.h ../Src/expanders\expanders.h \
  ../Src/expanders\expanders.h ../Src/expanders\TI95xx.h ../Inc/dac.h \
  ../Inc/main.h ../Inc/i2c.h ../Inc/spi.h ../Inc/tim.h ../Inc/usart.h \
- ../Inc/stateMachine.h ../Inc/gpio.h ../Inc/FonctionsSCPI.h \
- ../Inc/fonctions_eeprom.h ../Inc/FonctionsAutotest.h \
- ../Inc/stateMachine.h ../Src/CerrG.h ../Src/ScpiClientServer.h \
- ../Src/Pwm.h ../Src/Cna.h ../Src/Can.h ../Inc/tm_stm32_adc.h \
- ../Inc/stm32fxxx_hal.h ../Inc/defines.h ../Inc/tm_stm32_rcc.h \
- ../Inc/tm_stm32_gpio.h ../Src/SimCapTemp.h ../Src/EXPSEC.h \
- ../Inc/stm32fxxx_hal.h ../Inc/defines.h ../Inc/tm_stm32_i2c.h \
- ../Inc/attributes.h
+ ../Inc/stateMachine.h ../Inc/..\Src\CerrG.h ../Inc/gpio.h \
+ ../Inc/FonctionsSCPI.h ../Inc/fonctions_eeprom.h \
+ ../Inc/FonctionsAutotest.h ../Inc/stateMachine.h ../Src/CerrG.h \
+ ../Src/ScpiClientServer.h ../Src/Pwm.h ../Src/Cna.h ../Src/Can.h \
+ ../Inc/tm_stm32_adc.h ../Inc/stm32fxxx_hal.h ../Inc/defines.h \
+ ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h ../Src/SimCapTemp.h \
+ ../Src/EXPSEC.h ../Inc/stm32fxxx_hal.h ../Inc/defines.h \
+ ../Inc/tm_stm32_i2c.h ../Inc/attributes.h
 
 ../Inc/main.h:
 
@@ -148,6 +148,8 @@ Src/main.o: ../Src/main.cpp ../Inc/main.h \
 ../Inc/usart.h:
 
 ../Inc/stateMachine.h:
+
+../Inc/..\Src\CerrG.h:
 
 ../Inc/gpio.h:
 

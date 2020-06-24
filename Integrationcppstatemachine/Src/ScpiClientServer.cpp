@@ -67,7 +67,7 @@ short int ScpiClientServer::DecodeMsg(std::string& _msg, std::string& _header,
 	if (_msg.find("*") != string::npos) { //broadcast
 		_cmde = _msg;
 		a = BRD_CMD;
-	} else if ((_msg.find("ERR?") != string::npos)
+	} else if ((_msg.find("ERR ?") != string::npos)
 			&& (this->_HEADER.compare("TEST0256")) == 0) {
 		a = ERR_REQ;
 	} else if (first == -1) { //exec commande courte

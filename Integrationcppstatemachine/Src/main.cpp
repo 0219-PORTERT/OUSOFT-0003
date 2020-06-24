@@ -281,9 +281,6 @@ int main(void) {
 	std::string MSG;
 	std::string REP;
 
-	//SCPI_MAIN.SetSendEnable(1); //bloquer
-	//SCPI_MAIN.modeperoquet(1); //uncomment to active parrot mode
-
 	MSG.reserve(256);
 	MSG.assign("\0");
 	REP.reserve(256);
@@ -301,10 +298,18 @@ int main(void) {
 
 	initSCPI();
 
+	//SCPI_MAIN.SetSendEnable(1); //bloquer
+	//SCPI_MAIN.modeperoquet(1); //uncomment to active parrot mode
+
 	while (1) {
 		/* Infinite loop */
 		/* USER CODE BEGIN WHILE */
+
+
+
+
 		while (1) {
+
 
 			switch (stateMachine) {
 			case (HELLO):
@@ -361,8 +366,7 @@ int main(void) {
 	/* USER CODE END 3 */
 }
 
-void initSCPI(void){
-
+int getExpSecuErrorcode(void){
 	int secu = 0;
 	std::string MSG;
 	std::string REP;
@@ -372,6 +376,27 @@ void initSCPI(void){
 	MSG.assign("SECU:SECU:DATA ?");
 	SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 	secu = std::stoi(REP,nullptr,10);
+
+	REP.assign("\0");
+	MSG.assign("\0");
+
+	return secu;
+}
+
+void initSCPI(void){
+
+	int secu = 0;
+	std::string MSG;
+	std::string REP;
+	REP.assign("\0");
+	MSG.assign("\0");
+
+	/*MSG.assign("SECU:SECU:DATA ?");
+	SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
+	secu = std::stoi(REP,nullptr,10);*/
+
+	secu = getExpSecuErrorcode();
+
 	if(secu!=0){
 		mainCerrG.SetStateMachineErrorCode(secu);
 		TraitementSECU(); // problème sur une ligne de l'expender secu //mettre dans maincerg en cas d'erreur
@@ -529,15 +554,19 @@ void TraitementSECU(void) {
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+
+
+	//int test = -1;
+	//test = HAL_GPIO_ReadPin(GPIOG, GPIO_Pin);
+
 	if ((GPIO_Pin == GPIO_PIN_8) && (HAL_GPIO_ReadPin(GPIOG, GPIO_Pin) == 0) ) {
+		mainCerrG.SetStateMachineErrorCode(getExpSecuErrorcode());
 		TraitementSECU();
 	}
 	/* Clear interrupt flag */
 	EXTI_HandleTypeDef extihandle;
 	extihandle.Line = GPIO_Pin;
 	HAL_EXTI_ClearPending(&extihandle, EXTI_TRIGGER_RISING_FALLING);
-
-	//HAL_EXTI_ClearPending(GPIO_PIN_8, EXTI_TRIGGER_RISING_FALLING);
 }
 
 /* USER CODE BEGIN 4 */

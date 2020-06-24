@@ -24,6 +24,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stateMachine.h"
+#include "..\Src\CerrG.h"
 #include <string>
 #include <iostream>
 
@@ -62,7 +63,7 @@ void Reset_uart_buffer(void);
 /* USER CODE END Prototypes */
 
 extern T_STATUS stateMachine;
-
+extern CerrG mainCerrG;
 
 
 
