@@ -63,7 +63,7 @@ int SimCapTemp::decodeInstruct(std::string& _cmde) {
 
 	int sel = 0;
 
-	if (_cmde.compare("*RST") == 0) {
+	if (_cmde.compare("*CLR") == 0) {
 		sel = REQ_RST;
 	} else if (_cmde.compare("*IDN ?") == 0) {
 		sel = REQ_IDN;

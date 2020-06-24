@@ -32,7 +32,7 @@
 /* USER CODE BEGIN Private defines */
 
 typedef enum {
-	DEFAULT, HELLO, RST, CMD, SECU
+	DEFAULT, HELLO, RST, CMD, SECU,CLEAR
 } T_STATUS;
 
 /* USER CODE END Private defines */

@@ -322,7 +322,7 @@ int Enqueue(std::string &RX_string){
 
 	if(stateMachine == SECU){ // cas spécial déblocage scpi
 		if (RX_string.compare("*RST") == 0) {
-				v_queueCmd.push_back(RX_string);
+				//v_queueCmd.push_back(RX_string);
 				stateMachine = RST;
 		}else if(RX_string.compare("ERR ?") == 0){
 			UART_transmit(mainCerrG.ToString());
@@ -330,7 +330,7 @@ int Enqueue(std::string &RX_string){
 
 	}else{
 		if (RX_string.compare("*RST") == 0) {   //Test le zéro de l'égalité
-			v_queueCmd.push_back(RX_string);
+			//v_queueCmd.push_back(RX_string);
 			stateMachine = RST;
 			NVIC_SystemReset();
 		}else if (RX_string.compare("*OPC ?") == 0){
@@ -352,7 +352,7 @@ int Enqueue(std::string &RX_string){
 		}else if (RX_string.compare("*CLR") == 0){
 			if(endofCMD ==1){
 				v_queueCmd.push_back(RX_string);
-				stateMachine = CMD;
+				stateMachine = CLEAR;
 			}else {
 				v_queueCmd.push_back(RX_string);
 			}

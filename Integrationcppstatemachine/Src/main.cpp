@@ -348,16 +348,42 @@ int main(void) {
 				NVIC_SystemReset();
 				REP.assign("\0");
 				MSG.assign("\0");
-				deQueueFirstCmd();
+				//deQueueFirstCmd();
 				clearQueuemsg();
-				SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
+				//SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 				SCPI_MAIN.SetSendEnable(0); //réactivation des commandes
-				REP.assign("\0");//à voir si il faut une réponse du système ??????
-				MSG.assign("\0");
+				//REP.assign("\0");//à voir si il faut une réponse du système ??????
+				//MSG.assign("\0");
 				stateMachine = HELLO;
 				break;
+			case (CLEAR):
+				try {
+
+					while (getQueueMsgsize() > 0) {
+
+						getFirstCmd(MSG);
+						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
+						if (REP.size() == 0) {
+							UART_transmit(" OK\n\r");
+						} else {
+							UART_transmit("OK:answer =\n\r" + REP);
+						}
+						deQueueFirstCmd();
+						clearQueuemsg();
+						REP.assign("\0");
+						MSG.assign("\0");
+					}
+				} catch (int e) {
+					UART_transmit(REP.assign(mainCerrG.ToString()));
+				}
+				Reset_uart_buffer();
+				stateMachine = DEFAULT;
+
+				break;
 			case (DEFAULT):
-				;
+				break;
+			default:
+				break;
 			}
 
 		}
@@ -402,7 +428,7 @@ void initSCPI(void){
 		TraitementSECU(); // problème sur une ligne de l'expender secu //mettre dans maincerg en cas d'erreur
 	}
 
-	MSG.assign("*RST"); //toutes valeur par defaut
+	MSG.assign("*CLR"); //toutes valeur par defaut
 	SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 
 	REP.assign("\0");
