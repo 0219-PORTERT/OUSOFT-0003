@@ -560,8 +560,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	//test = HAL_GPIO_ReadPin(GPIOG, GPIO_Pin);
 
 	if ((GPIO_Pin == GPIO_PIN_8) && (HAL_GPIO_ReadPin(GPIOG, GPIO_Pin) == 0) ) {
-		mainCerrG.SetStateMachineErrorCode(getExpSecuErrorcode());
-		TraitementSECU();
+		if(stateMachine != SECU){
+			mainCerrG.SetStateMachineErrorCode(getExpSecuErrorcode());
+			TraitementSECU();
+		}
 	}
 	/* Clear interrupt flag */
 	EXTI_HandleTypeDef extihandle;

@@ -349,6 +349,13 @@ int Enqueue(std::string &RX_string){
 			}else {
 				v_queueCmd.push_back(RX_string);
 			}
+		}else if (RX_string.compare("*CLR") == 0){
+			if(endofCMD ==1){
+				v_queueCmd.push_back(RX_string);
+				stateMachine = CMD;
+			}else {
+				v_queueCmd.push_back(RX_string);
+			}
 		}else{
 			if(stateMachine != CMD){ //Protection pour empecher d'avoir plusieurs commande en meme temps
 				if(endofCMD ==1){
