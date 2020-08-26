@@ -27,7 +27,7 @@ Pwm::~Pwm() {
 }
 
 short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
-	//_rep.assign("Je suis le execute de la classe pwm");
+	_rep.assign("Je suis le execute de la classe pwm");
 
 
 	switch (decodeInstruct(_cmde)) {

@@ -14,7 +14,7 @@
 
 #define alpha 0.00788
 #define beta 0.00001937
-#define r25 2000
+#define r25 600
 
 SimCapTemp::SimCapTemp() {
 	// TODO Auto-generated constructor stub
