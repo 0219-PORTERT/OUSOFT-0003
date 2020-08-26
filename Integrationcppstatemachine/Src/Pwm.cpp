@@ -9,6 +9,7 @@
 #include "ScpiClientServer.h"
 #include <string>
 #include <iostream>
+#include <math.h>
 #include "tim.h"
 
 Pwm::Pwm() {
@@ -27,7 +28,7 @@ Pwm::~Pwm() {
 }
 
 short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
-	_rep.assign("Je suis le execute de la classe pwm");
+	//_rep.assign("Je suis le execute de la classe pwm");
 
 
 	switch (decodeInstruct(_cmde)) {
@@ -37,7 +38,8 @@ short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		startPwm(0);
 		break;
 	case REQ_IDN:
-		_rep.assign("je suis le client HARDWARE " + this->getHeader());
+		//_rep.assign("je suis le client HARDWARE " + this->getHeader());
+		_rep.assign(this->getHeader());
 		break;
 	case REQ_x:
 		startPwm(this->rpmValue);
@@ -46,7 +48,8 @@ short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		///////////////
 		//while(1){;}/*Simulation du client qui bosse*/
 		///////////////
-		_rep.assign("RPM: " + std::to_string(this->rpmValue) + "\n\r");
+		//_rep.assign("RPM: " + std::to_string(this->rpmValue) + "\n\r");
+		_rep.assign(std::to_string(this->rpmValue) + "\n\r");
 		break;
 
 	default:
@@ -73,7 +76,11 @@ int Pwm::decodeInstruct(std::string& _cmde) {
 		if ((value < 0) || (value > MAX_FREQ_VALUE)) {
 			sel = -1; //bonne commande mais mauvaise valeur car mal convertie ou autre
 		} else {
-			this->rpmValue = value;
+			float floatFreq = value/60.0;
+
+			this->rpmValue = round(floatFreq);
+
+			//this->rpmValue = value/60;
 			sel = REQ_x;
 		}
 	} else {

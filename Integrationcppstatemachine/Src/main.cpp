@@ -436,7 +436,10 @@ void initSCPI(void){
 }
 void initStateMachine(void) {
 
+
+
 	MX_USART3_UART_Init();
+
 	Reset_uart_buffer();
 
 	UART_transmit("*** OUSOFT-0003 Rev0.01 ***");
@@ -467,7 +470,6 @@ void initStateMachine(void) {
 	UART_transmit("--- init : TIM8");
 	MX_TIM8_Init();
 
-	//Relay_Init();
 
 	UART_transmit("--- init : RCC");
 	TM_RCC_InitSystem();
@@ -475,7 +477,7 @@ void initStateMachine(void) {
 	TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 100000);
 	//TM_I2C_Init(I2C3, TM_I2C_PinsPack_Custom, 100000);
 
-	//CheckI2C4();
+
 
 	UART_transmit("--- init : ADC3");
 	TM_ADC_Init(ADC3, TM_ADC_Channel_0);
@@ -494,6 +496,20 @@ void initStateMachine(void) {
 	TM_ADC_Init(ADC3, TM_ADC_Channel_13);
 	TM_ADC_Init(ADC3, TM_ADC_Channel_14);
 	TM_ADC_Init(ADC3, TM_ADC_Channel_15);
+
+
+
+	//////////////
+	//Test 1 I2C//
+	//////////////
+
+	//BUFFER I2CMAIN
+	//CheckI2C4();
+	//BUFFER EXT1
+	//CHECK
+	//BUFFER EXT2
+	//CHECK
+
 
 }
 

@@ -60,6 +60,7 @@ void clearQueuemsg(void);
 void UART_transmit(std::string stringtosend);
 void Reset_uart_buffer(void);
 
+void UART4_transmit(std::string stringtosend);
 /* USER CODE END Prototypes */
 
 extern T_STATUS stateMachine;

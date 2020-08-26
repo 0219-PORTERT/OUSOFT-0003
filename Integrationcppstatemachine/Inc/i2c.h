@@ -67,6 +67,13 @@ void testI2CCS(I2C_TypeDef* I2Cx);
 #define MEMU4_I2CADD 0xa0
 #define MEMU5_I2CADD 0xa4
 
+/*OUCART-0014 ADRESS*/
+
+
+
+
+/**/
+
 #ifdef __cplusplus
 }
 #endif

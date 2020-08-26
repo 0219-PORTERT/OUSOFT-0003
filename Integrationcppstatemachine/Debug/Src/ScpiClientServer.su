@@ -8,25 +8,25 @@ ScpiClientServer.cpp:35:1:ScpiClientServer::~ScpiClientServer()	16	static
 ScpiClientServer.cpp:35:1:virtual ScpiClientServer::~ScpiClientServer()	16	static
 ScpiClientServer.cpp:39:11:short int ScpiClientServer::AddClient(ScpiClientServer*)	64	static
 ScpiClientServer.cpp:59:11:short int ScpiClientServer::DecodeMsg(std::__cxx11::string&, std::__cxx11::string&, std::__cxx11::string&)	80	static
-ScpiClientServer.cpp:89:11:virtual short int ScpiClientServer::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	168	static
-ScpiClientServer.cpp:112:13:std::__cxx11::string ScpiClientServer::getHeader()	16	static
-ScpiClientServer.cpp:116:19:ScpiClientServer* ScpiClientServer::getClient(uint8_t)	16	static
+ScpiClientServer.cpp:89:11:virtual short int ScpiClientServer::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	144	static
+ScpiClientServer.cpp:113:13:std::__cxx11::string ScpiClientServer::getHeader()	16	static
+ScpiClientServer.cpp:117:19:ScpiClientServer* ScpiClientServer::getClient(uint8_t)	16	static
 CerrG.h:13:7:constexpr CerrG::CerrG(const CerrG&)	16	static
-ScpiClientServer.cpp:120:11:short int ScpiClientServer::ReceiveMsg(std::__cxx11::string, std::__cxx11::string&, CerrG&)	184	static
-ScpiClientServer.cpp:174:5:int ScpiClientServer::FindClientinList(std::__cxx11::string)	56	static
-ScpiClientServer.cpp:183:5:int ScpiClientServer::getTailleListClient()	16	static
-ScpiClientServer.cpp:187:6:void ScpiClientServer::SetSendEnable(int)	24	static
-ScpiClientServer.cpp:196:6:void ScpiClientServer::modeperoquet(int)	24	static
-ScpiClientServer.cpp:204:5:int ScpiClientServer::BroadCastCmde(std::__cxx11::string&, std::__cxx11::string&)	136	static
-ScpiClientServer.cpp:221:19:ScpiClientServer* ScpiClientServer::getSCPIClientServer()	16	static
+ScpiClientServer.cpp:121:11:short int ScpiClientServer::ReceiveMsg(std::__cxx11::string, std::__cxx11::string&, CerrG&)	184	static
+ScpiClientServer.cpp:175:5:int ScpiClientServer::FindClientinList(std::__cxx11::string)	56	static
+ScpiClientServer.cpp:184:5:int ScpiClientServer::getTailleListClient()	16	static
+ScpiClientServer.cpp:188:6:void ScpiClientServer::SetSendEnable(int)	24	static
+ScpiClientServer.cpp:197:6:void ScpiClientServer::modeperoquet(int)	24	static
+ScpiClientServer.cpp:205:5:int ScpiClientServer::BroadCastCmde(std::__cxx11::string&, std::__cxx11::string&)	112	static
+ScpiClientServer.cpp:223:19:ScpiClientServer* ScpiClientServer::getSCPIClientServer()	16	static
 stl_vector.h:259:7:std::vector<_Tp, _Alloc>::vector() [with _Tp = ScpiClientServer*; _Alloc = std::allocator<ScpiClientServer*>]	16	static
 stl_vector.h:433:7:std::vector<_Tp, _Alloc>::~vector() [with _Tp = ScpiClientServer*; _Alloc = std::allocator<ScpiClientServer*>]	24	static
 basic_string.h:6072:5:bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, const _CharT*) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	16	static
 stl_vector.h:939:7:void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = ScpiClientServer*; _Alloc = std::allocator<ScpiClientServer*>]	16	static
 basic_string.tcc:1157:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(const _CharT*, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	32	static
-move.h:98:5:constexpr typename std::remove_reference< <template-parameter-1-1> >::type&& std::move(_Tp&&) [with _Tp = std::__cxx11::basic_string<char>&]	16	static
 basic_string.h:5980:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&&, const _CharT*) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	24	static
 basic_string.h:5944:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&&, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	24	static
+move.h:98:5:constexpr typename std::remove_reference< <template-parameter-1-1> >::type&& std::move(_Tp&&) [with _Tp = std::__cxx11::basic_string<char>&]	16	static
 stl_vector.h:844:7:std::vector<_Tp, _Alloc>::reference std::vector<_Tp, _Alloc>::at(std::vector<_Tp, _Alloc>::size_type) [with _Tp = ScpiClientServer*; _Alloc = std::allocator<ScpiClientServer*>]	16	static
 stl_vector.h:670:7:std::vector<_Tp, _Alloc>::size_type std::vector<_Tp, _Alloc>::size() const [with _Tp = ScpiClientServer*; _Alloc = std::allocator<ScpiClientServer*>]	16	static
 basic_string.h:5879:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	24	static
@@ -82,6 +82,6 @@ cpp_type_traits.h:408:5:_Iterator std::__miter_base(_Iterator) [with _Iterator =
 stl_algobase.h:277:5:_Iterator std::__niter_base(_Iterator) [with _Iterator = ScpiClientServer**]	16	static
 stl_algobase.h:375:5:_OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = true; _II = ScpiClientServer**; _OI = ScpiClientServer**]	32	static
 stl_algobase.h:357:9:static _Tp* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(const _Tp*, const _Tp*, _Tp*) [with _Tp = ScpiClientServer*; bool _IsMove = true]	32	static
-ScpiClientServer.cpp:223:1:void __static_initialization_and_destruction_0(int, int)	16	static
-ScpiClientServer.cpp:223:1:cpp)	8	static
-ScpiClientServer.cpp:223:1:cpp)	8	static
+ScpiClientServer.cpp:225:1:void __static_initialization_and_destruction_0(int, int)	16	static
+ScpiClientServer.cpp:225:1:cpp)	8	static
+ScpiClientServer.cpp:225:1:cpp)	8	static

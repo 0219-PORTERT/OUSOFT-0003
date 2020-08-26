@@ -93,7 +93,8 @@ short int ScpiClientServer::ExecuteCmde(std::string& _cmde, std::string &_rep) {
 
 
 		if (_cmde.compare("*IDN ?") == 0) {
-			_rep.assign("je suis le client SCPI " + this->_HEADER);
+			//_rep.assign("je suis le client SCPI " + this->_HEADER);
+			_rep.assign(this->_HEADER);
 		} else {
 			//throw ERR_CMDE;
 		}
@@ -208,9 +209,10 @@ int ScpiClientServer::BroadCastCmde(std::string& _cmde, std::string& _rep) {
 	streponse.assign("\0");
 
 	this->ExecuteCmde(_cmde, streponse);
-	//_rep = _rep + "client:" + this->_HEADER + "->"+ streponse + ";";
 
-	_rep = _rep + streponse + ";" + "\n\r";
+
+	//_rep = _rep + streponse + ";" + "\n\r";
+	_rep = _rep + streponse + "\n\r";
 
 	for (int i = 0; i < this->listeClients.size(); i++) {
 		this->getClient(i)->BroadCastCmde(_cmde, _rep);
