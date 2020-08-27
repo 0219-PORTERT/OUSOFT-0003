@@ -17,7 +17,7 @@
 #define REQ_x 3
 #define REQ_QST 4
 
-#define MAX_FREQ_VALUE 5000
+#define MAX_FREQ_VALUE 10000000000
 
 
 class Pwm : public ScpiClientServer {

@@ -1,5 +1,5 @@
 Src/FonctionsAutotest.o: ../Src/FonctionsAutotest.c \
- ../Inc/FonctionsAutotest.h \
+ ../Src/FonctionsAutotest.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Inc/stm32f7xx_hal_conf.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
@@ -42,7 +42,7 @@ Src/FonctionsAutotest.o: ../Src/FonctionsAutotest.c \
  ../Inc/stm32fxxx_hal.h ../Inc/tm_stm32_gpio.h ../Inc/defines.h \
  ../Inc/tm_stm32_i2c.h ../Inc/attributes.h ../Inc/i2c.h ../Inc/main.h
 
-../Inc/FonctionsAutotest.h:
+../Src/FonctionsAutotest.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 

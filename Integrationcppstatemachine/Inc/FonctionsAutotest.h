@@ -7,6 +7,9 @@
 
 #ifndef FONCTIONSAUTOTEST_H_
 #define FONCTIONSAUTOTEST_H_
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 #include "stm32f7xx_hal.h"
 
@@ -44,11 +47,17 @@ typedef enum {
 
 uint16_t autoTest(void);
 
+uint16_t CheckI2C2(void);
+uint16_t CheckI2C1(void);
 uint16_t CheckI2C4(void);
+
 uint16_t testEeprom1(void);
 uint16_t testEeprom2(void);
 uint16_t testTemperature(void);
 uint16_t Simtemp1(void);
 uint16_t testEXP(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* FONCTIONSAUTOTEST_H_ */

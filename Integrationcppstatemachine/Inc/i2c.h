@@ -38,15 +38,25 @@ extern I2C_HandleTypeDef hi2c4;
 
 /* USER CODE END Private defines */
 
+void MX_I2C1_Init(void);
 void MX_I2C2_Init(void);
 void MX_I2C3_Init(void);
 void MX_I2C4_Init(void);
 
 void testI2CCS(I2C_TypeDef* I2Cx);
 
+void enableI2C_main();
+void disableI2Cmain();
+
+void enableI2C_EXT1();
+void disableI2C_EXT1();
+
+void enableI2C_EXT2();
+void disableI2C_EXT2();
 /* USER CODE BEGIN Prototypes */
 /*à deplacer dans les fichiers qui correspondront*/
 
+/*PROTO ADRESS*/
 #define I2C4_POT1K_PHYADD 0x5A
 #define I2C4_POT100K_PHYADD 0x58
 
@@ -68,8 +78,25 @@ void testI2CCS(I2C_TypeDef* I2Cx);
 #define MEMU5_I2CADD 0xa4
 
 /*OUCART-0014 ADRESS*/
+/*
+#define EXP_DATA_ADRESS_I2CADD 0x46
+#define EXP_DATA_ADRESS_I2CADD 0x46
 
+#define POT100KA_I2CADD 0x58
+#define POT1KA_I2CADD 0x5C
+#define POT100KB_I2CADD 0x5A
+#define POT1KB_I2CADD 0x5E
 
+#define EXPSECU_I2CADD 0x40
+
+#define EXP_DIO_I2CADD 0x42
+
+#define MEMU1_I2CADD 0xAE
+#define MEMU2_I2CADD 0xAC
+#define MEMU3_I2CADD 0xAA
+#define MEMU4_I2CADD 0xA8
+
+#define TEM_HUM_I2CADD 0x44*/
 
 
 /**/

@@ -49,9 +49,14 @@ uint16_t CheckI2C4(void){
 		return  CERR_ERRROR6 ;
 	}
 
-
-
 	return CERR_NOLOCALERRROR;
+}
+
+uint16_t CheckI2C2(void){
+
+}
+uint16_t CheckI2C1(void){
+
 }
 
 uint16_t testEeprom1(void){

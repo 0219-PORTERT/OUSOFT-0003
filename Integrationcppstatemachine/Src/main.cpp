@@ -55,6 +55,7 @@
 #include "Can.h"
 #include "SimCapTemp.h"
 #include "EXPSEC.h"
+#include "EXPDIO.h"
 
 /* Include core modules */
 #include "stm32fxxx_hal.h"
@@ -157,6 +158,9 @@ int main(void) {
 	SimCapTemp SIMT4("T4",TEMPCAP4);
 
 	EXPSEC ExpSecu1("SECU");
+
+	EXPDIO Expdio1a("DIOA",SIDEA);
+	EXPDIO Expdio1b("DIOB",SIDEB);
 
 	/*SCPI STRUCTURE*/
 
@@ -261,10 +265,12 @@ int main(void) {
 		ScpiClientServer SCPI_DIO("DIO");
 		SCPI_MAIN.AddClient(&SCPI_DIO);
 		//{
-			ScpiClientServer DIO_A("A");
+			/*ScpiClientServer DIO_A("A");
 			SCPI_SECU.AddClient(&DIO_A);
 			ScpiClientServer DIO_B("B");
-			SCPI_SECU.AddClient(&DIO_B);
+			SCPI_SECU.AddClient(&DIO_B);*/
+			SCPI_DIO.AddClient(Expdio1a.getSCPIClientServer());
+			SCPI_DIO.AddClient(Expdio1b.getSCPIClientServer());
 		//}
 		ScpiClientServer SCPI_OPT("OPT");
 		SCPI_MAIN.AddClient(&SCPI_OPT);
@@ -272,7 +278,6 @@ int main(void) {
 
 
 
-	//testI2CCS(I2C4);
 
 
 
@@ -428,6 +433,13 @@ void initSCPI(void){
 		TraitementSECU(); // problème sur une ligne de l'expender secu //mettre dans maincerg en cas d'erreur
 	}
 
+
+	/*TEST POUR OUCART-0014*/
+	/*if(secu!=0xFFFF){
+		mainCerrG.SetStateMachineErrorCode(secu);
+		TraitementSECU(); // problème sur une ligne de l'expender secu //mettre dans maincerg en cas d'erreur
+	}*/
+
 	MSG.assign("*CLR"); //toutes valeur par defaut
 	SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 
@@ -449,6 +461,7 @@ void initStateMachine(void) {
 	MX_GPIO_Init();
 	UART_transmit("--- init : DAC");
 	MX_DAC_Init();
+	MX_I2C1_Init();
 	UART_transmit("--- init : I2C2");
 	MX_I2C2_Init();
 	UART_transmit("--- init : I2C3");
@@ -465,18 +478,19 @@ void initStateMachine(void) {
 	MX_TIM2_Init();
 	UART_transmit("--- init : TIM3");
 	MX_TIM3_Init();
-	UART_transmit("--- init : TIM4");
-	MX_TIM4_Init();
+	/*UART_transmit("--- init : TIM4");
+	MX_TIM4_Init();*/
 	UART_transmit("--- init : TIM8");
 	MX_TIM8_Init();
 
 
 	UART_transmit("--- init : RCC");
 	TM_RCC_InitSystem();
-	TM_I2C_Init(I2C4, TM_I2C_PinsPack_3, 100000);
-	TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 100000);
-	//TM_I2C_Init(I2C3, TM_I2C_PinsPack_Custom, 100000);
 
+	TM_I2C_Init(I2C1, TM_I2C_PinsPack_1, 100000);
+	TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 100000);
+	TM_I2C_Init(I2C3, TM_I2C_PinsPack_1, 100000);
+	TM_I2C_Init(I2C4, TM_I2C_PinsPack_3, 100000);
 
 
 	UART_transmit("--- init : ADC3");
@@ -503,12 +517,30 @@ void initStateMachine(void) {
 	//Test 1 I2C//
 	//////////////
 
+
+	//testI2CCS(I2C4);
 	//BUFFER I2CMAIN
-	//CheckI2C4();
 	//BUFFER EXT1
 	//CHECK
 	//BUFFER EXT2
 	//CHECK
+
+
+	enableI2C_main();
+	CheckI2C4();
+	disableI2Cmain();
+
+
+	enableI2C_EXT1();
+	CheckI2C2();
+	disableI2C_EXT1();
+
+
+	enableI2C_EXT2();
+	CheckI2C1();
+	disableI2C_EXT2();
+
+	//initexpander DIO
 
 
 }

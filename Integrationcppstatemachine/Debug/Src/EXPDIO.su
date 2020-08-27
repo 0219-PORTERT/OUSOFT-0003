@@ -1,0 +1,11 @@
+gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
+EXPDIO.cpp:14:1:EXPDIO::EXPDIO()	16	static
+EXPDIO.cpp:19:1:EXPDIO::EXPDIO(std::__cxx11::string, uint8_t)	56	static
+EXPDIO.cpp:24:1:EXPDIO::~EXPDIO()	16	static
+EXPDIO.cpp:24:1:virtual EXPDIO::~EXPDIO()	16	static
+EXPDIO.cpp:29:11:virtual short int EXPDIO::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	24	static
+EXPDIO.cpp:54:5:int EXPDIO::decodeInstruct(std::__cxx11::string&)	16	static
+EXPDIO.cpp:70:10:uint16_t EXPDIO::readPort()	16	static
+EXPDIO.cpp:74:1:void __static_initialization_and_destruction_0(int, int)	16	static
+EXPDIO.cpp:74:1:cpp)	8	static
+EXPDIO.cpp:74:1:cpp)	8	static
