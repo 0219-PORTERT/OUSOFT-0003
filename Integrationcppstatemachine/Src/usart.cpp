@@ -41,7 +41,7 @@ std::vector<std::string> v_queueCmd;
 volatile uint8_t endofCMD;
 
 /* UART4 init function */
-void MX_UART4_Init(void) {
+void MX_UART4_Init(void) {/*ftdi*/
 
 
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
@@ -67,14 +67,14 @@ void MX_UART4_Init(void) {
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	/* UART4 interrupt Init */
-	//HAL_NVIC_SetPriority(UART4_IRQn, 0, 0);
-	//HAL_NVIC_EnableIRQ(UART4_IRQn);
+	HAL_NVIC_SetPriority(UART4_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(UART4_IRQn);
 
 
 
 
 
-	/*huart4.Instance = UART4;
+	huart4.Instance = UART4;
 	huart4.Init.BaudRate = 115200;
 	huart4.Init.WordLength = UART_WORDLENGTH_8B;
 	huart4.Init.StopBits = UART_STOPBITS_1;
@@ -86,29 +86,21 @@ void MX_UART4_Init(void) {
 	huart4.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
 	if (HAL_UART_Init(&huart4) != HAL_OK) {
 		Error_Handler();
-	}*/
+	}
 
 	/* USER CODE BEGIN USART4_Init 2 */
-	//__HAL_UART_ENABLE_IT(&huart4, UART_IT_RXNE);
+	__HAL_UART_ENABLE_IT(&huart4, UART_IT_RXNE);
 
 	/*mettre le reste de l'ini de l'usart 3 ici pour l usart 4!!!!!!!!!!!!!!!!!!*/
-	/*RX_string.reserve(256);
+	RX_string.reserve(256);
 	RX_string.assign("\0");
 
 	TX_string.reserve(256);
-	TX_string.assign("\0");*/
+	TX_string.assign("\0");
 
-	//endofCMD = 0;
-	/*while (1) {
+	endofCMD = 0;
 
-		UART4_transmit("test\n\r");
-	}*/
-
-
-
-
-
-
+	UART_transmit("COM on FTDI");
 
 }
 /* UART5 init function */
@@ -295,7 +287,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle) {
 	}
 }
 
-void MX_USART3_UART_Init(void) {
+void MX_USART3_UART_Init(void) {/*debug*/
 
 	/* USER CODE BEGIN USART3_Init 0 */
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
@@ -342,15 +334,17 @@ void MX_USART3_UART_Init(void) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN USART3_Init 2 */
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+	//__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 
-	RX_string.reserve(256);
+	/*RX_string.reserve(256);
 	RX_string.assign("\0");
 
 	TX_string.reserve(256);
 	TX_string.assign("\0");
 
-	endofCMD = 0;
+	endofCMD = 0;*/
+
+	//UART_transmit("COM on debug");
 
 	/* USER CODE END USART3_Init 2 */
 
@@ -458,12 +452,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		Enqueue(RX_string);
 
 	}
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+
+	if(huart->Instance == USART3){ //debug
+		__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+	}else if(huart->Instance == UART4){//ftdi
+		__HAL_UART_ENABLE_IT(&huart4, UART_IT_RXNE);
+	}
+
 
 
 }
 
-void UART_transmit(std::string stringtosend) {
+void UART3_transmit(std::string stringtosend) {/*debug*/
 	stringtosend = stringtosend + "\n" + "\r";
 	char char_array[stringtosend.length()];
 
@@ -476,7 +476,7 @@ void UART_transmit(std::string stringtosend) {
 
 }
 
-void UART4_transmit(std::string stringtosend) {
+void UART_transmit(std::string stringtosend) {/*via external ftdi cable*/
 	stringtosend = stringtosend + "\n" + "\r";
 	char char_array[stringtosend.length()];
 

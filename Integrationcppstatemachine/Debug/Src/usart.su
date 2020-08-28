@@ -3,22 +3,22 @@ new:168:14:void* operator new(std::size_t, void*)	16	static
 new:174:13:void operator delete(void*, void*)	16	static
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 basic_string.h:6405:3:std::__cxx11::string std::__cxx11::to_string(int)	24	static
-usart.cpp:44:6:void MX_UART4_Init()	40	static
-usart.cpp:115:6:void MX_UART5_Init()	8	static
-usart.cpp:133:6:void MX_UART7_Init()	8	static
-usart.cpp:151:6:void HAL_UART_MspInit(UART_HandleTypeDef*)	64	static
-usart.cpp:241:6:void HAL_UART_MspDeInit(UART_HandleTypeDef*)	16	static
-usart.cpp:298:6:void MX_USART3_UART_Init()	40	static
-usart.cpp:359:6:void HAL_UART_ErrorCallback(UART_HandleTypeDef*)	16	static
-usart.cpp:363:6:void HAL_UART_TxCpltCallback(UART_HandleTypeDef*)	16	static,ignoring_inline_asm
-usart.cpp:367:5:int getQueueMsgsize()	8	static
-usart.cpp:372:5:int Enqueue(std::__cxx11::string&)	112	static
-usart.cpp:429:5:int deQueueFirstCmd()	16	static
-usart.cpp:434:5:int getFirstCmd(std::__cxx11::string&)	16	static
-usart.cpp:439:6:void clearQueuemsg()	8	static
-usart.cpp:443:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	40	static
-usart.cpp:466:6:void UART_transmit(std::__cxx11::string)	80	dynamic
-usart.cpp:479:6:void UART4_transmit(std::__cxx11::string)	80	dynamic
+usart.cpp:44:6:void MX_UART4_Init()	64	static
+usart.cpp:107:6:void MX_UART5_Init()	8	static
+usart.cpp:125:6:void MX_UART7_Init()	8	static
+usart.cpp:143:6:void HAL_UART_MspInit(UART_HandleTypeDef*)	64	static
+usart.cpp:233:6:void HAL_UART_MspDeInit(UART_HandleTypeDef*)	16	static
+usart.cpp:290:6:void MX_USART3_UART_Init()	40	static
+usart.cpp:353:6:void HAL_UART_ErrorCallback(UART_HandleTypeDef*)	16	static
+usart.cpp:357:6:void HAL_UART_TxCpltCallback(UART_HandleTypeDef*)	16	static,ignoring_inline_asm
+usart.cpp:361:5:int getQueueMsgsize()	8	static
+usart.cpp:366:5:int Enqueue(std::__cxx11::string&)	112	static
+usart.cpp:423:5:int deQueueFirstCmd()	16	static
+usart.cpp:428:5:int getFirstCmd(std::__cxx11::string&)	16	static
+usart.cpp:433:6:void clearQueuemsg()	8	static
+usart.cpp:437:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	40	static
+usart.cpp:466:6:void UART3_transmit(std::__cxx11::string)	80	dynamic
+usart.cpp:479:6:void UART_transmit(std::__cxx11::string)	80	dynamic
 usart.cpp:492:6:void Reset_uart_buffer()	8	static
 string_conversions.h:99:5:) [with _String = std::__cxx11::basic_string<char>; _CharT = char]	52	dynamic
 basic_string.h:139:14:std::__cxx11::basic_string<char>::_Alloc_hider::~_Alloc_hider()	16	static

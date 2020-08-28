@@ -449,13 +449,16 @@ void initSCPI(void){
 void initStateMachine(void) {
 
 
-
-	MX_USART3_UART_Init();
-
 	Reset_uart_buffer();
 
+	MX_UART4_Init();
+	UART_transmit("--- init : UART4");
+	//MX_USART3_UART_Init();
+
+
+
 	UART_transmit("*** OUSOFT-0003 Rev0.01 ***");
-	UART_transmit("--- Hardware initing ---");
+	UART_transmit("--- Hardware init ---");
 
 	UART_transmit("--- init : GPIO");
 	MX_GPIO_Init();
@@ -468,7 +471,7 @@ void initStateMachine(void) {
 	MX_I2C3_Init();
 	UART_transmit("--- init : SPI3");
 	MX_SPI3_Init();
-	MX_UART4_Init();
+	//MX_UART4_Init();
 	MX_UART5_Init();
 	//MX_LWIP_Init();
 	UART_transmit("--- init : I2C4");
@@ -517,6 +520,10 @@ void initStateMachine(void) {
 	//Test 1 I2C//
 	//////////////
 
+
+	UART_transmit("Test I2C4");
+	UART_transmit("Test I2C2 EXT1");
+	UART_transmit("Test I2C1 EXT2");
 
 	//testI2CCS(I2C4);
 	//BUFFER I2CMAIN

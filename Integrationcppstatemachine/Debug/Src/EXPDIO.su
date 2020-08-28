@@ -8,10 +8,10 @@ EXPDIO.cpp:26:1:virtual EXPDIO::~EXPDIO()	16	static
 EXPDIO.cpp:31:11:virtual short int EXPDIO::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	144	static
 EXPDIO.cpp:63:5:int EXPDIO::decodeInstruct(std::__cxx11::string&)	80	static
 EXPDIO.cpp:104:9:uint8_t EXPDIO::readPort()	24	static
-EXPDIO.cpp:118:9:uint8_t EXPDIO::writePort()	16	static
-EXPDIO.cpp:129:9:uint8_t EXPDIO::setDir()	16	static
-EXPDIO.cpp:139:10:uint16_t EXPDIO::readPin()	16	static
-EXPDIO.cpp:142:10:uint16_t EXPDIO::writePin()	16	static
+EXPDIO.cpp:120:9:uint8_t EXPDIO::writePort()	16	static
+EXPDIO.cpp:134:9:uint8_t EXPDIO::setDir()	16	static
+EXPDIO.cpp:144:10:uint16_t EXPDIO::readPin()	16	static
+EXPDIO.cpp:147:10:uint16_t EXPDIO::writePin()	16	static
 string_conversions.h:63:2:)::_Save_errno::_Save_errno() [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:64:2:)::_Save_errno::~_Save_errno() [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:73:4:)::_Range_chk::_S_chk(_TRet, std::true_type) [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
@@ -28,6 +28,6 @@ type_traits.h:152:5:bool __gnu_cxx::__is_null_pointer(_Type*) [with _Type = char
 stl_iterator_base_types.h:205:5:constexpr typename std::iterator_traits<_Iterator>::iterator_category std::__iterator_category(const _Iter&) [with _Iter = char*]	16	static
 stl_iterator_base_funcs.h:138:5:typename std::iterator_traits<_Iterator>::difference_type std::distance(_InputIterator, _InputIterator) [with _InputIterator = char*]	32	static
 stl_iterator_base_funcs.h:98:5:constexpr typename std::iterator_traits<_Iterator>::difference_type std::__distance(_RandomAccessIterator, _RandomAccessIterator, std::random_access_iterator_tag) [with _RandomAccessIterator = char*]	24	static
-EXPDIO.cpp:144:1:void __static_initialization_and_destruction_0(int, int)	16	static
-EXPDIO.cpp:144:1:cpp)	8	static
-EXPDIO.cpp:144:1:cpp)	8	static
+EXPDIO.cpp:149:1:void __static_initialization_and_destruction_0(int, int)	16	static
+EXPDIO.cpp:149:1:cpp)	8	static
+EXPDIO.cpp:149:1:cpp)	8	static
