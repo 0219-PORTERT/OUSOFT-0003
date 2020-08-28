@@ -88,11 +88,11 @@ int SimCapTemp::decodeInstruct(std::string& _cmde) {
 			this->tempValue = value;
 			sel = REQ_x;
 		}
-	} else if (_cmde.compare("TMP MIN") == 0) {
+	} else if (_cmde.compare("TMPMIN") == 0) {
 		sel = REQ_MIN ;
-	} else if (_cmde.compare("TMP MAX") == 0) {
+	} else if (_cmde.compare("TMPMAX") == 0) {
 		sel = REQ_MAX ;
-	} else if (_cmde.compare("TMP STEP") == 0) {
+	} else if (_cmde.compare("TMPSTEP") == 0) {
 		sel = REQ_STEP ;
 	}
 	else {

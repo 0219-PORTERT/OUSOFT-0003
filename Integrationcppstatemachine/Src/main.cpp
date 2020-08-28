@@ -526,7 +526,7 @@ void initStateMachine(void) {
 	//CHECK
 
 
-	enableI2C_main();
+	/*enableI2C_main();
 	CheckI2C4();
 	disableI2Cmain();
 
@@ -538,7 +538,7 @@ void initStateMachine(void) {
 
 	enableI2C_EXT2();
 	CheckI2C1();
-	disableI2C_EXT2();
+	disableI2C_EXT2();*/
 
 	//initexpander DIO
 
@@ -629,16 +629,12 @@ void TraitementSECU(void) {
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
-
-	//int test = -1;
-	//test = HAL_GPIO_ReadPin(GPIOG, GPIO_Pin);
-
-	if ((GPIO_Pin == GPIO_PIN_8) && (HAL_GPIO_ReadPin(GPIOG, GPIO_Pin) == 0) ) {
+	/*if ((GPIO_Pin == GPIO_PIN_8) && (HAL_GPIO_ReadPin(GPIOG, GPIO_Pin) == 0) ) {
 		if(stateMachine != SECU){
 			mainCerrG.SetStateMachineErrorCode(getExpSecuErrorcode());
 			TraitementSECU();
 		}
-	}
+	}*/
 	/* Clear interrupt flag */
 	EXTI_HandleTypeDef extihandle;
 	extihandle.Line = GPIO_Pin;

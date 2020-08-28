@@ -42,7 +42,7 @@ Src/main.o: ../Src/main.cpp ../Inc/main.h \
  ../Inc/main.h ../Inc/i2c.h ../Inc/spi.h ../Inc/tim.h ../Inc/usart.h \
  ../Inc/stateMachine.h ../Inc/..\Src\CerrG.h ../Inc/gpio.h \
  ../Inc/FonctionsSCPI.h ../Inc/fonctions_eeprom.h \
- ../Src/FonctionsAutotest.h ../Inc/stateMachine.h ../Src/CerrG.h \
+ ../Inc/FonctionsAutotest.h ../Inc/stateMachine.h ../Src/CerrG.h \
  ../Src/ScpiClientServer.h ../Src/Pwm.h ../Src/Cna.h ../Src/Can.h \
  ../Inc/tm_stm32_adc.h ../Inc/stm32fxxx_hal.h ../Inc/defines.h \
  ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h ../Src/SimCapTemp.h \
@@ -157,7 +157,7 @@ Src/main.o: ../Src/main.cpp ../Inc/main.h \
 
 ../Inc/fonctions_eeprom.h:
 
-../Src/FonctionsAutotest.h:
+../Inc/FonctionsAutotest.h:
 
 ../Inc/stateMachine.h:
 
