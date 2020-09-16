@@ -477,7 +477,7 @@ void UART3_transmit(std::string stringtosend) {/*debug*/
 }
 
 void UART_transmit(std::string stringtosend) {/*via external ftdi cable*/
-	stringtosend = stringtosend + "\n" + "\r";
+	stringtosend = stringtosend + "\n";
 	char char_array[stringtosend.length()];
 
 	stringtosend.copy(char_array, stringtosend.length());

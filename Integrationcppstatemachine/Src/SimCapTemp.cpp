@@ -122,21 +122,21 @@ void SimCapTemp::setTemp(int tValue){
 
 
 	//settings
-	TM_I2C_Write(I2C4, I2C4_POT1K_PHYADD, this->capteur, rPcode);
+	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, rPcode);
 	//HAL_Delay(10);
-	TM_I2C_Write(I2C4, I2C4_POT100K_PHYADD, this->capteur, rGcode);
+	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, rGcode);
 }
 
 void SimCapTemp::MeasMin(){
-	TM_I2C_Write(I2C4, I2C4_POT1K_PHYADD, this->capteur, 0);
-	TM_I2C_Write(I2C4, I2C4_POT100K_PHYADD, this->capteur, 0);
+	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, 0);
+	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, 0);
 }
 void SimCapTemp::MeasMax(){
-	TM_I2C_Write(I2C4, I2C4_POT1K_PHYADD, this->capteur, 255);
-	TM_I2C_Write(I2C4, I2C4_POT100K_PHYADD, this->capteur, 255);
+	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, 255);
+	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, 255);
 }
 void SimCapTemp::MeasStep(){
-	TM_I2C_Write(I2C4, I2C4_POT1K_PHYADD, this->capteur, 1);
-	TM_I2C_Write(I2C4, I2C4_POT100K_PHYADD, this->capteur, 0);
+	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, 1);
+	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, 0);
 }
 

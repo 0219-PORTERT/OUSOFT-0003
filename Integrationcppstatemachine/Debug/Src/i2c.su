@@ -4,9 +4,9 @@ i2c.c:96:6:MX_I2C3_Init	8	static
 i2c.c:127:6:MX_I2C4_Init	8	static
 i2c.c:158:6:HAL_I2C_MspInit	72	static
 i2c.c:268:6:HAL_I2C_MspDeInit	16	static
-i2c.c:370:6:enableI2C_main	8	static
-i2c.c:373:6:disableI2Cmain	8	static
-i2c.c:378:6:enableI2C_EXT1	8	static
-i2c.c:381:6:disableI2C_EXT1	8	static
-i2c.c:386:6:enableI2C_EXT2	8	static
-i2c.c:389:6:disableI2C_EXT2	8	static
+i2c.c:373:6:enableI2C_main	8	static
+i2c.c:377:6:disableI2Cmain	8	static
+i2c.c:383:6:enableI2C_EXT1	8	static
+i2c.c:386:6:disableI2C_EXT1	8	static
+i2c.c:391:6:enableI2C_EXT2	8	static
+i2c.c:394:6:disableI2C_EXT2	8	static

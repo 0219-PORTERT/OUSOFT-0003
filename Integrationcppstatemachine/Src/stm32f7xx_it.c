@@ -231,6 +231,32 @@ void USART3_IRQHandler(void)
 
 void EXTI9_5_IRQHandler(void){
 	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
+	__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_8);
+}
+
+void SysTick_Handler(void)
+
+{
+
+  /* USER CODE BEGIN SysTick_IRQn 0 */
+
+
+
+
+
+  /* USER CODE END SysTick_IRQn 0 */
+  HAL_IncTick();
+
+  HAL_SYSTICK_IRQHandler();
+
+  /* USER CODE BEGIN SysTick_IRQn 1 */
+
+
+
+
+
+  /* USER CODE END SysTick_IRQn 1 */
+
 }
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

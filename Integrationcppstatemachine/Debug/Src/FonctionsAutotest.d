@@ -1,4 +1,4 @@
-Src/FonctionsAutotest.o: ../Src/FonctionsAutotest.c \
+Src/FonctionsAutotest.o: ../Src/FonctionsAutotest.cpp \
  ../Inc/FonctionsAutotest.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Inc/stm32f7xx_hal_conf.h \
@@ -38,9 +38,10 @@ Src/FonctionsAutotest.o: ../Src/FonctionsAutotest.c \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
- ../Inc/stm32fxxx_hal.h ../Inc/defines.h ../Inc/tm_stm32_rcc.h \
- ../Inc/stm32fxxx_hal.h ../Inc/tm_stm32_gpio.h ../Inc/defines.h \
- ../Inc/tm_stm32_i2c.h ../Inc/attributes.h ../Inc/i2c.h ../Inc/main.h
+ ../Inc/defines.h ../Inc/tm_stm32_i2c.h ../Inc/stm32fxxx_hal.h \
+ ../Inc/defines.h ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h \
+ ../Inc/attributes.h ../Inc/i2c.h ../Inc/main.h ../Inc/usart.h \
+ ../Inc/stateMachine.h ../Inc/..\Src\CerrG.h ../Inc/stm32fxxx_hal.h
 
 ../Inc/FonctionsAutotest.h:
 
@@ -120,22 +121,28 @@ Src/FonctionsAutotest.o: ../Src/FonctionsAutotest.c \
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
 
+../Inc/defines.h:
+
+../Inc/tm_stm32_i2c.h:
+
 ../Inc/stm32fxxx_hal.h:
 
 ../Inc/defines.h:
 
 ../Inc/tm_stm32_rcc.h:
 
-../Inc/stm32fxxx_hal.h:
-
 ../Inc/tm_stm32_gpio.h:
-
-../Inc/defines.h:
-
-../Inc/tm_stm32_i2c.h:
 
 ../Inc/attributes.h:
 
 ../Inc/i2c.h:
 
 ../Inc/main.h:
+
+../Inc/usart.h:
+
+../Inc/stateMachine.h:
+
+../Inc/..\Src\CerrG.h:
+
+../Inc/stm32fxxx_hal.h:

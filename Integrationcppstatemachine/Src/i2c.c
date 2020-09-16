@@ -170,7 +170,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
     PF0     ------> I2C2_SDA
     PF1     ------> I2C2_SCL 
     */
-    GPIO_InitStruct.Pin = I2C_EXT1_SDA_CN11_53_Pin|I2C_EXT1_SCL_CN11_51_Pin;
+    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -367,11 +367,16 @@ while(1){
 
 
 
+
+
+
 void enableI2C_main(){
 	HAL_GPIO_WritePin(GPIOG,CS_I2C_M , GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOG,GPIO_PIN_5 , GPIO_PIN_SET);
 }
 void disableI2Cmain(){
-	HAL_GPIO_WritePin(GPIOG,CS_I2C_M , GPIO_PIN_RESET);
+	//HAL_GPIO_WritePin(GPIOG,CS_I2C_M , GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOG,GPIO_PIN_5 , GPIO_PIN_RESET);
 }
 
 

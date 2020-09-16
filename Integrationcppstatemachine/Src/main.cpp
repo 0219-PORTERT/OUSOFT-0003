@@ -56,12 +56,13 @@
 #include "SimCapTemp.h"
 #include "EXPSEC.h"
 #include "EXPDIO.h"
+#include "EXPADDO24.h"
 
 /* Include core modules */
-#include "stm32fxxx_hal.h"
 #include "defines.h"
 #include "tm_stm32_i2c.h"
 #include "tm_stm32_adc.h"
+#include "stm32fxxx_hal.h"
 
 /* USER CODE END Includes */
 /* Private includes ----------------------------------------------------------*/
@@ -141,15 +142,15 @@ int main(void) {
 	Pwm Pwm1("RPM");
 	Cna Cna1("MOD");
 
-	Can CanV1("V1",TM_ADC_Channel_0);
-	Can CanV2("V2",TM_ADC_Channel_3);
-	Can CanV3("V3",TM_ADC_Channel_4);
-	Can CanV4("V4",TM_ADC_Channel_5);
-	Can CanW1("W1",TM_ADC_Channel_6);
+	Can CanV1("V1",TM_ADC_Channel_5);
+	Can CanV2("V2",TM_ADC_Channel_12);
+	Can CanV3("V3",TM_ADC_Channel_3);
+	Can CanV4("V4",TM_ADC_Channel_9);
+	Can CanW1("W1",TM_ADC_Channel_0);
 	Can CanW2("W2",TM_ADC_Channel_8);
-	Can CanW3("W3",TM_ADC_Channel_9);
+	Can CanW3("W3",TM_ADC_Channel_4);
 	Can CanW4("W4",TM_ADC_Channel_10);
-	Can CanL1("L1",TM_ADC_Channel_12);
+	Can CanL1("L1",TM_ADC_Channel_6);
 	Can CanL2("L2",TM_ADC_Channel_13);
 
 	SimCapTemp SIMT1("T1",TEMPCAP1);
@@ -161,6 +162,10 @@ int main(void) {
 
 	EXPDIO Expdio1a("DIOA",SIDEA);
 	EXPDIO Expdio1b("DIOB",SIDEB);
+
+	EXPADDO24 ExpADDOa("DIOA",SIDEA);
+	EXPADDO24 ExpADDOb("DIOB",SIDEB);
+	EXPADDO24 ExpADDOc("DIOC",SIDEC);
 
 	/*SCPI STRUCTURE*/
 
@@ -274,7 +279,15 @@ int main(void) {
 		//}
 		ScpiClientServer SCPI_OPT("OPT");
 		SCPI_MAIN.AddClient(&SCPI_OPT);
-	//}
+
+		ScpiClientServer SCPI_ADDO("ADDO");
+		SCPI_MAIN.AddClient(&SCPI_ADDO);
+			SCPI_ADDO.AddClient(ExpADDOa.getSCPIClientServer());
+			SCPI_ADDO.AddClient(ExpADDOb.getSCPIClientServer());
+			SCPI_ADDO.AddClient(ExpADDOc.getSCPIClientServer());
+
+
+		//}
 
 
 
@@ -329,9 +342,9 @@ int main(void) {
 						getFirstCmd(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
-							UART_transmit(" OK\n\r");
+							//UART_transmit(" OK\n\r");
 						} else {
-							UART_transmit("OK:answer =\n\r" + REP);
+							UART_transmit( REP);
 						}
 						deQueueFirstCmd();
 						REP.assign("\0");
@@ -369,9 +382,9 @@ int main(void) {
 						getFirstCmd(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
-							UART_transmit(" OK\n\r");
+							//UART_transmit(" OK\n\r");
 						} else {
-							UART_transmit("OK:answer =\n\r" + REP);
+							UART_transmit(REP);
 						}
 						deQueueFirstCmd();
 						clearQueuemsg();
@@ -426,12 +439,12 @@ void initSCPI(void){
 	SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 	secu = std::stoi(REP,nullptr,10);*/
 
-	secu = getExpSecuErrorcode();
+	/*secu = getExpSecuErrorcode();
 
 	if(secu!=0){
 		mainCerrG.SetStateMachineErrorCode(secu);
 		TraitementSECU(); // problème sur une ligne de l'expender secu //mettre dans maincerg en cas d'erreur
-	}
+	}*/
 
 
 	/*TEST POUR OUCART-0014*/
@@ -448,7 +461,7 @@ void initSCPI(void){
 }
 void initStateMachine(void) {
 
-
+	HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 	Reset_uart_buffer();
 
 	MX_UART4_Init();
@@ -491,7 +504,7 @@ void initStateMachine(void) {
 	TM_RCC_InitSystem();
 
 	TM_I2C_Init(I2C1, TM_I2C_PinsPack_1, 100000);
-	TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 100000);
+	TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 1000);
 	TM_I2C_Init(I2C3, TM_I2C_PinsPack_1, 100000);
 	TM_I2C_Init(I2C4, TM_I2C_PinsPack_3, 100000);
 
@@ -515,39 +528,41 @@ void initStateMachine(void) {
 	TM_ADC_Init(ADC3, TM_ADC_Channel_15);
 
 
+	HAL_GPIO_WritePin(GPIOG,RESET_CN11_66_Pin , GPIO_PIN_SET); //PIN RESET PG10
+	HAL_GPIO_WritePin(GPIOG,GPIO_PIN_4 , GPIO_PIN_SET); //PIN buffer PG4
 
 	//////////////
 	//Test 1 I2C//
 	//////////////
 
-
-	UART_transmit("Test I2C4");
-	UART_transmit("Test I2C2 EXT1");
-	UART_transmit("Test I2C1 EXT2");
-
-	//testI2CCS(I2C4);
-	//BUFFER I2CMAIN
-	//BUFFER EXT1
-	//CHECK
-	//BUFFER EXT2
-	//CHECK
-
-
-	/*enableI2C_main();
-	CheckI2C4();
+	UART_transmit("AUTOTEST I2CMAIN");
+	//
+	//
+	enableI2C_main();
 	disableI2Cmain();
 
+	//I2Cscanner(I2C4);
 
-	enableI2C_EXT1();
-	CheckI2C2();
-	disableI2C_EXT1();
+	int testI2C = -1;
+	testI2C = CheckI2CMain();
+	if(testI2C != 0){
+		UART_transmit("Test i2cmain fail at");
+		UART_transmit(std::to_string(testI2C));
+	}else{
+		UART_transmit("I2C main test ok");
+	}
 
+	UART_transmit("AUTOTEST I2CSECU");
+	//I2Cscanner(I2C3);
+	testI2C = -1;
+	testI2C = CheckI2C3();
+	if(testI2C != 0){
+		UART_transmit("Test i2c3 fail at");
+		UART_transmit(std::to_string(testI2C));
+	}else{
+		UART_transmit("I2C3 ok");
+	}
 
-	enableI2C_EXT2();
-	CheckI2C1();
-	disableI2C_EXT2();*/
-
-	//initexpander DIO
 
 
 }
@@ -592,8 +607,8 @@ void SystemClock_Config(void) {
 			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
 	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
 	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-	//RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV16;
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+	//RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV16;
 	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
 	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK) {

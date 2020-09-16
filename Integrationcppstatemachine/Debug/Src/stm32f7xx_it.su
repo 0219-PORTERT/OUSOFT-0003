@@ -10,3 +10,4 @@ stm32f7xx_it.c:192:6:TIM1_UP_TIM10_IRQHandler	8	static
 stm32f7xx_it.c:206:6:UART4_IRQHandler	8	static
 stm32f7xx_it.c:218:6:USART3_IRQHandler	8	static
 stm32f7xx_it.c:232:6:EXTI9_5_IRQHandler	8	static
+stm32f7xx_it.c:237:6:SysTick_Handler	8	static

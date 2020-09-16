@@ -19,7 +19,7 @@ EXPDIO::EXPDIO() {
 EXPDIO::EXPDIO(std::string _name, uint8_t _side): ScpiClientServer(_name), side(_side) {
 	// TODO Auto-generated constructor stub
 
-	this->direction = 0; //entrée
+	this->direction = -1; //entrée
 
 }
 
@@ -51,6 +51,9 @@ short int EXPDIO::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		break;
 	case REQ_SETDIR:
 		setDir();
+		break;
+	case REQ_TST:
+		_rep.assign(testAB(0xAA) + "\n\r" +testAB(0x55) +"\n\r");
 		break;
 	default:
 		//throw something;
@@ -92,6 +95,8 @@ int EXPDIO::decodeInstruct(std::string& _cmde) {
 			sel = REQ_SETDIR;
 		}
 
+	}else if(_cmde.compare("TST ?") == 0){
+		sel = REQ_TST;
 	}else {
 		//throw something
 	}
@@ -109,11 +114,11 @@ uint8_t EXPDIO::readPort(){
 		setDir();
 	}
 	if(this->side == SIDEA){
-		TM_I2C_WriteNoRegister(I2C4, EXPSECU_I2CADD, 0x00); //write input port 0
-		TM_I2C_ReadNoRegister(I2C4, (EXPSECU_I2CADD)|(1u<<0), &data); //read from input port 0
+		TM_I2C_WriteNoRegister(I2C4, EXP_DIO_I2CADD, 0x00); //write input port 0
+		TM_I2C_ReadNoRegister(I2C4, (EXP_DIO_I2CADD)|(1u<<0), &data); //read from input port 0
 	}else{
-		TM_I2C_WriteNoRegister(I2C4, EXPSECU_I2CADD, 0x01); //write input port 1
-		TM_I2C_ReadNoRegister(I2C4, (EXPSECU_I2CADD)|(1u<<0), &data); //read from input port 1
+		TM_I2C_WriteNoRegister(I2C4, EXP_DIO_I2CADD, 0x01); //write input port 1
+		TM_I2C_ReadNoRegister(I2C4, (EXP_DIO_I2CADD)|(1u<<0), &data); //read from input port 1
 	}
 	return data;
 }
@@ -124,20 +129,72 @@ uint8_t EXPDIO::writePort(){
 		setDir();
 	}
 	if(this->side == SIDEA){
-		TM_I2C_Write(I2C4, EXPSECU_I2CADD, 0x02, this->writevalue);
+		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x02, this->writevalue);
 	}else{
-		TM_I2C_Write(I2C4, EXPSECU_I2CADD, 0x03, this->writevalue);
+		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x03, this->writevalue);
 	}
 	return 0;
 }
 
 uint8_t EXPDIO::setDir(){
 	if(this->side == SIDEA){
-		TM_I2C_Write(I2C4, EXPSECU_I2CADD, 0x06, this->direction);
+		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x06, this->direction);
 	}else{
-		TM_I2C_Write(I2C4, EXPSECU_I2CADD, 0x07, this->direction);
+		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x07, this->direction);
 	}
 	return 0;
+}
+
+
+std::string EXPDIO::testAB(uint8_t bytetotest){
+
+	uint8_t data = -1;
+	std::string error = "unknow error";
+
+	if(this->side == SIDEA){
+
+		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x07, 0xFF); //port B lecture
+		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x06, 0x00); //port A ecriture
+
+		//this->writevalue = bytetotest;
+		//this->writePort();
+
+		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x02, bytetotest);//ecriture port A
+
+
+		TM_I2C_WriteNoRegister(I2C4, EXP_DIO_I2CADD, 0x01); //write input portB 1
+		TM_I2C_ReadNoRegister(I2C4, (EXP_DIO_I2CADD)|(1u<<0), &data); //read from input portB 1
+
+		if(data == bytetotest){
+			return error.assign("OK");
+		}else{
+			return error.assign("error at:" + std::to_string(data));
+		}
+
+	}else{
+
+		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x07, 0x00); //port B ecriture
+		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x06, 0xFF); //port A lecture
+
+
+		//this->writevalue = bytetotest;
+		//this->writePort();
+
+		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x03, bytetotest);//ecriture port B
+
+
+		TM_I2C_WriteNoRegister(I2C4, EXP_DIO_I2CADD, 0x00); //write input port 0
+		TM_I2C_ReadNoRegister(I2C4, (EXP_DIO_I2CADD)|(1u<<0), &data); //read from input port 0
+
+		if(data == bytetotest){
+			return error.assign("OK");
+		}else{
+			return error.assign("error at:" + std::to_string(data));
+		}
+
+
+	}
+	return error;
 }
 
 

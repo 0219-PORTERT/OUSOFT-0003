@@ -57,7 +57,7 @@ void disableI2C_EXT2();
 /*à deplacer dans les fichiers qui correspondront*/
 
 /*PROTO ADRESS*/
-#define I2C4_POT1K_PHYADD 0x5A
+/*#define I2C4_POT1K_PHYADD 0x5A
 #define I2C4_POT100K_PHYADD 0x58
 
 #define I2CEEPROM1 0xA0
@@ -70,7 +70,7 @@ void disableI2C_EXT2();
 
 /*OUCART-018 ADRESS*/
 
-#define TEM_HUM_I2CADD 0x44
+/*#define TEM_HUM_I2CADD 0x44
 #define EXPSECU_I2CADD 0x40
 #define POT_I2CADD 0x58
 #define MEMU3_I2CADD 0xa0
@@ -78,16 +78,15 @@ void disableI2C_EXT2();
 #define MEMU5_I2CADD 0xa4
 
 /*OUCART-0014 ADRESS*/
-/*
-#define EXP_DATA_ADRESS_I2CADD 0x46
+
 #define EXP_DATA_ADRESS_I2CADD 0x46
 
 #define POT100KA_I2CADD 0x58
-#define POT1KA_I2CADD 0x5C
+#define POT1KA_I2CADD 0x5c
 #define POT100KB_I2CADD 0x5A
 #define POT1KB_I2CADD 0x5E
 
-#define EXPSECU_I2CADD 0x40
+#define EXPSECU_I2CADD 0x40 //i2c secu
 
 #define EXP_DIO_I2CADD 0x42
 
@@ -96,7 +95,7 @@ void disableI2C_EXT2();
 #define MEMU3_I2CADD 0xAA
 #define MEMU4_I2CADD 0xA8
 
-#define TEM_HUM_I2CADD 0x44*/
+#define TEM_HUM_I2CADD 0x88
 
 
 /**/

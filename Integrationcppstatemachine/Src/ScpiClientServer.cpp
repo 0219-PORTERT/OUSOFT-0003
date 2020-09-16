@@ -212,7 +212,7 @@ int ScpiClientServer::BroadCastCmde(std::string& _cmde, std::string& _rep) {
 
 
 	//_rep = _rep + streponse + ";" + "\n\r";
-	_rep = _rep + streponse + "\n\r";
+	_rep = _rep + streponse + "|";
 
 	for (int i = 0; i < this->listeClients.size(); i++) {
 		this->getClient(i)->BroadCastCmde(_cmde, _rep);

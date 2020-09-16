@@ -18,6 +18,7 @@
 #define REQ_WR 4
 #define REQ_QSTDIR 5
 #define REQ_SETDIR 6
+#define REQ_TST 7
 
 #define SIDEA 0
 #define SIDEB 1
@@ -38,6 +39,8 @@ private:
 	uint8_t readPort();
 	uint8_t writePort();
 	uint8_t setDir();
+
+	std::string testAB(uint8_t bytetosend);
 
 	uint16_t readPin();
 	uint16_t writePin();
