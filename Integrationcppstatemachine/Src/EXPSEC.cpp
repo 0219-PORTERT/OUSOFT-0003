@@ -53,12 +53,16 @@ short int EXPSEC::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		break;
 
 	case REQ_I2CEXT1TST:
-		//_rep.assign(testI2CEXT1() + "\n\r");
+		_rep.assign(testI2CEXT1() + "\n\r");
+		/*enableI2C_EXT1();
 		I2Cscanner(I2C2);
+		disableI2C_EXT1();*/
 		break;
 	case REQ_I2CEXT2TST:
-		//_rep.assign(testI2CEXT2() + "\n\r");
+		_rep.assign(testI2CEXT2() + "\n\r");
+		/*enableI2C_EXT2();
 		I2Cscanner(I2C1);
+		disableI2C_EXT2();*/
 		break;
 	default:
 		//throw something;
@@ -127,10 +131,10 @@ uint16_t EXPSEC::readPort(){
 
 
 std::string EXPSEC::testI2CEXT1(){
-	UART_transmit("Test I2C2 EXT1");
+	//UART_transmit("Test I2C2 EXT1");
 	enableI2C_EXT1();
-	while(1){CheckI2C2();}
-	disableI2C_EXT1();
+	//while(1){CheckI2C2();}
+	//disableI2C_EXT1();
 
 	if(CheckI2C2() == 0){
 		disableI2C_EXT1();
@@ -143,10 +147,10 @@ std::string EXPSEC::testI2CEXT1(){
 }
 
 std::string EXPSEC::testI2CEXT2(){
-	UART_transmit("Test I2C1 EXT2");
+	//UART_transmit("Test I2C1 EXT2");
 	enableI2C_EXT2();
-	while(1){CheckI2C1();}
-	disableI2C_EXT2();
+	//while(1){CheckI2C1();}
+	//disableI2C_EXT2();
 
 	if(CheckI2C1() == 0){
 		disableI2C_EXT2();

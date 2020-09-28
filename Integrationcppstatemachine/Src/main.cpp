@@ -126,6 +126,7 @@ int main(void) {
 
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 	HAL_Init();
+	//HAL_Delay(500);
 
 	/* USER CODE BEGIN Init */
 
@@ -352,6 +353,9 @@ int main(void) {
 					}
 				} catch (int e) {
 					UART_transmit(REP.assign(mainCerrG.ToString()));
+					deQueueFirstCmd();
+					REP.assign("\0");
+					MSG.assign("\0");
 				}
 				Reset_uart_buffer();
 				stateMachine = DEFAULT;
