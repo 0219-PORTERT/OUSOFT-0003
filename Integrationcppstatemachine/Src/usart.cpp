@@ -41,7 +41,38 @@ std::vector<std::string> v_queueCmd;
 volatile uint8_t endofCMD;
 
 /* UART4 init function */
-void MX_UART4_Init(void) {
+void MX_UART4_Init(void) {/*ftdi*/
+
+
+	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+
+	/* USER CODE BEGIN UART4_MspInit 0 */
+
+	/* USER CODE END UART4_MspInit 0 */
+	/* UART4 clock enable */
+	__HAL_RCC_UART4_CLK_ENABLE()
+	;
+
+	__HAL_RCC_GPIOA_CLK_ENABLE()
+	;
+	/**UART4 GPIO Configuration
+	 PA11     ------> UART4_RX
+	 PA12     ------> UART4_TX
+	 */
+	GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12;
+	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+	GPIO_InitStruct.Alternate = GPIO_AF6_UART4;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+	/* UART4 interrupt Init */
+	HAL_NVIC_SetPriority(UART4_IRQn, 1, 0);
+	HAL_NVIC_EnableIRQ(UART4_IRQn);
+
+
+
+
 
 	huart4.Instance = UART4;
 	huart4.Init.BaudRate = 115200;
@@ -57,7 +88,19 @@ void MX_UART4_Init(void) {
 		Error_Handler();
 	}
 
-	//__HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
+	/* USER CODE BEGIN USART4_Init 2 */
+	__HAL_UART_ENABLE_IT(&huart4, UART_IT_RXNE);
+
+	/*mettre le reste de l'ini de l'usart 3 ici pour l usart 4!!!!!!!!!!!!!!!!!!*/
+	RX_string.reserve(256);
+	RX_string.assign("\0");
+
+	TX_string.reserve(256);
+	TX_string.assign("\0");
+
+	endofCMD = 0;
+
+	UART_transmit("COM on FTDI");
 
 }
 /* UART5 init function */
@@ -122,7 +165,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle) {
 		HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 		/* UART4 interrupt Init */
-		HAL_NVIC_SetPriority(UART4_IRQn, 0, 0);
+		HAL_NVIC_SetPriority(UART4_IRQn, 1, 0);
 		HAL_NVIC_EnableIRQ(UART4_IRQn);
 		/* USER CODE BEGIN UART4_MspInit 1 */
 
@@ -244,7 +287,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle) {
 	}
 }
 
-void MX_USART3_UART_Init(void) {
+void MX_USART3_UART_Init(void) {/*debug*/
 
 	/* USER CODE BEGIN USART3_Init 0 */
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
@@ -270,7 +313,7 @@ void MX_USART3_UART_Init(void) {
 	HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
 	/* UART4 interrupt Init */
-	HAL_NVIC_SetPriority(USART3_IRQn, 0, 0);
+	HAL_NVIC_SetPriority(USART3_IRQn, 1, 0);
 	HAL_NVIC_EnableIRQ(USART3_IRQn);
 	/* USER CODE END USART3_Init 0 */
 
@@ -278,7 +321,7 @@ void MX_USART3_UART_Init(void) {
 
 	/* USER CODE END USART3_Init 1 */
 	huart3.Instance = USART3;
-	huart3.Init.BaudRate = 9600;
+	huart3.Init.BaudRate = 115200;
 	huart3.Init.WordLength = UART_WORDLENGTH_8B;
 	huart3.Init.StopBits = UART_STOPBITS_1;
 	huart3.Init.Parity = UART_PARITY_NONE;
@@ -291,15 +334,17 @@ void MX_USART3_UART_Init(void) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN USART3_Init 2 */
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+	//__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 
-	RX_string.reserve(256);
+	/*RX_string.reserve(256);
 	RX_string.assign("\0");
 
 	TX_string.reserve(256);
 	TX_string.assign("\0");
 
-	endofCMD = 0;
+	endofCMD = 0;*/
+
+	//UART_transmit("COM on debug");
 
 	/* USER CODE END USART3_Init 2 */
 
@@ -407,18 +452,37 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		Enqueue(RX_string);
 
 	}
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+
+	if(huart->Instance == USART3){ //debug
+		__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+	}else if(huart->Instance == UART4){//ftdi
+		__HAL_UART_ENABLE_IT(&huart4, UART_IT_RXNE);
+	}
+
 
 
 }
 
-void UART_transmit(std::string stringtosend) {
+void UART3_transmit(std::string stringtosend) {/*debug*/
 	stringtosend = stringtosend + "\n" + "\r";
 	char char_array[stringtosend.length()];
 
 	stringtosend.copy(char_array, stringtosend.length());
 
 	HAL_UART_Transmit(&huart3, (uint8_t*) char_array, stringtosend.length(),
+			0xFFFF);
+
+	Reset_uart_buffer();
+
+}
+
+void UART_transmit(std::string stringtosend) {/*via external ftdi cable*/
+	stringtosend = stringtosend + "\n";
+	char char_array[stringtosend.length()];
+
+	stringtosend.copy(char_array, stringtosend.length());
+
+	HAL_UART_Transmit(&huart4, (uint8_t*) char_array, stringtosend.length(),
 			0xFFFF);
 
 	Reset_uart_buffer();

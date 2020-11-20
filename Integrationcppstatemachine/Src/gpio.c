@@ -46,10 +46,12 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 1);
 
+  HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
   /*Configure GPIO pin Output Level */
+
+
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_9 
                           |GPIO_PIN_10|GPIO_PIN_11|CS_I2C_0_Pin|CS_I2C_1_Pin 
                           |CS_I2C_2_Pin|CS_I2C_3_Pin|GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
@@ -65,8 +67,8 @@ void MX_GPIO_Init(void)
 
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_0|EXT_IT_TEMP_Pin|RESET_CN11_66_Pin|IT_I2C_A_Pin 
-                          |IT_I2C_B_Pin|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_0|EXT_IT_TEMP_Pin|RESET_CN11_66_Pin|CS_I2C_M|GPIO_PIN_4
+                          |IT_I2C_B_Pin|GPIO_PIN_14|GPIO_PIN_15|GPIO_PIN_5|EXT_IT_SECU_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_10|GPIO_PIN_11
@@ -75,7 +77,7 @@ void MX_GPIO_Init(void)
                           |GPIO_PIN_7, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  //////////////////HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_13|GPIO_PIN_14, GPIO_PIN_RESET);
+
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9|GPIO_PIN_10, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PE2 PE3 PE4 PE9 
@@ -120,8 +122,8 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : PG0 PGPin PGPin PGPin 
                            PGPin PG14 PG15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|EXT_IT_TEMP_Pin|RESET_CN11_66_Pin|IT_I2C_A_Pin 
-                          |IT_I2C_B_Pin|GPIO_PIN_14|GPIO_PIN_15;
+  //GPIO_InitStruct.Pin = GPIO_PIN_0|EXT_IT_TEMP_Pin|RESET_CN11_66_Pin|CS_I2C_M|GPIO_PIN_4|IT_I2C_B_Pin|GPIO_PIN_14|GPIO_PIN_15|GPIO_PIN_5;
+  GPIO_InitStruct.Pin = GPIO_PIN_0|EXT_IT_TEMP_Pin|RESET_CN11_66_Pin|CS_I2C_M|GPIO_PIN_4|IT_I2C_B_Pin|GPIO_PIN_14|GPIO_PIN_15|GPIO_PIN_5|CS_I2C_EX1_CN12_70_Pin|CS_I2C_EX2_CN12_67_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -130,9 +132,8 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pins : PGPin PGPin PGPin PGPin 
                            PGPin PGPin PGPin PGPin 
                            PGPin */
-  GPIO_InitStruct.Pin = SS0_CN11_58_Pin|SY1_CN11_42_Pin|SY2_CN11_44_Pin|CS_FDP_CN12_69_Pin 
-                          |CS_I2C_EX0_CN12_68_Pin|CS_I2C_EX1_CN12_70_Pin|CS_I2C_EX2_CN12_67_Pin|EXT_IT_SECU_Pin 
-                          |EXT_IT_11_CN11_70_Pin;
+  //GPIO_InitStruct.Pin = SS0_CN11_58_Pin|SY1_CN11_42_Pin|SY2_CN11_44_Pin|CS_I2C_EX1_CN12_70_Pin|CS_I2C_EX2_CN12_67_Pin|EXT_IT_SECU_Pin|EXT_IT_11_CN11_70_Pin;
+  GPIO_InitStruct.Pin = SS0_CN11_58_Pin|SY1_CN11_42_Pin|SY2_CN11_44_Pin|EXT_IT_11_CN11_70_Pin|EXT_IT_SECU_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);

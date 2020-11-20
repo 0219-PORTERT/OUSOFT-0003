@@ -48,6 +48,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 Integrationcppstatemachine.list \
 
+OBJCOPY_BIN += \
+Integrationcppstatemachine.bin \
+
 
 # All Target
 all: Integrationcppstatemachine.elf secondary-outputs
@@ -68,12 +71,17 @@ Integrationcppstatemachine.list: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+Integrationcppstatemachine.bin: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "Integrationcppstatemachine.bin"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
 .PHONY: all clean dependents
 .SECONDARY:

@@ -1,6 +1,29 @@
-FonctionsAutotest.c:14:10:autoTest	4	static
-FonctionsAutotest.c:36:10:CheckI2C4	8	static
-FonctionsAutotest.c:57:10:testEeprom1	16	static
-FonctionsAutotest.c:95:10:testEeprom2	16	static
-FonctionsAutotest.c:130:10:testTemperature	16	static
-FonctionsAutotest.c:144:10:Simtemp1	16	static
+gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
+basic_string.h:6405:3:std::__cxx11::string std::__cxx11::to_string(int)	24	static
+FonctionsAutotest.cpp:17:10:uint16_t autoTest()	4	static
+FonctionsAutotest.cpp:39:10:uint16_t CheckI2C4()	4	static
+FonctionsAutotest.cpp:58:10:uint16_t CheckI2CMain()	8	static,ignoring_inline_asm
+FonctionsAutotest.cpp:98:6:void I2Cscanner(I2C_TypeDef*)	256	static
+FonctionsAutotest.cpp:131:10:uint16_t CheckI2C3()	8	static,ignoring_inline_asm
+FonctionsAutotest.cpp:140:10:uint16_t CheckI2C2()	8	static,ignoring_inline_asm
+FonctionsAutotest.cpp:147:10:uint16_t CheckI2C1()	8	static,ignoring_inline_asm
+FonctionsAutotest.cpp:155:10:uint16_t testEeprom1()	4	static
+FonctionsAutotest.cpp:193:10:uint16_t testEeprom2()	4	static
+FonctionsAutotest.cpp:228:10:uint16_t testTemperature()	24	static
+FonctionsAutotest.cpp:279:10:uint16_t Simtemp1()	4	static
+string_conversions.h:99:5:) [with _String = std::__cxx11::basic_string<char>; _CharT = char]	52	dynamic
+basic_string.h:139:14:std::__cxx11::basic_string<char>::_Alloc_hider::~_Alloc_hider()	16	static
+basic_string.h:5968:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(const _CharT*, std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&&) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	24	static
+basic_string.h:5980:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&&, const _CharT*) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	24	static
+basic_string.h:604:9:std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::basic_string(_InputIterator, _InputIterator, const _Alloc&) [with _InputIterator = char*; <template-parameter-2-2> = void; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	32	static
+move.h:98:5:constexpr typename std::remove_reference< <template-parameter-1-1> >::type&& std::move(_Tp&&) [with _Tp = std::__cxx11::basic_string<char>&]	16	static
+basic_string.h:252:9:void std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::_M_construct(_InIterator, _InIterator) [with _InIterator = char*; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	32	static
+basic_string.h:232:9:void std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::_M_construct_aux(_InIterator, _InIterator, std::__false_type) [with _InIterator = char*; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	40	static
+basic_string.tcc:206:7:void std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::_M_construct(_InIterator, _InIterator, std::forward_iterator_tag) [with _FwdIterator = char*; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	32	static
+type_traits.h:152:5:bool __gnu_cxx::__is_null_pointer(_Type*) [with _Type = char]	16	static
+stl_iterator_base_types.h:205:5:constexpr typename std::iterator_traits<_Iterator>::iterator_category std::__iterator_category(const _Iter&) [with _Iter = char*]	16	static
+stl_iterator_base_funcs.h:138:5:typename std::iterator_traits<_Iterator>::difference_type std::distance(_InputIterator, _InputIterator) [with _InputIterator = char*]	32	static
+stl_iterator_base_funcs.h:98:5:constexpr typename std::iterator_traits<_Iterator>::difference_type std::__distance(_RandomAccessIterator, _RandomAccessIterator, std::random_access_iterator_tag) [with _RandomAccessIterator = char*]	24	static
+FonctionsAutotest.cpp:318:1:void __static_initialization_and_destruction_0(int, int)	16	static
+FonctionsAutotest.cpp:318:1:cpp)	8	static
+FonctionsAutotest.cpp:318:1:cpp)	8	static

@@ -33,15 +33,19 @@ short int Cna::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	case REQ_RST:
 		this->modValue = 0;
 		Set_Dac_Value(DAC_CHANNEL_1, 0); // reset
+		Set_Dac_Value(DAC_CHANNEL_2, 0);
 		break;
 	case REQ_IDN:
-		_rep.assign("je suis le client HARDWARE " + this->getHeader());
+		//_rep.assign("je suis le client HARDWARE " + this->getHeader());
+		_rep.assign(this->getHeader());
 		break;
 	case REQ_x:
 		Set_Dac_Value(DAC_CHANNEL_1, this->modValue);
+		Set_Dac_Value(DAC_CHANNEL_2, this->modValue);
 		break;
 	case REQ_QST:
-		_rep.assign("MOD: " + std::to_string(this->modValue) + "\n\r"); //request
+		//_rep.assign("MOD: " + std::to_string(this->modValue) + "\n\r"); //request
+		_rep.assign(std::to_string(this->modValue) + "\n\r"); //request
 		break;
 
 	default:

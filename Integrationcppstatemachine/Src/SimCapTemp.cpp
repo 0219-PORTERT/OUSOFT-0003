@@ -43,13 +43,22 @@ short int SimCapTemp::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		this->tempValue = 25;
 		break;
 	case REQ_IDN:
-		_rep.assign("je suis le client HARDWARE " + this->getHeader() +" et je suis le capteur " + std::to_string(this->capteur));
+		_rep.assign(this->getHeader() +":" + std::to_string(this->capteur));
 		break;
 	case REQ_x:
 		setTemp(this->tempValue);
 		break;
 	case REQ_QST:
-		_rep.assign(this->getHeader()+ " : "+ std::to_string(this->tempValue) + "\n\r");
+		_rep.assign(this->getHeader()+ ":"+ std::to_string(this->tempValue) + "\n\r");
+		break;
+	case REQ_MIN:
+		MeasMin();
+		break;
+	case REQ_MAX:
+		MeasMax();
+		break;
+	case REQ_STEP:
+		MeasStep();
 		break;
 	default:
 		//throw something;
@@ -79,7 +88,14 @@ int SimCapTemp::decodeInstruct(std::string& _cmde) {
 			this->tempValue = value;
 			sel = REQ_x;
 		}
-	}else {
+	} else if (_cmde.compare("TMPMIN") == 0) {
+		sel = REQ_MIN ;
+	} else if (_cmde.compare("TMPMAX") == 0) {
+		sel = REQ_MAX ;
+	} else if (_cmde.compare("TMPSTEP") == 0) {
+		sel = REQ_STEP ;
+	}
+	else {
 		//throw something
 	}
 	return sel;
@@ -106,10 +122,21 @@ void SimCapTemp::setTemp(int tValue){
 
 
 	//settings
-	TM_I2C_Write(I2C4, I2C4_POT1K_PHYADD, this->capteur, rPcode);
+	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, rPcode);
 	//HAL_Delay(10);
-	TM_I2C_Write(I2C4, I2C4_POT100K_PHYADD, this->capteur, rGcode);
+	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, rGcode);
+}
 
-
+void SimCapTemp::MeasMin(){
+	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, 0);
+	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, 0);
+}
+void SimCapTemp::MeasMax(){
+	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, 255);
+	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, 255);
+}
+void SimCapTemp::MeasStep(){
+	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, 1);
+	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, 0);
 }
 

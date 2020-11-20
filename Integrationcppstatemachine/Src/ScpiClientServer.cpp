@@ -67,8 +67,7 @@ short int ScpiClientServer::DecodeMsg(std::string& _msg, std::string& _header,
 	if (_msg.find("*") != string::npos) { //broadcast
 		_cmde = _msg;
 		a = BRD_CMD;
-	} else if ((_msg.find("ERR ?") != string::npos)
-			&& (this->_HEADER.compare("TEST0256")) == 0) {
+	} else if ((_msg.find("ERR ?") != string::npos) && (this->_HEADER.compare("TEST0256")) == 0) {
 		a = ERR_REQ;
 	} else if (first == -1) { //exec commande courte
 		_header.assign("\0");
@@ -93,7 +92,8 @@ short int ScpiClientServer::ExecuteCmde(std::string& _cmde, std::string &_rep) {
 
 
 		if (_cmde.compare("*IDN ?") == 0) {
-			_rep.assign("je suis le client SCPI " + this->_HEADER);
+			//_rep.assign("je suis le client SCPI " + this->_HEADER);
+			_rep.assign(this->_HEADER);
 		} else {
 			//throw ERR_CMDE;
 		}
@@ -208,9 +208,10 @@ int ScpiClientServer::BroadCastCmde(std::string& _cmde, std::string& _rep) {
 	streponse.assign("\0");
 
 	this->ExecuteCmde(_cmde, streponse);
-	//_rep = _rep + "client:" + this->_HEADER + "->"+ streponse + ";";
 
-	_rep = _rep + streponse + ";" + "\n\r";
+
+	//_rep = _rep + streponse + ";" + "\n\r";
+	_rep = _rep + streponse + "|";
 
 	for (int i = 0; i < this->listeClients.size(); i++) {
 		this->getClient(i)->BroadCastCmde(_cmde, _rep);

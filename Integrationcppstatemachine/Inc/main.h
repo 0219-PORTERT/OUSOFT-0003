@@ -156,7 +156,7 @@ void Error_Handler(void);
 #define RESET_CN11_66_GPIO_Port GPIOG
 #define EXT_IT_11_CN11_70_Pin GPIO_PIN_11
 #define EXT_IT_11_CN11_70_GPIO_Port GPIOG
-#define IT_I2C_A_Pin GPIO_PIN_12
+#define CS_I2C_M GPIO_PIN_12
 #define IT_I2C_A_GPIO_Port GPIOG
 #define IT_I2C_B_Pin GPIO_PIN_13
 #define IT_I2C_B_GPIO_Port GPIOG

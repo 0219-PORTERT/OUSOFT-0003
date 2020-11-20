@@ -55,12 +55,15 @@
 #include "Can.h"
 #include "SimCapTemp.h"
 #include "EXPSEC.h"
+#include "EXPDIO.h"
+#include "EXPADDO24.h"
+#include "SCPIclientserveurADDO.h"
 
 /* Include core modules */
-#include "stm32fxxx_hal.h"
 #include "defines.h"
 #include "tm_stm32_i2c.h"
 #include "tm_stm32_adc.h"
+#include "stm32fxxx_hal.h"
 
 /* USER CODE END Includes */
 /* Private includes ----------------------------------------------------------*/
@@ -123,7 +126,9 @@ int main(void) {
 	/* MCU Configuration--------------------------------------------------------*/
 
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+
 	HAL_Init();
+	//HAL_Delay(500);
 
 	/* USER CODE BEGIN Init */
 
@@ -140,16 +145,16 @@ int main(void) {
 	Pwm Pwm1("RPM");
 	Cna Cna1("MOD");
 
-	Can CanV1("V1",TM_ADC_Channel_0);
-	Can CanV2("V2",TM_ADC_Channel_3);
-	Can CanV3("V3",TM_ADC_Channel_4);
-	Can CanV4("V4",TM_ADC_Channel_5);
-	Can CanW1("W1",TM_ADC_Channel_6);
+	Can CanV1("V1",TM_ADC_Channel_5);
+	Can CanV2("V2",TM_ADC_Channel_12);
+	Can CanV3("V3",TM_ADC_Channel_3);
+	Can CanV4("V4",TM_ADC_Channel_9);
+	Can CanW1("W1",TM_ADC_Channel_0);
 	Can CanW2("W2",TM_ADC_Channel_8);
-	Can CanW3("W3",TM_ADC_Channel_9);
+	Can CanW3("W3",TM_ADC_Channel_4);
 	Can CanW4("W4",TM_ADC_Channel_10);
-	Can CanL1("L1",TM_ADC_Channel_12);
-	Can CanL2("L2",TM_ADC_Channel_13);
+	Can CanZ1("Z1",TM_ADC_Channel_6);
+	Can CanZ2("Z2",TM_ADC_Channel_13);
 
 	SimCapTemp SIMT1("T1",TEMPCAP1);
 	SimCapTemp SIMT2("T2",TEMPCAP2);
@@ -157,6 +162,11 @@ int main(void) {
 	SimCapTemp SIMT4("T4",TEMPCAP4);
 
 	EXPSEC ExpSecu1("SECU");
+
+	EXPDIO Expdio1a("DIOA",SIDEA);
+	EXPDIO Expdio1b("DIOB",SIDEB);
+
+	SCPIclientserveurADDO ExpADDOabc("ADDO");
 
 	/*SCPI STRUCTURE*/
 
@@ -200,8 +210,8 @@ int main(void) {
 				AXIAL.AddClient(&L1);
 				ScpiClientServer L2("L2");
 				AXIAL.AddClient(&L2);*/
-				AXIAL.AddClient(CanL1.getSCPIClientServer());
-				AXIAL.AddClient(CanL2.getSCPIClientServer());
+				AXIAL.AddClient(CanZ1.getSCPIClientServer());
+				AXIAL.AddClient(CanZ2.getSCPIClientServer());
 			//}
 		//}
 		ScpiClientServer SCPI_POS("POS");
@@ -261,20 +271,59 @@ int main(void) {
 		ScpiClientServer SCPI_DIO("DIO");
 		SCPI_MAIN.AddClient(&SCPI_DIO);
 		//{
-			ScpiClientServer DIO_A("A");
+			/*ScpiClientServer DIO_A("A");
 			SCPI_SECU.AddClient(&DIO_A);
 			ScpiClientServer DIO_B("B");
-			SCPI_SECU.AddClient(&DIO_B);
+			SCPI_SECU.AddClient(&DIO_B);*/
+			SCPI_DIO.AddClient(Expdio1a.getSCPIClientServer());
+			SCPI_DIO.AddClient(Expdio1b.getSCPIClientServer());
 		//}
 		ScpiClientServer SCPI_OPT("OPT");
 		SCPI_MAIN.AddClient(&SCPI_OPT);
-	//}
+
+		//ScpiClientServer SCPI_ADDO("ADDO");
+		//SCPI_MAIN.AddClient(&SCPI_ADDO);
+
+		SCPI_MAIN.AddClient(ExpADDOabc.getSCPIClientServer());
+
+
+		//}
 
 
 
-	//testI2CCS(I2C4);
+		/*	ExpADDOabc.configRelay(1, K1);
+			ExpADDOabc.configRelay(1, K2);
+			ExpADDOabc.configRelay(1, K3);
+			ExpADDOabc.configRelay(1, K4);
+			ExpADDOabc.configRelay(1, K5);
+			ExpADDOabc.configRelay(1, K6);
+			ExpADDOabc.configRelay(1, K7);
+			ExpADDOabc.configRelay(1, K8);
+			ExpADDOabc.configRelay(1, K9);
+			ExpADDOabc.configRelay(1, K10);
+			ExpADDOabc.configRelay(1, K11);
+			ExpADDOabc.configRelay(1, K12);
+			ExpADDOabc.configRelay(1, K13);
+			ExpADDOabc.configRelay(1, K14);
+			ExpADDOabc.configRelay(1, K15);
+			ExpADDOabc.configRelay(1, K16);
 
-
+			ExpADDOabc.configRelay(0, K1);
+			ExpADDOabc.configRelay(0, K2);
+			ExpADDOabc.configRelay(0, K3);
+			ExpADDOabc.configRelay(0, K4);
+			ExpADDOabc.configRelay(0, K5);
+			ExpADDOabc.configRelay(0, K6);
+			ExpADDOabc.configRelay(0, K7);
+			ExpADDOabc.configRelay(0, K8);
+			ExpADDOabc.configRelay(0, K9);
+			ExpADDOabc.configRelay(0, K10);
+			ExpADDOabc.configRelay(0, K11);
+			ExpADDOabc.configRelay(0, K12);
+			ExpADDOabc.configRelay(0, K13);
+			ExpADDOabc.configRelay(0, K14);
+			ExpADDOabc.configRelay(0, K15);
+			ExpADDOabc.configRelay(0, K16);*/
 
 	/* USER CODE BEGIN WHILE */
 
@@ -305,7 +354,9 @@ int main(void) {
 		/* Infinite loop */
 		/* USER CODE BEGIN WHILE */
 
-
+		/*MSG.assign("ADDO:REL K3 ON");
+		//MSG.assign("ADDO:LEV OFF");
+		SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);*/
 
 
 		while (1) {
@@ -324,9 +375,9 @@ int main(void) {
 						getFirstCmd(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
-							UART_transmit(" OK\n\r");
+							//UART_transmit(" OK\n\r");
 						} else {
-							UART_transmit("OK:answer =\n\r" + REP);
+							UART_transmit( REP);
 						}
 						deQueueFirstCmd();
 						REP.assign("\0");
@@ -334,6 +385,9 @@ int main(void) {
 					}
 				} catch (int e) {
 					UART_transmit(REP.assign(mainCerrG.ToString()));
+					deQueueFirstCmd();
+					REP.assign("\0");
+					MSG.assign("\0");
 				}
 				Reset_uart_buffer();
 				stateMachine = DEFAULT;
@@ -364,9 +418,9 @@ int main(void) {
 						getFirstCmd(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
-							UART_transmit(" OK\n\r");
+							//UART_transmit(" OK\n\r");
 						} else {
-							UART_transmit("OK:answer =\n\r" + REP);
+							UART_transmit(REP);
 						}
 						deQueueFirstCmd();
 						clearQueuemsg();
@@ -421,12 +475,19 @@ void initSCPI(void){
 	SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 	secu = std::stoi(REP,nullptr,10);*/
 
-	secu = getExpSecuErrorcode();
+	/*secu = getExpSecuErrorcode();
 
 	if(secu!=0){
 		mainCerrG.SetStateMachineErrorCode(secu);
 		TraitementSECU(); // problème sur une ligne de l'expender secu //mettre dans maincerg en cas d'erreur
-	}
+	}*/
+
+
+	/*TEST POUR OUCART-0014*/
+	/*if(secu!=0xFFFF){
+		mainCerrG.SetStateMachineErrorCode(secu);
+		TraitementSECU(); // problème sur une ligne de l'expender secu //mettre dans maincerg en cas d'erreur
+	}*/
 
 	MSG.assign("*CLR"); //toutes valeur par defaut
 	SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
@@ -436,46 +497,61 @@ void initSCPI(void){
 }
 void initStateMachine(void) {
 
-	MX_USART3_UART_Init();
+	HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(SysTick_IRQn);
+	//HAL_ResumeTick();
+
+	//HAL_Delay(500);
+
+	//TM_RCC_InitSystem();
+
+		TM_I2C_Init(I2C1, TM_I2C_PinsPack_1, 40000);
+		TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 40000);
+		TM_I2C_Init(I2C3, TM_I2C_PinsPack_1, 40000);
+		TM_I2C_Init(I2C4, TM_I2C_PinsPack_3, 40000);
+
+
 	Reset_uart_buffer();
 
+	MX_UART4_Init(); //
+	UART_transmit("--- init : UART4");
+	//MX_USART3_UART_Init(); //debug
+
+
+
 	UART_transmit("*** OUSOFT-0003 Rev0.01 ***");
-	UART_transmit("--- Hardware initing ---");
+	UART_transmit("--- Hardware init ---");
 
 	UART_transmit("--- init : GPIO");
 	MX_GPIO_Init();
 	UART_transmit("--- init : DAC");
 	MX_DAC_Init();
+	//MX_I2C1_Init();
 	UART_transmit("--- init : I2C2");
-	MX_I2C2_Init();
+	//MX_I2C2_Init();
 	UART_transmit("--- init : I2C3");
-	MX_I2C3_Init();
+	//MX_I2C3_Init();
 	UART_transmit("--- init : SPI3");
 	MX_SPI3_Init();
-	MX_UART4_Init();
+	//MX_UART4_Init();
 	MX_UART5_Init();
 	//MX_LWIP_Init();
 	UART_transmit("--- init : I2C4");
-	MX_I2C4_Init();
+	//MX_I2C4_Init();
 	MX_UART7_Init();
 	UART_transmit("--- init : TIM2");
 	MX_TIM2_Init();
 	UART_transmit("--- init : TIM3");
 	MX_TIM3_Init();
-	UART_transmit("--- init : TIM4");
-	MX_TIM4_Init();
+	/*UART_transmit("--- init : TIM4");
+	MX_TIM4_Init();*/
 	UART_transmit("--- init : TIM8");
 	MX_TIM8_Init();
 
-	//Relay_Init();
 
 	UART_transmit("--- init : RCC");
-	TM_RCC_InitSystem();
-	TM_I2C_Init(I2C4, TM_I2C_PinsPack_3, 100000);
-	TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 100000);
-	//TM_I2C_Init(I2C3, TM_I2C_PinsPack_Custom, 100000);
 
-	//CheckI2C4();
+
 
 	UART_transmit("--- init : ADC3");
 	TM_ADC_Init(ADC3, TM_ADC_Channel_0);
@@ -494,6 +570,44 @@ void initStateMachine(void) {
 	TM_ADC_Init(ADC3, TM_ADC_Channel_13);
 	TM_ADC_Init(ADC3, TM_ADC_Channel_14);
 	TM_ADC_Init(ADC3, TM_ADC_Channel_15);
+
+
+	HAL_GPIO_WritePin(GPIOG,RESET_CN11_66_Pin , GPIO_PIN_SET); //PIN RESET PG10
+	HAL_GPIO_WritePin(GPIOG,GPIO_PIN_4 , GPIO_PIN_SET); //PIN buffer PG4
+
+	//////////////
+	//Test 1 I2C//
+	//////////////
+
+	UART_transmit("AUTOTEST I2CMAIN");
+	//
+	//
+	enableI2C_main();
+	disableI2Cmain();
+
+	//I2Cscanner(I2C4);
+
+	int testI2C = -1;
+	testI2C = CheckI2CMain();
+	if(testI2C != 0){
+		UART_transmit("Test i2cmain fail at");
+		UART_transmit(std::to_string(testI2C));
+	}else{
+		UART_transmit("I2C main test ok");
+	}
+
+	UART_transmit("AUTOTEST I2CSECU");
+	//I2Cscanner(I2C3);
+	testI2C = -1;
+	testI2C = CheckI2C3();
+	if(testI2C != 0){
+		UART_transmit("Test i2c3 fail at");
+		UART_transmit(std::to_string(testI2C));
+	}else{
+		UART_transmit("I2C3 ok");
+	}
+
+	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
 
@@ -537,22 +651,29 @@ void SystemClock_Config(void) {
 			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
 	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
 	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-	//RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV16;
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+	//RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV16;
 	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
 	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK) {
 		Error_Handler();
 	}
-	PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_UART4
+
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK) {
+		Error_Handler();
+	}
+	PeriphClkInitStruct.PeriphClockSelection = (RCC_PERIPHCLK_UART4
 			| RCC_PERIPHCLK_UART5 | RCC_PERIPHCLK_UART7 | RCC_PERIPHCLK_I2C2
-			| RCC_PERIPHCLK_I2C3 | RCC_PERIPHCLK_I2C4;
+			| RCC_PERIPHCLK_I2C3 | RCC_PERIPHCLK_I2C4| RCC_PERIPHCLK_I2C1) ;
+
 	PeriphClkInitStruct.Uart4ClockSelection = RCC_UART4CLKSOURCE_PCLK1;
 	PeriphClkInitStruct.Uart5ClockSelection = RCC_UART5CLKSOURCE_PCLK1;
 	PeriphClkInitStruct.Uart7ClockSelection = RCC_UART7CLKSOURCE_PCLK1;
+
+	/*PeriphClkInitStruct.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
 	PeriphClkInitStruct.I2c2ClockSelection = RCC_I2C2CLKSOURCE_PCLK1;
 	PeriphClkInitStruct.I2c3ClockSelection = RCC_I2C3CLKSOURCE_PCLK1;
-	PeriphClkInitStruct.I2c4ClockSelection = RCC_I2C4CLKSOURCE_PCLK1;
+	PeriphClkInitStruct.I2c4ClockSelection = RCC_I2C4CLKSOURCE_PCLK1;*/
 	if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK) {
 		Error_Handler();
 	}
@@ -581,16 +702,12 @@ void TraitementSECU(void) {
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
-
-	//int test = -1;
-	//test = HAL_GPIO_ReadPin(GPIOG, GPIO_Pin);
-
-	if ((GPIO_Pin == GPIO_PIN_8) && (HAL_GPIO_ReadPin(GPIOG, GPIO_Pin) == 0) ) {
+	/*if ((GPIO_Pin == GPIO_PIN_8) && (HAL_GPIO_ReadPin(GPIOG, GPIO_Pin) == 0) ) {
 		if(stateMachine != SECU){
 			mainCerrG.SetStateMachineErrorCode(getExpSecuErrorcode());
 			TraitementSECU();
 		}
-	}
+	}*/
 	/* Clear interrupt flag */
 	EXTI_HandleTypeDef extihandle;
 	extihandle.Line = GPIO_Pin;

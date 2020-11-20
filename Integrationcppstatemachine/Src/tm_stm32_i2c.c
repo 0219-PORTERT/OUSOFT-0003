@@ -119,7 +119,7 @@ static void TM_I2C_FillSettings(I2C_HandleTypeDef* Handle, uint32_t clockSpeed) 
 	Handle->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
 	Handle->Init.NoStretchMode = I2C_NOSTRETCH_DISABLE; 
 #if defined(STM32F7xx) || defined(STM32F0xx)
-	Handle->Init.Timing = I2C_Timing;
+	Handle->Init.Timing =  0x2010091A;
 #else
 	Handle->Init.ClockSpeed = clockSpeed;
 	Handle->Init.DutyCycle = I2C_DUTYCYCLE_2;
