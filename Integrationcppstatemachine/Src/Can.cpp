@@ -39,15 +39,15 @@ short int Can::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		break;
 	case REQ_CHX:
 		//_rep.assign(_cmde +" : "+std::to_string(readADC())+"\n\r");
-		_rep.assign(std::to_string(readADC())+"\n\r");
+		_rep.assign(std::to_string(readADC()));
 		break;
 	case REQ_IMOY:
 		//_rep.assign(_cmde +" : "+std::to_string(readADCImoy(NB_MOYENNE))+"\n\r");
-		_rep.assign(std::to_string(readADCImoy(NB_MOYENNE))+"\n\r");
+		_rep.assign(std::to_string(readADCImoy(NB_MOYENNE)));
 		break;
 	case REQ_ISTCURR:
 		//_rep.assign(_cmde +" : "+std::to_string(InstCurrent())+"\n\r");
-		_rep.assign(std::to_string(InstCurrent())+"\n\r");
+		_rep.assign(std::to_string(InstCurrent()));
 		break;
 	default:
 		//throw something;

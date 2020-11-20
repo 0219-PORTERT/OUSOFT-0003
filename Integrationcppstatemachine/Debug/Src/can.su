@@ -5,7 +5,7 @@ Can.cpp:16:1:Can::Can()	16	static
 Can.cpp:21:1:Can::Can(std::__cxx11::string, TM_ADC_Channel_t)	56	static
 Can.cpp:24:1:Can::~Can()	16	static
 Can.cpp:24:1:virtual Can::~Can()	16	static
-Can.cpp:28:11:virtual short int Can::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	264	static
+Can.cpp:28:11:virtual short int Can::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	192	static
 Can.cpp:60:5:int Can::decodeInstruct(std::__cxx11::string&)	24	static
 Can.cpp:80:10:uint16_t Can::readADC()	16	static
 Can.cpp:86:7:float Can::readADCImoy(int)	32	static

@@ -2,7 +2,7 @@ gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 basic_string.h:6362:3:int std::__cxx11::stoi(const string&, std::size_t*, int)	32	static
 basic_string.h:6405:3:std::__cxx11::string std::__cxx11::to_string(int)	24	static
 SimCapTemp.cpp:19:1:SimCapTemp::SimCapTemp()	16	static
-SimCapTemp.cpp:26:1:SimCapTemp::SimCapTemp(std::__cxx11::string, uint8_t)	56	static
+SimCapTemp.cpp:26:1:SimCapTemp::SimCapTemp(std::__cxx11::string, uint8_t, uint8_t, uint8_t)	56	static
 SimCapTemp.cpp:31:1:SimCapTemp::~SimCapTemp()	16	static
 SimCapTemp.cpp:31:1:virtual SimCapTemp::~SimCapTemp()	16	static
 SimCapTemp.cpp:35:11:virtual short int SimCapTemp::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	240	static

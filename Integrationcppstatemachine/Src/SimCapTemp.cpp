@@ -23,7 +23,7 @@ SimCapTemp::SimCapTemp() {
 
 }
 
-SimCapTemp::SimCapTemp(std::string _name, uint8_t _capteur): ScpiClientServer(_name), capteur(_capteur) {
+SimCapTemp::SimCapTemp(std::string _name, uint8_t _capteur, uint8_t _addpot1k, uint8_t _addpot100k): ScpiClientServer(_name), capteur(_capteur), addpot1k(_addpot1k), addpot100k(_addpot100k){
 	// TODO Auto-generated constructor stub
 	this->tempValue = 25;
 }
@@ -122,21 +122,21 @@ void SimCapTemp::setTemp(int tValue){
 
 
 	//settings
-	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, rPcode);
+	TM_I2C_Write(I2C4,this->addpot1k, this->capteur, rPcode);
 	//HAL_Delay(10);
-	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, rGcode);
+	TM_I2C_Write(I2C4, this->addpot100k, this->capteur, rGcode);
 }
 
 void SimCapTemp::MeasMin(){
-	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, 0);
-	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, 0);
+	TM_I2C_Write(I2C4, this->addpot1k, this->capteur, 0);
+	TM_I2C_Write(I2C4, this->addpot100k, this->capteur, 0);
 }
 void SimCapTemp::MeasMax(){
-	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, 255);
-	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, 255);
+	TM_I2C_Write(I2C4, this->addpot1k, this->capteur, 255);
+	TM_I2C_Write(I2C4, this->addpot100k, this->capteur, 255);
 }
 void SimCapTemp::MeasStep(){
-	TM_I2C_Write(I2C4, POT1KA_I2CADD, this->capteur, 1);
-	TM_I2C_Write(I2C4, POT100KA_I2CADD, this->capteur, 0);
+	TM_I2C_Write(I2C4, this->addpot1k, this->capteur, 1);
+	TM_I2C_Write(I2C4, this->addpot100k, this->capteur, 0);
 }
 
