@@ -17,9 +17,19 @@ public:
 	OUCART18FCT();
 	virtual ~OUCART18FCT();
 
+
+
 private:
 
 
 };
 
 #endif /* OUCART18FCT_H_ */
+
+
+
+//Lecture voie lem
+//switch i2c
+//pot num
+//exp
+//memory

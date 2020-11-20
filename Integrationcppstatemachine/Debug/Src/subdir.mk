@@ -17,7 +17,6 @@ C_SRCS += \
 ../Src/sysmem.c \
 ../Src/system_stm32f7xx.c \
 ../Src/tim.c \
-../Src/timer.c \
 ../Src/tm_stm32_adc.c \
 ../Src/tm_stm32_gpio.c \
 ../Src/tm_stm32_i2c.c \
@@ -31,6 +30,8 @@ CPP_SRCS += \
 ../Src/EXPDIO.cpp \
 ../Src/EXPSEC.cpp \
 ../Src/FonctionsAutotest.cpp \
+../Src/Memory.cpp \
+../Src/OUCART0020FCT.cpp \
 ../Src/OUCART18FCT.cpp \
 ../Src/Pwm.cpp \
 ../Src/SCPIclientserveurADDO.cpp \
@@ -48,6 +49,8 @@ OBJS += \
 ./Src/EXPSEC.o \
 ./Src/FonctionsAutotest.o \
 ./Src/FonctionsSCPI.o \
+./Src/Memory.o \
+./Src/OUCART0020FCT.o \
 ./Src/OUCART18FCT.o \
 ./Src/Pwm.o \
 ./Src/SCPIclientserveurADDO.o \
@@ -66,7 +69,6 @@ OBJS += \
 ./Src/sysmem.o \
 ./Src/system_stm32f7xx.o \
 ./Src/tim.o \
-./Src/timer.o \
 ./Src/tm_stm32_adc.o \
 ./Src/tm_stm32_gpio.o \
 ./Src/tm_stm32_i2c.o \
@@ -87,7 +89,6 @@ C_DEPS += \
 ./Src/sysmem.d \
 ./Src/system_stm32f7xx.d \
 ./Src/tim.d \
-./Src/timer.d \
 ./Src/tm_stm32_adc.d \
 ./Src/tm_stm32_gpio.d \
 ./Src/tm_stm32_i2c.d \
@@ -101,6 +102,8 @@ CPP_DEPS += \
 ./Src/EXPDIO.d \
 ./Src/EXPSEC.d \
 ./Src/FonctionsAutotest.d \
+./Src/Memory.d \
+./Src/OUCART0020FCT.d \
 ./Src/OUCART18FCT.d \
 ./Src/Pwm.d \
 ./Src/SCPIclientserveurADDO.d \
@@ -127,6 +130,10 @@ Src/FonctionsAutotest.o: ../Src/FonctionsAutotest.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/FonctionsAutotest.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/FonctionsSCPI.o: ../Src/FonctionsSCPI.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/FonctionsSCPI.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
+Src/Memory.o: ../Src/Memory.cpp
+	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/Memory.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
+Src/OUCART0020FCT.o: ../Src/OUCART0020FCT.cpp
+	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/OUCART0020FCT.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/OUCART18FCT.o: ../Src/OUCART18FCT.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/OUCART18FCT.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/Pwm.o: ../Src/Pwm.cpp
@@ -163,8 +170,6 @@ Src/system_stm32f7xx.o: ../Src/system_stm32f7xx.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/system_stm32f7xx.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/tim.o: ../Src/tim.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/tim.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
-Src/timer.o: ../Src/timer.c
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/timer.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/tm_stm32_adc.o: ../Src/tm_stm32_adc.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/tm_stm32_adc.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/tm_stm32_gpio.o: ../Src/tm_stm32_gpio.c
