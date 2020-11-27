@@ -56,6 +56,7 @@ int CerrG::SetErrId(short int _specificPosition, short int _errAdress ){
 
 	this->specificPosition = _specificPosition;
 	this->adresse[_specificPosition] = _errAdress;
+	this->errid= _errAdress;
 
 	return 0;
 }

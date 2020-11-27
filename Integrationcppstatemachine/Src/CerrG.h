@@ -19,6 +19,7 @@ public:
 	short int cerr;
 	short int adresse[6];//public
 	short int specificPosition;//public
+	short int errid;//public
 
 	void AddErrorCode(CerrG _client);
 	void AddErrorCode(short int Cerr);

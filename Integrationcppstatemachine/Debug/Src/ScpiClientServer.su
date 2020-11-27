@@ -12,7 +12,7 @@ ScpiClientServer.cpp:88:11:virtual short int ScpiClientServer::ExecuteCmde(std::
 ScpiClientServer.cpp:112:13:std::__cxx11::string ScpiClientServer::getHeader()	16	static
 ScpiClientServer.cpp:116:19:ScpiClientServer* ScpiClientServer::getClient(uint8_t)	16	static
 CerrG.h:13:7:constexpr CerrG::CerrG(const CerrG&)	16	static
-ScpiClientServer.cpp:120:11:short int ScpiClientServer::ReceiveMsg(std::__cxx11::string, std::__cxx11::string&, CerrG&)	184	static
+ScpiClientServer.cpp:120:11:short int ScpiClientServer::ReceiveMsg(std::__cxx11::string, std::__cxx11::string&, CerrG&)	192	static
 ScpiClientServer.cpp:174:5:int ScpiClientServer::FindClientinList(std::__cxx11::string)	56	static
 ScpiClientServer.cpp:183:5:int ScpiClientServer::getTailleListClient()	16	static
 ScpiClientServer.cpp:187:6:void ScpiClientServer::SetSendEnable(int)	24	static

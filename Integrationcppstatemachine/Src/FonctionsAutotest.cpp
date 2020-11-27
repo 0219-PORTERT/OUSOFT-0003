@@ -152,6 +152,17 @@ uint16_t CheckI2C1(void){
 	return CERR_NOLOCALERRROR;
 }
 
+uint16_t CheckIDs(void){
+
+	//read oucart-18 1
+	//read oucart-18 2
+	//read oucart-18 3
+	//read oucart-18 4
+
+	//load calibration
+}
+
+
 uint16_t testEeprom1(void){
 
 	/*uint8_t read = 0;

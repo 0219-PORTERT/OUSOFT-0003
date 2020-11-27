@@ -58,6 +58,12 @@
 #include "EXPDIO.h"
 #include "EXPADDO24.h"
 #include "SCPIclientserveurADDO.h"
+#include "Memory.h"
+#include "json.hpp"
+
+#include "OUELEC0158.h"
+#include "OUCART0018.h"
+#include "OUCART0020.h"
 
 /* Include core modules */
 #include "defines.h"
@@ -102,6 +108,14 @@ void TraitementSECU(void);
 
 /* USER CODE BEGIN PFP */
 
+
+
+
+
+
+
+
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -118,6 +132,8 @@ CerrG mainCerrG(-1);
  * @brief  The application entry point.
  * @retval int
  */
+using json = nlohmann::json;
+
 int main(void) {
 	/* USER CODE BEGIN 1 */
 
@@ -131,21 +147,41 @@ int main(void) {
 	//HAL_Delay(500);
 
 	/* USER CODE BEGIN Init */
-
 	/* USER CODE END Init */
 
 	/* Configure the system clock */
 	SystemClock_Config();
 	initStateMachine();
+
+/*
+		Memory memtest(0xA4);
+		std::string s;
+		std::string read;
+		json j;
+
+		 memtest.getjsonstructref(j);
+		 j.at("/IDN/affaire"_json_pointer) = 46;
+		 j.at("/CAL/CFa/3"_json_pointer) = 23;
+		 s.assign(j.dump());
+
+		 memtest.writetomemory(s);
+		 memtest.readfrommemory(read);*/
+
 	/* USER CODE BEGIN SysInit */
 
 	/* USER CODE END SysInit */
 
 	/*Objets hardware*/
+
+	OUELEC_0158 rack1(0x01);
+	OUELEC_0158 rack2(0x02);
+	OUCART0018 psu(0x00);
+	OUCART0018 accordsOsc(0x05);
+
 	Pwm Pwm1("RPM");
 	Cna Cna1("MOD");
 
-	Can CanV1("V1",TM_ADC_Channel_5);
+	/*Can CanV1("V1",TM_ADC_Channel_5);
 	Can CanV2("V2",TM_ADC_Channel_12);
 	Can CanV3("V3",TM_ADC_Channel_3);
 	Can CanV4("V4",TM_ADC_Channel_9);
@@ -154,7 +190,19 @@ int main(void) {
 	Can CanW3("W3",TM_ADC_Channel_4);
 	Can CanW4("W4",TM_ADC_Channel_10);
 	Can CanZ1("Z1",TM_ADC_Channel_6);
-	Can CanZ2("Z2",TM_ADC_Channel_13);
+	Can CanZ2("Z2",TM_ADC_Channel_13);*/
+
+	Can CanV1("V1",rack1,TM_ADC_Channel_0);
+	Can CanV2("V2",rack1,TM_ADC_Channel_1);
+	Can CanV3("V3",rack1,TM_ADC_Channel_2);
+	Can CanV4("V4",rack1,TM_ADC_Channel_3);
+	Can CanW1("W1",rack1,TM_ADC_Channel_4);
+
+	Can CanW2("W2",rack2,TM_ADC_Channel_0);
+	Can CanW3("W3",rack2,TM_ADC_Channel_1);
+	Can CanW4("W4",rack2,TM_ADC_Channel_2);
+	Can CanZ1("Z1",rack2,TM_ADC_Channel_3);
+	Can CanZ2("Z2",rack2,TM_ADC_Channel_4);
 
 	SimCapTemp SIMT1("T1",TEMPCAP1,POT1KA_I2CADD,POT100KA_I2CADD);
 	SimCapTemp SIMT2("T2",TEMPCAP2,POT1KA_I2CADD,POT100KA_I2CADD);
@@ -337,6 +385,10 @@ int main(void) {
 
 	/* USER CODE BEGIN WHILE */
 
+
+
+
+
 	std::string MSG;
 	std::string REP;
 
@@ -515,17 +567,17 @@ void initStateMachine(void) {
 
 	//TM_RCC_InitSystem();
 
-		TM_I2C_Init(I2C1, TM_I2C_PinsPack_1, 40000);
-		TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 40000);
-		TM_I2C_Init(I2C3, TM_I2C_PinsPack_1, 40000);
-		TM_I2C_Init(I2C4, TM_I2C_PinsPack_3, 40000);
+	TM_I2C_Init(I2C1, TM_I2C_PinsPack_1, 40000);
+	TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 40000);
+	TM_I2C_Init(I2C3, TM_I2C_PinsPack_1, 40000);
+	TM_I2C_Init(I2C4, TM_I2C_PinsPack_3, 40000);
 
 
 	Reset_uart_buffer();
 
-	MX_UART4_Init(); //
-	UART_transmit("--- init : UART4");
-	//MX_USART3_UART_Init(); //debug
+	//MX_UART4_Init(); //
+	//UART_transmit("--- init : UART4");
+	MX_USART3_UART_Init(); //debug
 
 
 
@@ -553,8 +605,8 @@ void initStateMachine(void) {
 	MX_TIM2_Init();
 	UART_transmit("--- init : TIM3");
 	MX_TIM3_Init();
-	/*UART_transmit("--- init : TIM4");
-	MX_TIM4_Init();*/
+	//UART_transmit("--- init : TIM4");
+	//MX_TIM4_Init();
 	UART_transmit("--- init : TIM8");
 	MX_TIM8_Init();
 

@@ -1,5 +1,5 @@
-Src/Memory.o: ../Src/Memory.cpp ../Src/Memory.h ../Inc/tm_stm32_i2c.h \
- ../Inc/stm32fxxx_hal.h ../Inc/defines.h \
+Src/Memory.o: ../Src/Memory.cpp ../Src/Memory.h ../Src/json.hpp \
+ ../Inc/tm_stm32_i2c.h ../Inc/stm32fxxx_hal.h ../Inc/defines.h \
  ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h \
  ../Drivers/CMSIS/Include/core_cm7.h \
@@ -39,9 +39,11 @@ Src/Memory.o: ../Src/Memory.cpp ../Src/Memory.h ../Inc/tm_stm32_i2c.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h ../Inc/attributes.h \
- ../Inc/i2c.h ../Inc/main.h ../Src/json.hpp
+ ../Inc/i2c.h ../Inc/main.h
 
 ../Src/Memory.h:
+
+../Src/json.hpp:
 
 ../Inc/tm_stm32_i2c.h:
 
@@ -134,5 +136,3 @@ Src/Memory.o: ../Src/Memory.cpp ../Src/Memory.h ../Inc/tm_stm32_i2c.h \
 ../Inc/i2c.h:
 
 ../Inc/main.h:
-
-../Src/json.hpp:

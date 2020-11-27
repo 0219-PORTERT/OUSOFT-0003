@@ -10,6 +10,7 @@
 #include <string>
 #include <iostream>
 #include "tm_stm32_adc.h"
+#include "OUELEC0158.h"
 
 #define NB_MOYENNE 3
 
@@ -19,8 +20,13 @@ Can::Can() {
 }
 
 Can::Can(std::string _name, TM_ADC_Channel_t _channel): ScpiClientServer(_name), channel(_channel) {
+	this->rack.setRackadress(NULL);
+}
+
+Can::Can(std::string _name, OUELEC_0158 _rack, TM_ADC_Channel_t _channel): ScpiClientServer(_name), rack(_rack), channel(_channel) {
 
 }
+
 Can::~Can() {
 	// TODO Auto-generated destructor stub
 }
@@ -78,7 +84,16 @@ int Can::decodeInstruct(std::string& _cmde) {
 }
 
 uint16_t Can::readADC(){
-	return TM_ADC_Read(ADC3, this->channel);
+
+
+	if(this->rack.getRackadress() == NULL){
+		return TM_ADC_Read(ADC3, this->channel);
+	}else{
+		//return this->rack.readCurrent(this->codeErr.errid);
+		return this->rack.readCurrent(this->channel);
+	}
+
+
 }
 
 
@@ -87,13 +102,30 @@ float Can::readADCImoy(int nb){
 	uint16_t value = 0;
 	float moyenne = 0;
 
-	for(int i = 0;i<nb;i++){
-		value = value + TM_ADC_Read(ADC3, this->channel);
+	if(this->rack.getRackadress() == NULL){
+		for(int i = 0;i<nb;i++){
+			value = value + TM_ADC_Read(ADC3, this->channel);
+		}
+	}else{
+		for(int i = 0;i<nb;i++){
+			//value = value + this->rack.readCurrent(this->codeErr.errid);
+			value = value + this->rack.readCurrent(this->channel);
+		}
 	}
+
+
 	moyenne = (float)value/(float)nb;
 	return ((3.3/4095.0)*moyenne);
 }
 
 float Can::InstCurrent(){
-	return ((3.3/4095.0)*TM_ADC_Read(ADC3, this->channel));
+
+
+
+	if(this->rack.getRackadress() == NULL){
+		return ((3.3/4095.0)*TM_ADC_Read(ADC3, this->channel));
+	}else{
+		//return ((3.3/4095.0)*this->rack.readCurrent(this->codeErr.errid));
+		return ((3.3/4095.0)*this->rack.readCurrent(this->channel));
+	}
 }
