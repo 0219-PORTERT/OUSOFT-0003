@@ -17,8 +17,7 @@ OUELEC_0158::OUELEC_0158() {
 
 OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 	this->adressrack = _adressrack;
-	this->jsonstruct ;
-	/*= {
+	this->jsonstruct = {
 				{"IDN", {
 						{"part_nb",0},
 						{"serial_nb",0},
@@ -33,16 +32,23 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 						{"CFa",{0,0,0,0,0}},
 						{"CFb",{0,0,0,0,0}},
 				}},
-		};*/
+		};
 
 	this->carteEIC1.setI2cAdress(_adressrack);
-	this->carteLEM1.setI2cAdress(_adressrack);
+	this->carteLEM1.setI2cAdress(0x20);
 
 	for(int i = 0; i<6;i++){
 		this->tabCfa[i] = 0;
 		this->tabCfb[i] = 0;
 	}
 	//this->loadJson();
+
+
+
+	//switch to lem
+	//enable ref
+	//set dac and adc
+	//switch to eic
 
 }
 
@@ -66,6 +72,9 @@ uint16_t OUELEC_0158::readCurrent(uint8_t channel){
 
 }
 
+uint8_t OUELEC_0158:: setPosition(uint8_t channel, uint16_t value){
+	//return carteLEM1.setDAC(i2cadress, channel, value);
+}
 
 
 void OUELEC_0158::loadJson(){

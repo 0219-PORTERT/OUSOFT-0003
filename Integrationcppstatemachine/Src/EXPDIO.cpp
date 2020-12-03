@@ -41,13 +41,13 @@ short int EXPDIO::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		_rep.assign(this->getHeader());
 		break;
 	case REQ_QSTRD:
-		_rep.assign(std::to_string(readPort()) + "\n\r");
+		_rep.assign(std::to_string(readPort()));
 		break;
 	case REQ_WR:
 		writePort();
 		break;
 	case REQ_QSTDIR:
-		_rep.assign(std::to_string(this->direction) + "\n\r");
+		_rep.assign(std::to_string(this->direction));
 		break;
 	case REQ_SETDIR:
 		setDir();
@@ -56,28 +56,28 @@ short int EXPDIO::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		_rep.assign(testAB(0xAA) + "\n\r" +testAB(0x55) +"\n\r");
 		break;
 	case REQ_SDR:
-		_rep.assign(getSDR()+"\n\r");
+		_rep.assign(std::to_string(getSDR()));
 		break;
 	case REQ_RTR:
-		_rep.assign(getRTR()+"\n\r");
+		_rep.assign(std::to_string(getRTR()));
 		break;
 	case REQ_MBA:
-		_rep.assign(getMBA()+"\n\r");
+		_rep.assign(std::to_string(getMBA()));
 		break;
 	case REQ_THO:
-		_rep.assign(getTHO()+"\n\r");
+		_rep.assign(std::to_string(getTHO()));
 		break;
 	case REQ_THM:
-		_rep.assign(getTHM()+"\n\r");
+		_rep.assign(std::to_string(getTHM()));
 		break;
 	case REQ_THN:
-		_rep.assign(getTHN()+"\n\r");
+		_rep.assign(std::to_string(getTHN()));
 		break;
 	case REQ_WDSDR:
-		_rep.assign(getWDSDR()+"\n\r");
+		_rep.assign(std::to_string(getWDSDR()));
 		break;
 	case REQ_RTA:
-		_rep.assign(getRTA()+"\n\r");
+		_rep.assign(std::to_string(getRTA()));
 		break;
 
 	default:

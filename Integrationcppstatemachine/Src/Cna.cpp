@@ -45,7 +45,7 @@ short int Cna::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		break;
 	case REQ_QST:
 		//_rep.assign("MOD: " + std::to_string(this->modValue) + "\n\r"); //request
-		_rep.assign(std::to_string(this->modValue) + "\n\r"); //request
+		_rep.assign(std::to_string(this->modValue)); //request
 		break;
 
 	default:

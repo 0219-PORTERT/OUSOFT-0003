@@ -26,6 +26,7 @@ public:
 	void setRackadress(uint8_t adr);
 	uint8_t getRackadress(void);
 	uint16_t readCurrent(uint8_t channel);
+	uint8_t setPosition(uint8_t channel, uint16_t value);
 
 private:
 

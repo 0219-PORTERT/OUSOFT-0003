@@ -143,6 +143,7 @@ int main(void) {
 
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 
+
 	HAL_Init();
 	//HAL_Delay(500);
 
@@ -173,15 +174,15 @@ int main(void) {
 
 	/*Objets hardware*/
 
-	OUELEC_0158 rack1(0x01);
+	/*OUELEC_0158 rack1(0x01);
 	OUELEC_0158 rack2(0x02);
 	OUCART0018 psu(0x00);
-	OUCART0018 accordsOsc(0x05);
+	OUCART0018 accordsOsc(0x05);*/
 
 	Pwm Pwm1("RPM");
 	Cna Cna1("MOD");
 
-	/*Can CanV1("V1",TM_ADC_Channel_5);
+	Can CanV1("V1",TM_ADC_Channel_5);
 	Can CanV2("V2",TM_ADC_Channel_12);
 	Can CanV3("V3",TM_ADC_Channel_3);
 	Can CanV4("V4",TM_ADC_Channel_9);
@@ -190,9 +191,9 @@ int main(void) {
 	Can CanW3("W3",TM_ADC_Channel_4);
 	Can CanW4("W4",TM_ADC_Channel_10);
 	Can CanZ1("Z1",TM_ADC_Channel_6);
-	Can CanZ2("Z2",TM_ADC_Channel_13);*/
+	Can CanZ2("Z2",TM_ADC_Channel_13);
 
-	Can CanV1("V1",rack1,TM_ADC_Channel_0);
+	/*Can CanV1("V1",rack1,TM_ADC_Channel_0);
 	Can CanV2("V2",rack1,TM_ADC_Channel_1);
 	Can CanV3("V3",rack1,TM_ADC_Channel_2);
 	Can CanV4("V4",rack1,TM_ADC_Channel_3);
@@ -202,7 +203,7 @@ int main(void) {
 	Can CanW3("W3",rack2,TM_ADC_Channel_1);
 	Can CanW4("W4",rack2,TM_ADC_Channel_2);
 	Can CanZ1("Z1",rack2,TM_ADC_Channel_3);
-	Can CanZ2("Z2",rack2,TM_ADC_Channel_4);
+	Can CanZ2("Z2",rack2,TM_ADC_Channel_4);*/
 
 	SimCapTemp SIMT1("T1",TEMPCAP1,POT1KA_I2CADD,POT100KA_I2CADD);
 	SimCapTemp SIMT2("T2",TEMPCAP2,POT1KA_I2CADD,POT100KA_I2CADD);
@@ -575,13 +576,13 @@ void initStateMachine(void) {
 
 	Reset_uart_buffer();
 
-	//MX_UART4_Init(); //
-	//UART_transmit("--- init : UART4");
-	MX_USART3_UART_Init(); //debug
+	MX_UART4_Init(); //
+	UART_transmit("--- init : UART4");
+	//MX_USART3_UART_Init(); //debug
 
 
 
-	UART_transmit("*** OUSOFT-0003 Rev0.01 ***");
+	UART_transmit("*** OUSOFT-0003 Rev0.02 ***");
 	UART_transmit("--- Hardware init ---");
 
 	UART_transmit("--- init : GPIO");
