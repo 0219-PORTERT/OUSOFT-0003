@@ -44,7 +44,7 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 
 
 	carteEIC1.switchToi2c(0); //switchto eic
-	this->loadJson();
+	//this->loadJson();
 
 	carteEIC1.switchToi2c(1); //switch to lem
 	carteLEM1.enableInternalRef();//enable ref

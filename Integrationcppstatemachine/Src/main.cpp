@@ -180,9 +180,16 @@ int main(void) {
 	OUCART0018 accordsOsc(0x05);
 
 	Pwm Pwm1("RPM");
-	Cna Cna1("MOD");
+	//Cna Cna1("MOD");
 
-	Can CanV1("V1",TM_ADC_Channel_5);
+	Cna CnaV13("V13",rack1,0);
+	Cna CnaW13("W13",rack1,1);
+	Cna CnaZ1("Z1",rack1,2);
+	Cna CnaV24("V24",rack2,0);
+	Cna CnaW24("W24",rack2,1);
+	Cna CnaZ2("Z2",rack2,2);
+
+	/*Can CanV1("V1",TM_ADC_Channel_5);
 	Can CanV2("V2",TM_ADC_Channel_12);
 	Can CanV3("V3",TM_ADC_Channel_3);
 	Can CanV4("V4",TM_ADC_Channel_9);
@@ -191,9 +198,9 @@ int main(void) {
 	Can CanW3("W3",TM_ADC_Channel_4);
 	Can CanW4("W4",TM_ADC_Channel_10);
 	Can CanZ1("Z1",TM_ADC_Channel_6);
-	Can CanZ2("Z2",TM_ADC_Channel_13);
+	Can CanZ2("Z2",TM_ADC_Channel_13);*/
 
-	/*Can CanV1("V1",rack1,TM_ADC_Channel_0);
+	Can CanV1("V1",rack1,TM_ADC_Channel_0);
 	Can CanV2("V2",rack1,TM_ADC_Channel_1);
 	Can CanV3("V3",rack1,TM_ADC_Channel_2);
 	Can CanV4("V4",rack1,TM_ADC_Channel_3);
@@ -203,7 +210,7 @@ int main(void) {
 	Can CanW3("W3",rack2,TM_ADC_Channel_1);
 	Can CanW4("W4",rack2,TM_ADC_Channel_2);
 	Can CanZ1("Z1",rack2,TM_ADC_Channel_3);
-	Can CanZ2("Z2",rack2,TM_ADC_Channel_4);*/
+	Can CanZ2("Z2",rack2,TM_ADC_Channel_4);
 
 	SimCapTemp SIMT1("T1",TEMPCAP1,POT1KA_I2CADD,POT100KA_I2CADD);
 	SimCapTemp SIMT2("T2",TEMPCAP2,POT1KA_I2CADD,POT100KA_I2CADD);
@@ -271,9 +278,14 @@ int main(void) {
 		ScpiClientServer SCPI_POS("POS");
 		SCPI_MAIN.AddClient(&SCPI_POS);
 		//{
-			//ScpiClientServer MOD("MOD");
-			//SCPI_POS.AddClient(&MOD);
-		    SCPI_POS.AddClient(Cna1.getSCPIClientServer()); //MOD
+			ScpiClientServer MOD("MOD");
+			SCPI_POS.AddClient(&MOD);
+				SCPI_POS.AddClient(CnaV13.getSCPIClientServer()); //MOD
+				SCPI_POS.AddClient(CnaW13.getSCPIClientServer()); //MOD
+				SCPI_POS.AddClient(CnaZ1.getSCPIClientServer()); //MOD
+				SCPI_POS.AddClient(CnaV24.getSCPIClientServer()); //MOD
+				SCPI_POS.AddClient(CnaW24.getSCPIClientServer()); //MOD
+				SCPI_POS.AddClient(CnaZ2.getSCPIClientServer()); //MOD
 			ScpiClientServer SOURCE("SRC");
 			SCPI_POS.AddClient(&SOURCE);
 			ScpiClientServer DESTINATION("DST");
