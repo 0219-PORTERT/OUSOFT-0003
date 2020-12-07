@@ -9,6 +9,8 @@
 #include <string>
 #include <iostream>
 #include "json.hpp"
+#include "i2c.h"
+#include "tm_stm32_i2c.h"
 
 OUCART0018::OUCART0018() {
 	// TODO Auto-generated constructor stub
@@ -25,6 +27,32 @@ void OUCART0018::setI2cAdress(uint8_t adr){
 
 OUCART0018::~OUCART0018() {
 	// TODO Auto-generated destructor stub
+}
+
+
+
+
+uint8_t OUCART0018::switchToi2c(uint8_t i2cchannel){
+
+	switch(i2cchannel){
+		case 0:
+			break;
+			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x01);
+		case 1:
+			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x02);
+			break;
+		case 2:
+			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x04);
+			break;
+		case 3:
+			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x08);
+			break;
+		default:
+			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x00);
+			break;
+	}
+
+	return 0;
 }
 
 std::string OUCART0018::getJsonString(){

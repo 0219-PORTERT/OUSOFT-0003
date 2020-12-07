@@ -108,15 +108,24 @@ void I2Cscanner(I2C_TypeDef* I2Cx){
 	for(adress = 1; adress < 256;adress ++){
 
 
-		result = TM_I2C_IsDeviceConnected(I2Cx,adress );
 
-		if(result == TM_I2C_Result_Ok){
-			UART_transmit("Device found at adress:" + std::to_string(adress));
-			count++;
+		if((adress == 208) || (adress == 209)){
+			UART_transmit("adresse suprimee");
+		}else{
+			result = TM_I2C_IsDeviceConnected(I2Cx,adress );
+
+					if(result == TM_I2C_Result_Ok){
+						UART_transmit("Device found at adress:" + std::to_string(adress));
+						count++;
+					}
+					if(result == TM_I2C_Result_Error){
+						UART_transmit("NO Device found at adress:" + std::to_string(adress));
+					}
 		}
-		if(result == TM_I2C_Result_Error){
-			UART_transmit("NO Device found at adress:" + std::to_string(adress));
-		}
+
+
+
+
 		//HAL_Delay(500);
 	}
 

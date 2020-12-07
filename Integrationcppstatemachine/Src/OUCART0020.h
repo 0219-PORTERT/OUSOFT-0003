@@ -18,14 +18,15 @@ public:
 	virtual ~OUCART0020();
 
 	void setI2cAdress(uint8_t adr);
-	uint16_t readADC(uint8_t i2cadress, uint8_t channel); //lit la voie adc
+	uint16_t readADC(uint8_t channel); //lit la voie adc
 
-	uint16_t setDAC(uint8_t i2cadress, uint8_t channel, uint16_t value); //change la valeur du dac
+	uint16_t setDAC(uint8_t channel, uint16_t value); //change la valeur du dac
 
-	uint8_t setconfigADCDAC(uint8_t i2cadress, uint8_t channel, uint8_t mode);//config mod
+	uint8_t setconfigADC( uint8_t pins);
+	uint8_t setconfigDAC( uint8_t pins);
 
-	uint8_t enableInternalRef(uint8_t i2cadress);
-	uint8_t disableInternalRef(uint8_t i2cadress);
+	uint8_t enableInternalRef();
+	uint8_t disableInternalRef();
 
 private:
 

@@ -97,6 +97,10 @@ void disableI2C_EXT2();
 
 #define TEM_HUM_I2CADD 0x88
 
+/*OUCART-0018 V2 +LEM*/
+
+#define SWITCHI2C 0xD0
+
 
 /**/
 

@@ -54,15 +54,15 @@ short int EXPSEC::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 
 	case REQ_I2CEXT1TST:
 		_rep.assign(testI2CEXT1() + "\n\r");
-		/*enableI2C_EXT1();
+		enableI2C_EXT1();
 		I2Cscanner(I2C2);
-		disableI2C_EXT1();*/
+		disableI2C_EXT1();
 		break;
 	case REQ_I2CEXT2TST:
 		_rep.assign(testI2CEXT2() + "\n\r");
-		/*enableI2C_EXT2();
+		enableI2C_EXT2();
 		I2Cscanner(I2C1);
-		disableI2C_EXT2();*/
+		disableI2C_EXT2();
 		break;
 	case REQ_PSUCONTROL:
 

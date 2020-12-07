@@ -2,15 +2,15 @@ core_cm7.h:2147:34:void __NVIC_SystemReset()	4	static,ignoring_inline_asm
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 basic_string.h:6362:3:int std::__cxx11::stoi(const string&, std::size_t*, int)	32	static
 basic_string.h:6405:3:std::__cxx11::string std::__cxx11::to_string(int)	24	static
-main.cpp:137:5:int main()	10544	static,ignoring_inline_asm
-main.cpp:512:5:int getExpSecuErrorcode()	96	static
-main.cpp:529:6:void initSCPI()	88	static
-main.cpp:561:6:void initStateMachine()	624	static
-main.cpp:682:6:void SystemClock_Config()	232	static
-main.cpp:750:6:void TM_I2C_InitCustomPinsCallback(I2C_TypeDef*, uint16_t)	24	static
-main.cpp:760:6:void TraitementSECU()	40	static
-main.cpp:766:6:void HAL_GPIO_EXTI_Callback(uint16_t)	24	static
-main.cpp:788:6:void Error_Handler()	4	static
+main.cpp:137:5:int main()	12512	static,ignoring_inline_asm
+main.cpp:516:5:int getExpSecuErrorcode()	96	static
+main.cpp:533:6:void initSCPI()	88	static
+main.cpp:565:6:void initStateMachine()	624	static
+main.cpp:686:6:void SystemClock_Config()	232	static
+main.cpp:754:6:void TM_I2C_InitCustomPinsCallback(I2C_TypeDef*, uint16_t)	24	static
+main.cpp:764:6:void TraitementSECU()	40	static
+main.cpp:770:6:void HAL_GPIO_EXTI_Callback(uint16_t)	24	static
+main.cpp:792:6:void Error_Handler()	4	static
 string_conversions.h:63:2:)::_Save_errno::_Save_errno() [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:64:2:)::_Save_errno::~_Save_errno() [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:73:4:)::_Range_chk::_S_chk(_TRet, std::true_type) [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
@@ -25,6 +25,6 @@ type_traits.h:152:5:bool __gnu_cxx::__is_null_pointer(_Type*) [with _Type = char
 stl_iterator_base_types.h:205:5:constexpr typename std::iterator_traits<_Iterator>::iterator_category std::__iterator_category(const _Iter&) [with _Iter = char*]	16	static
 stl_iterator_base_funcs.h:138:5:typename std::iterator_traits<_Iterator>::difference_type std::distance(_InputIterator, _InputIterator) [with _InputIterator = char*]	32	static
 stl_iterator_base_funcs.h:98:5:constexpr typename std::iterator_traits<_Iterator>::difference_type std::__distance(_RandomAccessIterator, _RandomAccessIterator, std::random_access_iterator_tag) [with _RandomAccessIterator = char*]	24	static
-main.cpp:793:1:void __static_initialization_and_destruction_0(int, int)	48	static
-main.cpp:793:1:cpp)	8	static
-main.cpp:793:1:cpp)	8	static
+main.cpp:797:1:void __static_initialization_and_destruction_0(int, int)	48	static
+main.cpp:797:1:cpp)	8	static
+main.cpp:797:1:cpp)	8	static

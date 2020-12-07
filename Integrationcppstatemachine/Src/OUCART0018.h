@@ -23,7 +23,7 @@ public:
 	virtual ~OUCART0018();
 
 	void setI2cAdress(uint8_t adr);
-	uint8_t switchToi2c(uint8_t i2c);
+	uint8_t switchToi2c(uint8_t i2cchannel);
 
 	std::string getJsonString();
 	void getjsonwithref(json& j);

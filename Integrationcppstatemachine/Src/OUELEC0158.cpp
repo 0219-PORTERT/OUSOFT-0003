@@ -41,14 +41,18 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 		this->tabCfa[i] = 0;
 		this->tabCfb[i] = 0;
 	}
-	//this->loadJson();
 
 
+	carteEIC1.switchToi2c(0); //switchto eic
+	this->loadJson();
 
-	//switch to lem
-	//enable ref
-	//set dac and adc
-	//switch to eic
+	carteEIC1.switchToi2c(1); //switch to lem
+	carteLEM1.enableInternalRef();//enable ref
+
+	carteLEM1.setconfigADC(0x1f); //00011111
+	carteLEM1.setconfigDAC(0xe0); //11100000
+
+	carteEIC1.switchToi2c(0); //switchto eic
 
 }
 
@@ -65,15 +69,24 @@ uint8_t OUELEC_0158::getRackadress(void){
 	return this->adressrack;
 }
 
-uint16_t OUELEC_0158::readCurrent(uint8_t channel){
+float OUELEC_0158::readCurrent(uint8_t channel){
 
+	float value;
 
-	return carteLEM1.readADC(this->adressrack, channel)*this->tabCfa[channel]+this->tabCfb[channel];
+	carteEIC1.switchToi2c(1);
+	value = (carteLEM1.readADC(channel)*this->tabCfa[channel]+this->tabCfb[channel])*(3.3/4095.0);
+	carteEIC1.switchToi2c(0);
+
+	return value;
 
 }
 
 uint8_t OUELEC_0158:: setPosition(uint8_t channel, uint16_t value){
-	//return carteLEM1.setDAC(i2cadress, channel, value);
+
+
+	carteEIC1.switchToi2c(1);
+	carteLEM1.setDAC( channel, value);
+	carteEIC1.switchToi2c(0);
 }
 
 

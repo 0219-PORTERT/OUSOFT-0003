@@ -1,17 +1,18 @@
 new:168:14:void* operator new(std::size_t, void*)	16	static
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 stl_tree.h:206:5:void std::_Rb_tree_header::_M_reset()	16	static
-OUCART0018.cpp:13:1:OUCART0018::OUCART0018()	16	static
-OUCART0018.cpp:18:1:OUCART0018::OUCART0018(uint8_t)	16	static
-OUCART0018.cpp:22:6:void OUCART0018::setI2cAdress(uint8_t)	16	static
-OUCART0018.cpp:26:1:OUCART0018::~OUCART0018()	16	static
-OUCART0018.cpp:26:1:virtual OUCART0018::~OUCART0018()	16	static
-OUCART0018.cpp:30:13:std::__cxx11::string OUCART0018::getJsonString()	16	static
-OUCART0018.cpp:35:13:std::__cxx11::string OUCART0018::serialize()	16	static
-OUCART0018.cpp:40:6:void OUCART0018::deserialize(std::__cxx11::string)	16	static
-OUCART0018.cpp:44:16:nlohmann::json OUCART0018::getjsonstruct()	16	static
+OUCART0018.cpp:15:1:OUCART0018::OUCART0018()	16	static
+OUCART0018.cpp:20:1:OUCART0018::OUCART0018(uint8_t)	16	static
+OUCART0018.cpp:24:6:void OUCART0018::setI2cAdress(uint8_t)	16	static
+OUCART0018.cpp:28:1:OUCART0018::~OUCART0018()	16	static
+OUCART0018.cpp:28:1:virtual OUCART0018::~OUCART0018()	16	static
+OUCART0018.cpp:35:9:uint8_t OUCART0018::switchToi2c(uint8_t)	16	static
+OUCART0018.cpp:58:13:std::__cxx11::string OUCART0018::getJsonString()	16	static
+OUCART0018.cpp:63:13:std::__cxx11::string OUCART0018::serialize()	16	static
+OUCART0018.cpp:68:6:void OUCART0018::deserialize(std::__cxx11::string)	16	static
+OUCART0018.cpp:72:16:nlohmann::json OUCART0018::getjsonstruct()	16	static
 move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::type&) [with _Tp = std::__cxx11::basic_string<char>]	16	static
-OUCART0018.cpp:48:7:void OUCART0018::getjsonwithref(json&)	56	static
+OUCART0018.cpp:76:7:void OUCART0018::getjsonwithref(json&)	56	static
 stl_algobase.h:219:5:constexpr const _Tp& std::max(const _Tp&, const _Tp&) [with _Tp = unsigned int]	16	static
 json.hpp:18695:5:nlohmann::basic_json<ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType>::~basic_json() [with ObjectType = std::map; ArrayType = std::vector; StringType = std::__cxx11::basic_string<char>; BooleanType = bool; NumberIntegerType = long long int; NumberUnsignedType = long long unsigned int; NumberFloatType = double; AllocatorType = std::allocator; JSONSerializer = nlohmann::adl_serializer; BinaryType = std::vector<unsigned char>]	16	static
 move.h:98:5:constexpr typename std::remove_reference< <template-parameter-1-1> >::type&& std::move(_Tp&&) [with _Tp = nlohmann::basic_json<>::json_value&]	16	static
@@ -228,6 +229,6 @@ tuple:198:7:) [with T = std::__cxx11::basic_string<char>; Args = {std::__cxx11::
 tuple:125:17:) [with T = std::__cxx11::basic_string<char>; Args = {std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >}; ObjectType = std::map; ArrayType = std::vector; StringType = std::__cxx11::basic_string<char>; BooleanType = bool; NumberIntegerType = long long int; NumberUnsignedType = long long unsigned int; NumberFloatType = double; AllocatorType = std::allocator; JSONSerializer = nlohmann::adl_serializer; BinaryType = std::vector<unsigned char>]::<lambda(std::__cxx11::basic_string<char>*)>]	16	static
 tuple:351:7:) [with T = std::__cxx11::basic_string<char>; Args = {std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >}; ObjectType = std::map; ArrayType = std::vector; StringType = std::__cxx11::basic_string<char>; BooleanType = bool; NumberIntegerType = long long int; NumberUnsignedType = long long unsigned int; NumberFloatType = double; AllocatorType = std::allocator; JSONSerializer = nlohmann::adl_serializer; BinaryType = std::vector<unsigned char>]::<lambda(std::__cxx11::basic_string<char>*)>]	16	static
 tuple:160:7:) [with T = std::__cxx11::basic_string<char>; Args = {std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >}; ObjectType = std::map; ArrayType = std::vector; StringType = std::__cxx11::basic_string<char>; BooleanType = bool; NumberIntegerType = long long int; NumberUnsignedType = long long unsigned int; NumberFloatType = double; AllocatorType = std::allocator; JSONSerializer = nlohmann::adl_serializer; BinaryType = std::vector<unsigned char>]::<lambda(std::__cxx11::basic_string<char>*)>]	16	static
-OUCART0018.cpp:51:1:void __static_initialization_and_destruction_0(int, int)	16	static
-OUCART0018.cpp:51:1:cpp)	8	static
-OUCART0018.cpp:51:1:cpp)	8	static
+OUCART0018.cpp:79:1:void __static_initialization_and_destruction_0(int, int)	16	static
+OUCART0018.cpp:79:1:cpp)	8	static
+OUCART0018.cpp:79:1:cpp)	8	static

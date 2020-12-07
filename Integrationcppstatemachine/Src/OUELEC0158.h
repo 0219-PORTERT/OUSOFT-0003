@@ -25,8 +25,11 @@ public:
 
 	void setRackadress(uint8_t adr);
 	uint8_t getRackadress(void);
-	uint16_t readCurrent(uint8_t channel);
+	float readCurrent(uint8_t channel);
 	uint8_t setPosition(uint8_t channel, uint16_t value);
+
+	OUCART0018 carteEIC1;
+	OUCART0020 carteLEM1;
 
 private:
 
@@ -34,8 +37,7 @@ private:
 	uint8_t adressrack;
 	uint8_t tabCfa[5];
 	uint8_t tabCfb[5];
-	OUCART0018 carteEIC1;
-	OUCART0020 carteLEM1;
+
 
 
 

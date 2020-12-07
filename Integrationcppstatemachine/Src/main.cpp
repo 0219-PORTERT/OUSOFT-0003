@@ -174,10 +174,10 @@ int main(void) {
 
 	/*Objets hardware*/
 
-	/*OUELEC_0158 rack1(0x01);
+	OUELEC_0158 rack1(0x01);
 	OUELEC_0158 rack2(0x02);
 	OUCART0018 psu(0x00);
-	OUCART0018 accordsOsc(0x05);*/
+	OUCART0018 accordsOsc(0x05);
 
 	Pwm Pwm1("RPM");
 	Cna Cna1("MOD");
@@ -412,6 +412,10 @@ int main(void) {
 
 	//SCPI_MAIN.SetSendEnable(1); //bloquer
 	//SCPI_MAIN.modeperoquet(1); //uncomment to active parrot mode
+	/*enableI2C_EXT2();
+	rack1.carteEIC1.switchToi2c(1);
+	I2Cscanner(I2C1);
+	disableI2C_EXT2();*/
 
 	while (1) {
 		/* Infinite loop */

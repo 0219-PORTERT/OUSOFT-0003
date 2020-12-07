@@ -35,14 +35,14 @@ move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::
 move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::type&) [with _Tp = const char (&)[10]]	16	static
 json.hpp:12563:5:nlohmann::detail::json_ref< <template-parameter-1-1> >::~json_ref() [with BasicJsonType = nlohmann::basic_json<>]	16	static
 OUELEC0158.cpp:18:1:OUELEC_0158::OUELEC_0158(uint8_t)	1312	static
-OUELEC0158.cpp:56:1:OUELEC_0158::~OUELEC_0158()	16	static
-OUELEC0158.cpp:56:1:virtual OUELEC_0158::~OUELEC_0158()	16	static
-OUELEC0158.cpp:60:6:void OUELEC_0158::setRackadress(uint8_t)	16	static
-OUELEC0158.cpp:64:9:uint8_t OUELEC_0158::getRackadress()	16	static
-OUELEC0158.cpp:68:10:uint16_t OUELEC_0158::readCurrent(uint8_t)	16	static
-OUELEC0158.cpp:75:9:uint8_t OUELEC_0158::setPosition(uint8_t, uint16_t)	16	static
+OUELEC0158.cpp:60:1:OUELEC_0158::~OUELEC_0158()	16	static
+OUELEC0158.cpp:60:1:virtual OUELEC_0158::~OUELEC_0158()	16	static
+OUELEC0158.cpp:64:6:void OUELEC_0158::setRackadress(uint8_t)	16	static
+OUELEC0158.cpp:68:9:uint8_t OUELEC_0158::getRackadress()	16	static
+OUELEC0158.cpp:72:7:float OUELEC_0158::readCurrent(uint8_t)	24	static
+OUELEC0158.cpp:84:9:uint8_t OUELEC_0158::setPosition(uint8_t, uint16_t)	16	static
 move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::type&) [with _Tp = std::__cxx11::basic_string<char>]	16	static
-OUELEC0158.cpp:80:6:void OUELEC_0158::loadJson()	184	static
+OUELEC0158.cpp:93:6:void OUELEC_0158::loadJson()	184	static
 string_conversions.h:63:2:)::_Save_errno::_Save_errno() [with _TRet = long long unsigned int; _Ret = long long unsigned int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:64:2:)::_Save_errno::~_Save_errno() [with _TRet = long long unsigned int; _Ret = long long unsigned int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:70:4:)::_Range_chk::_S_chk(_TRet, std::false_type) [with _TRet = long long unsigned int; _Ret = long long unsigned int; _CharT = char; _Base = {int}]	24	static
@@ -948,6 +948,6 @@ json.hpp:2564:7:nlohmann::detail::type_error::~type_error()	16	static
 json.hpp:2564:7:virtual nlohmann::detail::type_error::~type_error()	16	static
 json.hpp:2424:7:nlohmann::detail::parse_error::~parse_error()	16	static
 json.hpp:2424:7:virtual nlohmann::detail::parse_error::~parse_error()	16	static
-OUELEC0158.cpp:95:1:void __static_initialization_and_destruction_0(int, int)	16	static
-OUELEC0158.cpp:95:1:cpp)	8	static
-OUELEC0158.cpp:95:1:cpp)	8	static
+OUELEC0158.cpp:108:1:void __static_initialization_and_destruction_0(int, int)	16	static
+OUELEC0158.cpp:108:1:cpp)	8	static
+OUELEC0158.cpp:108:1:cpp)	8	static
