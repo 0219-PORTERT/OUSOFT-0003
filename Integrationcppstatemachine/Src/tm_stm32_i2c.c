@@ -24,7 +24,7 @@
  * |----------------------------------------------------------------------
  */
 #include "tm_stm32_i2c.h"
-
+#include "i2c.h"
 /* I2C2 AF fix for F0xx */
 #if !defined(GPIO_AF4_I2C2) 
 #define GPIO_AF4_I2C2   GPIO_AF1_I2C2
@@ -244,18 +244,20 @@ TM_I2C_Result_t TM_I2C_ReadMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint
 
 TM_I2C_Result_t TM_I2C_ReadNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data) {
 	I2C_HandleTypeDef* Handle = TM_I2C_GetHandle(I2Cx);
-
+	if(I2Cx == I2C1){
+		enableI2C_EXT2();
+	}
 	/* Receive single byte without specifying  */
 	if (HAL_I2C_Master_Receive(Handle, (uint16_t)device_address, data, 1, 1000) != HAL_OK) {
 		/* Check error */
 		if (HAL_I2C_GetError(Handle) != HAL_I2C_ERROR_AF) {
 			
 		}
-		
+		//disableI2C_EXT2();
 		/* Return error */
 		return TM_I2C_Result_Error;
 	}
-	
+	//disableI2C_EXT2();
 	/* Return OK */
 	return TM_I2C_Result_Ok;
 }
@@ -322,17 +324,21 @@ TM_I2C_Result_t TM_I2C_WriteMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uin
 TM_I2C_Result_t TM_I2C_WriteNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t data) {
 	I2C_HandleTypeDef* Handle = TM_I2C_GetHandle(I2Cx);
 	
+	if(I2Cx == I2C1){
+		enableI2C_EXT2();
+	}
+
 	/* Try to transmit via I2C */
 	if (HAL_I2C_Master_Transmit(Handle, (uint16_t)device_address, &data, 1, 1000) != HAL_OK) {
 		/* Check error */
 		if (HAL_I2C_GetError(Handle) != HAL_I2C_ERROR_AF) {
 			
 		}
-		
+		//disableI2C_EXT2();
 		/* Return error */
 		return TM_I2C_Result_Error;
 	} 
-	
+	//disableI2C_EXT2();
 	/* Return OK */
 	return TM_I2C_Result_Ok;
 }
@@ -340,17 +346,21 @@ TM_I2C_Result_t TM_I2C_WriteNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address
 TM_I2C_Result_t TM_I2C_WriteMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data, uint16_t count) {
 	I2C_HandleTypeDef* Handle = TM_I2C_GetHandle(I2Cx);
 	
+	if(I2Cx == I2C1){
+		enableI2C_EXT2();
+	}
+
 	/* Try to transmit via I2C */
 	if (HAL_I2C_Master_Transmit(Handle, (uint16_t)device_address, data, count, 1000) != HAL_OK) {
 		/* Check error */
 		if (HAL_I2C_GetError(Handle) != HAL_I2C_ERROR_AF) {
 			
 		}
-		
+		//disableI2C_EXT2();
 		/* Return error */
 		return TM_I2C_Result_Error;
 	} 
-	
+	//disableI2C_EXT2();
 	/* Return OK */
 	return TM_I2C_Result_Ok;
 }
@@ -416,12 +426,18 @@ TM_I2C_Result_t TM_I2C_Read16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_
 TM_I2C_Result_t TM_I2C_IsDeviceConnected(I2C_TypeDef* I2Cx, uint8_t device_address) {
 	I2C_HandleTypeDef* Handle = TM_I2C_GetHandle(I2Cx);
 	
+	if(I2Cx == I2C1){
+		enableI2C_EXT2();
+	}
+
 	/* Check if device is ready for communication */
 	if (HAL_I2C_IsDeviceReady(Handle, device_address, 2, 5) != HAL_OK) {
 		/* Return error */
+		//disableI2C_EXT2();
 		return TM_I2C_Result_Error;
 	}
 	
+	//disableI2C_EXT2();
 	/* Return OK */
 	return TM_I2C_Result_Ok;
 }

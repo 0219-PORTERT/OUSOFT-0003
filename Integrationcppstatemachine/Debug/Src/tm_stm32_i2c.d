@@ -38,7 +38,8 @@ Src/tm_stm32_i2c.o: ../Src/tm_stm32_i2c.c ../Inc/tm_stm32_i2c.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
- ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h ../Inc/attributes.h
+ ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h ../Inc/attributes.h \
+ ../Inc/i2c.h ../Inc/main.h
 
 ../Inc/tm_stm32_i2c.h:
 
@@ -127,3 +128,7 @@ Src/tm_stm32_i2c.o: ../Src/tm_stm32_i2c.c ../Inc/tm_stm32_i2c.h \
 ../Inc/tm_stm32_gpio.h:
 
 ../Inc/attributes.h:
+
+../Inc/i2c.h:
+
+../Inc/main.h:

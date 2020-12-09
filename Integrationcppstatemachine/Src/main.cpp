@@ -122,7 +122,7 @@ void TraitementSECU(void);
 /* USER CODE BEGIN 0 */
 
 extern std::string RX_string;
-
+extern uint8_t acknowledge;
 T_STATUS stateMachine = HELLO;
 ScpiClientServer SCPI_MAIN("TEST0256", 0);
 CerrG mainCerrG(-1);
@@ -424,10 +424,12 @@ int main(void) {
 
 	//SCPI_MAIN.SetSendEnable(1); //bloquer
 	//SCPI_MAIN.modeperoquet(1); //uncomment to active parrot mode
-	/*enableI2C_EXT2();
-	rack1.carteEIC1.switchToi2c(1);
-	I2Cscanner(I2C1);
-	disableI2C_EXT2();*/
+	//enableI2C_EXT2();
+	/*rack1.carteEIC1.switchToi2c(0);
+	I2Cscanner(I2C1);*/
+	//rack1.carteEIC1.switchToi2c(1);
+	//I2Cscanner(I2C1);
+	//disableI2C_EXT2();
 
 	while (1) {
 		/* Infinite loop */
@@ -454,7 +456,11 @@ int main(void) {
 						getFirstCmd(MSG);
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
-							//UART_transmit(" OK\n\r");
+							if(acknowledge == 1){
+								UART_transmit("OK\n\r");
+							}else{
+								;
+							}
 						} else {
 							UART_transmit( REP);
 						}

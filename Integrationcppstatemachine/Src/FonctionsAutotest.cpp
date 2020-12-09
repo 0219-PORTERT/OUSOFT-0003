@@ -119,7 +119,7 @@ void I2Cscanner(I2C_TypeDef* I2Cx){
 						count++;
 					}
 					if(result == TM_I2C_Result_Error){
-						UART_transmit("NO Device found at adress:" + std::to_string(adress));
+						//UART_transmit("NO Device found at adress:" + std::to_string(adress));
 					}
 		}
 

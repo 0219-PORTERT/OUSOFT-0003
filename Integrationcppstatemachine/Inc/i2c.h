@@ -100,7 +100,7 @@ void disableI2C_EXT2();
 /*OUCART-0018 V2 +LEM*/
 
 #define SWITCHI2C 0xD0
-
+#define ADCDAC_I2CADD 0x22
 
 /**/
 

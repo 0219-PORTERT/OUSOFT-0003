@@ -84,8 +84,9 @@ uint8_t OUCART0020::enableInternalRef(){
 	data[0] = 0x0b;
 	data[1] = 0x02;
 	data[2] = 0x00;
-
+	uint8_t test = (uint8_t)TM_I2C_IsDeviceConnected(I2C1, this->i2cadress);
 	TM_I2C_WriteMultiNoRegister(I2C1, this->i2cadress, data, sizeof(data));
+
 }
 uint8_t OUCART0020::disableInternalRef(){
 	uint8_t data[3];

@@ -39,6 +39,7 @@ std::string TX_string;
 
 std::vector<std::string> v_queueCmd;
 volatile uint8_t endofCMD;
+uint8_t acknowledge = 0;
 
 /* UART4 init function */
 void MX_UART4_Init(void) {/*ftdi*/
@@ -401,6 +402,13 @@ int Enqueue(std::string &RX_string){
 			}else {
 				v_queueCmd.push_back(RX_string);
 			}
+		}else if (RX_string.compare("ACK") == 0){
+			if(acknowledge == 0 ){
+				acknowledge =1;
+			}else{
+				acknowledge =0;
+			}
+			Reset_uart_buffer();
 		}else{
 			if(stateMachine != CMD){ //Protection pour empecher d'avoir plusieurs commande en meme temps
 				if(endofCMD ==1){
@@ -443,7 +451,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		}else if(RX_Buffer[0] == '\n'){
 			;
 		}else {
-			RX_string = RX_string + RX_Buffer[0];
+			RX_string = RX_string + (char)toupper(RX_Buffer[0]);
 		}
 	} else { //fin de reception commandes
 

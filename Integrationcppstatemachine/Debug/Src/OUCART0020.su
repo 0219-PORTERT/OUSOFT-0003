@@ -8,7 +8,7 @@ OUCART0020.cpp:45:10:uint16_t OUCART0020::setDAC(uint8_t, uint16_t)	24	static
 OUCART0020.cpp:58:9:uint8_t OUCART0020::setconfigADC(uint8_t)	24	static
 OUCART0020.cpp:69:9:uint8_t OUCART0020::setconfigDAC(uint8_t)	24	static
 OUCART0020.cpp:80:9:uint8_t OUCART0020::enableInternalRef()	24	static
-OUCART0020.cpp:90:9:uint8_t OUCART0020::disableInternalRef()	24	static
-OUCART0020.cpp:98:1:void __static_initialization_and_destruction_0(int, int)	16	static
-OUCART0020.cpp:98:1:cpp)	8	static
-OUCART0020.cpp:98:1:cpp)	8	static
+OUCART0020.cpp:91:9:uint8_t OUCART0020::disableInternalRef()	24	static
+OUCART0020.cpp:99:1:void __static_initialization_and_destruction_0(int, int)	16	static
+OUCART0020.cpp:99:1:cpp)	8	static
+OUCART0020.cpp:99:1:cpp)	8	static

@@ -34,12 +34,16 @@ OUCART0018::~OUCART0018() {
 
 uint8_t OUCART0018::switchToi2c(uint8_t i2cchannel){
 
+	uint8_t data[1];
+	data[0] = 0;
 	switch(i2cchannel){
 		case 0:
-			break;
 			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x01);
+			TM_I2C_ReadNoRegister(I2C1, (SWITCHI2C | (1u<<0)), data);
+			break;
 		case 1:
 			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x02);
+			TM_I2C_ReadNoRegister(I2C1, (SWITCHI2C | (1u<<0)), data);
 			break;
 		case 2:
 			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x04);

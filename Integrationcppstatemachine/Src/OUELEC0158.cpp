@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include "json.hpp"
+#include "i2c.h"
 
 OUELEC_0158::OUELEC_0158() {
 	// TODO Auto-generated constructor stub
@@ -35,7 +36,7 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 		};
 
 	this->carteEIC1.setI2cAdress(_adressrack);
-	this->carteLEM1.setI2cAdress(0x20);
+	this->carteLEM1.setI2cAdress(ADCDAC_I2CADD);
 
 	for(int i = 0; i<6;i++){
 		this->tabCfa[i] = 0;
@@ -47,6 +48,7 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 	//this->loadJson();
 
 	carteEIC1.switchToi2c(1); //switch to lem
+
 	carteLEM1.enableInternalRef();//enable ref
 
 	carteLEM1.setconfigADC(0x1f); //00011111
