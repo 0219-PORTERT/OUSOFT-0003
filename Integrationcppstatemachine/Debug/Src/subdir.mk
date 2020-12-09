@@ -33,7 +33,6 @@ CPP_SRCS += \
 ../Src/Memory.cpp \
 ../Src/OUCART0018.cpp \
 ../Src/OUCART0020.cpp \
-../Src/OUCART0020FCT.cpp \
 ../Src/OUELEC0158.cpp \
 ../Src/Pwm.cpp \
 ../Src/SCPIclientserveurADDO.cpp \
@@ -54,7 +53,6 @@ OBJS += \
 ./Src/Memory.o \
 ./Src/OUCART0018.o \
 ./Src/OUCART0020.o \
-./Src/OUCART0020FCT.o \
 ./Src/OUELEC0158.o \
 ./Src/Pwm.o \
 ./Src/SCPIclientserveurADDO.o \
@@ -109,7 +107,6 @@ CPP_DEPS += \
 ./Src/Memory.d \
 ./Src/OUCART0018.d \
 ./Src/OUCART0020.d \
-./Src/OUCART0020FCT.d \
 ./Src/OUELEC0158.d \
 ./Src/Pwm.d \
 ./Src/SCPIclientserveurADDO.d \
@@ -142,8 +139,6 @@ Src/OUCART0018.o: ../Src/OUCART0018.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/OUCART0018.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/OUCART0020.o: ../Src/OUCART0020.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/OUCART0020.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
-Src/OUCART0020FCT.o: ../Src/OUCART0020FCT.cpp
-	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/OUCART0020FCT.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/OUELEC0158.o: ../Src/OUELEC0158.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fexceptions -fstack-usage -MMD -MP -MF"Src/OUELEC0158.d" -MT"$@"  -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 Src/Pwm.o: ../Src/Pwm.cpp

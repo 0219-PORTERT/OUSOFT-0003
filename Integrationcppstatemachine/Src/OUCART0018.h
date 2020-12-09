@@ -12,10 +12,6 @@
 #include "SimCapTemp.h"
 #include "json.hpp"
 
-
-#define TOADCDAC 0x00
-#define INTERN 0x00
-
 class OUCART0018 {
 public:
 	OUCART0018();
@@ -25,7 +21,10 @@ public:
 	void setI2cAdress(uint8_t adr);
 	uint8_t switchToi2c(uint8_t i2cchannel);
 
-	std::string getJsonString();
+	uint8_t getJsonStringfromMemory(std::string &_toread);
+	uint8_t storeJsonStringtoMemory(std::string &_towrite);
+
+
 	void getjsonwithref(json& j);
 private:
 

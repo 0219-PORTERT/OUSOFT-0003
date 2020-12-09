@@ -22,6 +22,8 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "OUELEC0158.h"
+#include "OUCART0018.h"
 
 /* USER CODE BEGIN 0 */
 
@@ -40,6 +42,11 @@ std::string TX_string;
 std::vector<std::string> v_queueCmd;
 volatile uint8_t endofCMD;
 uint8_t acknowledge = 0;
+
+extern OUELEC_0158 rack1;
+extern OUELEC_0158 rack2;
+extern OUCART0018 psu;
+extern OUCART0018 accordsOsc;
 
 /* UART4 init function */
 void MX_UART4_Init(void) {/*ftdi*/
@@ -409,7 +416,48 @@ int Enqueue(std::string &RX_string){
 				acknowledge =0;
 			}
 			Reset_uart_buffer();
-		}else{
+		}else if (RX_string.compare(0, 6, "EEPROM") == 0){
+			int eepromNb = 0;
+			std::size_t pos = -1;
+			std::string dataEeprom;
+
+			eepromNb = stoi(RX_string.substr(6), nullptr, 10);
+
+			pos = RX_string.find_last_of(" "); //prend la position du caractere ' '
+			if(pos == -1){
+				; //commande eeprom sans ? ni de chaine
+			}else{
+				if(RX_string.substr(pos+1).compare("?") == 0){ // si le prochain caractère après ' ' est le '?'
+					if(eepromNb == 1){
+						std::string s;
+						rack1.carteEIC1.getJsonStringfromMemory(s);//lecture eeprom 1
+						UART_transmit(s);
+					}else{
+						;//autre
+					}
+				}else{
+					if(eepromNb == 1){
+						dataEeprom.assign(RX_string.substr(pos+1));//écriture eeprom 1
+						rack1.carteEIC1.storeJsonStringtoMemory(dataEeprom);
+					}else{
+						;//autre
+					}
+				}
+			}
+
+
+
+			Reset_uart_buffer();
+		}
+
+
+
+
+
+
+
+
+		else{
 			if(stateMachine != CMD){ //Protection pour empecher d'avoir plusieurs commande en meme temps
 				if(endofCMD ==1){
 					v_queueCmd.push_back(RX_string);

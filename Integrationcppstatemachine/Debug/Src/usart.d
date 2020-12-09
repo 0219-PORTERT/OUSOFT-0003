@@ -37,7 +37,9 @@ Src/usart.o: ../Src/usart.cpp ../Inc/usart.h ../Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
- ../Inc/stateMachine.h ../Inc/..\Src\CerrG.h
+ ../Inc/stateMachine.h ../Inc/..\Src\CerrG.h ../Src/OUELEC0158.h \
+ ../Src/json.hpp ../Src/OUCART0018.h ../Src/Memory.h ../Src/SimCapTemp.h \
+ ../Src/ScpiClientServer.h ../Src/CerrG.h ../Src/OUCART0020.h
 
 ../Inc/usart.h:
 
@@ -122,3 +124,19 @@ Src/usart.o: ../Src/usart.cpp ../Inc/usart.h ../Inc/main.h \
 ../Inc/stateMachine.h:
 
 ../Inc/..\Src\CerrG.h:
+
+../Src/OUELEC0158.h:
+
+../Src/json.hpp:
+
+../Src/OUCART0018.h:
+
+../Src/Memory.h:
+
+../Src/SimCapTemp.h:
+
+../Src/ScpiClientServer.h:
+
+../Src/CerrG.h:
+
+../Src/OUCART0020.h:

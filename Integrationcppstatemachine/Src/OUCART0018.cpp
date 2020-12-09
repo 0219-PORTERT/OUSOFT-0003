@@ -14,11 +14,12 @@
 
 OUCART0018::OUCART0018() {
 	// TODO Auto-generated constructor stub
-
+	this->mem1.setI2cAdress(EEPROM1_I2CADD);
 }
 
 OUCART0018::OUCART0018(uint8_t _i2cadress) {
 	this->i2cadress = _i2cadress;
+	this->mem1.setI2cAdress(EEPROM1_I2CADD);
 }
 
 void OUCART0018::setI2cAdress(uint8_t adr){
@@ -59,11 +60,26 @@ uint8_t OUCART0018::switchToi2c(uint8_t i2cchannel){
 	return 0;
 }
 
-std::string OUCART0018::getJsonString(){
-	std::string s;
-	this->mem1.readfrommemory(s);
-	return s;
+uint8_t OUCART0018::getJsonStringfromMemory(std::string &_toread){
+	uint8_t test =0;
+
+	this->switchToi2c(0);
+	this->mem1.readfrommemory(_toread);
+
+	return test;
 }
+
+uint8_t OUCART0018::storeJsonStringtoMemory(std::string &_towrite){
+	uint8_t test =0;
+
+	this->switchToi2c(0);
+	this->mem1.writetomemory(_towrite);
+
+	return test;
+
+}
+
+
 std::string OUCART0018::serialize(){
 	//std::string s;
 	//return s.assign(this->jsonstruct.dump());
@@ -78,7 +94,11 @@ nlohmann::json OUCART0018::getjsonstruct(){
 }
 
 void  OUCART0018::getjsonwithref(json& j){
-	j = this->getJsonString();
+	std::string s;
+
+	this->getJsonStringfromMemory(s);
+
+	j = s;
 
 }
 

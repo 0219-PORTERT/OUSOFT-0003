@@ -21,23 +21,7 @@ Memory::Memory() {
 
 Memory::Memory(uint8_t _i2cadress): i2cadress(_i2cadress) {
 
-	/*this->jsonstruct = {
-			{"IDN", {
-					{"part_nb",0},
-					{"serial_nb",0},
-					{"affaire",0}
-			}},
-			{"MCO", {
-					{"part_nb",0},
-					{"serial_nb",0},
-					{"affaire",0}
-			}},
-			{"CAL", {
-					{"CFa",{0,0,0,0,0}},
-					{"CFb",{0,0,0,0,0}},
-			}},
-	};*/
-	this->i2cadress = 0xa4;
+
 
 }
 
@@ -46,7 +30,9 @@ Memory::~Memory() {
 }
 
 
-
+void Memory::setI2cAdress(uint8_t adr){
+	this->i2cadress = adr;
+}
 
 
 
@@ -54,9 +40,9 @@ uint8_t Memory::readfrommemory(std::string &_toread){
 
 	uint8_t dummy[2] = {};
 	uint8_t dataread[256]= {};
+	uint8_t test = 0;
 
-
-	TM_I2C_IsDeviceConnected(I2C4, this->i2cadress);
+	test = (uint8_t)TM_I2C_IsDeviceConnected(I2C4, this->i2cadress);
 
 
 	TM_I2C_WriteMultiNoRegister(I2C4, this->i2cadress, dummy, sizeof(dummy));//dummy write
@@ -68,7 +54,7 @@ uint8_t Memory::readfrommemory(std::string &_toread){
 	_toread.assign(buffer);
 
 
-	return 0;
+	return test;
 }
 
 
@@ -76,7 +62,7 @@ uint8_t Memory::writetomemory(std::string &_towrite){
 
 
 	int a = _towrite.length()+2;
-
+	uint8_t test = 0;
 
 	uint8_t data[a] = {};
 
@@ -89,13 +75,10 @@ uint8_t Memory::writetomemory(std::string &_towrite){
 
 	data[0];
 
-	TM_I2C_IsDeviceConnected(I2C4, this->i2cadress);
+	test = (uint8_t)TM_I2C_IsDeviceConnected(I2C4, this->i2cadress);
 	TM_I2C_WriteMultiNoRegister(I2C4, this->i2cadress, data, sizeof(data));
 
-
-
-
-	return 0;
+	return test;
 }
 
 

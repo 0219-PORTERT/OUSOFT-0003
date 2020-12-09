@@ -126,6 +126,10 @@ extern uint8_t acknowledge;
 T_STATUS stateMachine = HELLO;
 ScpiClientServer SCPI_MAIN("TEST0256", 0);
 CerrG mainCerrG(-1);
+OUELEC_0158 rack1(0x01);
+OUELEC_0158 rack2(0x02);
+OUCART0018 psu(0x00);
+OUCART0018 accordsOsc(0x05);
 /* USER CODE END 0 */
 
 /**
@@ -173,11 +177,6 @@ int main(void) {
 	/* USER CODE END SysInit */
 
 	/*Objets hardware*/
-
-	OUELEC_0158 rack1(0x01);
-	OUELEC_0158 rack2(0x02);
-	OUCART0018 psu(0x00);
-	OUCART0018 accordsOsc(0x05);
 
 	Pwm Pwm1("RPM");
 	//Cna Cna1("MOD");

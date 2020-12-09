@@ -21,6 +21,8 @@ public:
 
 	virtual ~Memory();
 
+	void setI2cAdress(uint8_t adr);
+
 	uint8_t readfrommemory(std::string &_toread);
 	uint8_t writetomemory(std::string &_towrite);
 

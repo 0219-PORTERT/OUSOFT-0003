@@ -45,7 +45,7 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 
 
 	carteEIC1.switchToi2c(0); //switchto eic
-	//this->loadJson();
+	this->loadJson();
 
 	carteEIC1.switchToi2c(1); //switch to lem
 
@@ -85,7 +85,6 @@ float OUELEC_0158::readCurrent(uint8_t channel){
 
 uint8_t OUELEC_0158:: setPosition(uint8_t channel, uint16_t value){
 
-
 	carteEIC1.switchToi2c(1);
 	carteLEM1.setDAC( channel, value);
 	carteEIC1.switchToi2c(0);
@@ -94,7 +93,11 @@ uint8_t OUELEC_0158:: setPosition(uint8_t channel, uint16_t value){
 
 void OUELEC_0158::loadJson(){
 
-	this->jsonstruct = carteEIC1.getJsonString();
+	std::string s;
+
+	carteEIC1.getJsonStringfromMemory(s);
+
+	this->jsonstruct = s;
 
 	tabCfa[0] = this->jsonstruct.at("/CAL/CFa/0"_json_pointer);
 	tabCfa[1] = this->jsonstruct.at("/CAL/CFa/1"_json_pointer);

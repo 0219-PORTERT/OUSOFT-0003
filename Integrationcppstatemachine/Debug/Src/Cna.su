@@ -14,7 +14,7 @@ Memory.h:17:7:Memory::Memory(const Memory&)	16	static
 CerrG.h:13:7:constexpr CerrG::CerrG(const CerrG&)	16	static
 ScpiClientServer.h:67:7:ScpiClientServer::ScpiClientServer(const ScpiClientServer&)	16	static
 SimCapTemp.h:35:7:SimCapTemp::SimCapTemp(const SimCapTemp&)	16	static
-OUCART0018.h:19:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
+OUCART0018.h:15:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
 OUCART0020.h:14:7:constexpr OUCART0020::OUCART0020(const OUCART0020&)	16	static
 OUELEC0158.h:20:7:OUELEC_0158::OUELEC_0158(const OUELEC_0158&)	16	static
 Cna.cpp:24:1:Cna::Cna(std::__cxx11::string, OUELEC_0158, uint8_t)	56	static

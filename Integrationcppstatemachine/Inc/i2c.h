@@ -102,6 +102,8 @@ void disableI2C_EXT2();
 #define SWITCHI2C 0xD0
 #define ADCDAC_I2CADD 0x22
 
+#define EEPROM1_I2CADD 0xa4
+
 /**/
 
 #ifdef __cplusplus
