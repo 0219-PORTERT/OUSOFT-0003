@@ -186,6 +186,8 @@ int main(void) {
 	Cna CnaW24("W24",rack2,1);
 	Cna CnaZ2("Z2",rack2,2);
 
+
+	/*pour OUCART-0014*/
 	/*Can CanV1("V1",TM_ADC_Channel_5);
 	Can CanV2("V2",TM_ADC_Channel_12);
 	Can CanV3("V3",TM_ADC_Channel_3);
@@ -196,7 +198,7 @@ int main(void) {
 	Can CanW4("W4",TM_ADC_Channel_10);
 	Can CanZ1("Z1",TM_ADC_Channel_6);
 	Can CanZ2("Z2",TM_ADC_Channel_13);*/
-
+	/*pour les deux rack*/
 	Can CanV1("V1",rack1,TM_ADC_Channel_0);
 	Can CanV2("V2",rack1,TM_ADC_Channel_1);
 	Can CanV3("V3",rack1,TM_ADC_Channel_2);
@@ -277,12 +279,12 @@ int main(void) {
 		//{
 			ScpiClientServer MOD("MOD");
 			SCPI_POS.AddClient(&MOD);
-				SCPI_POS.AddClient(CnaV13.getSCPIClientServer()); //MOD
-				SCPI_POS.AddClient(CnaW13.getSCPIClientServer()); //MOD
-				SCPI_POS.AddClient(CnaZ1.getSCPIClientServer()); //MOD
-				SCPI_POS.AddClient(CnaV24.getSCPIClientServer()); //MOD
-				SCPI_POS.AddClient(CnaW24.getSCPIClientServer()); //MOD
-				SCPI_POS.AddClient(CnaZ2.getSCPIClientServer()); //MOD
+				MOD.AddClient(CnaV13.getSCPIClientServer()); //MOD
+				MOD.AddClient(CnaW13.getSCPIClientServer()); //MOD
+				MOD.AddClient(CnaZ1.getSCPIClientServer()); //MOD
+				MOD.AddClient(CnaV24.getSCPIClientServer()); //MOD
+				MOD.AddClient(CnaW24.getSCPIClientServer()); //MOD
+				MOD.AddClient(CnaZ2.getSCPIClientServer()); //MOD
 			ScpiClientServer SOURCE("SRC");
 			SCPI_POS.AddClient(&SOURCE);
 			ScpiClientServer DESTINATION("DST");
@@ -454,7 +456,7 @@ int main(void) {
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
 							if(acknowledge == 1){
-								UART_transmit("OK" + mainCerrG.ToString());
+								UART_transmit("OK");
 							}else{
 								;
 							}

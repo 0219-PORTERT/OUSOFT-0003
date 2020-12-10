@@ -58,7 +58,7 @@ short int Cna::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		break;
 
 	default:
-		//throw something;
+		throw ERROR_CMD_BAD_ARG;
 		break;
 	}
 
