@@ -61,7 +61,7 @@ short int SimCapTemp::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		MeasStep();
 		break;
 	default:
-		//throw something;
+		throw ERROR_CMD_BAD_ARG;
 		break;
 	}
 
@@ -96,7 +96,7 @@ int SimCapTemp::decodeInstruct(std::string& _cmde) {
 		sel = REQ_STEP ;
 	}
 	else {
-		//throw something
+		throw ERROR_CMD_SCPIHARD_SYNTHAX_ERROR;
 	}
 	return sel;
 }

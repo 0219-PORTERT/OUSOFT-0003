@@ -412,8 +412,10 @@ int Enqueue(std::string &RX_string){
 		}else if (RX_string.compare("ACK") == 0){
 			if(acknowledge == 0 ){
 				acknowledge =1;
+				UART_transmit("ACK ON");
 			}else{
 				acknowledge =0;
+				UART_transmit("ACK OFF");
 			}
 			Reset_uart_buffer();
 		}else if (RX_string.compare(0, 6, "EEPROM") == 0){
@@ -439,25 +441,14 @@ int Enqueue(std::string &RX_string){
 					if(eepromNb == 1){
 						dataEeprom.assign(RX_string.substr(pos+1));//écriture eeprom 1
 						rack1.carteEIC1.storeJsonStringtoMemory(dataEeprom);
+						rack1.loadJson();
 					}else{
 						;//autre
 					}
 				}
 			}
-
-
-
 			Reset_uart_buffer();
-		}
-
-
-
-
-
-
-
-
-		else{
+		}else{
 			if(stateMachine != CMD){ //Protection pour empecher d'avoir plusieurs commande en meme temps
 				if(endofCMD ==1){
 					v_queueCmd.push_back(RX_string);

@@ -87,7 +87,7 @@ int Cna::decodeInstruct(std::string& _cmde) {
 			sel = REQ_x;
 		}
 	} else {
-		//throw something;
+		throw ERROR_CMD_SCPIHARD_SYNTHAX_ERROR;
 	}
 	return sel;
 }

@@ -108,14 +108,6 @@ void TraitementSECU(void);
 
 /* USER CODE BEGIN PFP */
 
-
-
-
-
-
-
-
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -126,10 +118,12 @@ extern uint8_t acknowledge;
 T_STATUS stateMachine = HELLO;
 ScpiClientServer SCPI_MAIN("TEST0256", 0);
 CerrG mainCerrG(-1);
+
 OUELEC_0158 rack1(0x01);
 OUELEC_0158 rack2(0x02);
 OUCART0018 psu(0x00);
 OUCART0018 accordsOsc(0x05);
+
 /* USER CODE END 0 */
 
 /**
@@ -157,6 +151,10 @@ int main(void) {
 	/* Configure the system clock */
 	SystemClock_Config();
 	initStateMachine();
+
+	rack1.init();
+	rack2.init();
+
 
 /*
 		Memory memtest(0xA4);
@@ -456,7 +454,7 @@ int main(void) {
 						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 						if (REP.size() == 0) {
 							if(acknowledge == 1){
-								UART_transmit("OK\n\r");
+								UART_transmit("OK" + mainCerrG.ToString());
 							}else{
 								;
 							}

@@ -81,7 +81,7 @@ short int EXPDIO::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		break;
 
 	default:
-		//throw something;
+		throw ERROR_CMD_BAD_ARG;
 		break;
 	}
 
@@ -139,7 +139,7 @@ int EXPDIO::decodeInstruct(std::string& _cmde) {
 	}else if(_cmde.compare("RTA ?") == 0){
 		sel = REQ_RTA;
 	}else {
-		//throw something
+		throw ERROR_CMD_SCPIHARD_SYNTHAX_ERROR;
 	}
 	return sel;
 }

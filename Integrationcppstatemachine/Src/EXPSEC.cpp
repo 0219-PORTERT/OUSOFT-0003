@@ -76,7 +76,7 @@ short int EXPSEC::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		break;
 
 	default:
-		//throw something;
+		throw ERROR_CMD_BAD_ARG;
 		break;
 	}
 
@@ -126,7 +126,7 @@ int EXPSEC::decodeInstruct(std::string& _cmde) {
 
 
 	}else {
-		//throw something
+		throw ERROR_CMD_SCPIHARD_SYNTHAX_ERROR;
 	}
 	return sel;
 }

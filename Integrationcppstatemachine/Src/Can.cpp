@@ -56,7 +56,7 @@ short int Can::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		_rep.assign(std::to_string(InstCurrent()));
 		break;
 	default:
-		//throw something;
+
 		break;
 	}
 
@@ -78,7 +78,7 @@ int Can::decodeInstruct(std::string& _cmde) {
 	}else if(_cmde.compare("ISTCURR ?") == 0){
 		sel = REQ_ISTCURR;
 	} else {
-		//throw something
+		throw ERROR_CMD_SCPIHARD_SYNTHAX_ERROR;
 	}
 	return sel;
 }

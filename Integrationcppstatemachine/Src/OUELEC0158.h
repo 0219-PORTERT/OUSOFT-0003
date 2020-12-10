@@ -27,6 +27,8 @@ public:
 	uint8_t getRackadress(void);
 	float readCurrent(uint8_t channel);
 	uint8_t setPosition(uint8_t channel, uint16_t value);
+	void loadJson();
+	void init();
 
 	OUCART0018 carteEIC1;
 	OUCART0020 carteLEM1;
@@ -44,7 +46,7 @@ private:
 
 
 
-	void loadJson();
+
 
 };
 

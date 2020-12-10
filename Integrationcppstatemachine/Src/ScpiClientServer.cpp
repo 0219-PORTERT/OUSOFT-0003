@@ -78,7 +78,7 @@ short int ScpiClientServer::DecodeMsg(std::string& _msg, std::string& _header,
 		_cmde = _msg.substr(first + 1);
 		a = FIND_NEXT_SERVER;
 	} else {
-		throw ERROR_SYNTHAX_ERROR;
+		throw ERROR_DECOD_INSTRUCT;
 	}
 
 	return a;
@@ -86,16 +86,14 @@ short int ScpiClientServer::DecodeMsg(std::string& _msg, std::string& _header,
 }
 
 short int ScpiClientServer::ExecuteCmde(std::string& _cmde, std::string &_rep) {
-
-	//throw ERROR_TEST;
-	//std::string Order = "Order66";
-
+	uint8_t test = 0;
 
 		if (_cmde.compare("*IDN ?") == 0) {
-			//_rep.assign("je suis le client SCPI " + this->_HEADER);
 			_rep.assign(this->_HEADER);
-		} else {
-			//throw ERR_CMDE;
+		}else if((_cmde.compare("*CLR") == 0)){
+
+		}else{
+			throw ERROR_CMD_SCPI_SYNTHAX_ERROR;
 		}
 
 
@@ -106,7 +104,7 @@ short int ScpiClientServer::ExecuteCmde(std::string& _cmde, std::string &_rep) {
 						+ _cmde + "\n\r" + _rep);
 	}
 
-	return 0;
+	return test;
 }
 
 std::string ScpiClientServer::getHeader() {

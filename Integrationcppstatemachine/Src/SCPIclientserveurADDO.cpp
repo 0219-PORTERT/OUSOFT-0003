@@ -87,7 +87,7 @@ short int SCPIclientserveurADDO::ExecuteCmde (std::string& _cmde,std::string& _r
 			_rep.assign(ExpADDOa.testAC(0xAA) + "\n\r" +ExpADDOc.testAC(0x55) +"\n\r");
 			break;
 		default:
-			//throw something;
+			throw ERROR_CMD_BAD_ARG;
 			break;
 		}
 	this->reltochange = 0;
@@ -251,7 +251,7 @@ int SCPIclientserveurADDO::decodeInstruct(std::string& _cmde){
 	}else if(_cmde.compare("TSTAC ?") == 0){
 		sel = REQ_TSTAC;
 	}else {
-		//throw something
+		throw ERROR_CMD_SCPIHARD_SYNTHAX_ERROR;
 	}
 	return sel;
 }

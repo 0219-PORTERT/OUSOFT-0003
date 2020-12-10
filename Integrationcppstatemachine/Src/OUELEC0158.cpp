@@ -43,9 +43,17 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 		this->tabCfb[i] = 0;
 	}
 
+}
 
-	carteEIC1.switchToi2c(0); //switchto eic
-	this->loadJson();
+
+
+OUELEC_0158::~OUELEC_0158() {
+	// TODO Auto-generated destructor stub
+}
+
+void OUELEC_0158::init(){
+	//carteEIC1.switchToi2c(0); //switchto eic
+	//this->loadJson();
 
 	carteEIC1.switchToi2c(1); //switch to lem
 
@@ -55,12 +63,6 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 	carteLEM1.setconfigDAC(0xe0); //11100000
 
 	carteEIC1.switchToi2c(0); //switchto eic
-
-}
-
-
-OUELEC_0158::~OUELEC_0158() {
-	// TODO Auto-generated destructor stub
 }
 
 void OUELEC_0158::setRackadress(uint8_t adr){

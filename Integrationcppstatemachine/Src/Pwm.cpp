@@ -53,7 +53,7 @@ short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		break;
 
 	default:
-		//throw something;
+		throw ERROR_CMD_BAD_ARG;
 		break;
 	}
 
@@ -84,7 +84,7 @@ int Pwm::decodeInstruct(std::string& _cmde) {
 			sel = REQ_x;
 		}
 	} else {
-		//throw something;
+		throw ERROR_CMD_SCPIHARD_SYNTHAX_ERROR;
 	}
 	return sel;
 }
