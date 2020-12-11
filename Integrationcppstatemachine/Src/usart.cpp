@@ -100,10 +100,10 @@ void MX_UART4_Init(void) {/*ftdi*/
 	__HAL_UART_ENABLE_IT(&huart4, UART_IT_RXNE);
 
 
-	RX_string.reserve(256);
+	RX_string.reserve(512);
 	RX_string.assign("\0");
 
-	TX_string.reserve(256);
+	TX_string.reserve(512);
 	TX_string.assign("\0");
 
 	endofCMD = 0;
@@ -441,7 +441,6 @@ int Enqueue(std::string &RX_string){
 					if(eepromNb == 1){
 						dataEeprom.assign(RX_string.substr(pos+1));//écriture eeprom 1
 						rack1.carteEIC1.storeJsonStringtoMemory(dataEeprom);
-						rack1.loadJson();
 					}else{
 						;//autre
 					}

@@ -12,7 +12,7 @@ Cna.cpp:14:1:Cna::Cna()	16	static
 Cna.cpp:19:1:Cna::Cna(std::__cxx11::string)	48	static
 Memory.h:17:7:Memory::Memory(const Memory&)	16	static
 CerrG.h:13:7:constexpr CerrG::CerrG(const CerrG&)	16	static
-ScpiClientServer.h:71:7:ScpiClientServer::ScpiClientServer(const ScpiClientServer&)	16	static
+ScpiClientServer.h:75:7:ScpiClientServer::ScpiClientServer(const ScpiClientServer&)	16	static
 SimCapTemp.h:35:7:SimCapTemp::SimCapTemp(const SimCapTemp&)	16	static
 OUCART0018.h:15:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
 OUCART0020.h:14:7:constexpr OUCART0020::OUCART0020(const OUCART0020&)	16	static

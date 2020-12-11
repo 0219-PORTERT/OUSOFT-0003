@@ -39,7 +39,7 @@ Src/Memory.o: ../Src/Memory.cpp ../Src/Memory.h ../Src/json.hpp \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h ../Inc/attributes.h \
- ../Inc/i2c.h ../Inc/main.h
+ ../Inc/i2c.h ../Inc/main.h ../Inc/FonctionsAutotest.h
 
 ../Src/Memory.h:
 
@@ -136,3 +136,5 @@ Src/Memory.o: ../Src/Memory.cpp ../Src/Memory.h ../Src/json.hpp \
 ../Inc/i2c.h:
 
 ../Inc/main.h:
+
+../Inc/FonctionsAutotest.h:

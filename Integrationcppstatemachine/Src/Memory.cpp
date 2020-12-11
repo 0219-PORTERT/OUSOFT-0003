@@ -11,6 +11,7 @@
 #include <String>
 #include <iostream>
 #include "json.hpp"
+#include "FonctionsAutotest.h"
 
 using json = nlohmann::json;
 
@@ -45,8 +46,8 @@ uint8_t Memory::readfrommemory(std::string &_toread){
 	test = (uint8_t)TM_I2C_IsDeviceConnected(I2C4, this->i2cadress);
 
 
-	TM_I2C_WriteMultiNoRegister(I2C4, this->i2cadress, dummy, sizeof(dummy));//dummy write
-	TM_I2C_ReadMultiNoRegister(I2C4, (this->i2cadress | (1u<<0)), dataread, 256);
+	TM_I2C_WriteMultiNoRegister(I2C1, this->i2cadress, dummy, sizeof(dummy));//dummy write
+	TM_I2C_ReadMultiNoRegister(I2C1, (this->i2cadress | (1u<<0)), dataread, 256);
 
 
 	std::string buffer((char*)dataread);
@@ -61,7 +62,7 @@ uint8_t Memory::readfrommemory(std::string &_toread){
 uint8_t Memory::writetomemory(std::string &_towrite){
 
 
-	int a = _towrite.length()+2;
+	int a = _towrite.length()+3;
 	uint8_t test = 0;
 
 	uint8_t data[a] = {};
@@ -69,14 +70,19 @@ uint8_t Memory::writetomemory(std::string &_towrite){
 	data[0] = 0;
 	data[1] = 0;
 
-	for(int i =2; i<sizeof(data); i++){
-		data[i] = _towrite[i];
+	for(int i =0; i<sizeof(data); i++){
+		data[i+2] = _towrite[i];
 	}
 
-	data[0];
+	//data[a-1] = '\0';
 
-	test = (uint8_t)TM_I2C_IsDeviceConnected(I2C4, this->i2cadress);
-	TM_I2C_WriteMultiNoRegister(I2C4, this->i2cadress, data, sizeof(data));
+
+
+	test = (uint8_t)TM_I2C_IsDeviceConnected(I2C1, this->i2cadress);
+
+
+	//I2Cscanner(I2C1);
+	TM_I2C_WriteMultiNoRegister(I2C1, this->i2cadress, data, sizeof(data));
 
 	return test;
 }

@@ -200,15 +200,15 @@ int main(void) {
 	Can CanZ2("Z2",TM_ADC_Channel_13);*/
 	/*pour les deux rack*/
 	Can CanV1("V1",rack1,TM_ADC_Channel_0);
-	Can CanV2("V2",rack1,TM_ADC_Channel_1);
-	Can CanV3("V3",rack1,TM_ADC_Channel_2);
-	Can CanV4("V4",rack1,TM_ADC_Channel_3);
-	Can CanW1("W1",rack1,TM_ADC_Channel_4);
+	Can CanV3("V3",rack1,TM_ADC_Channel_1);
+	Can CanW1("W1",rack1,TM_ADC_Channel_2);
+	Can CanW3("W3",rack1,TM_ADC_Channel_3);
+	Can CanZ1("Z1",rack1,TM_ADC_Channel_4);
 
-	Can CanW2("W2",rack2,TM_ADC_Channel_0);
-	Can CanW3("W3",rack2,TM_ADC_Channel_1);
-	Can CanW4("W4",rack2,TM_ADC_Channel_2);
-	Can CanZ1("Z1",rack2,TM_ADC_Channel_3);
+	Can CanV2("V2",rack2,TM_ADC_Channel_0);
+	Can CanV4("V4",rack2,TM_ADC_Channel_1);
+	Can CanW2("W2",rack2,TM_ADC_Channel_2);
+	Can CanW4("W4",rack2,TM_ADC_Channel_3);
 	Can CanZ2("Z2",rack2,TM_ADC_Channel_4);
 
 	SimCapTemp SIMT1("T1",TEMPCAP1,POT1KA_I2CADD,POT100KA_I2CADD);
@@ -674,8 +674,10 @@ void initStateMachine(void) {
 	int testI2C = -1;
 	testI2C = CheckI2CMain();
 	if(testI2C != 0){
+		mainCerrG.SetStateMachineErrorCode(ERROR_STMA_AUTOTEST_I2CMAIN);
 		UART_transmit("Test i2cmain fail at");
-		UART_transmit(std::to_string(testI2C));
+		UART_transmit(std::to_string(testI2C) + mainCerrG.ToString());
+
 	}else{
 		UART_transmit("I2C main test ok");
 	}
@@ -685,13 +687,23 @@ void initStateMachine(void) {
 	testI2C = -1;
 	testI2C = CheckI2C3();
 	if(testI2C != 0){
+		mainCerrG.SetStateMachineErrorCode(ERROR_STMA_AUTOTEST_I2CMAIN);
 		UART_transmit("Test i2c3 fail at");
-		UART_transmit(std::to_string(testI2C));
+		UART_transmit(std::to_string(testI2C) + mainCerrG.ToString());
 	}else{
 		UART_transmit("I2C3 ok");
 	}
 
 	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+
+	/*LOAD MEMORY*/
+
+	if(rack1.loadJson() != 0){
+		mainCerrG.SetStateMachineErrorCode(ERROR_STMA_JSONLOAD);
+		UART_transmit(mainCerrG.ToString());
+	}
+
 
 }
 

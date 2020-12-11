@@ -80,9 +80,9 @@ uint8_t OUCART0018::storeJsonStringtoMemory(std::string &_towrite){
 }
 
 
-std::string OUCART0018::serialize(){
-	//std::string s;
-	//return s.assign(this->jsonstruct.dump());
+std::string OUCART0018::serialize(nlohmann::json j){
+	std::string s;
+	return s.assign(j.dump());
 }
 
 void OUCART0018::deserialize(std::string s){

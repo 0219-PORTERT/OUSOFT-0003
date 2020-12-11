@@ -99,7 +99,7 @@ uint16_t Can::readADC(){
 
 
 float Can::readADCImoy(int nb){
-	uint16_t value = 0;
+	float value = 0;
 	float moyenne = 0;
 
 	if(this->rack.getRackadress() == NULL){

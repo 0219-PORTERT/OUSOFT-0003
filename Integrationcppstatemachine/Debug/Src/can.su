@@ -12,7 +12,7 @@ Can.cpp:17:1:Can::Can()	16	static
 Can.cpp:22:1:Can::Can(std::__cxx11::string, TM_ADC_Channel_t)	56	static
 Memory.h:17:7:Memory::Memory(const Memory&)	16	static
 CerrG.h:13:7:constexpr CerrG::CerrG(const CerrG&)	16	static
-ScpiClientServer.h:71:7:ScpiClientServer::ScpiClientServer(const ScpiClientServer&)	16	static
+ScpiClientServer.h:75:7:ScpiClientServer::ScpiClientServer(const ScpiClientServer&)	16	static
 SimCapTemp.h:35:7:SimCapTemp::SimCapTemp(const SimCapTemp&)	16	static
 OUCART0018.h:15:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
 OUCART0020.h:14:7:constexpr OUCART0020::OUCART0020(const OUCART0020&)	16	static
