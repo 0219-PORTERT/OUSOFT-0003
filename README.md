@@ -1,5 +1,9 @@
 /*MASTER*/
 
+v0.5-master
+problèmes chargement json et chargement mémoire ok
+
+
 *OPC ?
 *IDN ?
 *RST
