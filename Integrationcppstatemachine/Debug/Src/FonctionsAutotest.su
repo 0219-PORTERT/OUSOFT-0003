@@ -3,7 +3,7 @@ basic_string.h:6405:3:std::__cxx11::string std::__cxx11::to_string(int)	24	stati
 FonctionsAutotest.cpp:17:10:uint16_t autoTest()	4	static
 FonctionsAutotest.cpp:39:10:uint16_t CheckI2C4()	4	static
 FonctionsAutotest.cpp:58:10:uint16_t CheckI2CMain()	8	static,ignoring_inline_asm
-FonctionsAutotest.cpp:98:6:void I2Cscanner(I2C_TypeDef*)	280	static
+FonctionsAutotest.cpp:98:6:void I2Cscanner(I2C_TypeDef*)	232	static
 FonctionsAutotest.cpp:140:10:uint16_t CheckI2C3()	8	static,ignoring_inline_asm
 FonctionsAutotest.cpp:149:10:uint16_t CheckI2C2()	8	static,ignoring_inline_asm
 FonctionsAutotest.cpp:156:10:uint16_t CheckI2C1()	8	static,ignoring_inline_asm

@@ -23,7 +23,7 @@ Can.cpp:30:1:virtual Can::~Can()	16	static
 Can.cpp:34:11:virtual short int Can::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	192	static
 Can.cpp:66:5:int Can::decodeInstruct(std::__cxx11::string&)	24	static
 Can.cpp:86:10:uint16_t Can::readADC()	16	static
-Can.cpp:101:7:float Can::readADCImoy(int)	40	static
+Can.cpp:101:7:float Can::readADCImoy(int)	32	static
 Can.cpp:121:7:float Can::InstCurrent()	16	static
 string_conversions.h:99:5:) [with _String = std::__cxx11::basic_string<char>; _CharT = char]	52	dynamic
 basic_string.h:139:14:std::__cxx11::basic_string<char>::_Alloc_hider::~_Alloc_hider()	16	static

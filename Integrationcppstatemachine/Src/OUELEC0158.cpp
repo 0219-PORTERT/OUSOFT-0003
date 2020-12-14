@@ -17,7 +17,7 @@ OUELEC_0158::OUELEC_0158() {
 }
 
 OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
-	this->adressrack = _adressrack;
+	this->adressrack = _adressrack<<1;//shift de 1 pour ajouter le bit /RW à la fin de l'adresse i2c
 	this->jsonstruct = {
 				{"IDN", {
 						{"PART_NB",0},
@@ -35,7 +35,7 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 		};
 
 
-	this->carteEIC1.setI2cAdress(_adressrack);
+	this->carteEIC1.setI2cAdress(this->adressrack);
 	this->carteLEM1.setI2cAdress(ADCDAC_I2CADD);
 
 	for(int i = 0; i<6;i++){
@@ -58,6 +58,11 @@ void OUELEC_0158::init(){
 	carteEIC1.switchToi2c(1); //switch to lem
 
 	carteLEM1.enableInternalRef();//enable ref
+
+
+
+	//carteLEM1.setconfigADC(0xff);
+	//carteLEM1.setconfigDAC(0xff);
 
 	carteLEM1.setconfigADC(0x1f); //00011111
 	carteLEM1.setconfigDAC(0xe0); //11100000
@@ -102,13 +107,7 @@ uint8_t OUELEC_0158::loadJson(){
 
 	try{
 
-	std::string strjsontemp;
-	strjsontemp.assign(this->carteEIC1.serialize(this->jsonstruct));
-
-	/*this->jsonstruct = json::parse(strjsontemp);*/
-
 	this->jsonstruct = json::parse(s);
-
 
 	tabCfa[0] = this->jsonstruct.at("/CAL/CFA/0"_json_pointer);
 	tabCfa[1] = this->jsonstruct.at("/CAL/CFA/1"_json_pointer);

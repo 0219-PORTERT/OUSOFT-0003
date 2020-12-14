@@ -179,12 +179,12 @@ int main(void) {
 	Pwm Pwm1("RPM");
 	//Cna Cna1("MOD");
 
-	Cna CnaV13("V13",rack1,0);
-	Cna CnaW13("W13",rack1,1);
-	Cna CnaZ1("Z1",rack1,2);
-	Cna CnaV24("V24",rack2,0);
-	Cna CnaW24("W24",rack2,1);
-	Cna CnaZ2("Z2",rack2,2);
+	Cna CnaV13("V13",rack1,5);
+	Cna CnaW13("W13",rack1,6);
+	Cna CnaZ1("Z1",rack1,7);
+	Cna CnaV24("V24",rack2,5);
+	Cna CnaW24("W24",rack2,6);
+	Cna CnaZ2("Z2",rack2,7);
 
 
 	/*pour OUCART-0014*/
@@ -423,12 +423,12 @@ int main(void) {
 
 	//SCPI_MAIN.SetSendEnable(1); //bloquer
 	//SCPI_MAIN.modeperoquet(1); //uncomment to active parrot mode
-	//enableI2C_EXT2();
-	/*rack1.carteEIC1.switchToi2c(0);
+	/*enableI2C_EXT2();
+	rack1.carteEIC1.switchToi2c(6);
 	I2Cscanner(I2C1);*/
-	//rack1.carteEIC1.switchToi2c(1);
-	//I2Cscanner(I2C1);
-	//disableI2C_EXT2();
+	/*rack1.carteEIC1.switchToi2c(1);
+	I2Cscanner(I2C1);
+	disableI2C_EXT2();*/
 
 	while (1) {
 		/* Infinite loop */
@@ -603,7 +603,7 @@ void initStateMachine(void) {
 
 
 
-	UART_transmit("*** OUSOFT-0003 Rev0.02 ***");
+	UART_transmit("*** OUSOFT-0003 v0.6-master ***");
 	UART_transmit("--- Hardware init ---");
 
 	UART_transmit("--- init : GPIO");

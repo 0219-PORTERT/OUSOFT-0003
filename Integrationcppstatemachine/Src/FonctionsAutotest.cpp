@@ -109,7 +109,7 @@ void I2Cscanner(I2C_TypeDef* I2Cx){
 
 
 
-		if((adress == 208) || (adress == 209)){
+		if((adress == 512) || (adress == 512)){
 			UART_transmit("208 209 adresse suprimees");
 		}else{
 			result = TM_I2C_IsDeviceConnected(I2Cx,adress );
@@ -119,7 +119,7 @@ void I2Cscanner(I2C_TypeDef* I2Cx){
 						count++;
 					}
 					if(result == TM_I2C_Result_Error){
-						UART_transmit("NO Device found at adress:" + std::to_string(adress));
+						//UART_transmit("NO Device found at adress:" + std::to_string(adress));
 					}
 		}
 

@@ -23,7 +23,7 @@ OUCART0018::OUCART0018(uint8_t _i2cadress) {
 }
 
 void OUCART0018::setI2cAdress(uint8_t adr){
-	this->i2cadress = adr;
+	this->i2cadress = SWITCHI2C | adr;
 }
 
 OUCART0018::~OUCART0018() {
@@ -39,21 +39,21 @@ uint8_t OUCART0018::switchToi2c(uint8_t i2cchannel){
 	data[0] = 0;
 	switch(i2cchannel){
 		case 0:
-			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x01);
-			TM_I2C_ReadNoRegister(I2C1, (SWITCHI2C | (1u<<0)), data);
+			TM_I2C_WriteNoRegister(I2C1, this->i2cadress, 0x01);/*problème adresse*/
+			TM_I2C_ReadNoRegister(I2C1, (this->i2cadress | (1u<<0)), data);
 			break;
 		case 1:
-			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x02);
-			TM_I2C_ReadNoRegister(I2C1, (SWITCHI2C | (1u<<0)), data);
+			TM_I2C_WriteNoRegister(I2C1, this->i2cadress, 0x02);
+			TM_I2C_ReadNoRegister(I2C1, (this->i2cadress | (1u<<0)), data);
 			break;
 		case 2:
-			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x04);
+			TM_I2C_WriteNoRegister(I2C1, this->i2cadress, 0x04);
 			break;
 		case 3:
-			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x08);
+			TM_I2C_WriteNoRegister(I2C1, this->i2cadress, 0x08);
 			break;
 		default:
-			TM_I2C_WriteNoRegister(I2C1, SWITCHI2C, 0x00);
+			TM_I2C_WriteNoRegister(I2C1, this->i2cadress, 0x00);
 			break;
 	}
 

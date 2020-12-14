@@ -3,12 +3,12 @@ OUCART0020.cpp:12:1:OUCART0020::OUCART0020()	16	static
 OUCART0020.cpp:17:1:OUCART0020::~OUCART0020()	16	static
 OUCART0020.cpp:17:1:virtual OUCART0020::~OUCART0020()	16	static
 OUCART0020.cpp:21:6:void OUCART0020::setI2cAdress(uint8_t)	16	static
-OUCART0020.cpp:25:10:uint16_t OUCART0020::readADC(uint8_t)	32	static
-OUCART0020.cpp:45:10:uint16_t OUCART0020::setDAC(uint8_t, uint16_t)	24	static
-OUCART0020.cpp:58:9:uint8_t OUCART0020::setconfigADC(uint8_t)	24	static
-OUCART0020.cpp:69:9:uint8_t OUCART0020::setconfigDAC(uint8_t)	24	static
-OUCART0020.cpp:80:9:uint8_t OUCART0020::enableInternalRef()	24	static
-OUCART0020.cpp:91:9:uint8_t OUCART0020::disableInternalRef()	24	static
-OUCART0020.cpp:99:1:void __static_initialization_and_destruction_0(int, int)	16	static
-OUCART0020.cpp:99:1:cpp)	8	static
-OUCART0020.cpp:99:1:cpp)	8	static
+OUCART0020.cpp:25:10:uint16_t OUCART0020::readADC(uint8_t)	24	static
+OUCART0020.cpp:52:10:uint16_t OUCART0020::setDAC(uint8_t, uint16_t)	24	static
+OUCART0020.cpp:78:9:uint8_t OUCART0020::setconfigADC(uint8_t)	24	static
+OUCART0020.cpp:89:9:uint8_t OUCART0020::setconfigDAC(uint8_t)	24	static
+OUCART0020.cpp:100:9:uint8_t OUCART0020::enableInternalRef()	24	static
+OUCART0020.cpp:121:9:uint8_t OUCART0020::disableInternalRef()	24	static
+OUCART0020.cpp:129:1:void __static_initialization_and_destruction_0(int, int)	16	static
+OUCART0020.cpp:129:1:cpp)	8	static
+OUCART0020.cpp:129:1:cpp)	8	static
