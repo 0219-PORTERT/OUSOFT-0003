@@ -1,6 +1,6 @@
 /*MASTER*/
 
-v0.5-master
+v0.6-master
 problèmes chargement json et chargement mémoire ok
 
 
