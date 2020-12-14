@@ -11,6 +11,7 @@
 #include <String>
 #include <iostream>
 #include <cmath>
+#include "OUELEC0158.h"
 
 #define alpha 0.00788
 #define beta 0.00001937
@@ -24,6 +25,11 @@ SimCapTemp::SimCapTemp() {
 }
 
 SimCapTemp::SimCapTemp(std::string _name, uint8_t _capteur, uint8_t _addpot1k, uint8_t _addpot100k): ScpiClientServer(_name), capteur(_capteur), addpot1k(_addpot1k), addpot100k(_addpot100k){
+	// TODO Auto-generated constructor stub
+	this->tempValue = 25;
+}
+
+SimCapTemp::SimCapTemp(std::string _name, uint8_t _capteur, OUELEC_0158 _rack ,uint8_t _addpot1k, uint8_t _addpot100k): ScpiClientServer(_name), capteur(_capteur), rack(_rack), addpot1k(_addpot1k), addpot100k(_addpot100k){
 	// TODO Auto-generated constructor stub
 	this->tempValue = 25;
 }

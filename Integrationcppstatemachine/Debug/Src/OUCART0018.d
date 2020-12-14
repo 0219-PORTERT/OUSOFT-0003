@@ -1,6 +1,5 @@
 Src/OUCART0018.o: ../Src/OUCART0018.cpp ../Src/OUCART0018.h \
- ../Src/Memory.h ../Src/json.hpp ../Src/SimCapTemp.h \
- ../Src/ScpiClientServer.h ../Src/CerrG.h ../Inc/i2c.h ../Inc/main.h \
+ ../Src/Memory.h ../Src/json.hpp ../Inc/i2c.h ../Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Inc/stm32f7xx_hal_conf.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
@@ -47,12 +46,6 @@ Src/OUCART0018.o: ../Src/OUCART0018.cpp ../Src/OUCART0018.h \
 ../Src/Memory.h:
 
 ../Src/json.hpp:
-
-../Src/SimCapTemp.h:
-
-../Src/ScpiClientServer.h:
-
-../Src/CerrG.h:
 
 ../Inc/i2c.h:
 

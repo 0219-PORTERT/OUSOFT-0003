@@ -11,6 +11,7 @@
 #include "ScpiClientServer.h"
 #include <String>
 #include <iostream>
+#include "OUELEC0158.h"
 
 #define TEMPCAP1 0x00
 #define TEMPCAP2 0x01
@@ -36,12 +37,14 @@ class SimCapTemp : public ScpiClientServer {
 public:
 	SimCapTemp();
 	SimCapTemp(std::string _name, uint8_t _capteur, uint8_t _addpot1k, uint8_t _addpot100k);
+	SimCapTemp(std::string _name, uint8_t _capteur, OUELEC_0158 _rack ,uint8_t _addpot1k, uint8_t _addpot100k);
 	virtual ~SimCapTemp();
 private:
 	std::string _name;
 	uint8_t capteur;
 	uint8_t addpot1k;
 	uint8_t addpot100k;
+	OUELEC_0158 rack;
 
 	int tempValue;
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);

@@ -9,7 +9,6 @@
 #define OUCART0018_H_
 
 #include "Memory.h"
-#include "SimCapTemp.h"
 #include "json.hpp"
 
 class OUCART0018 {
@@ -29,12 +28,7 @@ public:
 private:
 
 	uint8_t i2cadress;
-
 	Memory mem1;
-	SimCapTemp T1;
-	SimCapTemp T2;
-	SimCapTemp T3;
-	SimCapTemp T4;
 
 	std::string serialize();
 	void deserialize(std::string s);

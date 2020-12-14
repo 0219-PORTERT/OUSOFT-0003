@@ -40,8 +40,7 @@ Src/Can.o: ../Src/Can.cpp ../Src/Can.h ../Src/ScpiClientServer.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h ../Src/OUELEC0158.h \
- ../Src/json.hpp ../Src/OUCART0018.h ../Src/Memory.h ../Src/SimCapTemp.h \
- ../Src/OUCART0020.h
+ ../Src/json.hpp ../Src/OUCART0018.h ../Src/Memory.h ../Src/OUCART0020.h
 
 ../Src/Can.h:
 
@@ -142,7 +141,5 @@ Src/Can.o: ../Src/Can.cpp ../Src/Can.h ../Src/ScpiClientServer.h \
 ../Src/OUCART0018.h:
 
 ../Src/Memory.h:
-
-../Src/SimCapTemp.h:
 
 ../Src/OUCART0020.h:

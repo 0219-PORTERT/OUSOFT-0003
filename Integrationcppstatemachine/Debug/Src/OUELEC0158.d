@@ -1,6 +1,5 @@
 Src/OUELEC0158.o: ../Src/OUELEC0158.cpp ../Src/OUELEC0158.h \
- ../Src/json.hpp ../Src/OUCART0018.h ../Src/Memory.h ../Src/SimCapTemp.h \
- ../Src/ScpiClientServer.h ../Src/CerrG.h ../Src/OUCART0020.h \
+ ../Src/json.hpp ../Src/OUCART0018.h ../Src/Memory.h ../Src/OUCART0020.h \
  ../Inc/i2c.h ../Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Inc/stm32f7xx_hal_conf.h \
@@ -48,12 +47,6 @@ Src/OUELEC0158.o: ../Src/OUELEC0158.cpp ../Src/OUELEC0158.h \
 ../Src/OUCART0018.h:
 
 ../Src/Memory.h:
-
-../Src/SimCapTemp.h:
-
-../Src/ScpiClientServer.h:
-
-../Src/CerrG.h:
 
 ../Src/OUCART0020.h:
 
