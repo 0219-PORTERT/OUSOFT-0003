@@ -109,7 +109,7 @@ void I2Cscanner(I2C_TypeDef* I2Cx){
 
 
 
-		if((adress == 512) || (adress == 512)){
+		if((adress == 208) || (adress == 209)){
 			UART_transmit("208 209 adresse suprimees");
 		}else{
 			result = TM_I2C_IsDeviceConnected(I2Cx,adress );

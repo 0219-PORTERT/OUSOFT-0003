@@ -20,9 +20,9 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 	this->adressrack = _adressrack<<1;//shift de 1 pour ajouter le bit /RW à la fin de l'adresse i2c
 	this->jsonstruct = {
 				{"IDN", {
-						{"PART_NB",0},
-						{"SERIAL_NB",0},
-						{"AFFAIRE",0}
+						{"PART_NB","PARTXXXX"},
+						{"SERIAL_NB","SERXXXX"},
+						{"AFFAIRE","XXXX"}
 				}},
 				{"MCO", {
 						{"MCO_N_DATE","10/12/20"},
@@ -42,7 +42,11 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 		this->tabCfa[i] = 0;
 		this->tabCfb[i] = 0;
 	}
-
+	this->partNb.assign("null");
+	this->serialNb.assign("null");
+	this->affaire.assign("null");
+	this->calDate.assign("null");
+	this->mcoDate.assign("null");
 }
 
 
@@ -82,15 +86,21 @@ float OUELEC_0158::readCurrent(uint8_t channel){
 
 	float value;
 
-	carteEIC1.switchToi2c(1);
-	value = (carteLEM1.readADC(channel)*this->tabCfa[channel]+this->tabCfb[channel])*(3.3/4095.0);
-	carteEIC1.switchToi2c(0);
+	//carteEIC1.switchToi2c(1);
+	//value = (carteLEM1.readADC(channel)*(5.0/4095.0))*this->tabCfa[channel]+this->tabCfb[channel];
+	value = (((carteLEM1.readADC(channel) - 2047.0f)*(5.0f/4095.0f))/(0.04167))*this->tabCfa[channel]+this->tabCfb[channel];
+			//*(5.0/4095.0))*1+0;
+	//carteEIC1.switchToi2c(0);
+
+
+	//0.0195 -> b0
+
 
 	return value;
 
 }
 
-uint8_t OUELEC_0158:: setPosition(uint8_t channel, uint16_t value){
+uint8_t OUELEC_0158:: setPosition(uint8_t channel, int value){
 
 	carteEIC1.switchToi2c(1);
 	carteLEM1.setDAC( channel, value);
@@ -103,7 +113,9 @@ uint8_t OUELEC_0158::loadJson(){
 	std::string s;
 	uint8_t error =0;
 	carteEIC1.getJsonStringfromMemory(s);
+	//std::string test;
 
+	//test.assign(this->jsonstruct.dump());
 
 	try{
 
@@ -121,18 +133,55 @@ uint8_t OUELEC_0158::loadJson(){
 	tabCfb[3] = this->jsonstruct.at("/CAL/CFB/3"_json_pointer);
 	tabCfb[4] = this->jsonstruct.at("/CAL/CFB/4"_json_pointer);
 
+	this->partNb.assign(this->jsonstruct.at("/IDN/PART_NB"_json_pointer));
+	this->serialNb.assign(this->jsonstruct.at("/IDN/SERIAL_NB"_json_pointer));
+	this->affaire.assign(this->jsonstruct.at("/IDN/AFFAIRE"_json_pointer));
+	this->calDate.assign(this->jsonstruct.at("/MCO/CAL_N_DATE"_json_pointer));
+	this->mcoDate.assign(this->jsonstruct.at("/MCO/MCO_N_DATE"_json_pointer));
+
 
 	}catch(json::parse_error& e){
+
+		tabCfa[0] = 1;
+		tabCfa[1] = 1;
+		tabCfa[2] = 1;
+		tabCfa[3] = 1;
+		tabCfa[4] = 1;
+
+		tabCfb[0] = 0;
+		tabCfb[1] = 0;
+		tabCfb[2] = 0;
+		tabCfb[3] = 0;
+		tabCfb[4] = 0;
+
+		this->partNb.assign("UNKNOW PART NB");
+		this->serialNb.assign("UNKNOW SERIAL NB");
+		this->affaire.assign("UNKNOW AFFAIR NB");
+		this->calDate.assign("UNKNOW LAST CAL");
+		this->mcoDate.assign("UNKNOW LAST MCO");
+
 		error = 1;
 	}
 	catch (json::out_of_range& e)
 	{
 		error = 2;
 	}
-
 return error;
 }
 
 
-
-
+std::string OUELEC_0158::getPartnb(){
+	return this->partNb;
+}
+std::string OUELEC_0158::getSerialnb(){
+	return this->serialNb;
+}
+std::string OUELEC_0158::getAffaire(){
+	return this->affaire;
+}
+std::string OUELEC_0158::getLastcal(){
+	return this->calDate;
+}
+std::string OUELEC_0158::getLastmco(){
+	return this->mcoDate;
+}

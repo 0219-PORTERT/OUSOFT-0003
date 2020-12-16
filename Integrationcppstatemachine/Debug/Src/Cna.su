@@ -11,9 +11,9 @@ move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::
 Cna.cpp:14:1:Cna::Cna()	16	static
 Cna.cpp:19:1:Cna::Cna(std::__cxx11::string)	48	static
 Memory.h:17:7:Memory::Memory(const Memory&)	16	static
-OUCART0018.h:15:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
+OUCART0018.h:14:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
 OUCART0020.h:14:7:constexpr OUCART0020::OUCART0020(const OUCART0020&)	16	static
-OUELEC0158.h:20:7:OUELEC_0158::OUELEC_0158(const OUELEC_0158&)	16	static
+OUELEC0158.h:20:7:OUELEC_0158::OUELEC_0158(const OUELEC_0158&)	24	static
 Cna.cpp:24:1:Cna::Cna(std::__cxx11::string, OUELEC_0158, uint8_t)	56	static
 Cna.cpp:28:1:Cna::~Cna()	16	static
 Cna.cpp:28:1:virtual Cna::~Cna()	16	static

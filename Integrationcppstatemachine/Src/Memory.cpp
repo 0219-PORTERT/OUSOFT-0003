@@ -6,6 +6,8 @@
  */
 
 #include "Memory.h"
+
+#include <sys/_stdint.h>
 #include "tm_stm32_i2c.h"
 #include "i2c.h"
 #include <String>
@@ -80,7 +82,7 @@ uint8_t Memory::writetomemory(std::string &_towrite){
 
 	test = (uint8_t)TM_I2C_IsDeviceConnected(I2C1, this->i2cadress);
 
-
+	//this->eraseAll();
 	//I2Cscanner(I2C1);
 	TM_I2C_WriteMultiNoRegister(I2C1, this->i2cadress, data, sizeof(data));
 
@@ -89,27 +91,14 @@ uint8_t Memory::writetomemory(std::string &_towrite){
 
 
 
+void Memory::eraseAll(){
+	uint8_t data2[256];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	for(int i =0; i<sizeof(data2);i++){
+		data2[i] = '\0';
+	}
+	TM_I2C_WriteMultiNoRegister(I2C1, this->i2cadress, data2, sizeof(data2));
+}
 
 
 

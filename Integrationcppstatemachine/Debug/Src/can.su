@@ -11,17 +11,17 @@ move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::
 Can.cpp:17:1:Can::Can()	16	static
 Can.cpp:22:1:Can::Can(std::__cxx11::string, TM_ADC_Channel_t)	56	static
 Memory.h:17:7:Memory::Memory(const Memory&)	16	static
-OUCART0018.h:15:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
+OUCART0018.h:14:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
 OUCART0020.h:14:7:constexpr OUCART0020::OUCART0020(const OUCART0020&)	16	static
-OUELEC0158.h:20:7:OUELEC_0158::OUELEC_0158(const OUELEC_0158&)	16	static
+OUELEC0158.h:20:7:OUELEC_0158::OUELEC_0158(const OUELEC_0158&)	24	static
 Can.cpp:26:1:Can::Can(std::__cxx11::string, OUELEC_0158, TM_ADC_Channel_t)	56	static
 Can.cpp:30:1:Can::~Can()	16	static
 Can.cpp:30:1:virtual Can::~Can()	16	static
 Can.cpp:34:11:virtual short int Can::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	192	static
 Can.cpp:66:5:int Can::decodeInstruct(std::__cxx11::string&)	24	static
-Can.cpp:86:10:uint16_t Can::readADC()	16	static
-Can.cpp:101:7:float Can::readADCImoy(int)	32	static
-Can.cpp:121:7:float Can::InstCurrent()	16	static
+Can.cpp:86:10:uint16_t Can::readADC()	24	static
+Can.cpp:104:7:float Can::readADCImoy(int)	32	static
+Can.cpp:125:7:float Can::InstCurrent()	24	static
 string_conversions.h:99:5:) [with _String = std::__cxx11::basic_string<char>; _CharT = char]	52	dynamic
 basic_string.h:139:14:std::__cxx11::basic_string<char>::_Alloc_hider::~_Alloc_hider()	16	static
 basic_string.h:5956:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&&, std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&&) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	40	static
@@ -446,6 +446,6 @@ stl_algobase.h:357:9:static _Tp* std::__copy_move<_IsMove, true, std::random_acc
 alloc_traits.h:474:2:) [with _Up = std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> >; _Args = {const std::pair<const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long long int, long long unsigned int, double, std::allocator, nlohmann::adl_serializer, std::vector<unsigned char, std::allocator<unsigned char> > > >&}; _Tp = std::_Rb_tree_node<std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> > >]	24	static
 stl_pair.h:292:17:std::pair<_T1, _T2>::pair(const std::pair<_T1, _T2>&) [with _T1 = const std::__cxx11::basic_string<char>; _T2 = nlohmann::basic_json<>]	16	static
 new_allocator.h:135:2:) [with _Up = std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> >; _Args = {const std::pair<const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long long int, long long unsigned int, double, std::allocator, nlohmann::adl_serializer, std::vector<unsigned char, std::allocator<unsigned char> > > >&}; _Tp = std::_Rb_tree_node<std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> > >]	40	static
-Can.cpp:131:1:void __static_initialization_and_destruction_0(int, int)	16	static
-Can.cpp:131:1:cpp)	8	static
-Can.cpp:131:1:cpp)	8	static
+Can.cpp:137:1:void __static_initialization_and_destruction_0(int, int)	16	static
+Can.cpp:137:1:cpp)	8	static
+Can.cpp:137:1:cpp)	8	static

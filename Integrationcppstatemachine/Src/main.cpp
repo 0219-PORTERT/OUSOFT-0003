@@ -211,15 +211,15 @@ int main(void) {
 	Can CanW4("W4",rack2,TM_ADC_Channel_3);
 	Can CanZ2("Z2",rack2,TM_ADC_Channel_4);
 
-	SimCapTemp SIMT1("T1",TEMPCAP1,POT1KA_I2CADD,POT100KA_I2CADD);
-	SimCapTemp SIMT2("T2",TEMPCAP2,POT1KA_I2CADD,POT100KA_I2CADD);
-	SimCapTemp SIMT3("T3",TEMPCAP3,POT1KA_I2CADD,POT100KA_I2CADD);
-	SimCapTemp SIMT4("T4",TEMPCAP4,POT1KA_I2CADD,POT100KA_I2CADD);
+	SimCapTemp SIMT1("T1",TEMPCAP1,rack1,POT1KA_I2CADD,POT100KA_I2CADD);
+	SimCapTemp SIMT2("T2",TEMPCAP2,rack1,POT1KA_I2CADD,POT100KA_I2CADD);
+	SimCapTemp SIMT3("T3",TEMPCAP3,rack1,POT1KA_I2CADD,POT100KA_I2CADD);
+	SimCapTemp SIMT4("T4",TEMPCAP4,rack1,POT1KA_I2CADD,POT100KA_I2CADD);
 
-	SimCapTemp SIMT5("T5",TEMPCAP5,POT1KB_I2CADD,POT100KB_I2CADD);
-	SimCapTemp SIMT6("T6",TEMPCAP6,POT1KB_I2CADD,POT100KB_I2CADD);
-	SimCapTemp SIMT7("T7",TEMPCAP7,POT1KB_I2CADD,POT100KB_I2CADD);
-	SimCapTemp SIMT8("T8",TEMPCAP8,POT1KB_I2CADD,POT100KB_I2CADD);
+	SimCapTemp SIMT5("T5",TEMPCAP5,rack2,POT1KB_I2CADD,POT100KB_I2CADD);
+	SimCapTemp SIMT6("T6",TEMPCAP6,rack2,POT1KB_I2CADD,POT100KB_I2CADD);
+	SimCapTemp SIMT7("T7",TEMPCAP7,rack2,POT1KB_I2CADD,POT100KB_I2CADD);
+	SimCapTemp SIMT8("T8",TEMPCAP8,rack2,POT1KB_I2CADD,POT100KB_I2CADD);
 
 	EXPSEC ExpSecu1("SECU");
 
@@ -424,9 +424,9 @@ int main(void) {
 	//SCPI_MAIN.SetSendEnable(1); //bloquer
 	//SCPI_MAIN.modeperoquet(1); //uncomment to active parrot mode
 	/*enableI2C_EXT2();
-	rack1.carteEIC1.switchToi2c(6);
-	I2Cscanner(I2C1);*/
-	/*rack1.carteEIC1.switchToi2c(1);
+	rack1.carteEIC1.switchToi2c(0);
+	I2Cscanner(I2C1);
+	rack1.carteEIC1.switchToi2c(1);
 	I2Cscanner(I2C1);
 	disableI2C_EXT2();*/
 
@@ -603,7 +603,7 @@ void initStateMachine(void) {
 
 
 
-	UART_transmit("*** OUSOFT-0003 v0.6-master ***");
+	UART_transmit("*** OUSOFT-0003 v0.7-master ***");
 	UART_transmit("--- Hardware init ---");
 
 	UART_transmit("--- init : GPIO");

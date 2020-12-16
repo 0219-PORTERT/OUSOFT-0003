@@ -85,12 +85,15 @@ int Can::decodeInstruct(std::string& _cmde) {
 
 uint16_t Can::readADC(){
 
+	uint16_t value = 0;
 
 	if(this->rack.getRackadress() == NULL){
 		return TM_ADC_Read(ADC3, this->channel);
 	}else{
-		//return this->rack.readCurrent(this->codeErr.errid);
-		return this->rack.readCurrent(this->channel);
+		this->rack.carteEIC1.switchToi2c(1);
+		value = this->rack.readCurrent(this->channel);
+		this->rack.carteEIC1.switchToi2c(0);
+		return value;
 	}
 
 
@@ -106,26 +109,29 @@ float Can::readADCImoy(int nb){
 		for(int i = 0;i<nb;i++){
 			value = value + TM_ADC_Read(ADC3, this->channel);
 		}
+		moyenne = (float)value/(float)nb;
+		return ((3.3/4095.0)*moyenne);
 	}else{
+		this->rack.carteEIC1.switchToi2c(1);
 		for(int i = 0;i<nb;i++){
-			//value = value + this->rack.readCurrent(this->codeErr.errid);
 			value = value + this->rack.readCurrent(this->channel);
 		}
+		this->rack.carteEIC1.switchToi2c(0);
+		moyenne = (float)value/(float)nb;
+		return moyenne;
 	}
-
-
-	moyenne = (float)value/(float)nb;
-	return ((3.3/4095.0)*moyenne);
 }
 
 float Can::InstCurrent(){
 
-
+	float value = 0;
 
 	if(this->rack.getRackadress() == NULL){
 		return ((3.3/4095.0)*TM_ADC_Read(ADC3, this->channel));
 	}else{
-		//return ((3.3/4095.0)*this->rack.readCurrent(this->codeErr.errid));
-		return ((3.3/4095.0)*this->rack.readCurrent(this->channel));
+		this->rack.carteEIC1.switchToi2c(1);
+		value = this->rack.readCurrent(this->channel);
+		this->rack.carteEIC1.switchToi2c(0);
+		return value;
 	}
 }

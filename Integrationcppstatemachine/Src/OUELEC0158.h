@@ -26,9 +26,10 @@ public:
 	void setRackadress(uint8_t adr);
 	uint8_t getRackadress(void);
 	float readCurrent(uint8_t channel);
-	uint8_t setPosition(uint8_t channel, uint16_t value);
+	uint8_t setPosition(uint8_t channel, int value);
 	uint8_t loadJson();
 	void init();
+
 
 	OUCART0018 carteEIC1;
 	OUCART0020 carteLEM1;
@@ -37,10 +38,21 @@ private:
 
 	nlohmann::json jsonstruct;
 	uint8_t adressrack;
-	uint8_t tabCfa[5];
-	uint8_t tabCfb[5];
+
+	float tabCfa[5];
+	float tabCfb[5];
+	std::string partNb;
+	std::string serialNb;
+	std::string affaire;
+	std::string calDate;
+	std::string mcoDate;
 
 
+	std::string getPartnb();
+	std::string getSerialnb();
+	std::string getAffaire();
+	std::string getLastcal();
+	std::string getLastmco();
 
 
 

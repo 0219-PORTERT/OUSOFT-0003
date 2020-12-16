@@ -40,7 +40,7 @@ private:
 
 
 	nlohmann::json jsonstruct;
-
+	void eraseAll();
 
 };
 

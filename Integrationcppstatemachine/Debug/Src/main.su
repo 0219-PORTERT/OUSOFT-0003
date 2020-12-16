@@ -10,10 +10,10 @@ stl_tree.h:173:5:std::_Rb_tree_header::_Rb_tree_header()	16	static
 stl_tree.h:206:5:void std::_Rb_tree_header::_M_reset()	16	static
 move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::type&) [with _Tp = const nlohmann::basic_json<>&]	16	static
 Memory.h:17:7:Memory::Memory(const Memory&)	16	static
-OUCART0018.h:15:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
+OUCART0018.h:14:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
 OUCART0020.h:14:7:constexpr OUCART0020::OUCART0020(const OUCART0020&)	16	static
-OUELEC0158.h:20:7:OUELEC_0158::OUELEC_0158(const OUELEC_0158&)	16	static
-main.cpp:135:5:int main()	9792	static,ignoring_inline_asm
+OUELEC0158.h:20:7:OUELEC_0158::OUELEC_0158(const OUELEC_0158&)	24	static
+main.cpp:135:5:int main()	17824	static,ignoring_inline_asm
 main.cpp:533:5:int getExpSecuErrorcode()	96	static
 main.cpp:550:6:void initSCPI()	88	static
 main.cpp:582:6:void initStateMachine()	744	static

@@ -27,10 +27,10 @@ public:
 
 	virtual ~Cna();
 private:
-	int modValue;
 	std::string _name;
-	uint8_t channel;
 	OUELEC_0158 rack;
+	uint8_t channel;
+	int modValue;
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
 	int decodeInstruct(std::string& _cmde);
 	void setModulation();

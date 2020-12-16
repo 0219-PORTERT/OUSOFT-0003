@@ -42,9 +42,10 @@ public:
 private:
 	std::string _name;
 	uint8_t capteur;
+	OUELEC_0158 rack;
 	uint8_t addpot1k;
 	uint8_t addpot100k;
-	OUELEC_0158 rack;
+
 
 	int tempValue;
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
