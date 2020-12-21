@@ -37,7 +37,7 @@ class SimCapTemp : public ScpiClientServer {
 public:
 	SimCapTemp();
 	SimCapTemp(std::string _name, uint8_t _capteur, uint8_t _addpot1k, uint8_t _addpot100k);
-	SimCapTemp(std::string _name, uint8_t _capteur, OUELEC_0158 _rack ,uint8_t _addpot1k, uint8_t _addpot100k);
+	SimCapTemp(std::string _name, uint8_t _capteur, OUELEC_0158 _rack);
 	virtual ~SimCapTemp();
 private:
 	std::string _name;

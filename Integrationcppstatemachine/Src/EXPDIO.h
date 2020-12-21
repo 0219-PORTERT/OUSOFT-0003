@@ -11,6 +11,7 @@
 #include "ScpiClientServer.h"
 #include <String>
 #include <iostream>
+#include "OUELEC0158.h"
 
 #define REQ_RST 1
 #define REQ_IDN 2
@@ -36,6 +37,7 @@ class EXPDIO : public ScpiClientServer  {
 public:
 	EXPDIO();
 	EXPDIO(std::string _name, uint8_t _side);
+	EXPDIO(std::string _name, uint8_t _side, OUELEC_0158 _rack);
 	virtual ~EXPDIO();
 
 	uint8_t getSDR(void);
@@ -52,6 +54,7 @@ public:
 private:
 	std::string _name;
 	uint8_t side;
+	OUELEC_0158 rack;
 	uint8_t direction;
 	uint8_t writevalue;
 
@@ -61,8 +64,6 @@ private:
 
 	std::string testAB(uint8_t bytetosend);
 
-	uint16_t readPin();
-	uint16_t writePin();
 };
 
 #endif /* EXPDIO_H_ */

@@ -65,7 +65,7 @@ uint8_t OUCART0018::getJsonStringfromMemory(std::string &_toread){
 
 	this->switchToi2c(0);
 	this->mem1.readfrommemory(_toread);
-
+	this->switchToi2c(6);
 	return test;
 }
 
@@ -74,7 +74,7 @@ uint8_t OUCART0018::storeJsonStringtoMemory(std::string &_towrite){
 
 	this->switchToi2c(0);
 	this->mem1.writetomemory(_towrite);
-
+	this->switchToi2c(6);
 	return test;
 
 }
@@ -101,5 +101,41 @@ void  OUCART0018::getjsonwithref(json& j){
 	j = s;
 
 }
+
+void OUCART0018::setTemp(uint8_t rGcode,uint8_t rPcode, uint8_t capteur ){
+	this->switchToi2c(0); //switch to i2c channel 0 carte 0018
+	//settings
+	TM_I2C_Write(I2C1,POT_I2CADD, capteur, rPcode);
+	//HAL_Delay(10);
+	TM_I2C_Write(I2C1, POT_I2CADD, capteur, rGcode);
+	this->switchToi2c(6);
+}
+
+void OUCART0018::setDir(uint8_t side, uint8_t dir){
+	this->switchToi2c(0); //switch to i2c channel 0 carte 0018
+	TM_I2C_Write(I2C1, EXPSECU_I2CADD, side, dir);
+	this->switchToi2c(6);
+}
+void OUCART0018::writePort(uint8_t side, uint8_t writeBits){
+	this->switchToi2c(0); //switch to i2c channel 0 carte 0018
+	TM_I2C_Write(I2C1, EXPSECU_I2CADD, side, writeBits);
+	this->switchToi2c(6);
+}
+void OUCART0018::readPort(uint8_t side, uint8_t *data){
+	this->switchToi2c(0); //switch to i2c channel 0 carte 0018
+
+/*	uint8_t test = 0;
+
+	test = (uint8_t)TM_I2C_IsDeviceConnected(I2C1, EXPSECU_I2CADD);*/
+
+	TM_I2C_WriteNoRegister(I2C1, EXPSECU_I2CADD, side); //write input port 1
+	TM_I2C_ReadNoRegister(I2C1, (EXPSECU_I2CADD)|(1u<<0), data); //read from input port 1
+	this->switchToi2c(6);
+}
+
+uint8_t OUCART0018::isConnected(){
+	return (uint8_t)TM_I2C_IsDeviceConnected(I2C1, this->i2cadress);
+}
+
 
 

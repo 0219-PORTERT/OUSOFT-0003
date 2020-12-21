@@ -31,7 +31,7 @@ SimCapTemp::SimCapTemp(std::string _name, uint8_t _capteur, uint8_t _addpot1k, u
 	this->rack.setRackadress(NULL);
 }
 
-SimCapTemp::SimCapTemp(std::string _name, uint8_t _capteur, OUELEC_0158 _rack ,uint8_t _addpot1k, uint8_t _addpot100k): ScpiClientServer(_name), capteur(_capteur), rack(_rack), addpot1k(_addpot1k), addpot100k(_addpot100k){
+SimCapTemp::SimCapTemp(std::string _name, uint8_t _capteur, OUELEC_0158 _rack ): ScpiClientServer(_name), capteur(_capteur), rack(_rack){
 	// TODO Auto-generated constructor stub
 	this->tempValue = 25;
 }
@@ -117,43 +117,26 @@ void SimCapTemp::setTemp(int tValue){
 	int Rth =0;
 	int Rapp=0;
 
+
+	//conversion temperature to resistance
+	rT = (r25 * ((1+alpha*(tValue-25)+beta*pow((tValue-25),2)))); //Resistance totale théorique
+
+	//repartition resistance to Rp et Rg
+
+	rGcode = round(((rT - 500)/390.0)); //code resistance 100k
+	rPcode = round((rT - rGcode*390)/4.0)-37;//code resistance 1k
+
+	Rth = rPcode*4 + rGcode*390; //resistance totale après 2pot ?
+	Rapp = ((rPcode/256.0)*1000+75) + ((rGcode/256.0)*100000+75); // resistance réelle appliquée sur les pot ;
+
 	if(this->rack.getRackadress() == NULL){
-		//conversion temperature to resistance
-		rT = (r25 * ((1+alpha*(tValue-25)+beta*pow((tValue-25),2)))); //Resistance totale théorique
-
-		//repartition resistance to Rp et Rg
-
-		rGcode = round(((rT - 500)/390.0)); //code resistance 100k
-		rPcode = round((rT - rGcode*390)/4.0)-37;//code resistance 1k
-
-		Rth = rPcode*4 + rGcode*390; //resistance totale après 2pot ?
-		Rapp = ((rPcode/256.0)*1000+75) + ((rGcode/256.0)*100000+75); // resistance réelle appliquée sur les pot ;
-
-
 		//settings
 		TM_I2C_Write(I2C4,this->addpot1k, this->capteur, rPcode);
 		//HAL_Delay(10);
 		TM_I2C_Write(I2C4, this->addpot100k, this->capteur, rGcode);
 	}else{
-		this->rack.carteEIC1.switchToi2c(0);
-		//conversion temperature to resistance
-		rT = (r25 * ((1+alpha*(tValue-25)+beta*pow((tValue-25),2)))); //Resistance totale théorique
-
-		//repartition resistance to Rp et Rg
-
-		rGcode = round(((rT - 500)/390.0)); //code resistance 100k
-		rPcode = round((rT - rGcode*390)/4.0)-37;//code resistance 1k
-
-		Rth = rPcode*4 + rGcode*390; //resistance totale après 2pot ?
-		Rapp = ((rPcode/256.0)*1000+75) + ((rGcode/256.0)*100000+75); // resistance réelle appliquée sur les pot ;
-
-
-		//settings
-		TM_I2C_Write(I2C4,this->addpot1k, this->capteur, rPcode);
-		//HAL_Delay(10);
-		TM_I2C_Write(I2C4, this->addpot100k, this->capteur, rGcode);
+		this->rack.carteEIC1.setTemp(rGcode, rPcode, this->capteur);
 	}
-
 }
 
 void SimCapTemp::MeasMin(){

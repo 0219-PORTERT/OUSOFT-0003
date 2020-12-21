@@ -22,7 +22,8 @@ OUELEC_0158::OUELEC_0158(uint8_t _adressrack) {
 				{"IDN", {
 						{"PART_NB","PARTXXXX"},
 						{"SERIAL_NB","SERXXXX"},
-						{"AFFAIRE","XXXX"}
+						{"AFFAIRE","XXXX"},
+						{"REV","XXXX"}
 				}},
 				{"MCO", {
 						{"MCO_N_DATE","10/12/20"},
@@ -168,7 +169,6 @@ uint8_t OUELEC_0158::loadJson(){
 	}
 return error;
 }
-
 
 std::string OUELEC_0158::getPartnb(){
 	return this->partNb;

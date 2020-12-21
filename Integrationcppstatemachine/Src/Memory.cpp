@@ -92,7 +92,7 @@ uint8_t Memory::writetomemory(std::string &_towrite){
 
 
 void Memory::eraseAll(){
-	uint8_t data2[256];
+	uint8_t data2[255];
 
 	for(int i =0; i<sizeof(data2);i++){
 		data2[i] = '\0';

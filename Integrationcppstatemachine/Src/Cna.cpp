@@ -39,7 +39,7 @@ short int Cna::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		//Set_Dac_Value(DAC_CHANNEL_1, 0); // reset
 		//Set_Dac_Value(DAC_CHANNEL_2, 0);
 
-		//setModulation();
+		setModulation();
 
 		break;
 	case REQ_IDN:

@@ -25,6 +25,16 @@ public:
 
 	std::string serialize(nlohmann::json j);
 	void getjsonwithref(json& j);
+	void setTemp(uint8_t rGcode,uint8_t rPcode, uint8_t capteur );
+
+	void setDir(uint8_t side, uint8_t dir);
+	void writePort(uint8_t side, uint8_t writeBits);
+	void readPort(uint8_t side, uint8_t *data);
+
+	uint8_t isConnected(void);
+
+
+
 private:
 
 	uint8_t i2cadress;

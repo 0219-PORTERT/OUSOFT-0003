@@ -41,7 +41,10 @@ Src/FonctionsAutotest.o: ../Src/FonctionsAutotest.cpp \
  ../Inc/defines.h ../Inc/tm_stm32_i2c.h ../Inc/stm32fxxx_hal.h \
  ../Inc/defines.h ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h \
  ../Inc/attributes.h ../Inc/i2c.h ../Inc/main.h ../Inc/usart.h \
- ../Inc/stateMachine.h ../Inc/..\Src\CerrG.h ../Inc/stm32fxxx_hal.h
+ ../Inc/stateMachine.h ../Inc/..\Src\CerrG.h ../Inc/stm32fxxx_hal.h \
+ ../Inc/main.h ../Src/OUELEC0158.h ../Src/json.hpp ../Src/OUCART0018.h \
+ ../Src/Memory.h ../Src/OUCART0020.h ../Src/ScpiClientServer.h \
+ ../Src/CerrG.h
 
 ../Inc/FonctionsAutotest.h:
 
@@ -146,3 +149,19 @@ Src/FonctionsAutotest.o: ../Src/FonctionsAutotest.cpp \
 ../Inc/..\Src\CerrG.h:
 
 ../Inc/stm32fxxx_hal.h:
+
+../Inc/main.h:
+
+../Src/OUELEC0158.h:
+
+../Src/json.hpp:
+
+../Src/OUCART0018.h:
+
+../Src/Memory.h:
+
+../Src/OUCART0020.h:
+
+../Src/ScpiClientServer.h:
+
+../Src/CerrG.h:

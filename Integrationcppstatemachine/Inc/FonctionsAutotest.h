@@ -7,11 +7,11 @@
 
 #ifndef FONCTIONSAUTOTEST_H_
 #define FONCTIONSAUTOTEST_H_
-#ifdef __cplusplus
- extern "C" {
-#endif
+
 
 #include "stm32f7xx_hal.h"
+#include <String>
+#include <iostream>
 
 /*ERROR level 1*/
 #define CERR_AUTOTEST_ERROR 0x1000
@@ -59,8 +59,7 @@ uint16_t testTemperature(void);
 uint16_t Simtemp1(void);
 uint16_t testEXP(void);
 void I2Cscanner(I2C_TypeDef* I2Cx);
+std::string checkDTI(void);
 
-#ifdef __cplusplus
-}
-#endif
+
 #endif /* FONCTIONSAUTOTEST_H_ */

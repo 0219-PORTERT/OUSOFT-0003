@@ -10,6 +10,7 @@
 #include "i2c.h"
 #include <String>
 #include <iostream>
+#include "OUELEC0158.h"
 
 EXPDIO::EXPDIO() {
 	// TODO Auto-generated constructor stub
@@ -17,6 +18,13 @@ EXPDIO::EXPDIO() {
 }
 
 EXPDIO::EXPDIO(std::string _name, uint8_t _side): ScpiClientServer(_name), side(_side) {
+	// TODO Auto-generated constructor stub
+
+	this->direction = -1; //entrée
+	this->rack.setRackadress(NULL);
+}
+
+EXPDIO::EXPDIO(std::string _name, uint8_t _side,OUELEC_0158 _rack): ScpiClientServer(_name), side(_side), rack(_rack) {
 	// TODO Auto-generated constructor stub
 
 	this->direction = -1; //entrée
@@ -154,12 +162,21 @@ uint8_t EXPDIO::readPort(){
 		this->direction = 0xFF; //config input
 		setDir();
 	}
-	if(this->side == SIDEA){
-		TM_I2C_WriteNoRegister(I2C4, EXP_DIO_I2CADD, 0x00); //write input port 0
-		TM_I2C_ReadNoRegister(I2C4, (EXP_DIO_I2CADD)|(1u<<0), &data); //read from input port 0
+
+	if(this->rack.getRackadress() == NULL){
+		if(this->side == SIDEA){
+			TM_I2C_WriteNoRegister(I2C4, EXP_DIO_I2CADD, 0x00); //write input port 0
+			TM_I2C_ReadNoRegister(I2C4, (EXP_DIO_I2CADD)|(1u<<0), &data); //read from input port 0
+		}else{
+			TM_I2C_WriteNoRegister(I2C4, EXP_DIO_I2CADD, 0x01); //write input port 1
+			TM_I2C_ReadNoRegister(I2C4, (EXP_DIO_I2CADD)|(1u<<0), &data); //read from input port 1
+		}
 	}else{
-		TM_I2C_WriteNoRegister(I2C4, EXP_DIO_I2CADD, 0x01); //write input port 1
-		TM_I2C_ReadNoRegister(I2C4, (EXP_DIO_I2CADD)|(1u<<0), &data); //read from input port 1
+		if(this->side == SIDEA){
+			this->rack.carteEIC1.readPort(0x00, &data);
+		}else{
+			this->rack.carteEIC1.readPort(0x01, &data);
+		}
 	}
 	return data;
 }
@@ -169,19 +186,37 @@ uint8_t EXPDIO::writePort(){
 		this->direction = 0x00; //config output
 		setDir();
 	}
-	if(this->side == SIDEA){
-		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x02, this->writevalue);
+
+	if(this->rack.getRackadress() == NULL){
+		if(this->side == SIDEA){
+			TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x02, this->writevalue);
+		}else{
+			TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x03, this->writevalue);
+		}
 	}else{
-		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x03, this->writevalue);
+		if(this->side == SIDEA){
+			this->rack.carteEIC1.writePort(0x02, this->writevalue);
+		}else{
+			this->rack.carteEIC1.writePort(0x03, this->writevalue);
+		}
 	}
 	return 0;
 }
 
 uint8_t EXPDIO::setDir(){
-	if(this->side == SIDEA){
-		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x06, this->direction);
+
+	if(this->rack.getRackadress() == NULL){
+		if(this->side == SIDEA){
+			TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x06, this->direction);
+		}else{
+			TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x07, this->direction);
+		}
 	}else{
-		TM_I2C_Write(I2C4, EXP_DIO_I2CADD, 0x07, this->direction);
+		if(this->side == SIDEA){
+			this->rack.carteEIC1.setDir(0x06, this->direction);
+		}else{
+			this->rack.carteEIC1.setDir(0x07, this->direction);
+		}
 	}
 	return 0;
 }
@@ -332,9 +367,4 @@ uint8_t EXPDIO::getRTA(void){
 	}
 	return 0;
 }
-uint16_t EXPDIO::readPin(){
-	return 0;
-}
-uint16_t EXPDIO::writePin(){
-	return 0;
-}
+

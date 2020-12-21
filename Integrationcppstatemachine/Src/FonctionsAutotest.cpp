@@ -13,6 +13,20 @@
 #include <String>
 #include <iostream>
 #include "stm32fxxx_hal.h"
+#include "main.h"
+#include "OUELEC0158.h"
+#include "OUCART0018.h"
+#include "ScpiClientServer.h"
+#include <string>
+#include <iostream>
+#include "CerrG.h"
+
+extern OUELEC_0158 rack1;
+extern OUELEC_0158 rack2;
+extern OUCART0018 psu;
+extern OUCART0018 accordsOsc;
+extern ScpiClientServer SCPI_MAIN;
+extern CerrG mainCerrG;
 
 uint16_t autoTest(void){
 
@@ -159,6 +173,82 @@ uint16_t CheckI2C1(void){
 		return  CERR_ERRROR1 ;
 	}
 	return CERR_NOLOCALERRROR;
+}
+
+std::string checkDTI(){
+
+	uint8_t *data = 0;
+	uint16_t oucart0014value = 0;
+
+	/*uint8_t masqueCONTROL = 0x00;
+	uint8_t masquePSU = 0x08;
+	uint8_t masqueRACKCH = 0xF2;
+	uint8_t masqueACCOSC = 0x00;*/
+	std::string s;
+	char hex_str[5];
+	std::string retourdti;
+
+	*data = 0;
+
+
+
+
+	SCPI_MAIN.ReceiveMsg("SECU:SECU:DATA ?",s, mainCerrG);
+	oucart0014value = stoi(s);
+	oucart0014value = oucart0014value & 0x00ff;
+
+
+	sprintf(hex_str, "0x%x", oucart0014value);
+	retourdti = retourdti + hex_str;
+
+	if(rack1.carteEIC1.isConnected() == 0){
+		rack1.carteEIC1.readPort(0x00, data);
+		sprintf(hex_str, "0x%x", *data);
+		retourdti = retourdti +","+ hex_str;
+	}else{
+		retourdti = retourdti +","+"NC";
+	}
+	rack1.carteEIC1.switchToi2c(6);
+
+
+	if(rack2.carteEIC1.isConnected() == 0){
+		rack2.carteEIC1.readPort(0x00, data);
+		sprintf(hex_str, "0x%x", *data);
+		retourdti = retourdti +","+ hex_str;
+	}else{
+		retourdti = retourdti +","+"NC";
+	}
+	rack2.carteEIC1.switchToi2c(6);
+
+
+
+	if(psu.isConnected() == 0){
+		psu.readPort(0x00, data);
+		sprintf(hex_str, "0x%x", *data);
+		retourdti = retourdti +","+ hex_str;
+	}else{
+		retourdti = retourdti +","+"NC";
+	}
+	psu.switchToi2c(6);
+
+
+	if(accordsOsc.isConnected() == 0){
+		accordsOsc.readPort(0x00, data);
+		sprintf(hex_str, "0x%x", *data);
+		retourdti = retourdti +","+ hex_str;
+	}else{
+		retourdti = retourdti +","+"NC";
+	}
+	accordsOsc.switchToi2c(6);
+
+
+
+
+
+	return retourdti;
+
+
+	/*comment on switch d'un sous*ensemble à l'autre ?*/
 }
 
 uint16_t CheckIDs(void){

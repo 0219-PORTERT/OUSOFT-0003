@@ -24,6 +24,7 @@
 #include <vector>
 #include "OUELEC0158.h"
 #include "OUCART0018.h"
+#include "FonctionsAutotest.h"
 
 /* USER CODE BEGIN 0 */
 
@@ -47,6 +48,8 @@ extern OUELEC_0158 rack1;
 extern OUELEC_0158 rack2;
 extern OUCART0018 psu;
 extern OUCART0018 accordsOsc;
+
+
 
 /* UART4 init function */
 void MX_UART4_Init(void) {/*ftdi*/
@@ -83,7 +86,7 @@ void MX_UART4_Init(void) {/*ftdi*/
 
 
 	huart4.Instance = UART4;
-	huart4.Init.BaudRate = 115200;
+	huart4.Init.BaudRate = 38400;
 	huart4.Init.WordLength = UART_WORDLENGTH_8B;
 	huart4.Init.StopBits = UART_STOPBITS_1;
 	huart4.Init.Parity = UART_PARITY_NONE;
@@ -434,18 +437,62 @@ int Enqueue(std::string &RX_string){
 						std::string s;
 						rack1.carteEIC1.getJsonStringfromMemory(s);//lecture eeprom 1
 						UART_transmit(s);
-					}else{
+					}else if(eepromNb == 0){
+						;
+					}else if(eepromNb == 2){
+						std::string s;
+						rack2.carteEIC1.getJsonStringfromMemory(s);//lecture eeprom 1
+						UART_transmit(s);
+					}else if(eepromNb == 3){
+						;
+					}
+
+
+
+
+
+
+
+
+
+
+
+					else{
 						;//autre
 					}
 				}else{
 					if(eepromNb == 1){
 						dataEeprom.assign(RX_string.substr(pos+1));//écriture eeprom 1
 						rack1.carteEIC1.storeJsonStringtoMemory(dataEeprom);
-					}else{
+					}else if(eepromNb == 2){
+						dataEeprom.assign(RX_string.substr(pos+1));//écriture eeprom 1
+						rack2.carteEIC1.storeJsonStringtoMemory(dataEeprom);
+					}else if(eepromNb == 0){
+						;
+					}else if(eepromNb == 3){
+						;
+					}
+
+
+
+
+
+
+
+
+
+
+
+
+
+					else{
 						;//autre
 					}
 				}
 			}
+			Reset_uart_buffer();
+		}else if (RX_string.compare(0, 6, "DTI ?") == 0){
+			UART_transmit(checkDTI());
 			Reset_uart_buffer();
 		}else{
 			if(stateMachine != CMD){ //Protection pour empecher d'avoir plusieurs commande en meme temps

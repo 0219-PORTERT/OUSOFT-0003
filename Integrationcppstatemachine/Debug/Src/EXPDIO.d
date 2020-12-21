@@ -1,6 +1,7 @@
 Src/EXPDIO.o: ../Src/EXPDIO.cpp ../Src/EXPDIO.h ../Src/ScpiClientServer.h \
- ../Src/CerrG.h ../Inc/tm_stm32_i2c.h ../Inc/stm32fxxx_hal.h \
- ../Inc/defines.h \
+ ../Src/CerrG.h ../Src/OUELEC0158.h ../Src/json.hpp ../Src/OUCART0018.h \
+ ../Src/Memory.h ../Src/OUCART0020.h ../Inc/tm_stm32_i2c.h \
+ ../Inc/stm32fxxx_hal.h ../Inc/defines.h \
  ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h \
  ../Drivers/CMSIS/Include/core_cm7.h \
@@ -47,6 +48,16 @@ Src/EXPDIO.o: ../Src/EXPDIO.cpp ../Src/EXPDIO.h ../Src/ScpiClientServer.h \
 ../Src/ScpiClientServer.h:
 
 ../Src/CerrG.h:
+
+../Src/OUELEC0158.h:
+
+../Src/json.hpp:
+
+../Src/OUCART0018.h:
+
+../Src/Memory.h:
+
+../Src/OUCART0020.h:
 
 ../Inc/tm_stm32_i2c.h:
 

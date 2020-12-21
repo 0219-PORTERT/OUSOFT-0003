@@ -113,11 +113,11 @@ void TraitementSECU(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-extern std::string RX_string;
-extern uint8_t acknowledge;
-T_STATUS stateMachine = HELLO;
-ScpiClientServer SCPI_MAIN("TEST0256", 0);
-CerrG mainCerrG(-1);
+extern std::string RX_string; //variable extern de uart.c chaine de reception uart
+extern uint8_t acknowledge;//variable extern de uart.c indique si le mode retour ack
+T_STATUS stateMachine = HELLO; //statut de la machine d'état
+ScpiClientServer SCPI_MAIN("TEST0256", 0);//objet principale du scpi
+CerrG mainCerrG(-1);//code erreur
 
 OUELEC_0158 rack1(0x01);
 OUELEC_0158 rack2(0x02);
@@ -150,25 +150,13 @@ int main(void) {
 
 	/* Configure the system clock */
 	SystemClock_Config();
-	initStateMachine();
+	initStateMachine();//ini de la machine d'etat et des phériphériques du µC
 
-	rack1.init();
-	rack2.init();
+	rack1.init();// ini i2c des adc dac
+	rack2.init();// ini i2c des adc dac
 
 
-/*
-		Memory memtest(0xA4);
-		std::string s;
-		std::string read;
-		json j;
 
-		 memtest.getjsonstructref(j);
-		 j.at("/IDN/affaire"_json_pointer) = 46;
-		 j.at("/CAL/CFa/3"_json_pointer) = 23;
-		 s.assign(j.dump());
-
-		 memtest.writetomemory(s);
-		 memtest.readfrommemory(read);*/
 
 	/* USER CODE BEGIN SysInit */
 
@@ -211,20 +199,35 @@ int main(void) {
 	Can CanW4("W4",rack2,TM_ADC_Channel_3);
 	Can CanZ2("Z2",rack2,TM_ADC_Channel_4);
 
-	SimCapTemp SIMT1("T1",TEMPCAP1,rack1,POT1KA_I2CADD,POT100KA_I2CADD);
-	SimCapTemp SIMT2("T2",TEMPCAP2,rack1,POT1KA_I2CADD,POT100KA_I2CADD);
-	SimCapTemp SIMT3("T3",TEMPCAP3,rack1,POT1KA_I2CADD,POT100KA_I2CADD);
-	SimCapTemp SIMT4("T4",TEMPCAP4,rack1,POT1KA_I2CADD,POT100KA_I2CADD);
+	/*SimCapTemp SIMT1("T1",TEMPCAP1,POT1KA_I2CADD,POT100KA_I2CADD);
+	SimCapTemp SIMT2("T2",TEMPCAP2,POT1KA_I2CADD,POT100KA_I2CADD);
+	SimCapTemp SIMT3("T3",TEMPCAP3,POT1KA_I2CADD,POT100KA_I2CADD);
+	SimCapTemp SIMT4("T4",TEMPCAP4,POT1KA_I2CADD,POT100KA_I2CADD);
 
-	SimCapTemp SIMT5("T5",TEMPCAP5,rack2,POT1KB_I2CADD,POT100KB_I2CADD);
-	SimCapTemp SIMT6("T6",TEMPCAP6,rack2,POT1KB_I2CADD,POT100KB_I2CADD);
-	SimCapTemp SIMT7("T7",TEMPCAP7,rack2,POT1KB_I2CADD,POT100KB_I2CADD);
-	SimCapTemp SIMT8("T8",TEMPCAP8,rack2,POT1KB_I2CADD,POT100KB_I2CADD);
+	SimCapTemp SIMT5("T5",TEMPCAP5,POT1KB_I2CADD,POT100KB_I2CADD);
+	SimCapTemp SIMT6("T6",TEMPCAP6,POT1KB_I2CADD,POT100KB_I2CADD);
+	SimCapTemp SIMT7("T7",TEMPCAP7,POT1KB_I2CADD,POT100KB_I2CADD);
+	SimCapTemp SIMT8("T8",TEMPCAP8,POT1KB_I2CADD,POT100KB_I2CADD);*/
+
+	SimCapTemp SIMT1("T1",TEMPCAP1,rack1);
+	SimCapTemp SIMT2("T2",TEMPCAP2,rack1);
+	SimCapTemp SIMT3("T3",TEMPCAP3,rack1);
+	SimCapTemp SIMT4("T4",TEMPCAP4,rack1);
+
+	SimCapTemp SIMT5("T5",TEMPCAP5,rack2);
+	SimCapTemp SIMT6("T6",TEMPCAP6,rack2);
+	SimCapTemp SIMT7("T7",TEMPCAP7,rack2);
+	SimCapTemp SIMT8("T8",TEMPCAP8,rack2);
 
 	EXPSEC ExpSecu1("SECU");
 
 	EXPDIO Expdio1a("DIOA",SIDEA);
 	EXPDIO Expdio1b("DIOB",SIDEB);
+
+	EXPDIO Exprack1dioa("DIOAR1",SIDEA,rack1);
+	EXPDIO Exprack1diob("DIOBR1",SIDEB,rack1);
+	EXPDIO Exprack2dioa("DIOAR2",SIDEA,rack2);
+	EXPDIO Exprack2diob("DIOBR2",SIDEB,rack2);
 
 	SCPIclientserveurADDO ExpADDOabc("ADDO");
 
@@ -438,6 +441,8 @@ int main(void) {
 		//MSG.assign("ADDO:LEV OFF");
 		SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);*/
 
+		//checkDTI();
+
 
 		while (1) {
 
@@ -589,6 +594,7 @@ void initStateMachine(void) {
 
 	//TM_RCC_InitSystem();
 
+	/*ini i2c*/
 	TM_I2C_Init(I2C1, TM_I2C_PinsPack_1, 40000);
 	TM_I2C_Init(I2C2, TM_I2C_PinsPack_2, 40000);
 	TM_I2C_Init(I2C3, TM_I2C_PinsPack_1, 40000);
@@ -597,7 +603,7 @@ void initStateMachine(void) {
 
 	Reset_uart_buffer();
 
-	MX_UART4_Init(); //
+	MX_UART4_Init(); //ini uart 4 par ftdi
 	UART_transmit("--- init : UART4");
 	//MX_USART3_UART_Init(); //debug
 
@@ -700,6 +706,10 @@ void initStateMachine(void) {
 	/*LOAD MEMORY*/
 
 	if(rack1.loadJson() != 0){
+		mainCerrG.SetStateMachineErrorCode(ERROR_STMA_JSONLOAD);
+		UART_transmit(mainCerrG.ToString());
+	}
+	if(rack2.loadJson() != 0){
 		mainCerrG.SetStateMachineErrorCode(ERROR_STMA_JSONLOAD);
 		UART_transmit(mainCerrG.ToString());
 	}

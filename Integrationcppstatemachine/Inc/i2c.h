@@ -65,19 +65,19 @@ void disableI2C_EXT2();
 
 #define I2CTEMP 0x90
 
-#define I2CEXP 0x40
-/* USER CODE END Prototypes */
+#define I2CEXP 0x40*/
+// USER CODE END Prototypes
 
-/*OUCART-018 ADRESS*/
+//OUCART-018 ADRESS
 
 /*#define TEM_HUM_I2CADD 0x44
 #define EXPSECU_I2CADD 0x40
 #define POT_I2CADD 0x58
 #define MEMU3_I2CADD 0xa0
 #define MEMU4_I2CADD 0xa0
-#define MEMU5_I2CADD 0xa4
+#define MEMU5_I2CADD 0xa4*/
 
-/*OUCART-0014 ADRESS*/
+//OUCART-0014 ADRESS
 
 #define EXP_DATA_ADRESS_I2CADD 0x46
 
@@ -103,6 +103,9 @@ void disableI2C_EXT2();
 #define ADCDAC_I2CADD 0x22
 
 #define EEPROM1_I2CADD 0xa4
+
+#define EXPSECU_I2CADD 0x40
+#define POT_I2CADD 0x58
 
 /**/
 

@@ -31,8 +31,9 @@ public:
 
 private:
 	std::string _name;
-	TM_ADC_Channel_t channel;
 	OUELEC_0158 rack;
+	TM_ADC_Channel_t channel;
+
 	short int ExecuteCmde (std::string& _cmde,std::string& _rep);
 	int decodeInstruct(std::string& _cmde);
 	uint16_t readADC();
