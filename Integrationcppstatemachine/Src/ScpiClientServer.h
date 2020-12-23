@@ -17,23 +17,23 @@
 #define FIND_NEXT_SERVER 3
 #define ERR_REQ 4
 
-#define ERROR_LVL_MAX 1
-#define ERROR_CLIENT_MAX 2
-#define ERROR_EMPTY_CLIENT 3
-#define ERROR_CANT_FIND_CLIENT 4
-#define ERROR_CMD_SCPIHARD_SYNTHAX_ERROR 5
-#define ERROR_CMD_SCPI_SYNTHAX_ERROR 6
+#define ERROR_LVL_MAX 1 //depassement du nombre d'étage scpi
+#define ERROR_CLIENT_MAX 2 //dépassement du nombre de client max
+#define ERROR_EMPTY_CLIENT 3 //client sans informations
+#define ERROR_CANT_FIND_CLIENT 4 //client scpi inconu
+#define ERROR_CMD_SCPIHARD_SYNTHAX_ERROR 5//un client hardware scpi à reçu une mauvaise commande
+#define ERROR_CMD_SCPI_SYNTHAX_ERROR 6//un client/serveur scpi à reçu une mauvaise commande
 
-#define ERROR_BAD_MSG 7
-#define ERROR_DECOD_INSTRUCT 8
-#define ERROR_CMD_BAD_ARG 9
+#define ERROR_BAD_MSG 7 //message scpi non compris
+#define ERROR_DECOD_INSTRUCT 8 //message scpi mal décodé ou problème de synthaxe
+#define ERROR_CMD_BAD_ARG 9//paramètre d'une commande scpi depasse les limites imposé par la commande
 
 #define ERROR_TEST 99
 
 /*ERREUR STATE MACHINE LEVEL*/
-#define ERROR_STMA_JSONLOAD 1
-#define ERROR_STMA_AUTOTEST_I2CMAIN 2
-#define ERROR_STMA_AUTOTEST_I2CSECU 3
+#define ERROR_STATEMA_JSONLOAD 1 //problème de chargement du json dans le µC
+#define ERROR_STATEMA_AUTOTEST_I2CMAIN 2 //Problème sur l'i2c main oucart-0014
+#define ERROR_STATEMA_AUTOTEST_I2CSECU 3//Problème sur l'i2c secu oucart-0014
 
 //Code erreur pour p_cmde
 #define ERR_CMDE 30

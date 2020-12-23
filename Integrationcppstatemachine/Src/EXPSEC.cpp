@@ -17,14 +17,26 @@ EXPSEC::EXPSEC() {
 	// TODO Auto-generated constructor stub
 
 }
+
+/**
+ * @brief  Constructeur expsec pour l expander de secu sur oucart-0014
+ * @param  _name: Nom à donner au client
+ * @retval None
+ */
 EXPSEC::EXPSEC(std::string _name): ScpiClientServer(_name) {
 	// TODO Auto-generated constructor stub
-	this->psucontrolstate = this->staterelaysecu = 0;
+	this->psucontrolstate = this->staterelaysecu = 0; //mise à 0 du relais de secu sur oucart-0014
 }
 EXPSEC::~EXPSEC() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * @brief  client execute commande scpi
+ * @param  & _cmde: référence à la commande scpi à executer
+ * @param  & _rep: référence à la chaine de réponse scpi si le client en a besoin
+ * @retval peut retourner une erreur
+ */
 short int EXPSEC::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	//_rep.assign("Je suis le execute de la classe EXPSECu");
 
@@ -66,7 +78,7 @@ short int EXPSEC::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		break;
 	case REQ_PSUCONTROL:
 
-		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);//lors d'un changement d'etat du relai, desactivation des interruption sur le bits en question
 
 		HAL_GPIO_WritePin(GPIOF,GPIO_PIN_13 , (GPIO_PinState)this->psucontrolstate);
 
@@ -83,6 +95,11 @@ short int EXPSEC::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	return 0;
 }
 
+/**
+ * @brief  décode les instructions scpi
+ * @param  & _cmde: référence à la commande scpi à executer
+ * @retval None
+ */
 int EXPSEC::decodeInstruct(std::string& _cmde) {
 
 	int sel = 0;
@@ -131,6 +148,10 @@ int EXPSEC::decodeInstruct(std::string& _cmde) {
 	return sel;
 }
 
+/**
+ * @brief  lit le port de l'expander
+ * @retval valeur lu sur le port de l'expander
+ */
 uint16_t EXPSEC::readPort(){
 	uint8_t data = 0;
 	uint16_t value = 0;

@@ -11,6 +11,12 @@
 #include <String>
 #include <iostream>
 
+
+/**
+ * @brief  Constructeur expaddo pour utilisation de l'expander 24bits
+ * @param  _side: Nom à donner au client
+ * @retval None
+ */
 EXPADDO24::EXPADDO24(uint8_t _side) {
 	// TODO Auto-generated constructor stub
 	this->direction = 0xff; //entrée
@@ -28,6 +34,10 @@ EXPADDO24::~EXPADDO24() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * @brief  lit le port de l'expander
+ * @retval valeur lu sur le port de l'expander
+ */
 uint8_t EXPADDO24::readPort(){
 	uint8_t data = -1;
 
@@ -48,6 +58,11 @@ uint8_t EXPADDO24::readPort(){
 	return data;
 }
 
+/**
+ * @brief  ecrit sur le port de l'expander
+ * @param  _writevalue: valeur à écrire
+ * @retval None
+ */
 uint8_t EXPADDO24::writePort(uint8_t _writevalue){
 	this->writevalue = _writevalue;
 
@@ -65,6 +80,11 @@ uint8_t EXPADDO24::writePort(uint8_t _writevalue){
 	return 0;
 }
 
+/**
+ * @brief  configure le port de l'expander
+ * @param  _dir: indique quels pins seront en entrée ou sortie
+ * @retval None
+ */
 uint8_t EXPADDO24::setDir(uint8_t _dir){
 	this->direction = _dir;
 
@@ -164,7 +184,11 @@ std::string EXPADDO24::testAC(uint8_t bytetotest){
 	return error;
 }
 
-
+/**
+ * @brief  configure le port de l'expander
+ * @param  _side: port a b ou c
+ * @retval None
+ */
 void EXPADDO24::setSide(uint8_t _side){
 	this->side = _side;
 }

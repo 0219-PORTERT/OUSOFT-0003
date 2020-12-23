@@ -12,12 +12,20 @@
 #include <math.h>
 #include "tim.h"
 
+/**
+ * @brief  Constructeur pour pwm
+ * @retval None
+ */
 Pwm::Pwm() {
 	// TODO Auto-generated constructor stub
-	rpmValue = 0;
+	rpmValue = 0; //ini les pwm à 0;
 
 }
-
+/**
+ * @brief  Constructeur pour pwm
+ * @param  _name: nom du client
+ * @retval None
+ */
 Pwm::Pwm(std::string _name) :
 		ScpiClientServer(_name), rpmValue(0) {
 	// TODO Auto-generated constructor stub
@@ -27,6 +35,12 @@ Pwm::~Pwm() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * @brief  client execute commande scpi
+ * @param  & _cmde: référence à la commande scpi à executer
+ * @param  & _rep: référence à la chaine de réponse scpi si le client en a besoin
+ * @retval peut retourner une erreur
+ */
 short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	//_rep.assign("Je suis le execute de la classe pwm");
 
@@ -45,10 +59,6 @@ short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		startPwm(this->rpmValue);
 		break;
 	case REQ_QST:
-		///////////////
-		//while(1){;}/*Simulation du client qui bosse*/
-		///////////////
-		//_rep.assign("RPM: " + std::to_string(this->rpmValue) + "\n\r");
 		_rep.assign(std::to_string(this->rpmValue) + "\n\r");
 		break;
 
@@ -60,6 +70,11 @@ short int Pwm::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	return 0;
 }
 
+/**
+ * @brief  décode les instructions scpi
+ * @param  & _cmde: référence à la commande scpi à executer
+ * @retval None
+ */
 int Pwm::decodeInstruct(std::string& _cmde) {
 
 	int sel = 0;
@@ -77,10 +92,7 @@ int Pwm::decodeInstruct(std::string& _cmde) {
 			sel = -1; //bonne commande mais mauvaise valeur car mal convertie ou autre
 		} else {
 			float floatFreq = value/60.0;
-
 			this->rpmValue = round(floatFreq);
-
-			//this->rpmValue = value/60;
 			sel = REQ_x;
 		}
 	} else {

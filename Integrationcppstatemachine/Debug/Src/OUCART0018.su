@@ -33,24 +33,24 @@ json.hpp:14921:13:void nlohmann::detail::dtoa_impl::grisu2_digit_gen(char*, int&
 json.hpp:15162:13:void nlohmann::detail::dtoa_impl::grisu2(char*, int&, int&, nlohmann::detail::dtoa_impl::diyfp, nlohmann::detail::dtoa_impl::diyfp, nlohmann::detail::dtoa_impl::diyfp)	192	static
 json.hpp:15262:14:char* nlohmann::detail::dtoa_impl::append_exponent(char*, int)	24	static
 json.hpp:15314:14:char* nlohmann::detail::dtoa_impl::format_buffer(char*, int, int, int, int)	32	static
-OUCART0018.cpp:15:1:OUCART0018::OUCART0018()	16	static
-OUCART0018.cpp:20:1:OUCART0018::OUCART0018(uint8_t)	16	static
-OUCART0018.cpp:25:6:void OUCART0018::setI2cAdress(uint8_t)	16	static
-OUCART0018.cpp:29:1:OUCART0018::~OUCART0018()	16	static
-OUCART0018.cpp:29:1:virtual OUCART0018::~OUCART0018()	16	static
-OUCART0018.cpp:36:9:uint8_t OUCART0018::switchToi2c(uint8_t)	24	static
-OUCART0018.cpp:63:9:uint8_t OUCART0018::getJsonStringfromMemory(std::__cxx11::string&)	24	static
-OUCART0018.cpp:72:9:uint8_t OUCART0018::storeJsonStringtoMemory(std::__cxx11::string&)	24	static
-OUCART0018.cpp:83:13:std::__cxx11::string OUCART0018::serialize(nlohmann::json)	80	static
-OUCART0018.cpp:88:6:void OUCART0018::deserialize(std::__cxx11::string)	16	static
-OUCART0018.cpp:92:16:nlohmann::json OUCART0018::getjsonstruct()	16	static
+OUCART0018.cpp:21:1:OUCART0018::OUCART0018()	16	static
+OUCART0018.cpp:31:1:OUCART0018::OUCART0018(uint8_t)	16	static
+OUCART0018.cpp:41:6:void OUCART0018::setI2cAdress(uint8_t)	16	static
+OUCART0018.cpp:45:1:OUCART0018::~OUCART0018()	16	static
+OUCART0018.cpp:45:1:virtual OUCART0018::~OUCART0018()	16	static
+OUCART0018.cpp:54:9:uint8_t OUCART0018::switchToi2c(uint8_t)	24	static
+OUCART0018.cpp:86:9:uint8_t OUCART0018::getJsonStringfromMemory(std::__cxx11::string&)	24	static
+OUCART0018.cpp:100:9:uint8_t OUCART0018::storeJsonStringtoMemory(std::__cxx11::string&)	24	static
+OUCART0018.cpp:116:6:void OUCART0018::setTemp(uint8_t, uint8_t)	16	static
+OUCART0018.cpp:128:6:void OUCART0018::setDir(uint8_t, uint8_t)	16	static
+OUCART0018.cpp:140:6:void OUCART0018::writePort(uint8_t, uint8_t)	16	static
+OUCART0018.cpp:152:6:void OUCART0018::readPort(uint8_t, uint8_t*)	24	static
+OUCART0018.cpp:168:9:uint8_t OUCART0018::isConnected()	16	static
+OUCART0018.cpp:173:13:std::__cxx11::string OUCART0018::serialize(nlohmann::json)	80	static
+OUCART0018.cpp:178:6:void OUCART0018::deserialize(std::__cxx11::string)	16	static
+OUCART0018.cpp:182:16:nlohmann::json OUCART0018::getjsonstruct()	16	static
 move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::type&) [with _Tp = std::__cxx11::basic_string<char>&]	16	static
-OUCART0018.cpp:96:7:void OUCART0018::getjsonwithref(json&)	56	static
-OUCART0018.cpp:105:6:void OUCART0018::setTemp(uint8_t, uint8_t, uint8_t)	16	static
-OUCART0018.cpp:114:6:void OUCART0018::setDir(uint8_t, uint8_t)	16	static
-OUCART0018.cpp:119:6:void OUCART0018::writePort(uint8_t, uint8_t)	16	static
-OUCART0018.cpp:124:6:void OUCART0018::readPort(uint8_t, uint8_t*)	24	static
-OUCART0018.cpp:136:9:uint8_t OUCART0018::isConnected()	16	static
+OUCART0018.cpp:186:7:void OUCART0018::getjsonwithref(json&)	56	static
 string_conversions.h:99:5:) [with _String = std::__cxx11::basic_string<char>; _CharT = char]	52	dynamic
 basic_string.h:139:14:std::__cxx11::basic_string<char>::_Alloc_hider::~_Alloc_hider()	16	static
 basic_string.h:5956:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&&, std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&&) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	40	static
@@ -453,7 +453,7 @@ tuple:351:7:) [with T = std::__cxx11::basic_string<char>; Args = {const std::__c
 tuple:160:7:) [with T = std::__cxx11::basic_string<char>; Args = {const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&}; ObjectType = std::map; ArrayType = std::vector; StringType = std::__cxx11::basic_string<char>; BooleanType = bool; NumberIntegerType = long long int; NumberUnsignedType = long long unsigned int; NumberFloatType = double; AllocatorType = std::allocator; JSONSerializer = nlohmann::adl_serializer; BinaryType = std::vector<unsigned char>]::<lambda(std::__cxx11::basic_string<char>*)>]	16	static
 json.hpp:2564:7:nlohmann::detail::type_error::~type_error()	16	static
 json.hpp:2564:7:virtual nlohmann::detail::type_error::~type_error()	16	static
-OUCART0018.cpp:138:1:void __static_initialization_and_destruction_0(int, int)	16	static
+OUCART0018.cpp:193:1:void __static_initialization_and_destruction_0(int, int)	16	static
 shared_ptr_base.h:466:7:std::_Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp>::~_Sp_counted_deleter() [with _Ptr = nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> >*; _Deleter = std::__shared_ptr<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> >, (__gnu_cxx::_Lock_policy)0>::_Deleter<std::allocator<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> > > >; _Alloc = std::allocator<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> > >; __gnu_cxx::_Lock_policy _Lp = (__gnu_cxx::_Lock_policy)0]	16	static
 shared_ptr_base.h:466:7:std::_Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp>::~_Sp_counted_deleter() [with _Ptr = nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> >*; _Deleter = std::__shared_ptr<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> >, (__gnu_cxx::_Lock_policy)0>::_Deleter<std::allocator<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> > > >; _Alloc = std::allocator<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> > >; __gnu_cxx::_Lock_policy _Lp = (__gnu_cxx::_Lock_policy)0]	16	static
 shared_ptr_base.h:469:7:void std::_Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp>::_M_dispose() [with _Ptr = nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> >*; _Deleter = std::__shared_ptr<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> >, (__gnu_cxx::_Lock_policy)0>::_Deleter<std::allocator<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> > > >; _Alloc = std::allocator<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> > >; __gnu_cxx::_Lock_policy _Lp = (__gnu_cxx::_Lock_policy)0]	16	static
@@ -465,5 +465,5 @@ shared_ptr_base.h:449:12:_Deleter& std::_Sp_counted_deleter<_Ptr, _Deleter, _All
 shared_ptr_base.h:450:10:_Alloc& std::_Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp>::_Impl::_M_alloc() [with _Ptr = nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> >*; _Deleter = std::__shared_ptr<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> >, (__gnu_cxx::_Lock_policy)0>::_Deleter<std::allocator<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> > > >; _Alloc = std::allocator<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> > >; __gnu_cxx::_Lock_policy _Lp = (__gnu_cxx::_Lock_policy)0]	16	static
 shared_ptr_base.h:428:7:static _Tp& std::_Sp_ebo_helper<_Nm, _Tp, false>::_S_get(std::_Sp_ebo_helper<_Nm, _Tp, false>&) [with int _Nm = 0; _Tp = std::__shared_ptr<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> >, (__gnu_cxx::_Lock_policy)0>::_Deleter<std::allocator<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> > > >]	16	static
 shared_ptr_base.h:417:7:static _Tp& std::_Sp_ebo_helper<_Nm, _Tp, true>::_S_get(std::_Sp_ebo_helper<_Nm, _Tp, true>&) [with int _Nm = 1; _Tp = std::allocator<nlohmann::detail::output_string_adapter<char, std::__cxx11::basic_string<char> > >]	16	static
-OUCART0018.cpp:138:1:cpp)	8	static
-OUCART0018.cpp:138:1:cpp)	8	static
+OUCART0018.cpp:193:1:cpp)	8	static
+OUCART0018.cpp:193:1:cpp)	8	static

@@ -16,6 +16,40 @@
  *
  ******************************************************************************
  */
+
+/**
+ ******************************************************************************
+ *     SSSSSSSSSSSSSSS KKKKKKKKK    KKKKKKKFFFFFFFFFFFFFFFFFFFFFF
+ *   SS:::::::::::::::SK:::::::K    K:::::KF::::::::::::::::::::F
+ *  S:::::SSSSSS::::::SK:::::::K    K:::::KF::::::::::::::::::::F
+ *  S:::::S     SSSSSSSK:::::::K   K::::::KFF::::::FFFFFFFFF::::F
+ *  S:::::S            KK::::::K  K:::::KKK  F:::::F       FFFFFF
+ *  S:::::S              K:::::K K:::::K     F:::::F
+ *   S::::SSSS           K::::::K:::::K      F::::::FFFFFFFFFF
+ *    SS::::::SSSSS      K:::::::::::K       F:::::::::::::::F
+ *      SSS::::::::SS    K:::::::::::K       F:::::::::::::::F
+ *         SSSSSS::::S   K::::::K:::::K      F::::::FFFFFFFFFF
+ *              S:::::S  K:::::K K:::::K     F:::::F
+ *              S:::::SKK::::::K  K:::::KKK  F:::::F
+ *  SSSSSSS     S:::::SK:::::::K   K::::::KFF:::::::FF
+ *  S::::::SSSSSS:::::SK:::::::K    K:::::KF::::::::FF
+ *  S:::::::::::::::SS K:::::::K    K:::::KF::::::::FF
+ *   SSSSSSSSSSSSSSS   KKKKKKKKK    KKKKKKKFFFFFFFFFFF
+ *
+ ******************************************************************************
+ *    ____  __  __________  _____________  ___  ___  ____
+ *   / __ \/ / / / __/ __ \/ __/_  __/ _ \/ _ \/ _ \|_  /
+ *  / /_/ / /_/ /\ \/ /_/ / _/  / / / // / // / // //_ <
+ *  \____/\____/___/\____/_/   /_/  \___/\___/\___/____/
+ *
+ ******************************************************************************
+ *
+ * @author Théo Paris
+ * Indus Outillage
+ * 2020
+ * OUSOFT-0003
+ */
+
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -44,7 +78,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 //#include "lwip/apps/httpd.h"
-#include "FonctionsSCPI.h"
 #include "fonctions_eeprom.h"
 #include "FonctionsAutotest.h"
 #include "stateMachine.h"
@@ -59,7 +92,7 @@
 #include "EXPADDO24.h"
 #include "SCPIclientserveurADDO.h"
 #include "Memory.h"
-#include "json.hpp"
+#include "json.hpp"//lib json
 
 #include "OUELEC0158.h"
 #include "OUCART0018.h"
@@ -119,7 +152,7 @@ T_STATUS stateMachine = HELLO; //statut de la machine d'état
 ScpiClientServer SCPI_MAIN("TEST0256", 0);//objet principale du scpi
 CerrG mainCerrG(-1);//code erreur
 
-OUELEC_0158 rack1(0x01);
+OUELEC_0158 rack1(0x01);//adresse des oucart-0018
 OUELEC_0158 rack2(0x02);
 OUCART0018 psu(0x00);
 OUCART0018 accordsOsc(0x05);
@@ -133,17 +166,11 @@ OUCART0018 accordsOsc(0x05);
 using json = nlohmann::json;
 
 int main(void) {
-	/* USER CODE BEGIN 1 */
-
-	/* USER CODE END 1 */
-
 	/* MCU Configuration--------------------------------------------------------*/
 
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 
-
 	HAL_Init();
-	//HAL_Delay(500);
 
 	/* USER CODE BEGIN Init */
 	/* USER CODE END Init */
@@ -152,27 +179,20 @@ int main(void) {
 	SystemClock_Config();
 	initStateMachine();//ini de la machine d'etat et des phériphériques du µC
 
-	rack1.init();// ini i2c des adc dac
-	rack2.init();// ini i2c des adc dac
-
-
-
-
-	/* USER CODE BEGIN SysInit */
-
-	/* USER CODE END SysInit */
+	rack1.init();// ini i2c des adc dac des rack
+	rack2.init();// ini i2c des adc dac des rack
 
 	/*Objets hardware*/
 
 	Pwm Pwm1("RPM");
 	//Cna Cna1("MOD");
 
-	Cna CnaV13("V13",rack1,5);
-	Cna CnaW13("W13",rack1,6);
-	Cna CnaZ1("Z1",rack1,7);
-	Cna CnaV24("V24",rack2,5);
-	Cna CnaW24("W24",rack2,6);
-	Cna CnaZ2("Z2",rack2,7);
+	Cna CnaV13("LV13",rack1,5);
+	Cna CnaW13("LW13",rack1,6);
+	Cna CnaZ1("LZ1",rack1,7);
+	Cna CnaV24("LV24",rack2,5);
+	Cna CnaW24("LW24",rack2,6);
+	Cna CnaZ2("LZ2",rack2,7);
 
 
 	/*pour OUCART-0014*/
@@ -214,10 +234,10 @@ int main(void) {
 	SimCapTemp SIMT3("T3",TEMPCAP3,rack1);
 	SimCapTemp SIMT4("T4",TEMPCAP4,rack1);
 
-	SimCapTemp SIMT5("T5",TEMPCAP5,rack2);
+	/*SimCapTemp SIMT5("T5",TEMPCAP5,rack2);
 	SimCapTemp SIMT6("T6",TEMPCAP6,rack2);
 	SimCapTemp SIMT7("T7",TEMPCAP7,rack2);
-	SimCapTemp SIMT8("T8",TEMPCAP8,rack2);
+	SimCapTemp SIMT8("T8",TEMPCAP8,rack2);*/
 
 	EXPSEC ExpSecu1("SECU");
 
@@ -310,10 +330,10 @@ int main(void) {
 			SCPI_TEMP.AddClient(SIMT3.getSCPIClientServer());
 			SCPI_TEMP.AddClient(SIMT4.getSCPIClientServer());
 
-			SCPI_TEMP.AddClient(SIMT5.getSCPIClientServer());
+			/*SCPI_TEMP.AddClient(SIMT5.getSCPIClientServer());
 			SCPI_TEMP.AddClient(SIMT6.getSCPIClientServer());
 			SCPI_TEMP.AddClient(SIMT7.getSCPIClientServer());
-			SCPI_TEMP.AddClient(SIMT8.getSCPIClientServer());
+			SCPI_TEMP.AddClient(SIMT8.getSCPIClientServer());*/
 		//}
 		ScpiClientServer SCPI_HUMS("HUMS");
 		SCPI_MAIN.AddClient(&SCPI_HUMS);
@@ -359,56 +379,13 @@ int main(void) {
 
 		SCPI_MAIN.AddClient(ExpADDOabc.getSCPIClientServer());
 
-
-		//}
-
-
-
-		/*	ExpADDOabc.configRelay(1, K1);
-			ExpADDOabc.configRelay(1, K2);
-			ExpADDOabc.configRelay(1, K3);
-			ExpADDOabc.configRelay(1, K4);
-			ExpADDOabc.configRelay(1, K5);
-			ExpADDOabc.configRelay(1, K6);
-			ExpADDOabc.configRelay(1, K7);
-			ExpADDOabc.configRelay(1, K8);
-			ExpADDOabc.configRelay(1, K9);
-			ExpADDOabc.configRelay(1, K10);
-			ExpADDOabc.configRelay(1, K11);
-			ExpADDOabc.configRelay(1, K12);
-			ExpADDOabc.configRelay(1, K13);
-			ExpADDOabc.configRelay(1, K14);
-			ExpADDOabc.configRelay(1, K15);
-			ExpADDOabc.configRelay(1, K16);
-
-			ExpADDOabc.configRelay(0, K1);
-			ExpADDOabc.configRelay(0, K2);
-			ExpADDOabc.configRelay(0, K3);
-			ExpADDOabc.configRelay(0, K4);
-			ExpADDOabc.configRelay(0, K5);
-			ExpADDOabc.configRelay(0, K6);
-			ExpADDOabc.configRelay(0, K7);
-			ExpADDOabc.configRelay(0, K8);
-			ExpADDOabc.configRelay(0, K9);
-			ExpADDOabc.configRelay(0, K10);
-			ExpADDOabc.configRelay(0, K11);
-			ExpADDOabc.configRelay(0, K12);
-			ExpADDOabc.configRelay(0, K13);
-			ExpADDOabc.configRelay(0, K14);
-			ExpADDOabc.configRelay(0, K15);
-			ExpADDOabc.configRelay(0, K16);*/
-
 	/* USER CODE BEGIN WHILE */
 
+	std::string MSG; //chaine message scpi
+	std::string REP; //chaine reposne scpi
 
-
-
-
-	std::string MSG;
-	std::string REP;
-
-	MSG.reserve(256);
-	MSG.assign("\0");
+	MSG.reserve(256);//reserve 256 octets
+	MSG.assign("\0");//ini à null
 	REP.reserve(256);
 	REP.assign("\0");
 
@@ -437,58 +414,51 @@ int main(void) {
 		/* Infinite loop */
 		/* USER CODE BEGIN WHILE */
 
-		/*MSG.assign("ADDO:REL K3 ON");
-		//MSG.assign("ADDO:LEV OFF");
-		SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);*/
-
-		//checkDTI();
-
-
 		while (1) {
 
 
 			switch (stateMachine) {
 			case (HELLO):
 				UART_transmit("\n\r *** Hello S2M *** \n\r");
-				stateMachine = DEFAULT;
+				stateMachine = DEFAULT;//machine d'état en attente
 				break;
-			case (CMD):
+			case (CMD)://traitmeent des commandes
 				try {
 
-					while (getQueueMsgsize() > 0) {
+					while (getQueueMsgsize() > 0) {//tant qu'il y a des message scpi dans la queue
 
-						getFirstCmd(MSG);
-						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
-						if (REP.size() == 0) {
-							if(acknowledge == 1){
-								UART_transmit("OK");
+						getFirstCmd(MSG); //prend le 1er message
+						SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);//traitement scpi
+						if (REP.size() == 0) {//si la commande ne renvoie rien
+							if(acknowledge == 1){//et si le mode ACK est actif
+								UART_transmit("OK");//alors renvoi "OK"
 							}else{
-								;
+								;//sinon rien
 							}
 						} else {
-							UART_transmit( REP);
+							UART_transmit( REP);//sinon renvoi la réponse de la commande scpi
 						}
-						deQueueFirstCmd();
-						REP.assign("\0");
+						deQueueFirstCmd();//supprime le message qui vient d'être traiter de la queue
+						REP.assign("\0");//raz
 						MSG.assign("\0");
 					}
-				} catch (int e) {
-					UART_transmit(REP.assign(mainCerrG.ToString()));
-					deQueueFirstCmd();
+				} catch (int e) {//si exeption lors du traitement scpi
+					UART_transmit(REP.assign(mainCerrG.ToString()));//transmet le code maincerrg correspondant
+					deQueueFirstCmd();//supprime le message
 					REP.assign("\0");
 					MSG.assign("\0");
 				}
-				Reset_uart_buffer();
-				stateMachine = DEFAULT;
+				Reset_uart_buffer();//raz
+				stateMachine = DEFAULT;//retourne en mode par defaut
 				break;
-			case (SECU):
+			case (SECU)://pas utilisé à cause des interruptions
 				//HAL_Delay(100);
 				//stateMachine = SECU;
 						__NOP();
 				break;
-			case (RST):
+			case (RST)://reset
 				UART_transmit("\n\r RESETING... \n\r");
-				NVIC_SystemReset();
+				NVIC_SystemReset();//soft reset du µC
 				REP.assign("\0");
 				MSG.assign("\0");
 				//deQueueFirstCmd();
@@ -499,7 +469,7 @@ int main(void) {
 				//MSG.assign("\0");
 				stateMachine = HELLO;
 				break;
-			case (CLEAR):
+			case (CLEAR)://clear les buffer, variable tampon,
 				try {
 
 					while (getQueueMsgsize() > 0) {
@@ -535,6 +505,10 @@ int main(void) {
 	/* USER CODE END 3 */
 }
 
+/**
+ * @brief  recupère le code de l'expander de secu
+ * @retval retourne la valeur lue
+ */
 int getExpSecuErrorcode(void){
 	int secu = 0;
 	std::string MSG;
@@ -552,6 +526,10 @@ int getExpSecuErrorcode(void){
 	return secu;
 }
 
+/**
+ * @brief  initialise la com scpi
+ * @retval None
+ */
 void initSCPI(void){
 
 	int secu = 0;
@@ -560,6 +538,7 @@ void initSCPI(void){
 	REP.assign("\0");
 	MSG.assign("\0");
 
+	/*test des expander de secu pour démarer*/
 	/*MSG.assign("SECU:SECU:DATA ?");
 	SCPI_MAIN.ReceiveMsg(MSG, REP, mainCerrG);
 	secu = std::stoi(REP,nullptr,10);*/
@@ -584,14 +563,16 @@ void initSCPI(void){
 	REP.assign("\0");
 	MSG.assign("\0");
 }
+
+/**
+ * @brief  initialise la machine d'état
+ * @retval None
+ */
 void initStateMachine(void) {
 
-	HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+	HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);//interruption systick
 	HAL_NVIC_EnableIRQ(SysTick_IRQn);
 	//HAL_ResumeTick();
-
-	//HAL_Delay(500);
-
 	//TM_RCC_InitSystem();
 
 	/*ini i2c*/
@@ -600,16 +581,13 @@ void initStateMachine(void) {
 	TM_I2C_Init(I2C3, TM_I2C_PinsPack_1, 40000);
 	TM_I2C_Init(I2C4, TM_I2C_PinsPack_3, 40000);
 
-
-	Reset_uart_buffer();
+	Reset_uart_buffer();//mise à 0 des buffer uart
 
 	MX_UART4_Init(); //ini uart 4 par ftdi
 	UART_transmit("--- init : UART4");
-	//MX_USART3_UART_Init(); //debug
+	//MX_USART3_UART_Init(); //ini par l'uart debug
 
-
-
-	UART_transmit("*** OUSOFT-0003 v0.7-master ***");
+	UART_transmit("*** OUSOFT-0003 v0.8-master ***");
 	UART_transmit("--- Hardware init ---");
 
 	UART_transmit("--- init : GPIO");
@@ -665,22 +643,14 @@ void initStateMachine(void) {
 	HAL_GPIO_WritePin(GPIOG,RESET_CN11_66_Pin , GPIO_PIN_SET); //PIN RESET PG10
 	HAL_GPIO_WritePin(GPIOG,GPIO_PIN_4 , GPIO_PIN_SET); //PIN buffer PG4
 
-	//////////////
-	//Test 1 I2C//
-	//////////////
-
 	UART_transmit("AUTOTEST I2CMAIN");
-	//
-	//
 	enableI2C_main();
 	disableI2Cmain();
-
-	//I2Cscanner(I2C4);
 
 	int testI2C = -1;
 	testI2C = CheckI2CMain();
 	if(testI2C != 0){
-		mainCerrG.SetStateMachineErrorCode(ERROR_STMA_AUTOTEST_I2CMAIN);
+		mainCerrG.SetStateMachineErrorCode(ERROR_STATEMA_AUTOTEST_I2CMAIN);
 		UART_transmit("Test i2cmain fail at");
 		UART_transmit(std::to_string(testI2C) + mainCerrG.ToString());
 
@@ -689,11 +659,10 @@ void initStateMachine(void) {
 	}
 
 	UART_transmit("AUTOTEST I2CSECU");
-	//I2Cscanner(I2C3);
 	testI2C = -1;
 	testI2C = CheckI2C3();
 	if(testI2C != 0){
-		mainCerrG.SetStateMachineErrorCode(ERROR_STMA_AUTOTEST_I2CMAIN);
+		mainCerrG.SetStateMachineErrorCode(ERROR_STATEMA_AUTOTEST_I2CSECU);
 		UART_transmit("Test i2c3 fail at");
 		UART_transmit(std::to_string(testI2C) + mainCerrG.ToString());
 	}else{
@@ -704,13 +673,12 @@ void initStateMachine(void) {
 
 
 	/*LOAD MEMORY*/
-
-	if(rack1.loadJson() != 0){
-		mainCerrG.SetStateMachineErrorCode(ERROR_STMA_JSONLOAD);
+	if(rack1.loadJson() != 0){//Chargement des calibrations
+		mainCerrG.SetStateMachineErrorCode(ERROR_STATEMA_JSONLOAD);
 		UART_transmit(mainCerrG.ToString());
 	}
 	if(rack2.loadJson() != 0){
-		mainCerrG.SetStateMachineErrorCode(ERROR_STMA_JSONLOAD);
+		mainCerrG.SetStateMachineErrorCode(ERROR_STATEMA_JSONLOAD);
 		UART_transmit(mainCerrG.ToString());
 	}
 
@@ -808,7 +776,7 @@ void TraitementSECU(void) {
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
-	/*if ((GPIO_Pin == GPIO_PIN_8) && (HAL_GPIO_ReadPin(GPIOG, GPIO_Pin) == 0) ) {
+	/*if ((GPIO_Pin == GPIO_PIN_8) && (HAL_GPIO_ReadPin(GPIOG, GPIO_Pin) == 0) ) {//si une interruption est presente gpio G8, machine d'etat passe en secu
 		if(stateMachine != SECU){
 			mainCerrG.SetStateMachineErrorCode(getExpSecuErrorcode());
 			TraitementSECU();

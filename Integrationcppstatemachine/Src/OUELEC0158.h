@@ -29,7 +29,7 @@ public:
 	uint8_t setPosition(uint8_t channel, int value);
 	uint8_t loadJson();
 	void init();
-
+	uint16_t readADC(uint8_t channel);
 
 	OUCART0018 carteEIC1;
 	OUCART0020 carteLEM1;

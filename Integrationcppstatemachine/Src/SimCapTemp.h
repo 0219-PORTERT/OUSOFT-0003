@@ -32,6 +32,7 @@
 #define REQ_MAX 6
 #define REQ_STEP 7
 
+#define REQ_CODE 8
 
 class SimCapTemp : public ScpiClientServer {
 public:
@@ -52,6 +53,7 @@ private:
 	int decodeInstruct(std::string& _cmde);
 
 	void setTemp(int value);
+	void setTempcode(int value);
 
 	void MeasMin();
 	void MeasMax();

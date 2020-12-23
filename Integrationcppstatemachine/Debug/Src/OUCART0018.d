@@ -39,7 +39,8 @@ Src/OUCART0018.o: ../Src/OUCART0018.cpp ../Src/OUCART0018.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Inc/tm_stm32_i2c.h ../Inc/stm32fxxx_hal.h ../Inc/defines.h \
- ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h ../Inc/attributes.h
+ ../Inc/tm_stm32_rcc.h ../Inc/tm_stm32_gpio.h ../Inc/attributes.h \
+ ../Inc/FonctionsAutotest.h
 
 ../Src/OUCART0018.h:
 
@@ -138,3 +139,5 @@ Src/OUCART0018.o: ../Src/OUCART0018.cpp ../Src/OUCART0018.h \
 ../Inc/tm_stm32_gpio.h:
 
 ../Inc/attributes.h:
+
+../Inc/FonctionsAutotest.h:

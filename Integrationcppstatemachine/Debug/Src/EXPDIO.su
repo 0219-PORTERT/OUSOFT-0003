@@ -9,28 +9,28 @@ stl_tree.h:173:5:std::_Rb_tree_header::_Rb_tree_header()	16	static
 stl_tree.h:206:5:void std::_Rb_tree_header::_M_reset()	16	static
 move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::type&) [with _Tp = const nlohmann::basic_json<>&]	16	static
 EXPDIO.cpp:15:1:EXPDIO::EXPDIO()	16	static
-EXPDIO.cpp:20:1:EXPDIO::EXPDIO(std::__cxx11::string, uint8_t)	56	static
+EXPDIO.cpp:26:1:EXPDIO::EXPDIO(std::__cxx11::string, uint8_t)	56	static
 Memory.h:17:7:Memory::Memory(const Memory&)	16	static
 OUCART0018.h:14:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
 OUCART0020.h:14:7:constexpr OUCART0020::OUCART0020(const OUCART0020&)	16	static
 OUELEC0158.h:20:7:OUELEC_0158::OUELEC_0158(const OUELEC_0158&)	24	static
-EXPDIO.cpp:27:1:EXPDIO::EXPDIO(std::__cxx11::string, uint8_t, OUELEC_0158)	56	static
-EXPDIO.cpp:34:1:EXPDIO::~EXPDIO()	16	static
-EXPDIO.cpp:34:1:virtual EXPDIO::~EXPDIO()	16	static
-EXPDIO.cpp:39:11:virtual short int EXPDIO::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	408	static
-EXPDIO.cpp:99:5:int EXPDIO::decodeInstruct(std::__cxx11::string&)	80	static
-EXPDIO.cpp:158:9:uint8_t EXPDIO::readPort()	24	static
-EXPDIO.cpp:183:9:uint8_t EXPDIO::writePort()	16	static
-EXPDIO.cpp:206:9:uint8_t EXPDIO::setDir()	16	static
-EXPDIO.cpp:225:13:std::__cxx11::string EXPDIO::testAB(uint8_t)	152	static
-EXPDIO.cpp:276:9:uint8_t EXPDIO::getSDR()	24	static
-EXPDIO.cpp:287:9:uint8_t EXPDIO::getRTR()	24	static
-EXPDIO.cpp:299:9:uint8_t EXPDIO::getMBA()	24	static
-EXPDIO.cpp:311:9:uint8_t EXPDIO::getTHO()	24	static
-EXPDIO.cpp:323:9:uint8_t EXPDIO::getTHM()	24	static
-EXPDIO.cpp:335:9:uint8_t EXPDIO::getTHN()	24	static
-EXPDIO.cpp:347:9:uint8_t EXPDIO::getWDSDR()	24	static
-EXPDIO.cpp:359:9:uint8_t EXPDIO::getRTA()	24	static
+EXPDIO.cpp:40:1:EXPDIO::EXPDIO(std::__cxx11::string, uint8_t, OUELEC_0158)	56	static
+EXPDIO.cpp:47:1:EXPDIO::~EXPDIO()	16	static
+EXPDIO.cpp:47:1:virtual EXPDIO::~EXPDIO()	16	static
+EXPDIO.cpp:57:11:virtual short int EXPDIO::ExecuteCmde(std::__cxx11::string&, std::__cxx11::string&)	408	static
+EXPDIO.cpp:122:5:int EXPDIO::decodeInstruct(std::__cxx11::string&)	80	static
+EXPDIO.cpp:184:9:uint8_t EXPDIO::readPort()	24	static
+EXPDIO.cpp:214:9:uint8_t EXPDIO::writePort()	16	static
+EXPDIO.cpp:242:9:uint8_t EXPDIO::setDir()	16	static
+EXPDIO.cpp:261:13:std::__cxx11::string EXPDIO::testAB(uint8_t)	152	static
+EXPDIO.cpp:317:9:uint8_t EXPDIO::getSDR()	24	static
+EXPDIO.cpp:332:9:uint8_t EXPDIO::getRTR()	24	static
+EXPDIO.cpp:348:9:uint8_t EXPDIO::getMBA()	24	static
+EXPDIO.cpp:364:9:uint8_t EXPDIO::getTHO()	24	static
+EXPDIO.cpp:380:9:uint8_t EXPDIO::getTHM()	24	static
+EXPDIO.cpp:396:9:uint8_t EXPDIO::getTHN()	24	static
+EXPDIO.cpp:412:9:uint8_t EXPDIO::getWDSDR()	24	static
+EXPDIO.cpp:428:9:uint8_t EXPDIO::getRTA()	24	static
 string_conversions.h:63:2:)::_Save_errno::_Save_errno() [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:64:2:)::_Save_errno::~_Save_errno() [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:73:4:)::_Range_chk::_S_chk(_TRet, std::true_type) [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
@@ -460,6 +460,6 @@ stl_algobase.h:357:9:static _Tp* std::__copy_move<_IsMove, true, std::random_acc
 alloc_traits.h:474:2:) [with _Up = std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> >; _Args = {const std::pair<const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long long int, long long unsigned int, double, std::allocator, nlohmann::adl_serializer, std::vector<unsigned char, std::allocator<unsigned char> > > >&}; _Tp = std::_Rb_tree_node<std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> > >]	24	static
 stl_pair.h:292:17:std::pair<_T1, _T2>::pair(const std::pair<_T1, _T2>&) [with _T1 = const std::__cxx11::basic_string<char>; _T2 = nlohmann::basic_json<>]	16	static
 new_allocator.h:135:2:) [with _Up = std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> >; _Args = {const std::pair<const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long long int, long long unsigned int, double, std::allocator, nlohmann::adl_serializer, std::vector<unsigned char, std::allocator<unsigned char> > > >&}; _Tp = std::_Rb_tree_node<std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> > >]	40	static
-EXPDIO.cpp:369:1:void __static_initialization_and_destruction_0(int, int)	16	static
-EXPDIO.cpp:369:1:cpp)	8	static
-EXPDIO.cpp:369:1:cpp)	8	static
+EXPDIO.cpp:438:1:void __static_initialization_and_destruction_0(int, int)	16	static
+EXPDIO.cpp:438:1:cpp)	8	static
+EXPDIO.cpp:438:1:cpp)	8	static

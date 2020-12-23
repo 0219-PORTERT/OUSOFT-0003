@@ -17,6 +17,12 @@ EXPDIO::EXPDIO() {
 
 }
 
+/**
+ * @brief  Constructeur expdio pour utilisation de l'expander 16bits de oucart-0014
+ * @param  _name: Nom à donner au client
+ * @param  _side: coté a ou b
+ * @retval None
+ */
 EXPDIO::EXPDIO(std::string _name, uint8_t _side): ScpiClientServer(_name), side(_side) {
 	// TODO Auto-generated constructor stub
 
@@ -24,6 +30,13 @@ EXPDIO::EXPDIO(std::string _name, uint8_t _side): ScpiClientServer(_name), side(
 	this->rack.setRackadress(NULL);
 }
 
+/**
+ * @brief  Constructeur expdio pour utilisation de l'expander 16bits de oucart-0018
+ * @param  _name: Nom à donner au client
+ * @param  _side: coté a ou b
+ * @param  _rack: rack où se trouve la oucart-0018
+ * @retval None
+ */
 EXPDIO::EXPDIO(std::string _name, uint8_t _side,OUELEC_0158 _rack): ScpiClientServer(_name), side(_side), rack(_rack) {
 	// TODO Auto-generated constructor stub
 
@@ -35,7 +48,12 @@ EXPDIO::~EXPDIO() {
 	// TODO Auto-generated destructor stub
 }
 
-
+/**
+ * @brief  client execute commande scpi
+ * @param  & _cmde: référence à la commande scpi à executer
+ * @param  & _rep: référence à la chaine de réponse scpi si le client en a besoin
+ * @retval peut retourner une erreur
+ */
 short int EXPDIO::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	//_rep.assign("Je suis le execute de la classe EXPDIO");
 
@@ -96,8 +114,13 @@ short int EXPDIO::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	return 0;
 }
 
+/**
+ * @brief  décode les instructions scpi
+ * @param  & _cmde: référence à la commande scpi à executer
+ * @retval None
+ */
 int EXPDIO::decodeInstruct(std::string& _cmde) {
-
+	/*toutes les instructions scpi*/
 	int sel = 0;
 
 	if (_cmde.compare("*CLR") == 0) {
@@ -154,7 +177,10 @@ int EXPDIO::decodeInstruct(std::string& _cmde) {
 
 
 
-
+/**
+ * @brief  lit le port de l'expander
+ * @retval valeur lu sur le port de l'expander
+ */
 uint8_t EXPDIO::readPort(){
 	uint8_t data = -1;
 
@@ -163,7 +189,7 @@ uint8_t EXPDIO::readPort(){
 		setDir();
 	}
 
-	if(this->rack.getRackadress() == NULL){
+	if(this->rack.getRackadress() == NULL){//pour oucart-0014
 		if(this->side == SIDEA){
 			TM_I2C_WriteNoRegister(I2C4, EXP_DIO_I2CADD, 0x00); //write input port 0
 			TM_I2C_ReadNoRegister(I2C4, (EXP_DIO_I2CADD)|(1u<<0), &data); //read from input port 0
@@ -171,7 +197,7 @@ uint8_t EXPDIO::readPort(){
 			TM_I2C_WriteNoRegister(I2C4, EXP_DIO_I2CADD, 0x01); //write input port 1
 			TM_I2C_ReadNoRegister(I2C4, (EXP_DIO_I2CADD)|(1u<<0), &data); //read from input port 1
 		}
-	}else{
+	}else{//pour oucart-0018
 		if(this->side == SIDEA){
 			this->rack.carteEIC1.readPort(0x00, &data);
 		}else{
@@ -180,6 +206,11 @@ uint8_t EXPDIO::readPort(){
 	}
 	return data;
 }
+
+/**
+ * @brief  ecrit sur le port de l'expander
+ * @retval None
+ */
 uint8_t EXPDIO::writePort(){
 
 	if(this->direction != 0x00){
@@ -203,6 +234,11 @@ uint8_t EXPDIO::writePort(){
 	return 0;
 }
 
+/**
+ * @brief  configure le port de l'expander
+ * @param  _dir: indique quels pins seront en entrée ou sortie
+ * @retval None
+ */
 uint8_t EXPDIO::setDir(){
 
 	if(this->rack.getRackadress() == NULL){
@@ -273,22 +309,31 @@ std::string EXPDIO::testAB(uint8_t bytetotest){
 	return error;
 }
 
+
+/**
+ * @brief  recupère le bits sdr spécifiquement
+ * @retval 1 ou 0 en fonction de l'etat de sdr
+ */
 uint8_t EXPDIO::getSDR(void){
 	uint8_t value = -1;
 	value = this->readPort();
 
-	if(value & (1u << 0)){
+	if(value & (1u << 0)){//bits 0
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
+/**
+ * @brief  recupère le bits rtr spécifiquement
+ * @retval 1 ou 0 en fonction de l'etat de rtr
+ */
 uint8_t EXPDIO::getRTR(void){
 	uint8_t value = -1;
 	value = this->readPort();
 
-	if(value & (1u << 1)){
+	if(value & (1u << 1)){//bits 1
 		return 1;
 	}else{
 		return 0;
@@ -296,11 +341,15 @@ uint8_t EXPDIO::getRTR(void){
 	return 0;
 }
 
+/**
+ * @brief  recupère le bits mba spécifiquement
+ * @retval 1 ou 0 en fonction de l'etat de mba
+ */
 uint8_t EXPDIO::getMBA(void){
 	uint8_t value = -1;
 	value = this->readPort();
 
-	if(value & (1u << 2)){
+	if(value & (1u << 2)){//bits 2
 		return 1;
 	}else{
 		return 0;
@@ -308,11 +357,15 @@ uint8_t EXPDIO::getMBA(void){
 	return 0;
 }
 
+/**
+ * @brief  recupère le bits tho spécifiquement
+ * @retval 1 ou 0 en fonction de l'etat de tho
+ */
 uint8_t EXPDIO::getTHO(void){
 	uint8_t value = -1;
 	value = this->readPort();
 
-	if(value & (1u << 3)){
+	if(value & (1u << 3)){//bits 3
 		return 1;
 	}else{
 		return 0;
@@ -320,11 +373,15 @@ uint8_t EXPDIO::getTHO(void){
 	return 0;
 }
 
+/**
+ * @brief  recupère le bits thm spécifiquement
+ * @retval 1 ou 0 en fonction de l'etat de thm
+ */
 uint8_t EXPDIO::getTHM(void){
 	uint8_t value = -1;
 	value = this->readPort();
 
-	if(value & (1u << 4)){
+	if(value & (1u << 4)){//bits 4
 		return 1;
 	}else{
 		return 0;
@@ -332,11 +389,15 @@ uint8_t EXPDIO::getTHM(void){
 	return 0;
 }
 
+/**
+ * @brief  recupère le bits thn spécifiquement
+ * @retval 1 ou 0 en fonction de l'etat de thn
+ */
 uint8_t EXPDIO::getTHN(void){
 	uint8_t value = -1;
 	value = this->readPort();
 
-	if(value & (1u << 5)){
+	if(value & (1u << 5)){//bits 5
 		return 1;
 	}else{
 		return 0;
@@ -344,11 +405,15 @@ uint8_t EXPDIO::getTHN(void){
 	return 0;
 }
 
+/**
+ * @brief  recupère le bits wdsdr spécifiquement
+ * @retval 1 ou 0 en fonction de l'etat de wdsdr
+ */
 uint8_t EXPDIO::getWDSDR(void){
 	uint8_t value = -1;
 	value = this->readPort();
 
-	if(value & (1u << 6)){
+	if(value & (1u << 6)){//bits 6
 		return 1;
 	}else{
 		return 0;
@@ -356,11 +421,15 @@ uint8_t EXPDIO::getWDSDR(void){
 	return 0;
 }
 
+/**
+ * @brief  recupère le bits rta spécifiquement
+ * @retval 1 ou 0 en fonction de l'etat de rta
+ */
 uint8_t EXPDIO::getRTA(void){
 	uint8_t value = -1;
 	value = this->readPort();
 
-	if(value & (1u << 7)){
+	if(value & (1u << 7)){//bits 7
 		return 1;
 	}else{
 		return 0;

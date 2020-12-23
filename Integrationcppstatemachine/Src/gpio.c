@@ -48,7 +48,7 @@ void MX_GPIO_Init(void)
 
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 1);
 
-  HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+  HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);//interruption desactivée
   /*Configure GPIO pin Output Level */
 
 

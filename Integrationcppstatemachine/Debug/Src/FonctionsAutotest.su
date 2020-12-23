@@ -3,16 +3,16 @@ basic_string.h:6362:3:int std::__cxx11::stoi(const string&, std::size_t*, int)	3
 basic_string.h:6405:3:std::__cxx11::string std::__cxx11::to_string(int)	24	static
 FonctionsAutotest.cpp:31:10:uint16_t autoTest()	4	static
 FonctionsAutotest.cpp:53:10:uint16_t CheckI2C4()	4	static
-FonctionsAutotest.cpp:72:10:uint16_t CheckI2CMain()	8	static,ignoring_inline_asm
-FonctionsAutotest.cpp:112:6:void I2Cscanner(I2C_TypeDef*)	232	static
-FonctionsAutotest.cpp:154:10:uint16_t CheckI2C3()	8	static,ignoring_inline_asm
-FonctionsAutotest.cpp:163:10:uint16_t CheckI2C2()	8	static,ignoring_inline_asm
-FonctionsAutotest.cpp:170:10:uint16_t CheckI2C1()	8	static,ignoring_inline_asm
-FonctionsAutotest.cpp:178:13:std::__cxx11::string checkDTI()	496	static
-FonctionsAutotest.cpp:254:10:uint16_t CheckIDs()	4	static
-FonctionsAutotest.cpp:265:10:uint16_t testEeprom1()	4	static
-FonctionsAutotest.cpp:303:10:uint16_t testEeprom2()	4	static
-FonctionsAutotest.cpp:338:10:uint16_t testTemperature()	24	static
+FonctionsAutotest.cpp:76:10:uint16_t CheckI2CMain()	8	static,ignoring_inline_asm
+FonctionsAutotest.cpp:121:6:void I2Cscanner(I2C_TypeDef*)	232	static
+FonctionsAutotest.cpp:163:10:uint16_t CheckI2C3()	8	static,ignoring_inline_asm
+FonctionsAutotest.cpp:172:10:uint16_t CheckI2C2()	8	static,ignoring_inline_asm
+FonctionsAutotest.cpp:179:10:uint16_t CheckI2C1()	8	static,ignoring_inline_asm
+FonctionsAutotest.cpp:191:13:std::__cxx11::string checkDTI()	496	static
+FonctionsAutotest.cpp:261:10:uint16_t CheckIDs()	4	static
+FonctionsAutotest.cpp:272:10:uint16_t testEeprom1()	4	static
+FonctionsAutotest.cpp:310:10:uint16_t testEeprom2()	4	static
+FonctionsAutotest.cpp:345:10:uint16_t testTemperature()	24	static
 string_conversions.h:63:2:)::_Save_errno::_Save_errno() [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:64:2:)::_Save_errno::~_Save_errno() [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:73:4:)::_Range_chk::_S_chk(_TRet, std::true_type) [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
@@ -31,6 +31,6 @@ type_traits.h:152:5:bool __gnu_cxx::__is_null_pointer(_Type*) [with _Type = char
 stl_iterator_base_types.h:205:5:constexpr typename std::iterator_traits<_Iterator>::iterator_category std::__iterator_category(const _Iter&) [with _Iter = char*]	16	static
 stl_iterator_base_funcs.h:138:5:typename std::iterator_traits<_Iterator>::difference_type std::distance(_InputIterator, _InputIterator) [with _InputIterator = char*]	32	static
 stl_iterator_base_funcs.h:98:5:constexpr typename std::iterator_traits<_Iterator>::difference_type std::__distance(_RandomAccessIterator, _RandomAccessIterator, std::random_access_iterator_tag) [with _RandomAccessIterator = char*]	24	static
-FonctionsAutotest.cpp:387:1:void __static_initialization_and_destruction_0(int, int)	16	static
-FonctionsAutotest.cpp:387:1:cpp)	8	static
-FonctionsAutotest.cpp:387:1:cpp)	8	static
+FonctionsAutotest.cpp:394:1:void __static_initialization_and_destruction_0(int, int)	16	static
+FonctionsAutotest.cpp:394:1:cpp)	8	static
+FonctionsAutotest.cpp:394:1:cpp)	8	static

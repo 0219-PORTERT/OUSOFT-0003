@@ -13,7 +13,7 @@
 #include <iostream>
 
 
-
+/*groupe 8bits*/
 #define SIDEA 0
 #define SIDEB 1
 #define SIDEC 2

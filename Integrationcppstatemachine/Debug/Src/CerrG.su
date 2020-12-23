@@ -1,17 +1,17 @@
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 basic_string.h:6405:3:std::__cxx11::string std::__cxx11::to_string(int)	24	static
 basic_string.h:6421:3:std::__cxx11::string std::__cxx11::to_string(long unsigned int)	24	static
-CerrG.cpp:11:1:CerrG::CerrG()	24	static
-CerrG.cpp:20:1:CerrG::CerrG(int)	24	static
-CerrG.cpp:29:1:CerrG::~CerrG()	16	static
-CerrG.cpp:29:1:virtual CerrG::~CerrG()	16	static
-CerrG.cpp:33:6:void CerrG::AddErrorCode(CerrG)	24	static
-CerrG.cpp:39:6:void CerrG::AddErrorCode(short int)	16	static
-CerrG.cpp:47:5:int CerrG::SetSpecificPosition(short int)	16	static
-CerrG.cpp:55:5:int CerrG::SetErrId(short int, short int)	16	static
-CerrG.cpp:64:13:std::__cxx11::string CerrG::ToString()	576	static
-CerrG.cpp:73:6:void CerrG::clearCerrg()	24	static
-CerrG.cpp:81:5:int CerrG::SetStateMachineErrorCode(uint16_t)	16	static
+CerrG.cpp:15:1:CerrG::CerrG()	24	static
+CerrG.cpp:29:1:CerrG::CerrG(int)	24	static
+CerrG.cpp:38:1:CerrG::~CerrG()	16	static
+CerrG.cpp:38:1:virtual CerrG::~CerrG()	16	static
+CerrG.cpp:47:6:void CerrG::AddErrorCode(CerrG)	24	static
+CerrG.cpp:59:6:void CerrG::AddErrorCode(short int)	16	static
+CerrG.cpp:72:5:int CerrG::SetSpecificPosition(short int)	16	static
+CerrG.cpp:85:5:int CerrG::SetErrId(short int, short int)	16	static
+CerrG.cpp:113:13:std::__cxx11::string CerrG::ToString()	576	static
+CerrG.cpp:126:6:void CerrG::clearCerrg()	24	static
+CerrG.cpp:139:5:int CerrG::SetStateMachineErrorCode(uint16_t)	16	static
 string_conversions.h:99:5:) [with _String = std::__cxx11::basic_string<char>; _CharT = char]	52	dynamic
 basic_string.h:139:14:std::__cxx11::basic_string<char>::_Alloc_hider::~_Alloc_hider()	16	static
 basic_string.h:5968:5:std::__cxx11::basic_string<_CharT, _Traits, _Alloc> std::operator+(const _CharT*, std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&&) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	24	static

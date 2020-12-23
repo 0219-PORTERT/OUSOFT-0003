@@ -69,6 +69,10 @@ uint16_t CheckI2C4(void){
 	return CERR_NOLOCALERRROR;*/
 }
 
+/**
+ * @brief  lit le port de l'expander
+ * @retval retourne 0 si tout les composant i2c de oucart-0014 sont trouvés
+ */
 uint16_t CheckI2CMain(void){
 
 	if(TM_I2C_IsDeviceConnected(I2C4, EXP_DATA_ADRESS_I2CADD)!= TM_I2C_Result_Ok){
@@ -109,6 +113,11 @@ uint16_t CheckI2CMain(void){
 	return CERR_NOLOCALERRROR;
 }
 
+/**
+ * @brief  test toutes les adresse i2c sur un port
+ * @param  I2Cx: port i2c à tester
+ * @retval None
+ */
 void I2Cscanner(I2C_TypeDef* I2Cx){
 	UART_transmit("***I2C SCANNER***");
 
@@ -119,12 +128,12 @@ void I2Cscanner(I2C_TypeDef* I2Cx){
 	UART_transmit("Scanning");
 
 
-	for(adress = 1; adress < 256;adress ++){
+	for(adress = 1; adress < 256;adress ++){//verifie toutes les adresse
 
 
 
 		if((adress == 208) || (adress == 209)){
-			UART_transmit("208 209 adresse suprimees");
+			UART_transmit("208 209 adresse suprimees");// test pour éviter de reset le switch i2c
 		}else{
 			result = TM_I2C_IsDeviceConnected(I2Cx,adress );
 
@@ -175,6 +184,10 @@ uint16_t CheckI2C1(void){
 	return CERR_NOLOCALERRROR;
 }
 
+/**
+ * @brief  vérifie la précense des rack i2c et détecte les defauts dti sur ceux ci
+ * @retval renvoi le resultat de la lecture dti de tous les commposants
+ */
 std::string checkDTI(){
 
 	uint8_t *data = 0;
@@ -193,15 +206,15 @@ std::string checkDTI(){
 
 
 
-	SCPI_MAIN.ReceiveMsg("SECU:SECU:DATA ?",s, mainCerrG);
+	SCPI_MAIN.ReceiveMsg("SECU:SECU:DATA ?",s, mainCerrG);//lecture dti oucart-0014
 	oucart0014value = stoi(s);
 	oucart0014value = oucart0014value & 0x00ff;
 
 
-	sprintf(hex_str, "0x%x", oucart0014value);
+	sprintf(hex_str, "0x%x", oucart0014value);//conversion en chaine hex
 	retourdti = retourdti + hex_str;
 
-	if(rack1.carteEIC1.isConnected() == 0){
+	if(rack1.carteEIC1.isConnected() == 0){//dti rack 1
 		rack1.carteEIC1.readPort(0x00, data);
 		sprintf(hex_str, "0x%x", *data);
 		retourdti = retourdti +","+ hex_str;
@@ -211,7 +224,7 @@ std::string checkDTI(){
 	rack1.carteEIC1.switchToi2c(6);
 
 
-	if(rack2.carteEIC1.isConnected() == 0){
+	if(rack2.carteEIC1.isConnected() == 0){//dti rack 2
 		rack2.carteEIC1.readPort(0x00, data);
 		sprintf(hex_str, "0x%x", *data);
 		retourdti = retourdti +","+ hex_str;
@@ -222,7 +235,7 @@ std::string checkDTI(){
 
 
 
-	if(psu.isConnected() == 0){
+	if(psu.isConnected() == 0){//dti psu
 		psu.readPort(0x00, data);
 		sprintf(hex_str, "0x%x", *data);
 		retourdti = retourdti +","+ hex_str;
@@ -232,7 +245,7 @@ std::string checkDTI(){
 	psu.switchToi2c(6);
 
 
-	if(accordsOsc.isConnected() == 0){
+	if(accordsOsc.isConnected() == 0){//dti accordsosc
 		accordsOsc.readPort(0x00, data);
 		sprintf(hex_str, "0x%x", *data);
 		retourdti = retourdti +","+ hex_str;
@@ -241,14 +254,8 @@ std::string checkDTI(){
 	}
 	accordsOsc.switchToi2c(6);
 
-
-
-
-
 	return retourdti;
 
-
-	/*comment on switch d'un sous*ensemble à l'autre ?*/
 }
 
 uint16_t CheckIDs(void){

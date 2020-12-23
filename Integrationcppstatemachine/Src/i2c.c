@@ -345,29 +345,6 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
 } 
 
 /* USER CODE BEGIN 1 */
-/*void testI2CCS(I2C_TypeDef* I2Cx){
-
-	uint8_t data4[8] = "I2C4ADD4";
-	uint8_t data2[8] = "I2C2ADD2";
-while(1){
-	if(I2Cx == I2C4){
-		HAL_GPIO_WritePin(GPIOE,CS_I2C_0_Pin , GPIO_PIN_RESET);
-		//TM_I2C_WriteNoRegister(I2Cx, 0x05, 5);
-		TM_I2C_WriteNoRegister(I2Cx, 0x00, 1);
-		HAL_GPIO_WritePin(GPIOE,CS_I2C_0_Pin , GPIO_PIN_SET);
-	}else if(I2Cx == I2C2){
-		HAL_GPIO_WritePin(GPIOE, CS_I2C_2_Pin, GPIO_PIN_RESET);
-		TM_I2C_WriteNoRegister(I2Cx, 0x02, 5);
-		HAL_GPIO_WritePin(GPIOE, CS_I2C_2_Pin, GPIO_PIN_SET);
-	}else{
-		//rien
-	}
-	//HAL_Delay(10);
-}*/
-
-
-
-
 
 
 void enableI2C_main(){
@@ -375,7 +352,7 @@ void enableI2C_main(){
 	HAL_GPIO_WritePin(GPIOG,GPIO_PIN_5 , GPIO_PIN_SET);
 }
 void disableI2Cmain(){
-	//HAL_GPIO_WritePin(GPIOG,CS_I2C_M , GPIO_PIN_RESET);
+	//HAL_GPIO_WritePin(GPIOG,CS_I2C_M , GPIO_PIN_RESET);//i2c main toujours activé si en commentaire
 	HAL_GPIO_WritePin(GPIOG,GPIO_PIN_5 , GPIO_PIN_RESET);
 }
 

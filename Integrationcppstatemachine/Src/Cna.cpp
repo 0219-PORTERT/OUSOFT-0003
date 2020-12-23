@@ -11,16 +11,31 @@
 #include <iostream>
 #include "dac.h"
 
+
+
 Cna::Cna() {
 	// TODO Auto-generated constructor stub
 	modValue = 0;
 
 }
+
+/**
+ * @brief  constructeur cna avec oucart-0014
+ * @param  _name: nom du client
+ * @retval None
+ */
 Cna::Cna(std::string _name): ScpiClientServer(_name), modValue(0) {
 	// TODO Auto-generated constructor stub
 	this->rack.setRackadress(NULL);
 }
 
+/**
+ * @brief  constructeur cna avec oucart-0020
+ * @param  _name: nom du client
+ * @param  _rack: objet rack
+ * @param  _channel: channel correspondant au nom
+ * @retval None
+ */
 Cna::Cna(std::string _name,OUELEC_0158 _rack, uint8_t _channel): ScpiClientServer(_name), rack(_rack), channel(_channel),modValue(0) {
 
 }
@@ -29,15 +44,19 @@ Cna::~Cna() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * @brief  client execute commande scpi
+ * @param  & _cmde: référence à la commande scpi à executer
+ * @param  & _rep: référence à la chaine de réponse scpi si le client en a besoin
+ * @retval peut retourner une erreur
+ */
 short int Cna::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	//_rep.assign("Je suis le execute de la classe CNA");
 
 	switch (decodeInstruct(_cmde)) {
 
 	case REQ_RST:
-		this->modValue = 0;
-		//Set_Dac_Value(DAC_CHANNEL_1, 0); // reset
-		//Set_Dac_Value(DAC_CHANNEL_2, 0);
+		this->modValue = 0;//mise à 0 modulation
 
 		setModulation();
 
@@ -47,13 +66,10 @@ short int Cna::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 		_rep.assign(this->getHeader());
 		break;
 	case REQ_x:
-		//Set_Dac_Value(DAC_CHANNEL_1, this->modValue);
-		//Set_Dac_Value(DAC_CHANNEL_2, this->modValue);
 		setModulation();
 
 		break;
 	case REQ_QST:
-		//_rep.assign("MOD: " + std::to_string(this->modValue) + "\n\r"); //request
 		_rep.assign(std::to_string(this->modValue)); //request
 		break;
 
@@ -65,6 +81,11 @@ short int Cna::ExecuteCmde(std::string& _cmde, std::string& _rep) {
 	return 0;
 }
 
+/**
+ * @brief  décode les instructions scpi
+ * @param  & _cmde: référence à la commande scpi à executer
+ * @retval None
+ */
 int Cna::decodeInstruct(std::string& _cmde) {
 
 	int sel = 0;
@@ -92,7 +113,10 @@ int Cna::decodeInstruct(std::string& _cmde) {
 	return sel;
 }
 
-
+/**
+ * @brief  config de la modulation pour oucart-0014 ou oucart-0020
+ * @retval None
+ */
 void Cna::setModulation(){
 	if(this->rack.getRackadress() == NULL){
 		if(this->channel == 1){

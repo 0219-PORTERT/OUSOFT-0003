@@ -81,20 +81,21 @@ move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::
 move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::type&) [with _Tp = const char (&)[5]]	16	static
 move.h:73:5:constexpr _Tp&& std::forward(typename std::remove_reference<_From>::type&) [with _Tp = const char (&)[11]]	16	static
 json.hpp:12563:5:nlohmann::detail::json_ref< <template-parameter-1-1> >::~json_ref() [with BasicJsonType = nlohmann::basic_json<>]	16	static
-OUELEC0158.cpp:19:1:OUELEC_0158::OUELEC_0158(uint8_t)	1264	static
-OUELEC0158.cpp:55:1:OUELEC_0158::~OUELEC_0158()	16	static
-OUELEC0158.cpp:55:1:virtual OUELEC_0158::~OUELEC_0158()	16	static
-OUELEC0158.cpp:59:6:void OUELEC_0158::init()	16	static
-OUELEC0158.cpp:78:6:void OUELEC_0158::setRackadress(uint8_t)	16	static
-OUELEC0158.cpp:82:9:uint8_t OUELEC_0158::getRackadress()	16	static
-OUELEC0158.cpp:86:7:float OUELEC_0158::readCurrent(uint8_t)	24	static
-OUELEC0158.cpp:104:9:uint8_t OUELEC_0158::setPosition(uint8_t, int)	24	static
-OUELEC0158.cpp:112:9:uint8_t OUELEC_0158::loadJson()	400	static
-OUELEC0158.cpp:173:13:std::__cxx11::string OUELEC_0158::getPartnb()	16	static
-OUELEC0158.cpp:176:13:std::__cxx11::string OUELEC_0158::getSerialnb()	16	static
-OUELEC0158.cpp:179:13:std::__cxx11::string OUELEC_0158::getAffaire()	16	static
-OUELEC0158.cpp:182:13:std::__cxx11::string OUELEC_0158::getLastcal()	16	static
-OUELEC0158.cpp:185:13:std::__cxx11::string OUELEC_0158::getLastmco()	16	static
+OUELEC0158.cpp:24:1:OUELEC_0158::OUELEC_0158(uint8_t)	1264	static
+OUELEC0158.cpp:60:1:OUELEC_0158::~OUELEC_0158()	16	static
+OUELEC0158.cpp:60:1:virtual OUELEC_0158::~OUELEC_0158()	16	static
+OUELEC0158.cpp:68:6:void OUELEC_0158::init()	16	static
+OUELEC0158.cpp:84:6:void OUELEC_0158::setRackadress(uint8_t)	16	static
+OUELEC0158.cpp:92:9:uint8_t OUELEC_0158::getRackadress()	16	static
+OUELEC0158.cpp:101:7:float OUELEC_0158::readCurrent(uint8_t)	24	static
+OUELEC0158.cpp:113:10:uint16_t OUELEC_0158::readADC(uint8_t)	16	static
+OUELEC0158.cpp:123:9:uint8_t OUELEC_0158::setPosition(uint8_t, int)	24	static
+OUELEC0158.cpp:136:9:uint8_t OUELEC_0158::loadJson()	400	static
+OUELEC0158.cpp:194:13:std::__cxx11::string OUELEC_0158::getPartnb()	16	static
+OUELEC0158.cpp:197:13:std::__cxx11::string OUELEC_0158::getSerialnb()	16	static
+OUELEC0158.cpp:200:13:std::__cxx11::string OUELEC_0158::getAffaire()	16	static
+OUELEC0158.cpp:203:13:std::__cxx11::string OUELEC_0158::getLastcal()	16	static
+OUELEC0158.cpp:206:13:std::__cxx11::string OUELEC_0158::getLastmco()	16	static
 string_conversions.h:63:2:)::_Save_errno::_Save_errno() [with _TRet = long long unsigned int; _Ret = long long unsigned int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:64:2:)::_Save_errno::~_Save_errno() [with _TRet = long long unsigned int; _Ret = long long unsigned int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:70:4:)::_Range_chk::_S_chk(_TRet, std::false_type) [with _TRet = long long unsigned int; _Ret = long long unsigned int; _CharT = char; _Base = {int}]	24	static
@@ -1532,6 +1533,6 @@ json.hpp:2510:7:nlohmann::detail::invalid_iterator::~invalid_iterator()	16	stati
 json.hpp:2510:7:virtual nlohmann::detail::invalid_iterator::~invalid_iterator()	16	static
 json.hpp:2424:7:nlohmann::detail::parse_error::~parse_error()	16	static
 json.hpp:2424:7:virtual nlohmann::detail::parse_error::~parse_error()	16	static
-OUELEC0158.cpp:187:1:void __static_initialization_and_destruction_0(int, int)	16	static
-OUELEC0158.cpp:187:1:cpp)	8	static
-OUELEC0158.cpp:187:1:cpp)	8	static
+OUELEC0158.cpp:208:1:void __static_initialization_and_destruction_0(int, int)	16	static
+OUELEC0158.cpp:208:1:cpp)	8	static
+OUELEC0158.cpp:208:1:cpp)	8	static

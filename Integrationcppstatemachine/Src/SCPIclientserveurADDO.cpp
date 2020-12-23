@@ -15,12 +15,17 @@ SCPIclientserveurADDO::SCPIclientserveurADDO() {
 
 }
 
+/**
+ * @brief  Constructeur expaddo pour utilisation de l'expander 24bits pour carte relais
+ * @param  _name: Nom du client
+ * @retval None
+ */
 SCPIclientserveurADDO::SCPIclientserveurADDO(std::string _name): ScpiClientServer(_name) {
-	this->staterelay = 0;
+	this->staterelay = 0;// etat des relais ouvert par défaut
 	this->writevalue = 0;
 	this->dir = -1;
 
-	ExpADDOa.setSide(0);
+	ExpADDOa.setSide(0);//ini des ports a b et c des expander
 	ExpADDOb.setSide(1);
 	ExpADDOc.setSide(2);
 
@@ -32,6 +37,12 @@ SCPIclientserveurADDO::~SCPIclientserveurADDO() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * @brief  client execute commande scpi
+ * @param  & _cmde: référence à la commande scpi à executer
+ * @param  & _rep: référence à la chaine de réponse scpi si le client en a besoin
+ * @retval peut retourner une erreur
+ */
 short int SCPIclientserveurADDO::ExecuteCmde (std::string& _cmde,std::string& _rep){
 	switch (decodeInstruct(_cmde)) {
 
@@ -95,6 +106,11 @@ short int SCPIclientserveurADDO::ExecuteCmde (std::string& _cmde,std::string& _r
 	return 0;
 }
 
+/**
+ * @brief  Constructeur expaddo pour utilisation de l'expander 24bits
+ * @param  _side: Nom à donner au client
+ * @retval None
+ */
 int SCPIclientserveurADDO::decodeInstruct(std::string& _cmde){
 	int sel = 0;
 
@@ -256,14 +272,18 @@ int SCPIclientserveurADDO::decodeInstruct(std::string& _cmde){
 	return sel;
 }
 
-
-
+/**
+ * @brief  configure les relais
+ * @param  newstate: l'etat dans lesquels les relais doivent passer
+ * @param  relayTochange: correspond aux relais que l'on veut changer
+ * @retval
+ */
 uint8_t SCPIclientserveurADDO::configRelay(uint8_t newstate, uint16_t relayTochange){
 
 	uint8_t sidea = 0;
 	uint8_t sideb = 0;
 
-
+	/*place dans staterelay le nouvel état des relais après comparaison avec l'etat déja présent*/
 	if(this->staterelay & (1u << relayTochange )){// = etat actuel du relais 1
 		if(newstate == 1){
 			this->staterelay = (this->staterelay | (1u<<relayTochange)); // mise a 1 meme si deja a 1
@@ -279,18 +299,18 @@ uint8_t SCPIclientserveurADDO::configRelay(uint8_t newstate, uint16_t relayTocha
 	}
 
 
-
+	/*séparation de staterelay en deux pour pouvoir adresser le port A et le port B*/
 	sidea = this->staterelay & 0x00ff;
 	sideb = ((this->staterelay & 0xff00)>>8);
 
 
 
-	ExpADDOa.writePort(sidea);
-	ExpADDOb.writePort(sideb);
+	ExpADDOa.writePort(sidea);//écriture sur le port A de l'état des relais
+	ExpADDOb.writePort(sideb);//écriture sur le port B de l'état des relais
 
-	ExpADDOc.writePort(RelayboardAddress);
+	ExpADDOc.writePort(RelayboardAddress);//adresse sur le port C
 
-	ExpADDOc.writePort(0);
+	ExpADDOc.writePort(0);//remise à 0 des port A B et C afin d'avoir un pulse
 	ExpADDOa.writePort(0);
 	ExpADDOb.writePort(0);
 

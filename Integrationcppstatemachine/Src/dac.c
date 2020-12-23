@@ -107,13 +107,15 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* dacHandle)
 } 
 
 /* USER CODE BEGIN 1 */
+
+/*valeur dac pour oucart-0014*/
 void Set_Dac_Value(uint32_t Channel, int value){
 
 
 	if(value == 0){
 		value = 2048;
 	}else if(value < 0){
-		value = (int)((2047*value)/100)+2047;
+		value = (int)((2047*value)/100)+2047;//conversion pour centrage
 	}else if(value > 0){
 		value = (int)((2047*value)/100)+2048;
 	}else{

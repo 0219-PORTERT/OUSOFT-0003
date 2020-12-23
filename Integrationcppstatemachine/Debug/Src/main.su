@@ -13,15 +13,15 @@ Memory.h:17:7:Memory::Memory(const Memory&)	16	static
 OUCART0018.h:14:7:OUCART0018::OUCART0018(const OUCART0018&)	16	static
 OUCART0020.h:14:7:constexpr OUCART0020::OUCART0020(const OUCART0020&)	16	static
 OUELEC0158.h:20:7:OUELEC_0158::OUELEC_0158(const OUELEC_0158&)	24	static
-main.cpp:135:5:int main()	20880	static,ignoring_inline_asm
-main.cpp:538:5:int getExpSecuErrorcode()	96	static
-main.cpp:555:6:void initSCPI()	88	static
-main.cpp:587:6:void initStateMachine()	768	static
-main.cpp:725:6:void SystemClock_Config()	232	static
-main.cpp:793:6:void TM_I2C_InitCustomPinsCallback(I2C_TypeDef*, uint16_t)	24	static
-main.cpp:803:6:void TraitementSECU()	40	static
-main.cpp:809:6:void HAL_GPIO_EXTI_Callback(uint16_t)	24	static
-main.cpp:831:6:void Error_Handler()	4	static
+main.cpp:168:5:int main()	18384	static,ignoring_inline_asm
+main.cpp:512:5:int getExpSecuErrorcode()	96	static
+main.cpp:533:6:void initSCPI()	88	static
+main.cpp:571:6:void initStateMachine()	768	static
+main.cpp:693:6:void SystemClock_Config()	232	static
+main.cpp:761:6:void TM_I2C_InitCustomPinsCallback(I2C_TypeDef*, uint16_t)	24	static
+main.cpp:771:6:void TraitementSECU()	40	static
+main.cpp:777:6:void HAL_GPIO_EXTI_Callback(uint16_t)	24	static
+main.cpp:799:6:void Error_Handler()	4	static
 string_conversions.h:63:2:)::_Save_errno::_Save_errno() [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:64:2:)::_Save_errno::~_Save_errno() [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:73:4:)::_Range_chk::_S_chk(_TRet, std::true_type) [with _TRet = long int; _Ret = int; _CharT = char; _Base = {int}]	16	static
@@ -449,6 +449,6 @@ stl_algobase.h:357:9:static _Tp* std::__copy_move<_IsMove, true, std::random_acc
 alloc_traits.h:474:2:) [with _Up = std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> >; _Args = {const std::pair<const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long long int, long long unsigned int, double, std::allocator, nlohmann::adl_serializer, std::vector<unsigned char, std::allocator<unsigned char> > > >&}; _Tp = std::_Rb_tree_node<std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> > >]	24	static
 stl_pair.h:292:17:std::pair<_T1, _T2>::pair(const std::pair<_T1, _T2>&) [with _T1 = const std::__cxx11::basic_string<char>; _T2 = nlohmann::basic_json<>]	16	static
 new_allocator.h:135:2:) [with _Up = std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> >; _Args = {const std::pair<const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long long int, long long unsigned int, double, std::allocator, nlohmann::adl_serializer, std::vector<unsigned char, std::allocator<unsigned char> > > >&}; _Tp = std::_Rb_tree_node<std::pair<const std::__cxx11::basic_string<char>, nlohmann::basic_json<> > >]	40	static
-main.cpp:836:1:void __static_initialization_and_destruction_0(int, int)	48	static
-main.cpp:836:1:cpp)	8	static
-main.cpp:836:1:cpp)	8	static
+main.cpp:804:1:void __static_initialization_and_destruction_0(int, int)	48	static
+main.cpp:804:1:cpp)	8	static
+main.cpp:804:1:cpp)	8	static
