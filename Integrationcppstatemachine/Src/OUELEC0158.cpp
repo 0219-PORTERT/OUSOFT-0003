@@ -73,7 +73,7 @@ void OUELEC_0158::init(){
 	carteLEM1.setconfigADC(0x1f); //00011111
 	carteLEM1.setconfigDAC(0xe0); //11100000
 
-	carteEIC1.switchToi2c(0); //switchto eic
+	carteEIC1.switchToi2c(6); //switchto eic
 }
 
 /**
@@ -136,6 +136,8 @@ uint8_t OUELEC_0158:: setPosition(uint8_t channel, int value){
 uint8_t OUELEC_0158::loadJson(){
 
 	std::string s;
+	s.reserve(256);
+	s.assign("\0");
 	uint8_t error =0;
 	carteEIC1.getJsonStringfromMemory(s);// lecture de la chaine json de la mémoire
 

@@ -56,8 +56,7 @@ uint8_t Memory::readfrommemory(std::string &_toread){
 	uint8_t dataread[256]= {};
 	uint8_t test = 0;
 
-	test = (uint8_t)TM_I2C_IsDeviceConnected(I2C4, this->i2cadress);//test si la mémoire est connecté
-
+	test = (uint8_t)TM_I2C_IsDeviceConnected(I2C1, this->i2cadress);//test si la mémoire est connecté
 
 	TM_I2C_WriteMultiNoRegister(I2C1, this->i2cadress, dummy, sizeof(dummy));//dummy write
 	TM_I2C_ReadMultiNoRegister(I2C1, (this->i2cadress | (1u<<0)), dataread, 256);//reception
@@ -67,6 +66,9 @@ uint8_t Memory::readfrommemory(std::string &_toread){
 
 	_toread.assign(buffer);//ajout au buffer
 
+
+//mem rack 1 = 0xa4
+//mem rack 2= 0xa4
 
 	return test;
 }

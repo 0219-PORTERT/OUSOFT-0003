@@ -447,16 +447,6 @@ int Enqueue(std::string &RX_string){
 						;
 					}
 
-
-
-
-
-
-
-
-
-
-
 					else{
 						;//autre
 					}
@@ -472,18 +462,6 @@ int Enqueue(std::string &RX_string){
 					}else if(eepromNb == 3){
 						;
 					}
-
-
-
-
-
-
-
-
-
-
-
-
 
 					else{
 						;//autre

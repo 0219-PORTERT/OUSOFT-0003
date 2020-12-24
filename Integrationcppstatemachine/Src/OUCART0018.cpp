@@ -90,6 +90,9 @@ uint8_t OUCART0018::getJsonStringfromMemory(std::string &_toread){
 	this->mem1.readfrommemory(_toread);//lecture
 	this->switchToi2c(6);//desactive le switch
 	return test;
+
+	//rack 1 =0xd2
+	//rack2 =0xd4
 }
 
 /**

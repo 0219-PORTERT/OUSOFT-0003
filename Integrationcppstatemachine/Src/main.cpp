@@ -179,8 +179,9 @@ int main(void) {
 	SystemClock_Config();
 	initStateMachine();//ini de la machine d'etat et des phériphériques du µC
 
-	rack1.init();// ini i2c des adc dac des rack
 	rack2.init();// ini i2c des adc dac des rack
+	rack1.init();// ini i2c des adc dac des rack
+
 
 	/*Objets hardware*/
 
@@ -409,6 +410,14 @@ int main(void) {
 	rack1.carteEIC1.switchToi2c(1);
 	I2Cscanner(I2C1);
 	disableI2C_EXT2();*/
+
+	/*Pré-lecture de la mémoire pour supprimer le problème de lecture du json de la mémoire 1 suite à la mise en place du 2eme rack */
+	std::string strtest;
+	strtest.reserve(256);
+	strtest.assign("\0");
+
+	rack1.carteEIC1.getJsonStringfromMemory(strtest);
+	rack2.carteEIC1.getJsonStringfromMemory(strtest);
 
 	while (1) {
 		/* Infinite loop */

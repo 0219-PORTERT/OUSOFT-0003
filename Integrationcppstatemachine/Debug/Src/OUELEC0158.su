@@ -91,11 +91,11 @@ OUELEC0158.cpp:101:7:float OUELEC_0158::readCurrent(uint8_t)	24	static
 OUELEC0158.cpp:113:10:uint16_t OUELEC_0158::readADC(uint8_t)	16	static
 OUELEC0158.cpp:123:9:uint8_t OUELEC_0158::setPosition(uint8_t, int)	24	static
 OUELEC0158.cpp:136:9:uint8_t OUELEC_0158::loadJson()	400	static
-OUELEC0158.cpp:194:13:std::__cxx11::string OUELEC_0158::getPartnb()	16	static
-OUELEC0158.cpp:197:13:std::__cxx11::string OUELEC_0158::getSerialnb()	16	static
-OUELEC0158.cpp:200:13:std::__cxx11::string OUELEC_0158::getAffaire()	16	static
-OUELEC0158.cpp:203:13:std::__cxx11::string OUELEC_0158::getLastcal()	16	static
-OUELEC0158.cpp:206:13:std::__cxx11::string OUELEC_0158::getLastmco()	16	static
+OUELEC0158.cpp:196:13:std::__cxx11::string OUELEC_0158::getPartnb()	16	static
+OUELEC0158.cpp:199:13:std::__cxx11::string OUELEC_0158::getSerialnb()	16	static
+OUELEC0158.cpp:202:13:std::__cxx11::string OUELEC_0158::getAffaire()	16	static
+OUELEC0158.cpp:205:13:std::__cxx11::string OUELEC_0158::getLastcal()	16	static
+OUELEC0158.cpp:208:13:std::__cxx11::string OUELEC_0158::getLastmco()	16	static
 string_conversions.h:63:2:)::_Save_errno::_Save_errno() [with _TRet = long long unsigned int; _Ret = long long unsigned int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:64:2:)::_Save_errno::~_Save_errno() [with _TRet = long long unsigned int; _Ret = long long unsigned int; _CharT = char; _Base = {int}]	16	static
 string_conversions.h:70:4:)::_Range_chk::_S_chk(_TRet, std::false_type) [with _TRet = long long unsigned int; _Ret = long long unsigned int; _CharT = char; _Base = {int}]	24	static
@@ -1533,6 +1533,6 @@ json.hpp:2510:7:nlohmann::detail::invalid_iterator::~invalid_iterator()	16	stati
 json.hpp:2510:7:virtual nlohmann::detail::invalid_iterator::~invalid_iterator()	16	static
 json.hpp:2424:7:nlohmann::detail::parse_error::~parse_error()	16	static
 json.hpp:2424:7:virtual nlohmann::detail::parse_error::~parse_error()	16	static
-OUELEC0158.cpp:208:1:void __static_initialization_and_destruction_0(int, int)	16	static
-OUELEC0158.cpp:208:1:cpp)	8	static
-OUELEC0158.cpp:208:1:cpp)	8	static
+OUELEC0158.cpp:210:1:void __static_initialization_and_destruction_0(int, int)	16	static
+OUELEC0158.cpp:210:1:cpp)	8	static
+OUELEC0158.cpp:210:1:cpp)	8	static
