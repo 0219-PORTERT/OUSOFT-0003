@@ -235,10 +235,10 @@ int main(void) {
 	SimCapTemp SIMT3("T3",TEMPCAP3,rack1);
 	SimCapTemp SIMT4("T4",TEMPCAP4,rack1);
 
-	/*SimCapTemp SIMT5("T5",TEMPCAP5,rack2);
+	SimCapTemp SIMT5("T5",TEMPCAP5,rack2);
 	SimCapTemp SIMT6("T6",TEMPCAP6,rack2);
 	SimCapTemp SIMT7("T7",TEMPCAP7,rack2);
-	SimCapTemp SIMT8("T8",TEMPCAP8,rack2);*/
+	SimCapTemp SIMT8("T8",TEMPCAP8,rack2);
 
 	EXPSEC ExpSecu1("SECU");
 
@@ -331,10 +331,10 @@ int main(void) {
 			SCPI_TEMP.AddClient(SIMT3.getSCPIClientServer());
 			SCPI_TEMP.AddClient(SIMT4.getSCPIClientServer());
 
-			/*SCPI_TEMP.AddClient(SIMT5.getSCPIClientServer());
+			SCPI_TEMP.AddClient(SIMT5.getSCPIClientServer());
 			SCPI_TEMP.AddClient(SIMT6.getSCPIClientServer());
 			SCPI_TEMP.AddClient(SIMT7.getSCPIClientServer());
-			SCPI_TEMP.AddClient(SIMT8.getSCPIClientServer());*/
+			SCPI_TEMP.AddClient(SIMT8.getSCPIClientServer());
 		//}
 		ScpiClientServer SCPI_HUMS("HUMS");
 		SCPI_MAIN.AddClient(&SCPI_HUMS);
@@ -596,7 +596,7 @@ void initStateMachine(void) {
 	UART_transmit("--- init : UART4");
 	//MX_USART3_UART_Init(); //ini par l'uart debug
 
-	UART_transmit("*** OUSOFT-0003 v0.8-master ***");
+	UART_transmit("*** OUSOFT-0003 v0.9-master ***");
 	UART_transmit("--- Hardware init ---");
 
 	UART_transmit("--- init : GPIO");
